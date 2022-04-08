@@ -19,7 +19,7 @@ public class Account {
     private String phone_number;
     private LocalDate date_birth;
     private String address;
-    private Boolean status;
+    private Boolean status = false;
 
     @Column(unique = true, nullable = false)
     private String gmail;
