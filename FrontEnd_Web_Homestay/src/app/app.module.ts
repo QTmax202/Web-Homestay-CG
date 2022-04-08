@@ -29,9 +29,12 @@ import {MatButtonModule} from "@angular/material/button";
 import {MatIconModule} from "@angular/material/icon";
 import {MatToolbarModule} from "@angular/material/toolbar";
 import {MatRadioModule} from "@angular/material/radio";
-import {MatCheckbox, MatCheckboxModule} from "@angular/material/checkbox";
 import {MatCardModule} from "@angular/material/card";
 import {MatInputModule} from "@angular/material/input";
+import {MatCheckboxModule} from '@angular/material/checkbox';
+import {MatSelectModule} from "@angular/material/select";
+import {MatChipsModule} from "@angular/material/chips";
+import { EditHomestayComponent } from './dialog/edit-homestay/edit-homestay.component';
 
 @NgModule({
   declarations: [
@@ -53,7 +56,8 @@ import {MatInputModule} from "@angular/material/input";
     RateCommentComponent,
     CreateHomestayComponent,
     ConfirmComponent,
-    NotifyComponent
+    NotifyComponent,
+    EditHomestayComponent
   ],
   imports: [
     BrowserModule,
@@ -71,6 +75,8 @@ import {MatInputModule} from "@angular/material/input";
     MatCheckboxModule,
     MatCardModule,
     MatInputModule,
+    MatSelectModule,
+    MatChipsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
