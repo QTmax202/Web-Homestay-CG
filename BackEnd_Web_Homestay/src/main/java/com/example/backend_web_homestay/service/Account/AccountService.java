@@ -60,4 +60,5 @@ public class AccountService implements IAccountService{
     public Optional<Account> findAccountByGmailAndPassword(String username, String password) {
         return accountRepository.findAccountByGmailAndPassword(username, password);
     }
+
 }
