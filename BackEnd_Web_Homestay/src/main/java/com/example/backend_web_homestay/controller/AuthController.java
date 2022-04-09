@@ -50,19 +50,22 @@ public class AuthController {
 
     @PostMapping("/signIn")
     public ResponseEntity<?> login(@RequestBody Account account) {
-        if(accountService.findByGmail(account.getGmail()).get().getStatus()){
-            Authentication authentication = authenticationManager.authenticate
-                    (new UsernamePasswordAuthenticationToken(account.getGmail(), account.getPassword()));
+        if (accountService.existsByGmail(account.getGmail())){
+            if(accountService.findByGmail(account.getGmail()).get().getStatus()){
+                Authentication authentication = authenticationManager.authenticate
+                        (new UsernamePasswordAuthenticationToken(account.getGmail(), account.getPassword()));
 
-            SecurityContextHolder.getContext().setAuthentication(authentication);
+                SecurityContextHolder.getContext().setAuthentication(authentication);
 
-            String jwt = jwtService.generateTokenLogin(authentication);
-            UserDetails userDetails = (UserDetails) authentication.getPrincipal();
-            Account currentUser = accountService.findByGmail(account.getGmail()).get();
-            JwtResponse jwtResponse = new JwtResponse(currentUser.getId(), jwt, userDetails.getUsername(), userDetails.getAuthorities());
-            return ResponseEntity.ok(jwtResponse);
+                String jwt = jwtService.generateTokenLogin(authentication);
+                UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+                Account currentUser = accountService.findByGmail(account.getGmail()).get();
+                JwtResponse jwtResponse = new JwtResponse(currentUser.getId(), jwt, userDetails.getUsername(), userDetails.getAuthorities());
+                return ResponseEntity.ok(jwtResponse);
+            }
+            return new ResponseEntity<>("Tài khoản chưa được xác thực!",HttpStatus.NO_CONTENT);
         }
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        return new ResponseEntity<>("Tài khoản chưa được đăng ký!",HttpStatus.NOT_FOUND);
     }
 
     @GetMapping("/hello")

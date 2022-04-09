@@ -28,6 +28,10 @@ public class Homestay {
     @JoinColumn(name = "account_id")
     private Account account;
 
+    @ManyToOne
+    @JoinColumn(name = "city_id")
+    private City city;
+
     public Homestay() {
     }
 
