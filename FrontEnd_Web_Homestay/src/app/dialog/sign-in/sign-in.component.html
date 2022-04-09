@@ -1,26 +1,27 @@
-<form class="example-form">
+<form class="example-form" [formGroup]="loginForm" novalidate>
   <h1 mat-dialog-title>ĐĂNG NHẬP</h1>
+  <mat-card-content style="color: #c82333" id="error-form-login"></mat-card-content>
   <mat-form-field class="example-full-width" appearance="fill">
     <mat-label>Email</mat-label>
-    <input type="email" matInput placeholder="Ex. pat@example.com">
-<!--    <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">-->
-<!--      Please enter a valid email address-->
-<!--    </mat-error>-->
-<!--    <mat-error *ngIf="emailFormControl.hasError('required')">-->
-<!--      Email is <strong>required</strong>-->
-<!--    </mat-error>-->
+    <input type="email" matInput placeholder="Ex. pat@example.com" formControlName="gmail" required>
+    <mat-error *ngIf="loginForm.hasError('email','gmail') && !loginForm.hasError('required','gmail')">
+      Vui lòng nhập một địa chỉ email hợp lệ!
+    </mat-error>
+    <mat-error *ngIf="loginForm.hasError('required','gmail')">
+      Bạn phải nhập một giá trị!
+    </mat-error>
     <mat-icon matSuffix>email</mat-icon>
   </mat-form-field>
   <mat-form-field class="example-full-width" appearance="fill">
     <mat-label>Mật Khẩu</mat-label>
-    <input type="email" matInput>
-    <!--    <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">-->
-    <!--      Please enter a valid email address-->
-    <!--    </mat-error>-->
-    <!--    <mat-error *ngIf="emailFormControl.hasError('required')">-->
-    <!--      Email is <strong>required</strong>-->
-    <!--    </mat-error>-->
-    <mat-icon matSuffix>password</mat-icon>
+    <input matInput [type]="hide ? 'password' : 'text'" formControlName="password" required>
+    <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+      <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+    </button>
+    <mat-error *ngIf="loginForm.hasError('minLength','password') || loginForm.hasError('required','password')">
+      Bạn phải nhập ít nhất 5 giá trị!
+    </mat-error>
+<!--    <mat-icon matSuffix>password</mat-icon>-->
   </mat-form-field>
   <div>
     <span>
@@ -30,6 +31,6 @@
   </div>
   <div mat-dialog-actions [align]="'end'">
     <button mat-raised-button color="warn" mat-dialog-close>Đóng</button>
-    <button type="submit" mat-raised-button color="primary">Đăng Nhập</button>
+    <button mat-raised-button color="primary" (click)="login()" [disabled]="loginForm.invalid">Đăng Nhập</button>
   </div>
 </form>
