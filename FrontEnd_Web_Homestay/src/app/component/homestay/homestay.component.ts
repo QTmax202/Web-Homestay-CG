@@ -1,4 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import {FormBuilder} from "@angular/forms";
+import {Homestay2Service} from "../../service/homestay/homestay2.service";
+import {Homestay2} from "../../models/homestay2";
+import {MatPaginator} from '@angular/material/paginator';
+import {MatSort} from '@angular/material/sort';
+import {MatTableDataSource} from '@angular/material/table';
 
 @Component({
   selector: 'app-homestay',
@@ -6,10 +12,31 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./homestay.component.css']
 })
 export class HomestayComponent implements OnInit {
+  displayedColumns: string[] = ['homestay1','homestay2','homestay3'];
+  dataSource!: MatTableDataSource<any>;
 
-  constructor() { }
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild(MatSort) sort!: MatSort;
+
+
+  homestays!: Homestay2[];
+
+  constructor(private fb: FormBuilder,
+              private homestayService: Homestay2Service) { }
 
   ngOnInit(): void {
+    this.getAllHomestay();
   }
 
+  getAllHomestay() {
+    this.homestayService.getAllHomestay().subscribe((data) => {
+      this.homestays = data;
+      this.dataSource = new MatTableDataSource<any>(data);
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
+      console.log(data);
+      console.log("--------------");
+      console.log(this.homestays);
+    })
+  }
 }

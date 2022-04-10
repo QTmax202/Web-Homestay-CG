@@ -34,7 +34,10 @@ import {MatInputModule} from "@angular/material/input";
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatSelectModule} from "@angular/material/select";
 import {MatChipsModule} from "@angular/material/chips";
+import {MatTableModule} from '@angular/material/table';
+import {MatPaginatorModule} from '@angular/material/paginator';
 import { EditHomestayComponent } from './dialog/edit-homestay/edit-homestay.component';
+import {MatSortModule} from "@angular/material/sort";
 
 @NgModule({
   declarations: [
@@ -77,6 +80,9 @@ import { EditHomestayComponent } from './dialog/edit-homestay/edit-homestay.comp
     MatInputModule,
     MatSelectModule,
     MatChipsModule,
+    MatTableModule,
+    MatPaginatorModule,
+    MatSortModule
   ],
   providers: [],
   bootstrap: [AppComponent]
