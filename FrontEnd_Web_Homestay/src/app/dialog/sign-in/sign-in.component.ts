@@ -19,7 +19,6 @@ export class SignInComponent implements OnInit {
   });
 
   accountUrl?: string;
-  error = '';
   hide = true;
 
   constructor(private dialog: MatDialog,
@@ -56,10 +55,10 @@ export class SignInComponent implements OnInit {
             localStorage.removeItem('ACCESS_TOKEN');
           } else if (data.token != undefined){
             localStorage.setItem('ACCESS_TOKEN', data.token);
+            console.log(localStorage.getItem('currentAccount'));
               // localStorage.setItem('ROLE', data.roles[0].authority);
               // localStorage.setItem('EMAIL', data.email);
               // this.router.navigate([this.accountUrl]);
-            alert('We')
               this.dialog.closeAll();
           }
         },

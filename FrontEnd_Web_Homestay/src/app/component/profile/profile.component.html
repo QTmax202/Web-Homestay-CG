@@ -23,7 +23,11 @@
           <!--                    <img src="images/person_1.jpg" style="border-radius: 50%; width: 210px; height: 210px"/>-->
           <img src="assets/images/person_1.jpg" style="border-radius: 50%; width: 300px; height: 300px"/>
           <hr>
-          <input type="file">
+          <input type="file"
+                 id="file"
+                 (change)="onFileSelected($event)"
+                 name="image"
+                 autocomplete="off">
         </div>
       </div>
 
@@ -62,7 +66,6 @@
             </div>
           </div>
         </div>
-
       </div>
     </div>
   </div>
