@@ -15,6 +15,11 @@ export class HomestayDetailComponent implements OnInit {
   homestays!: Homestay2[];
   homestay!: Homestay2;
 
+  displayedColumns: string[] = ['image', 'content'];
+  dataSource: MatTableDataSource<UserData>;
+
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+
   constructor(private homestayService: Homestay2Service,
               private route: ActivatedRoute,) { }
 
