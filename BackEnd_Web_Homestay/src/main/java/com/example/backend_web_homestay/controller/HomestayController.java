@@ -33,8 +33,5 @@ public class HomestayController {
         }
         return new ResponseEntity<>(homestay, HttpStatus.OK);
     }
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> hongnam
+
