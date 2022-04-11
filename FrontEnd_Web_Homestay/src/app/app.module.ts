@@ -35,6 +35,9 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatSelectModule} from "@angular/material/select";
 import {MatChipsModule} from "@angular/material/chips";
 import { EditHomestayComponent } from './dialog/edit-homestay/edit-homestay.component';
+import {environment} from "../environments/environment";
+import {AngularFireStorageModule} from "@angular/fire/compat/storage";
+import {AngularFireModule} from "@angular/fire/compat";
 
 @NgModule({
   declarations: [
@@ -77,6 +80,8 @@ import { EditHomestayComponent } from './dialog/edit-homestay/edit-homestay.comp
     MatInputModule,
     MatSelectModule,
     MatChipsModule,
+    AngularFireStorageModule,
+    AngularFireModule.initializeApp(environment.firebaseConfig, "cloud")
   ],
   providers: [],
   bootstrap: [AppComponent]

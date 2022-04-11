@@ -114,4 +114,12 @@ public class Homestay {
     public void setAccount(Account account) {
         this.account = account;
     }
+
+    public City getCity() {
+        return city;
+    }
+
+    public void setCity(City city) {
+        this.city = city;
+    }
 }
