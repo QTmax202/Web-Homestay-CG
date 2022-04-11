@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import {Homestay2Service} from "../../service/homestay/homestay2.service";
+import {Homestay2} from "../../models/homestay2";
+import {ActivatedRoute} from "@angular/router";
+import {MatTableDataSource} from "@angular/material/table";
 
 @Component({
   selector: 'app-homestay-detail',
@@ -7,9 +11,30 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomestayDetailComponent implements OnInit {
 
-  constructor() { }
+  idH!: number;
+  homestays!: Homestay2[];
+  homestay!: Homestay2;
+
+  constructor(private homestayService: Homestay2Service,
+              private route: ActivatedRoute,) { }
 
   ngOnInit(): void {
+    this.idH = this.route.snapshot.params['id'];
+    this.homestayService.getHomestayById(this.idH).subscribe((data) => {
+      this.homestay = data;
+      console.log(data);
+      console.log("------------")
+      console.log(this.homestay)
+    })
+    this.getAllHomestay();
   }
 
+  getAllHomestay() {
+    this.homestayService.getAllHomestay().subscribe((data) => {
+      this.homestays = data;
+      console.log(data);
+      console.log("--------------");
+      console.log(this.homestays);
+    })
+  }
 }
