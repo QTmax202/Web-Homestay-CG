@@ -1,1 +1,41 @@
-<p>book-homestay works!</p>
+<form class="example-form">
+  <h1 mat-dialog-title>THUÊ NHÀ</h1>
+  <mat-form-field class="example-full-width" appearance="outline">
+    <mat-label>Tên Nhà</mat-label>
+    <input type="text" matInput readonly value="Hehe">
+  </mat-form-field>
+  <mat-form-field class="example-full-width" appearance="outline">
+    <mat-label>Địa Chỉ</mat-label>
+    <input type="text" matInput readonly value="Hà Nội">
+  </mat-form-field>
+  <div class="row">
+    <div class="col-sm-6">
+      <mat-form-field class="example-full-width" appearance="outline">
+        <mat-label>Ngày Bắt Đầu</mat-label>
+        <input type="date" matInput>
+      </mat-form-field>
+    </div>
+    <div class="col-sm-6">
+      <mat-form-field class="example-full-width" appearance="outline">
+        <mat-label>Ngày Kết Thúc</mat-label>
+        <input type="date" matInput>
+      </mat-form-field>
+    </div>
+    <div class="col-sm-2">
+      <mat-form-field class="example-full-width" appearance="outline">
+        <mat-label>Số Ngày Đặt</mat-label>
+        <input type="number" matInput placeholder="VNĐ" readonly value="5">
+      </mat-form-field>
+    </div>
+    <div class="col-sm-10">
+      <mat-form-field class="example-full-width" appearance="outline">
+        <mat-label>Giá Tiền</mat-label>
+        <input type="number" matInput placeholder="VNĐ" readonly value="12000000">
+      </mat-form-field>
+    </div>
+  </div>
+  <div mat-dialog-actions [align]="'end'">
+    <button mat-raised-button color="warn" mat-dialog-close>Đóng</button>
+    <button type="submit" mat-raised-button color="primary">Xác Nhận</button>
+  </div>
+</form>

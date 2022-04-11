@@ -6,6 +6,9 @@ import {MatTableDataSource} from "@angular/material/table";
 import {MatPaginator} from "@angular/material/paginator";
 import {CommentService} from "../../service/comment/comment.service";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {NotifyComponent} from "../../dialog/notify/notify.component";
+import {MatDialog} from "@angular/material/dialog";
+import {BookHomestayComponent} from "../../dialog/book-homestay/book-homestay.component";
 
 @Component({
   selector: 'app-homestay-detail',
@@ -29,7 +32,8 @@ export class HomestayDetailComponent implements OnInit {
   constructor(private homestayService: Homestay2Service,
               private commentService: CommentService,
               private route: ActivatedRoute,
-              private fb: FormBuilder) { }
+              private fb: FormBuilder,
+              private dialog: MatDialog) { }
 
   ngOnInit(): void {
     this.formComment = this.fb.group({
@@ -44,7 +48,7 @@ export class HomestayDetailComponent implements OnInit {
     this.getHomestayById();
     this.getAllComment();
     this.getAllHomestay();
-    console.log(JSON.parse(<any>localStorage.getItem("currentAccount")).id)
+    console.log(localStorage.getItem('ACCOUNT_ID'))
   }
 
   getHomestayById() {
@@ -71,9 +75,11 @@ export class HomestayDetailComponent implements OnInit {
       id: this.formComment.value.id,
       comment: this.formComment.value.comment,
       time_stamp: new Date(),
-      homestay: this.idH,
+      homestay: {
+        id: this.idH
+      },
       account: {
-        id: 1
+        id: localStorage.getItem('ACCOUNT_ID')
       }
     };
     console.log(comment);
@@ -89,5 +95,12 @@ export class HomestayDetailComponent implements OnInit {
     this.homestayService.getAllHomestay().subscribe((data) => {
       this.homestays = data;
     })
+  }
+
+  openBookHouse() {
+    this.dialog.closeAll()
+    this.dialog.open(BookHomestayComponent, {
+      width: '50%',
+    });
   }
 }

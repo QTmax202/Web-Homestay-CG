@@ -150,15 +150,14 @@
                 <h2>{{homestay.name}}</h2>
               </div>
               <div class="col-md-2">
-                <h4 class="price per-price">{{homestay.price}}<small>/night</small></h4>
+                <h2 class="price per-price" style="color: #2f89fc">{{homestay.price}}<small>/night</small></h2>
               </div>
             </div>
             <div class="row">
-              <p class="col-md-9">
-                <span class="loc"><a href="#"><i class="icon-map"></i> {{homestay.address}}</a></span>
-              </p>
-              <div class="col-md-3">
-                 <span class="star">
+              <p class="col-md-10">
+                <br>
+                <span class="loc rate i"><a href="#"><i class="icon-map"></i> {{homestay.address}}</a></span>
+                <span class="star">
     							<i class="icon-star"></i>
     							<i class="icon-star"></i>
     							<i class="icon-star"></i>
@@ -166,7 +165,12 @@
     							<i class="icon-star-o"></i>
     							8 Rating
                  </span>
+              <div class="col-sm-2">
+                <input (click)="openBookHouse()" style="margin-right: 0" class="btn btn-primary"
+                       type="submit"
+                       value="Đặt ngay">
               </div>
+
             </div>
             <!--            <p>When she reached the first hills of the Italic Mountains, she had a last view back on the-->
             <!--              skyline of her hometown Bookmarksgrove, the headline of Alphabet Village and the subline of-->
@@ -187,10 +191,12 @@
               <div class="destination">
                 <form style="display: flex" [formGroup]="formComment" (ngSubmit)="createComment()" novalidate>
                   <div class="col-md-12">
-                    <input type="text" class="form-control" formControlName="comment" placeholder="Your Comment" required>
+                    <input type="text" class="form-control" formControlName="comment" placeholder="Your Comment"
+                           required>
                   </div>
                   <div class="col-md-12">
-                    <button type="submit" class="btn btn-primary py-2 px-4">Gửi</button>
+                    <button type="submit" class="btn btn-primary py-2 px-4" [disabled]="formComment.invalid">Gửi
+                    </button>
                   </div>
                 </form>
               </div>
@@ -255,7 +261,8 @@
                 </table>
 
 
-                <mat-paginator style="right: 0" [pageSizeOptions]="[3, 6, 9, 15]" aria-label="Select page of users"></mat-paginator>
+                <mat-paginator style="right: 0" [pageSizeOptions]="[3, 6, 9, 15]"
+                               aria-label="Select page of users"></mat-paginator>
               </div>
             </div>
           </div>
