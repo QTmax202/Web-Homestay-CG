@@ -27,7 +27,7 @@
               <div class="form-group">
                 <div class="select-wrap one-third">
                   <div class="icon"><span class="ion-ios-arrow-down"></span></div>
-                  <select name="" class="form-control" placeholder="Keyword search">
+                  <select name="123" class="form-control" placeholder="Keyword search">
                     <option value="">Select Location</option>
                     <option value="">San Francisco USA</option>
                     <option value="">Berlin Germany</option>
@@ -181,26 +181,16 @@
             </div>
             <p>{{homestay.description}}</p>
           </div>
-          <!--          		<div class="col-md-12 hotel-single  mb-5 mt-4">-->
-          <!--          			<h4 class="mb-4">Take A Tour</h4>-->
-          <!--          			<div class="block-16">-->
-          <!--		              <figure>-->
-          <!--		                <img src="assets/images/hotel-6.jpg" alt="Image placeholder" class="img-fluid">-->
-          <!--		                <a href="https://vimeo.com/45830194" class="play-button popup-vimeo"><span class="icon-play"></span></a>-->
-          <!--		              </figure>-->
-          <!--		            </div>-->
-          <!--          		</div>-->
 
-          <!--                    comment-->
           <div class="row" style="width: 88%">
             <div class="col-md-12">
               <div class="destination">
-                <form action="#" style="display: flex">
+                <form style="display: flex" [formGroup]="formComment" (ngSubmit)="createComment()" novalidate>
                   <div class="col-md-12">
-                    <input type="text" class="form-control" placeholder="Your Comment">
+                    <input type="text" class="form-control" formControlName="comment" placeholder="Your Comment" required>
                   </div>
                   <div class="col-md-12">
-                    <input type="submit" value="Gửi" class="btn btn-primary py-2 px-4">
+                    <button type="submit" class="btn btn-primary py-2 px-4">Gửi</button>
                   </div>
                 </form>
               </div>
@@ -225,16 +215,16 @@
                             <img src="{{row.account.avatar_url}}" alt=""
                                  style="border-radius: 50%; width: 100px; height: 100px">
                           </div>
-                          <div class="text ml-md-4">
+                          <div class="text ml-md-4 hotel-single">
                             <div class="row">
                               <div class="col-sm-10">
                                 <span class="star">
-    							            <i class="icon-star"></i>
-                              <i class="icon-star"></i>
-    							            <i class="icon-star"></i>
-    							            <i class="icon-star"></i>
-                              <i class="icon-star-o"></i>
-                            </span>
+    							                <i class="icon-star"></i>
+                                  <i class="icon-star"></i>
+    							                <i class="icon-star"></i>
+    							                <i class="icon-star"></i>
+                                  <i class="icon-star-o"></i>
+                                </span>
                               </div>
                               <div class="col-sm-2">
                                 <span>{{row.time_stamp}}</span>
@@ -245,7 +235,7 @@
                             <p class="mb-5">Far far away, behind the word mountains, far from the-->
                               countries Vokalia and Consonantia, there live the blind texts.</p>
                             <div class="row">
-                              <p class="name">{{row.account.name}}</p>
+                              <span class="name">{{row.account.name}}</span>
                               <span>&ensp;|&ensp;</span>
                               <span class="position">{{row.account.address}}</span>
                             </div>
@@ -265,23 +255,8 @@
                 </table>
 
 
-                <mat-paginator [pageSizeOptions]="[3, 6, 9, 15]" aria-label="Select page of users"></mat-paginator>
+                <mat-paginator style="right: 0" [pageSizeOptions]="[3, 6, 9, 15]" aria-label="Select page of users"></mat-paginator>
               </div>
-
-              <!--              <div class="item">-->
-              <!--                <div class="testimony-wrap d-flex">-->
-              <!--                  <div class="user-img mb-5">-->
-              <!--                    <img src="assets/images/person_2.jpg" alt=""-->
-              <!--                         style="border-radius: 50%; width: 100px; height: 100px">-->
-              <!--                  </div>-->
-              <!--                  <div class="text ml-md-4">-->
-              <!--                    <p class="mb-5">Far far away, behind the word mountains, far from the-->
-              <!--                      countries Vokalia and Consonantia, there live the blind texts.</p>-->
-              <!--                    <p class="name">Dennis Green</p>-->
-              <!--                    <span class="position">Guest from London</span>-->
-              <!--                  </div>-->
-              <!--                </div>-->
-              <!--              </div>-->
             </div>
           </div>
         </div>
