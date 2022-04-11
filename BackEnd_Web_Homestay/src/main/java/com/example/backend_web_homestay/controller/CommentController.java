@@ -23,4 +23,10 @@ public class CommentController {
         }
         return new ResponseEntity<>(comments, HttpStatus.OK);
     }
+
+    @PostMapping
+    public ResponseEntity<?> createComment(@RequestBody Comment comment) {
+        Comment comment1 = commentService.save(comment);
+        return new ResponseEntity<>(comment1, HttpStatus.OK);
+    }
 }
