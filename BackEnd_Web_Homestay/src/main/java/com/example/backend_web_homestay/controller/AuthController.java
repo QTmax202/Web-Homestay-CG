@@ -16,7 +16,9 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.PostConstruct;
 import javax.validation.Valid;
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/auth")
@@ -66,5 +68,14 @@ public class AuthController {
         JwtResponse jwtResponse = new JwtResponse(currentUser.getId(), jwt, userDetails.getUsername(), userDetails.getAuthorities());
         return ResponseEntity.ok(jwtResponse);
     }
-
+    @PostConstruct
+    public void init() {
+        List<Account> accounts = (List<Account>) accountService.findAll();
+        if (accounts.isEmpty()) {
+            Account account = new Account();
+            account.setGmail("abc@gmail.com");
+            account.setPassword(passwordEncoder.encode("1234abc"));
+            accountService.save(account);
+        }
+    }
 }
