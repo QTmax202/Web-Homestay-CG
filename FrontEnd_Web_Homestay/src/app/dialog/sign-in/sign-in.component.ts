@@ -47,28 +47,30 @@ export class SignInComponent implements OnInit {
         data => {
           if (data.status == 202){
             // @ts-ignore
-            document.getElementById("error-form-login").innerHTML = 'Tài khoản của bạn chưa có trong hệ thống!'
+            document.getElementById("error-form-login").innerHTML = 'Tài khoản của bạn chưa có trong hệ thống hoặc sai mật khẩu!'
             localStorage.removeItem('ACCESS_TOKEN');
-          } else if (localStorage.getItem('currentAccount') == "unverified account"){
+            localStorage.removeItem('ACCOUNT_ID');
+            localStorage.removeItem('currentAccount');
+          } else if (data.error){
             // @ts-ignore
             document.getElementById("error-form-login").innerHTML = 'Tài khoản của bạn đã bị khoá hoặc sai mật khẩu!'
             localStorage.removeItem('ACCESS_TOKEN');
+            localStorage.removeItem('ACCOUNT_ID');
+            localStorage.removeItem('currentAccount');
           } else if (data.token != undefined){
             localStorage.setItem('ACCESS_TOKEN', data.token);
+            localStorage.setItem('ACCOUNT_ID', data.id);
             console.log(localStorage.getItem('currentAccount'));
-              // localStorage.setItem('ROLE', data.roles[0].authority);
-              // localStorage.setItem('EMAIL', data.email);
-              // this.router.navigate([this.accountUrl]);
+              this.router.navigate([this.accountUrl]);
               this.dialog.closeAll();
           }
         },
         error => {
           // @ts-ignore
           document.getElementById("error-form-login").innerHTML = 'Tài khoản của bạn đã bị khoá hoặc sai mật khẩu!'
-          localStorage.removeItem('currentUser');
-          // localStorage.removeItem('ROLE');
+          localStorage.removeItem('currentAccount');
+          localStorage.removeItem('ACCOUNT_ID');
           localStorage.removeItem('ACCESS_TOKEN');
-          // localStorage.removeItem('EMAIL');
         });
   }
 }
