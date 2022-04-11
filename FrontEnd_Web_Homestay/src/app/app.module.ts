@@ -41,6 +41,8 @@ import {environment} from "../environments/environment";
 import {AngularFireStorageModule} from "@angular/fire/compat/storage";
 import {AngularFireModule} from "@angular/fire/compat";
 import {MatSortModule} from "@angular/material/sort";
+import { ChangePassComponent } from './dialog/change-pass/change-pass.component';
+import { ConfirmBookComponent } from './dialog/confirm-book/confirm-book.component';
 
 @NgModule({
   declarations: [
@@ -63,7 +65,9 @@ import {MatSortModule} from "@angular/material/sort";
     CreateHomestayComponent,
     ConfirmComponent,
     NotifyComponent,
-    EditHomestayComponent
+    EditHomestayComponent,
+    ChangePassComponent,
+    ConfirmBookComponent
   ],
   imports: [
     BrowserModule,
