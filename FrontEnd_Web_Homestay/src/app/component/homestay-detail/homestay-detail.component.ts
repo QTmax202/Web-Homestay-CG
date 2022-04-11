@@ -38,7 +38,7 @@ export class HomestayDetailComponent implements OnInit {
       time_stamp: [""],
       homestay: [""],
       account: {
-        id: [""],
+        id: localStorage.getItem('ACCOUNT_ID')
       }
     })
     this.getHomestayById();
@@ -68,14 +68,15 @@ export class HomestayDetailComponent implements OnInit {
 
   createComment() {
     const comment = {
-      id: 8,
+      id: this.formComment.value.id,
       comment: this.formComment.value.comment,
       time_stamp: new Date(),
       homestay: this.idH,
       account: {
-        id: JSON.parse(<any>localStorage.getItem("currentAccount")).id
+        id: 1
       }
     };
+    console.log(comment);
     this.commentService.createComment(comment).subscribe(() => {
       console.log(comment);
       alert(comment);
