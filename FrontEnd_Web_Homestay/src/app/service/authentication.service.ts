@@ -24,10 +24,10 @@ export class AuthenticationService {
   login(gmail: string, password: string) {
     return this.http.post<any>('http://localhost:8080/api/auth/sign-in', {gmail, password})
       .pipe(map(account => {
-        localStorage.setItem('currentAccount', JSON.stringify(account));
-        this.currentUserSubject.next(account);
-        this.update.emit('login');
-        return account;
+          localStorage.setItem('currentAccount', JSON.stringify(account));
+          this.currentUserSubject.next(account);
+          this.update.emit('login');
+          return account;
       }));
   }
 

@@ -49,14 +49,18 @@ export class SignInComponent implements OnInit {
             // @ts-ignore
             document.getElementById("error-form-login").innerHTML = 'Tài khoản của bạn chưa có trong hệ thống hoặc sai mật khẩu!'
             localStorage.removeItem('ACCESS_TOKEN');
+            localStorage.removeItem('ACCOUNT_ID');
             localStorage.removeItem('currentAccount');
           } else if (data.error){
             // @ts-ignore
             document.getElementById("error-form-login").innerHTML = 'Tài khoản của bạn đã bị khoá hoặc sai mật khẩu!'
             localStorage.removeItem('ACCESS_TOKEN');
+            localStorage.removeItem('ACCOUNT_ID');
             localStorage.removeItem('currentAccount');
           } else if (data.token != undefined){
             localStorage.setItem('ACCESS_TOKEN', data.token);
+            localStorage.setItem('ACCOUNT_ID', data.id);
+            console.log(localStorage.getItem('currentAccount'));
               this.router.navigate([this.accountUrl]);
               this.dialog.closeAll();
           }
@@ -65,6 +69,7 @@ export class SignInComponent implements OnInit {
           // @ts-ignore
           document.getElementById("error-form-login").innerHTML = 'Tài khoản của bạn đã bị khoá hoặc sai mật khẩu!'
           localStorage.removeItem('currentAccount');
+          localStorage.removeItem('ACCOUNT_ID');
           localStorage.removeItem('ACCESS_TOKEN');
         });
   }
