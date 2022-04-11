@@ -19,7 +19,7 @@ const routes: Routes = [
   {path: 'blog', component: BlogComponent},
   {path: 'contact', component: ContactComponent},
   {path: 'homestay', component: HomestayComponent},
-  {path: 'homestay-detail', component: HomestayDetailComponent},
+  {path: 'homestay-detail/:id', component: HomestayDetailComponent},
   {path: 'my-homestay', component: MyHomestayComponent},
   {path: 'profile', component: ProfileComponent},
   {path: 'trips', component: TripsComponent},

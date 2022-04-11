@@ -34,10 +34,16 @@ import {MatInputModule} from "@angular/material/input";
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatSelectModule} from "@angular/material/select";
 import {MatChipsModule} from "@angular/material/chips";
+import {MatTableModule} from '@angular/material/table';
+import {MatPaginatorModule} from '@angular/material/paginator';
 import { EditHomestayComponent } from './dialog/edit-homestay/edit-homestay.component';
+<<<<<<< HEAD
 import {environment} from "../environments/environment";
 import {AngularFireStorageModule} from "@angular/fire/compat/storage";
 import {AngularFireModule} from "@angular/fire/compat";
+=======
+import {MatSortModule} from "@angular/material/sort";
+>>>>>>> hongnam
 
 @NgModule({
   declarations: [
@@ -80,8 +86,14 @@ import {AngularFireModule} from "@angular/fire/compat";
     MatInputModule,
     MatSelectModule,
     MatChipsModule,
+<<<<<<< HEAD
     AngularFireStorageModule,
     AngularFireModule.initializeApp(environment.firebaseConfig, "cloud")
+=======
+    MatTableModule,
+    MatPaginatorModule,
+    MatSortModule
+>>>>>>> hongnam
   ],
   providers: [],
   bootstrap: [AppComponent]
