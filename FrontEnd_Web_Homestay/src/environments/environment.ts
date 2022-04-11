@@ -4,7 +4,17 @@
 
 export const environment = {
   production: false,
-  apiUrl: 'http://localhost:8080/api/'
+  apiUrl: 'http://localhost:8080/api/',
+  firebaseConfig : {
+    apiKey: "AIzaSyBreE-HEeEviMPLa4TfGLRojjL_PBEkud8",
+    authDomain: "web-homestay-cg.firebaseapp.com",
+    databaseURL: "https://web-homestay-cg-default-rtdb.asia-soutosystem1.firebasedatabase.app",
+    projectId: "web-homestay-cg",
+    storageBucket: "web-homestay-cg.appspot.com",
+    messagingSenderId: "355394003399",
+    appId: "1:355394003399:web:1910e01cd75dfbe8c9b9e2"
+  }
+
 };
 
 export const pathUrl = 'http://localhost:8080/api/';
