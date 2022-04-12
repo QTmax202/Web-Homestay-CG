@@ -1,1 +1,102 @@
-<p>notify works!</p>
+<form class="example-form">
+  <h1 mat-dialog-title>Thông báo</h1>
+
+  <div class="row">
+    <div class="col-md-12" style="padding: 0">
+      <div class="container-table row" style="width: 100%; margin: 0">
+        <div class="my-notify item">
+          <div class="testimony-wrap d-flex" style="width: 100%; height: 80px; padding-bottom: 10px; padding-top: 10px">
+            <div class="user-img mb-5">
+              <img src="https://media-cdn-v2.laodong.vn/Storage/NewsPortal/2021/5/26/913299/Ngan-Ha25.jpg" alt=""
+                   style="border-radius: 50%; width: 50px; height: 50px">
+            </div>
+            <div class="">
+              <div class="row">
+                <div class="col-md-12">
+                  <span class="name">Hong Nam</span>
+                  <span>&ensp;|&ensp;</span>
+                  <span class="position">đã đánh giá một homestay của bạn</span>
+                </div>
+                <div class="col-sm-4">
+                  <span>&nbsp;2022-12-12</span>
+                </div>
+                <div class="col-sm-8">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="my-notify item">
+          <div class="testimony-wrap d-flex" style="width: 100%; height: 80px; padding-bottom: 10px; padding-top: 10px">
+            <div class="user-img mb-5">
+              <img src="https://media-cdn-v2.laodong.vn/Storage/NewsPortal/2021/5/26/913299/Ngan-Ha25.jpg" alt=""
+                   style="border-radius: 50%; width: 50px; height: 50px">
+            </div>
+            <div class="">
+              <div class="row">
+                <div class="col-md-12">
+                  <span class="name">Hong Nam</span>
+                  <span>&ensp;|&ensp;</span>
+                  <span class="position">đã nhận xét một homestay của bạn</span>
+                </div>
+                <div class="col-sm-4">
+                  <span>&nbsp;2022-12-12</span>
+                </div>
+                <div class="col-sm-8">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="my-notify item">
+          <div class="testimony-wrap d-flex" style="width: 100%; height: 80px; padding-bottom: 10px; padding-top: 10px">
+            <div class="user-img mb-5">
+              <img src="https://media-cdn-v2.laodong.vn/Storage/NewsPortal/2021/5/26/913299/Ngan-Ha25.jpg" alt=""
+                   style="border-radius: 50%; width: 50px; height: 50px">
+            </div>
+            <div class="">
+              <div class="row">
+                <div class="col-md-12">
+                  <span class="name">Hong Nam</span>
+                  <span>&ensp;|&ensp;</span>
+                  <span class="position">đã hủy thuê một homestay của bạn</span>
+                </div>
+                <div class="col-sm-4">
+                  <span>&nbsp;2022-12-12</span>
+                </div>
+                <div class="col-sm-8">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div (click)="openConfirm()" class="my-notify item">
+          <div class="testimony-wrap d-flex" style="width: 100%; height: 80px; padding-bottom: 10px; padding-top: 10px">
+            <div class="user-img mb-5">
+              <img src="https://media-cdn-v2.laodong.vn/Storage/NewsPortal/2021/5/26/913299/Ngan-Ha25.jpg" alt=""
+                   style="border-radius: 50%; width: 50px; height: 50px">
+            </div>
+            <div class="">
+              <div class="row">
+                <div class="col-md-12">
+                  <span class="name">Hong Nam</span>
+                  <span>&ensp;|&ensp;</span>
+                  <span class="position">đã đặt lịch thuê một homestay của bạn</span>
+                </div>
+                <div class="col-sm-6">
+                  <span>&nbsp;2022-12-12</span>
+                </div>
+                <div class="col-sm-6">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div mat-dialog-actions [align]="'end'">
+    <button mat-raised-button color="warn" mat-dialog-close>Đóng</button>
+  </div>
+</form>
