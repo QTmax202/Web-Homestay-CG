@@ -80,7 +80,11 @@
       <section class="example-section">
         <label for="img">Chọn Ảnh</label>
         <img id="img" alt="" style="border-radius: 50%; width: 80%">
-        <input type="file">
+        <input type="file"
+               multiple
+               (change)="showPreview($event)"
+               name="image"
+               autocomplete="off">
       </section>
     </div>
     <div class="col-lg-8">
