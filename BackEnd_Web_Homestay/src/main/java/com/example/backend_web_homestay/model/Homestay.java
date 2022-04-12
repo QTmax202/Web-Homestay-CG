@@ -3,6 +3,7 @@ package com.example.backend_web_homestay.model;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Data
@@ -31,6 +32,28 @@ public class Homestay {
     @ManyToOne
     @JoinColumn(name = "city_id")
     private City city;
+
+    public List<Rate> getRates() {
+        return rates;
+    }
+
+    public void setRates(List<Rate> rates) {
+        this.rates = rates;
+    }
+
+    public List<Comment> getComments() {
+        return comments;
+    }
+
+    public void setComments(List<Comment> comments) {
+        this.comments = comments;
+    }
+
+    @OneToMany(mappedBy = "rates", cascade = CascadeType.ALL)
+    private List<Rate> rates;
+
+    @OneToMany(mappedBy = "comments", cascade = CascadeType.ALL)
+    private List<Comment> comments;
 
     public Homestay() {
     }
