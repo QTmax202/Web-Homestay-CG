@@ -1,10 +1,5 @@
 package com.example.backend_web_homestay.controller;
 
-import com.example.backend_web_homestay.model.Account;
-import com.example.backend_web_homestay.model.JwtResponse;
-import com.example.backend_web_homestay.service.Account.IAccountService;
-import com.example.backend_web_homestay.service.JwtService;
-import com.example.backend_web_homestay.service.Role.IRoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
