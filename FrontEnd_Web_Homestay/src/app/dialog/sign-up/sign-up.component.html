@@ -1,0 +1,39 @@
+<form class="example-form" style="justify-content: center">
+  <h1 mat-dialog-title>ĐĂNG KÝ</h1>
+  <mat-form-field class="example-full-width" appearance="fill">
+    <mat-label>Họ & Tên</mat-label>
+    <input type="text" matInput>
+    <mat-icon matSuffix>perm_identity</mat-icon>
+  </mat-form-field>
+  <mat-form-field class="example-full-width" appearance="fill">
+    <mat-label>Email</mat-label>
+    <input type="email" matInput placeholder="Ex. pat@example.com">
+    <!--    <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">-->
+    <!--      Please enter a valid email address-->
+    <!--    </mat-error>-->
+    <!--    <mat-error *ngIf="emailFormControl.hasError('required')">-->
+    <!--      Email is <strong>required</strong>-->
+    <!--    </mat-error>-->
+    <mat-icon matSuffix>email</mat-icon>
+  </mat-form-field>
+  <mat-form-field class="example-full-width" appearance="fill">
+    <mat-label>Mật Khẩu</mat-label>
+    <input type="password" matInput>
+    <mat-icon matSuffix>password</mat-icon>
+  </mat-form-field>
+  <mat-form-field class="example-full-width" appearance="fill">
+    <mat-label>Nhập Lại Mật Khẩu</mat-label>
+    <input type="password" matInput>
+    <mat-icon matSuffix>password</mat-icon>
+  </mat-form-field>
+  <mat-form-field class="example-full-width" appearance="fill">
+    <mat-label>Số Điện Thoại</mat-label>
+    <input type="tel" matInput>
+    <mat-icon matSuffix>phone</mat-icon>
+  </mat-form-field>
+  <br>
+  <div mat-dialog-actions [align]="'end'">
+    <button (click)="openSignIn()" mat-raised-button color="warn">Quay Lại</button>
+    <button (click)="openConfirm()" type="submit" mat-raised-button color="primary">Đăng Ký</button>
+  </div>
+</form>

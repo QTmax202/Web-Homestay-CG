@@ -38,35 +38,33 @@ public class AuthController {
     @Autowired
     private JwtService jwtService;
 
-    @PostMapping("/signup")
+    @PostMapping("/sign-up")
     public ResponseEntity<?> register(@Valid @RequestBody Account account) {
-        if(accountService.existsByGmail(account.getGmail())){
+        if (accountService.existsByGmail(account.getGmail())) {
             return new ResponseEntity<>("The username existed!", HttpStatus.OK);
         }
-        Account appUser = new Account(account.getGmail(),passwordEncoder.encode(account.getPassword()),account.getRoles());
+        Account appUser = new Account(account.getGmail(), passwordEncoder.encode(account.getPassword()), account.getRoles());
         accountService.save(appUser);
         return new ResponseEntity<>(appUser, HttpStatus.OK);
     }
 
-    @PostMapping("/signIn")
+    @PostMapping("/sign-in")
     public ResponseEntity<?> login(@RequestBody Account account) {
-        if(accountService.findByGmail(account.getGmail()).get().getStatus()){
-            Authentication authentication = authenticationManager.authenticate
-                    (new UsernamePasswordAuthenticationToken(account.getGmail(), account.getPassword()));
-
-            SecurityContextHolder.getContext().setAuthentication(authentication);
-
-            String jwt = jwtService.generateTokenLogin(authentication);
-            UserDetails userDetails = (UserDetails) authentication.getPrincipal();
-            Account currentUser = accountService.findByGmail(account.getGmail()).get();
-            JwtResponse jwtResponse = new JwtResponse(currentUser.getId(), jwt, userDetails.getUsername(), userDetails.getAuthorities());
-            return ResponseEntity.ok(jwtResponse);
+        if (accountService.existsByGmail(account.getGmail())){
+            if (!accountService.findByGmail(account.getGmail()).get().getStatus()) {
+                return new ResponseEntity<>("unverified account", HttpStatus.OK);
+            }
         }
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        Authentication authentication = authenticationManager.authenticate
+                (new UsernamePasswordAuthenticationToken(account.getGmail(), account.getPassword()));
+
+        SecurityContextHolder.getContext().setAuthentication(authentication);
+
+        String jwt = jwtService.generateTokenLogin(authentication);
+        UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+        Account currentUser = accountService.findByGmail(account.getGmail()).get();
+        JwtResponse jwtResponse = new JwtResponse(currentUser.getId(), jwt, userDetails.getUsername(), userDetails.getAuthorities());
+        return ResponseEntity.ok(jwtResponse);
     }
 
-    @GetMapping("/hello")
-    public ResponseEntity<String> hello() {
-        return new ResponseEntity<>("Hello World", HttpStatus.OK);
-    }
 }
