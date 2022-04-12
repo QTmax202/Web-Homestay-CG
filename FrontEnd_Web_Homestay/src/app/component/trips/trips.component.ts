@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import {ChangePassComponent} from "../../dialog/change-pass/change-pass.component";
+import {MatDialog} from "@angular/material/dialog";
+import {RateCommentComponent} from "../../dialog/rate-comment/rate-comment.component";
 
 @Component({
   selector: 'app-trips',
@@ -7,9 +10,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TripsComponent implements OnInit {
 
-  constructor() { }
+  constructor(private dialog: MatDialog) { }
 
   ngOnInit(): void {
   }
 
+  openRate() {
+    this.dialog.closeAll()
+    this.dialog.open(RateCommentComponent, {
+      width: '50%',
+    });
+  }
 }

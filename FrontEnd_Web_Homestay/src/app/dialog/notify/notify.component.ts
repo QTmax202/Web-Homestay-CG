@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import {RateCommentComponent} from "../rate-comment/rate-comment.component";
+import {MatDialog} from "@angular/material/dialog";
+import {ConfirmComponent} from "../confirm/confirm.component";
+import {ConfirmBookComponent} from "../confirm-book/confirm-book.component";
 
 @Component({
   selector: 'app-notify',
@@ -7,9 +11,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NotifyComponent implements OnInit {
 
-  constructor() { }
+  constructor(private dialog: MatDialog) { }
 
   ngOnInit(): void {
   }
 
+  openConfirm() {
+    this.dialog.open(ConfirmBookComponent, {
+      width: '50%',
+    });
+  }
 }
