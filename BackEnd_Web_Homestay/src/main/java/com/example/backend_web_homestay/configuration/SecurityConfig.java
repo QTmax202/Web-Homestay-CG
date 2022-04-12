@@ -56,7 +56,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests().antMatchers("/api/auth/sign**").permitAll()
-                .antMatchers("/api/auth/hello").hasAnyAuthority("ADMIN","USER")
+                .antMatchers("/api/auth/hello").hasAnyAuthority("USER")
                 .and()
                 .formLogin().loginPage("/login").permitAll()
                 .and()
@@ -70,29 +70,5 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
         http.addFilterBefore(jwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
-//        http.csrf().ignoringAntMatchers("/**");
-//        http.httpBasic().authenticationEntryPoint(jwtAuthenticationFilter());
-//        http.authorizeRequests()
-//                .antMatchers("/login", "/register").permitAll()
-//                .antMatchers("/user/**").access("hasRole('ROLE_USER')")
-//                .antMatchers("/admin/**").access("hasRole('ROLE_ADMIN')")
-////                .antMatchers(HttpMethod.GET
-////                        ).access("hasRole('ROLE_USER') or hasRole('ROLE_ADMIN')")
-////                .antMatchers(HttpMethod.DELETE, "/categories",
-////                        "/typeOfQuestions",
-////                        "/questions",
-////                        "/answers",
-////                        "/quizzes",
-////                        "/hello").access("hasRole('ROLE_ADMIN')")
-////                .antMatchers(HttpMethod.PUT, "/users")
-////                .access("hasRole('ROLE_USER')")
-//                .anyRequest().authenticated()
-//                .and().csrf().disable()
-//                .logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout"));
-//        http.addFilterBefore(jwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class)
-//                .exceptionHandling().accessDeniedHandler(customAccessDeniedHandler());
-//        http.sessionManagement()
-//                .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
-//        http.cors();
     }
 }
