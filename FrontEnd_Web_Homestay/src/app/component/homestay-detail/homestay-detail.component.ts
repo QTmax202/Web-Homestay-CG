@@ -20,6 +20,7 @@ export class HomestayDetailComponent implements OnInit {
   idH!: number;
   homestays!: Homestay2[];
   homestay!: Homestay2;
+  google_api! :string;
 
   formComment: FormGroup = new FormGroup({});
   comments?: any;
@@ -49,6 +50,9 @@ export class HomestayDetailComponent implements OnInit {
     this.getAllComment();
     this.getAllHomestay();
     console.log(localStorage.getItem('ACCOUNT_ID'))
+    // this.google_api = this.homestay.address + this.homestay.city.name;
+    this.google_api = "Sân+vận+động+Quốc+gia+Mỹ+Đình";
+    console.log(this.google_api);
   }
 
   getHomestayById() {
@@ -97,10 +101,11 @@ export class HomestayDetailComponent implements OnInit {
     })
   }
 
-  openBookHouse() {
+  openBookHouse(homestay : any) {
     this.dialog.closeAll()
-    this.dialog.open(BookHomestayComponent, {
-      width: '50%',
+    this.dialog.open(BookHomestayComponent,{
+      width: '45%',
+      data : homestay
     });
   }
 }

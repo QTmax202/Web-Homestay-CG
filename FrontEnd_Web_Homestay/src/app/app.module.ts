@@ -43,6 +43,8 @@ import {AngularFireModule} from "@angular/fire/compat";
 import {MatSortModule} from "@angular/material/sort";
 import { ChangePassComponent } from './dialog/change-pass/change-pass.component';
 import { ConfirmBookComponent } from './dialog/confirm-book/confirm-book.component';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import {MatNativeDateModule} from "@angular/material/core";
 
 @NgModule({
   declarations: [
@@ -91,7 +93,9 @@ import { ConfirmBookComponent } from './dialog/confirm-book/confirm-book.compone
     AngularFireModule.initializeApp(environment.firebaseConfig, "cloud"),
     MatTableModule,
     MatPaginatorModule,
-    MatSortModule
+    MatSortModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
