@@ -40,16 +40,6 @@ public class AuthController {
     @Autowired
     private JwtService jwtService;
 
-    @PostMapping("/sign-up")
-    public ResponseEntity<?> register(@Valid @RequestBody Account account) {
-        if (accountService.existsByGmail(account.getGmail())) {
-            return new ResponseEntity<>("The username existed!", HttpStatus.OK);
-        }
-        Account appUser = new Account(account.getGmail(), passwordEncoder.encode(account.getPassword()), account.getRoles());
-        accountService.save(appUser);
-        return new ResponseEntity<>(appUser, HttpStatus.OK);
-    }
-
     @PostMapping("/sign-in")
     public ResponseEntity<?> login(@RequestBody Account account) {
         if (accountService.existsByGmail(account.getGmail())){
@@ -68,14 +58,5 @@ public class AuthController {
         JwtResponse jwtResponse = new JwtResponse(currentUser.getId(), jwt, userDetails.getUsername(), userDetails.getAuthorities());
         return ResponseEntity.ok(jwtResponse);
     }
-    @PostConstruct
-    public void init() {
-        List<Account> accounts = (List<Account>) accountService.findAll();
-        if (accounts.isEmpty()) {
-            Account account = new Account();
-            account.setGmail("abc@gmail.com");
-            account.setPassword(passwordEncoder.encode("1234abc"));
-            accountService.save(account);
-        }
-    }
+
 }

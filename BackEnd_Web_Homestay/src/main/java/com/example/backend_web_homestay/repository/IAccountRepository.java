@@ -3,6 +3,8 @@ package com.example.backend_web_homestay.repository;
 
 import com.example.backend_web_homestay.model.Account;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
@@ -15,5 +17,11 @@ public interface IAccountRepository extends JpaRepository<Account, Long> {
     Boolean existsByGmail(String username);
 
     Optional<Account> findAccountByGmailAndPassword(String username,String password);
+
+    //    confirm mail
+    @Query("	SELECT 	a.status 		"
+            + "	FROM 	Account a		"
+            + " WHERE 	a.gmail = :gmail ")
+    Account findStatusByEmail(@Param("gmail") String gmail);
 
 }

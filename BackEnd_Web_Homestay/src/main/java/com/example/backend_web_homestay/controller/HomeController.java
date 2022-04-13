@@ -55,12 +55,10 @@ public class HomeController {
         return new ResponseEntity<>(city, HttpStatus.OK);
     }
 
-    @PostMapping
+    @PostMapping("/create")
     public ResponseEntity<Homestay> createHome(@RequestPart("homestay") Homestay homestay) {
-        homestay.setAccount(homestay.getAccount());
-        homestayService.save(homestay);
-        HttpHeaders headers = new HttpHeaders();
-        return new ResponseEntity<>(headers, HttpStatus.CREATED);
+        Homestay homestayCreate = homestayService.save(homestay);
+        return new ResponseEntity<>(homestayCreate, HttpStatus.CREATED);
     }
 
     @PutMapping("/edit-home")
@@ -72,6 +70,15 @@ public class HomeController {
         homestayEdit.setId(homestay.get().getId());
         homestayEdit = homestayService.save(homestayEdit);
         return new ResponseEntity<>(homestayEdit, HttpStatus.OK);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Homestay> deleteHome(@PathVariable Long id) {
+        Optional<Homestay> homestayRemove = homestayService.findById(id);
+        return homestayRemove.map(house1 -> {
+            homestayService.delete(id);
+            return new ResponseEntity<>(house1, HttpStatus.OK);
+        }).orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
 }
