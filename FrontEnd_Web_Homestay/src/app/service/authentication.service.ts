@@ -30,12 +30,4 @@ export class AuthenticationService {
           return account;
       }));
   }
-
-  logout() {
-    localStorage.removeItem('currentAccount');
-    // localStorage.removeItem('ROLE');
-    // localStorage.removeItem('ACCESS_TOKEN');
-    // localStorage.removeItem('EMAIL');
-    // this.currentUserSubject.next(null);
-  }
 }

@@ -2,35 +2,41 @@
   <h1 mat-dialog-title>THUÊ NHÀ</h1>
   <mat-form-field class="example-full-width" appearance="outline">
     <mat-label>Tên Nhà</mat-label>
-    <input type="text" matInput readonly value="Hehe">
+    <input type="text" matInput readonly value="{{homestay.name}}">
   </mat-form-field>
   <mat-form-field class="example-full-width" appearance="outline">
     <mat-label>Địa Chỉ</mat-label>
-    <input type="text" matInput readonly value="Hà Nội">
+    <input type="text" matInput readonly value="{{homestay.address}}, {{homestay.city.name}}">
   </mat-form-field>
   <div class="row">
-    <div class="col-sm-6">
+    <div class="col-sm-12">
       <mat-form-field class="example-full-width" appearance="outline">
-        <mat-label>Ngày Bắt Đầu</mat-label>
-        <input type="date" matInput>
-      </mat-form-field>
-    </div>
-    <div class="col-sm-6">
-      <mat-form-field class="example-full-width" appearance="outline">
-        <mat-label>Ngày Kết Thúc</mat-label>
-        <input type="date" matInput>
+        <mat-label>Enter a date range</mat-label>
+        <mat-date-range-input [rangePicker]="rangePicker"
+                              [formGroup]="calender_day_bill">
+          <input matStartDate placeholder="Start date" formControlName="start">
+          <input matEndDate placeholder="End date" formControlName="end">
+        </mat-date-range-input>
+        <mat-hint>MM/DD/YYYY – MM/DD/YYYY</mat-hint>
+        <mat-datepicker-toggle matSuffix [for]="rangePicker"></mat-datepicker-toggle>
+        <mat-date-range-picker #rangePicker>
+          <mat-date-range-picker-actions>
+            <button mat-button matDateRangePickerCancel>Cancel</button>
+            <button mat-raised-button color="primary" matDateRangePickerApply (click)="start_end_date()">Apply</button>
+          </mat-date-range-picker-actions>
+        </mat-date-range-picker>
       </mat-form-field>
     </div>
     <div class="col-sm-2">
       <mat-form-field class="example-full-width" appearance="outline">
         <mat-label>Số Ngày Đặt</mat-label>
-        <input type="number" matInput placeholder="VNĐ" readonly value="5">
+        <input type="number" matInput readonly value="{{number_date}}">
       </mat-form-field>
     </div>
     <div class="col-sm-10">
       <mat-form-field class="example-full-width" appearance="outline">
         <mat-label>Giá Tiền</mat-label>
-        <input type="number" matInput placeholder="VNĐ" readonly value="12000000">
+        <input type="number" matInput placeholder="VNĐ" readonly value="{{price_homestay}}">
       </mat-form-field>
     </div>
   </div>
