@@ -38,6 +38,7 @@ import { EditHomestayComponent } from './dialog/edit-homestay/edit-homestay.comp
 import {environment} from "../environments/environment";
 import {AngularFireStorageModule} from "@angular/fire/compat/storage";
 import {AngularFireModule} from "@angular/fire/compat";
+import {NgToastModule} from "ng-angular-popup";
 
 @NgModule({
   declarations: [
@@ -81,6 +82,7 @@ import {AngularFireModule} from "@angular/fire/compat";
     MatSelectModule,
     MatChipsModule,
     AngularFireStorageModule,
+    NgToastModule,
     AngularFireModule.initializeApp(environment.firebaseConfig, "cloud")
   ],
   providers: [],

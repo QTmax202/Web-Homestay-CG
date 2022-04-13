@@ -1,14 +1,12 @@
 package com.example.backend_web_homestay.controller;
 
-import com.example.backend_web_homestay.model.Account;
+
 import com.example.backend_web_homestay.model.City;
 import com.example.backend_web_homestay.model.Homestay;
 import com.example.backend_web_homestay.model.HomestayType;
-import com.example.backend_web_homestay.repository.HomestayRepository;
-import com.example.backend_web_homestay.service.Account.IAccountService;
+
 import com.example.backend_web_homestay.service.Homestay.HomestayService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -22,14 +20,9 @@ public class HomeController {
     @Autowired
     private HomestayService homestayService;
 
-//    @Autowired
-//    private IAccountService accountService;
-//
-//    @Autowired
-//    private HomestayRepository homestayRepository;
 
     @GetMapping("/list")
-    public ResponseEntity<Iterable<Homestay>> showAll() {
+    public ResponseEntity<Iterable<Homestay>> getAll() {
         Iterable<Homestay> homestays = homestayService.getAllHomestays();
         if (!homestays.iterator().hasNext()) {
             new ResponseEntity<>(HttpStatus.NO_CONTENT);
@@ -38,7 +31,7 @@ public class HomeController {
     }
 
     @GetMapping("/type-home")
-    public ResponseEntity<Iterable<HomestayType>> showAllType() {
+    public ResponseEntity<Iterable<HomestayType>> getAllType() {
         Iterable<HomestayType> homestayTypes = homestayService.findAllTypes();
         if (!homestayTypes.iterator().hasNext()) {
             new ResponseEntity<>(HttpStatus.NO_CONTENT);
@@ -47,7 +40,7 @@ public class HomeController {
     }
 
     @GetMapping("/city")
-    public ResponseEntity<Iterable<City>> showAllCity() {
+    public ResponseEntity<Iterable<City>> getAllCity() {
         Iterable<City> city = homestayService.findAllCity();
         if (!city.iterator().hasNext()) {
             new ResponseEntity<>(HttpStatus.NO_CONTENT);
@@ -56,7 +49,8 @@ public class HomeController {
     }
 
     @PostMapping("/create")
-    public ResponseEntity<Homestay> createHome(@RequestPart("homestay") Homestay homestay) {
+    public ResponseEntity<Homestay> createHome(@RequestBody Homestay homestay) {
+        homestay.setAccount(homestay.getAccount());
         Homestay homestayCreate = homestayService.save(homestay);
         return new ResponseEntity<>(homestayCreate, HttpStatus.CREATED);
     }
