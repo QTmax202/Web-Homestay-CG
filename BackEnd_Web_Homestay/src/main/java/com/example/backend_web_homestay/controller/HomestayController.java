@@ -33,11 +33,19 @@ public class HomestayController {
     @GetMapping("/{id}")
     private ResponseEntity<?> getHomestayById(@PathVariable long id) {
         Optional<Homestay> homestay = homestayService.findById(id);
-        Iterable<ImageOfHomestay> imageOfHomestays = iImageService.findImageOfHomestaysByHomestay_Id(id);
         if (!homestay.isPresent()) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
         return new ResponseEntity<>(homestay, HttpStatus.OK);
+    }
+
+    @GetMapping("/image-of-homestay")
+    private ResponseEntity<?> findImageOfHomestays() {
+        Iterable<ImageOfHomestay> imageOfHomestays = iImageService.findAll();
+        if (!imageOfHomestays.iterator().hasNext()) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<>(imageOfHomestays, HttpStatus.OK);
     }
 
     @GetMapping("/image-of-homestay/{id}")
