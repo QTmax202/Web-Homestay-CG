@@ -1,1 +1,28 @@
-<p>rate-comment works!</p>
+<form class="example-form">
+  <h1 mat-dialog-title>ĐÁNH GIÁ</h1>
+  <mat-form-field class="example-full-width" appearance="outline">
+    <mat-label>Tên Nhà</mat-label>
+    <input type="text" matInput readonly value="Hehe">
+  </mat-form-field>
+  <mat-form-field class="example-full-width" appearance="outline">
+    <mat-label>Địa Chỉ</mat-label>
+    <input type="text" matInput readonly value="Hà Nội">
+  </mat-form-field>
+  <div class="row">
+    <div class="col-sm-6">
+      <p class="rate">
+        <span>Đánh giá của bạn: </span>
+        <i class="icon-star"></i>
+        <i class="icon-star"></i>
+        <i class="icon-star"></i>
+        <i class="icon-star"></i>
+        <i class="icon-star-o"></i>
+        <span> 5 star</span>
+      </p>
+    </div>
+  </div>
+  <div mat-dialog-actions [align]="'end'">
+    <button mat-raised-button color="warn" mat-dialog-close>Đóng</button>
+    <button type="submit" mat-raised-button color="primary">Xác Nhận</button>
+  </div>
+</form>

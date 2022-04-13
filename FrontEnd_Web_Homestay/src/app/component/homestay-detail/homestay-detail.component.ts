@@ -4,6 +4,7 @@ import {Homestay2} from "../../models/homestay2";
 import {ActivatedRoute} from "@angular/router";
 import {MatTableDataSource} from "@angular/material/table";
 import {MatPaginator} from "@angular/material/paginator";
+import {CommentService} from "../../service/comment/comment.service";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {NotifyComponent} from "../../dialog/notify/notify.component";
 import {MatDialog} from "@angular/material/dialog";
@@ -29,6 +30,7 @@ export class HomestayDetailComponent implements OnInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   constructor(private homestayService: Homestay2Service,
+              private commentService: CommentService,
               private route: ActivatedRoute,
               private fb: FormBuilder,
               private dialog: MatDialog) { }
@@ -44,7 +46,7 @@ export class HomestayDetailComponent implements OnInit {
       }
     })
     this.getHomestayById();
-    // this.getAllComment();
+    this.getAllComment();
     this.getAllHomestay();
     console.log(localStorage.getItem('ACCOUNT_ID'))
   }
@@ -56,17 +58,17 @@ export class HomestayDetailComponent implements OnInit {
     })
   }
 
-  // getAllComment() {
-  //   this.idH = this.route.snapshot.params['id'];
-  //   this.commentService.getCommentsByHomestayId(this.idH).subscribe((data) => {
-  //     this.dataSource = new MatTableDataSource<any>(data);
-  //     this.comments = data;
-  //     this.dataSource.paginator = this.paginator;
-  //     console.log(data)
-  //     console.log("-----------")
-  //     console.log(this.comments)
-  //   })
-  // }
+  getAllComment() {
+    this.idH = this.route.snapshot.params['id'];
+    this.commentService.getCommentsByHomestayId(this.idH).subscribe((data) => {
+      this.dataSource = new MatTableDataSource<any>(data);
+      this.comments = data;
+      this.dataSource.paginator = this.paginator;
+      console.log(data)
+      console.log("-----------")
+      console.log(this.comments)
+    })
+  }
 
   createComment() {
     const comment = {
@@ -81,12 +83,12 @@ export class HomestayDetailComponent implements OnInit {
       }
     };
     console.log(comment);
-    // this.commentService.createComment(comment).subscribe(() => {
-    //   console.log(comment);
-    //   alert(comment);
-    //   this.formComment.reset();
-    //   this.getAllComment();
-    // })
+    this.commentService.createComment(comment).subscribe(() => {
+      console.log(comment);
+      alert(comment);
+      this.formComment.reset();
+      this.getAllComment();
+    })
   }
 
   getAllHomestay() {

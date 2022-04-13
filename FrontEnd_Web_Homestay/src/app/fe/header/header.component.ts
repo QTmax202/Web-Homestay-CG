@@ -25,7 +25,7 @@ export class HeaderComponent implements OnInit {
   openNotify() {
     this.dialog.closeAll()
     this.dialog.open(NotifyComponent, {
-      width: '50%',
+      width: '40%',
     });
   }
 

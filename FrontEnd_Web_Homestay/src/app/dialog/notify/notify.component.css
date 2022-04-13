@@ -1,0 +1,18 @@
+.example-form {
+  min-width: 150px;
+  max-width: 700px;
+  width: 100%;
+}
+
+.example-full-width {
+  width: 100%;
+}
+
+.my-notify :hover {
+  background-color: #e7e9eb;
+  cursor: pointer;
+}
+
+.my-notify {
+  padding: 0;
+}
