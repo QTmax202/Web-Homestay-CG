@@ -22,7 +22,7 @@ export class HomestayDetailComponent implements OnInit {
   homestays!: Homestay2[];
   homestay!: Homestay2;
   google_api! :string;
-  images!: any;
+  images!: ImageOfHomestay[];
 
   formComment: FormGroup = new FormGroup({});
   comments?: any;
@@ -70,8 +70,6 @@ export class HomestayDetailComponent implements OnInit {
     this.homestayService.findImageOfHomestaysByHomestay_Id(this.idH).subscribe((data) => {
       this.images = data;
       console.log(data);
-      console.log("------")
-      console.log(this.images);
     })
   }
 

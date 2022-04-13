@@ -1,6 +1,7 @@
+import {Homestay2} from "./homestay2";
 
 export interface ImageOfHomestay {
   id: number;
-  image: any;
-  homestay: any;
+  images: any;
+  homestay: Homestay2;
 }

@@ -21,7 +21,11 @@ export class Homestay2Service {
     return this.http.get<Homestay2>(API_URL + 'homestay/' + id);
   }
 
+  getAllImage() {
+    return this.http.get<ImageOfHomestay[]>(API_URL + 'homestay/image-of-homestay');
+  }
+
   findImageOfHomestaysByHomestay_Id(id: number) {
-    return this.http.get<ImageOfHomestay>(API_URL + 'homestay/image-of-homestay/' + id);
+    return this.http.get<ImageOfHomestay[]>(API_URL + 'homestay/image-of-homestay/' + id);
   }
 }
