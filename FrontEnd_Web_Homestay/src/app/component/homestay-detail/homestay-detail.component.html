@@ -17,17 +17,17 @@
   <div class="container">
     <div class="row">
       <div class="col-lg-3 sidebar">
-        <div class="sidebar-wrap bg-light ">
-          <h3 class="heading mb-4">Find City</h3>
+        <div class="sidebar-wrap bg-light assets/images">
+          <h3 class="heading mb-4">Tìm Kiếm</h3>
           <form action="#">
             <div class="fields">
               <div class="form-group">
-                <input type="text" class="form-control" placeholder="Destination, City">
+                <input type="text" class="form-control" placeholder="Tên Homestay">
               </div>
               <div class="form-group">
                 <div class="select-wrap one-third">
                   <div class="icon"><span class="ion-ios-arrow-down"></span></div>
-                  <select name="" class="form-control" placeholder="Keyword search">
+                  <select name="" id="" class="form-control">
                     <option value="">Select Location</option>
                     <option value="">San Francisco USA</option>
                     <option value="">Berlin Germany</option>
@@ -37,20 +37,10 @@
                 </div>
               </div>
               <div class="form-group">
-                <input type="text" id="checkin_date1" class="form-control" placeholder="Date from">
+                <input type="text" id="checkin_date1" class="form-control" placeholder="Ngày Bắt Đầu">
               </div>
               <div class="form-group">
-                <input type="text" id="checkin_date2" class="form-control" placeholder="Date to">
-              </div>
-              <div class="form-group">
-                <div class="range-slider">
-		              		<span>
-										    <input type="number" value="25000" min="0" max="120000"/>	-
-										    <input type="number" value="50000" min="0" max="120000"/>
-										  </span>
-                  <input value="1000" min="0" max="120000" step="500" type="range"/>
-                  <input value="50000" min="0" max="120000" step="500" type="range"/>
-                </div>
+                <input type="text" id="checkin_date2" class="form-control" placeholder="Ngày Kết Thúc">
               </div>
               <div class="form-group">
                 <input type="submit" value="Search" class="btn btn-primary py-3 px-5">
@@ -58,47 +48,42 @@
             </div>
           </form>
         </div>
-        <div class="sidebar-wrap bg-light ">
-          <h3 class="heading mb-4">Star Rating</h3>
+        <div class="sidebar-wrap bg-light assets/images">
+          <h3 class="heading mb-4">Đánh Giá Tốt</h3>
           <form method="post" class="star-rating">
             <div class="form-check">
               <input type="checkbox" class="form-check-input" id="exampleCheck1">
               <label class="form-check-label" for="exampleCheck1">
-                <p class="rate"><span><i class="icon-star"></i><i class="icon-star"></i><i
-                  class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i></span>
-                </p>
+                <p class="rate"><span><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i><i
+                  class="icon-star"></i><i class="icon-star"></i></span></p>
               </label>
             </div>
             <div class="form-check">
               <input type="checkbox" class="form-check-input" id="exampleCheck2">
               <label class="form-check-label" for="exampleCheck1">
-                <p class="rate"><span><i class="icon-star"></i><i class="icon-star"></i><i
-                  class="icon-star"></i><i class="icon-star"></i><i
-                  class="icon-star-o"></i></span></p>
+                <p class="rate"><span><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i><i
+                  class="icon-star"></i><i class="icon-star-o"></i></span></p>
               </label>
             </div>
             <div class="form-check">
               <input type="checkbox" class="form-check-input" id="exampleCheck3">
               <label class="form-check-label" for="exampleCheck1">
-                <p class="rate"><span><i class="icon-star"></i><i class="icon-star"></i><i
-                  class="icon-star"></i><i class="icon-star-o"></i><i
-                  class="icon-star-o"></i></span></p>
+                <p class="rate"><span><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i><i
+                  class="icon-star-o"></i><i class="icon-star-o"></i></span></p>
               </label>
             </div>
             <div class="form-check">
               <input type="checkbox" class="form-check-input" id="exampleCheck4">
               <label class="form-check-label" for="exampleCheck1">
-                <p class="rate"><span><i class="icon-star"></i><i class="icon-star"></i><i
-                  class="icon-star-o"></i><i class="icon-star-o"></i><i
-                  class="icon-star-o"></i></span></p>
+                <p class="rate"><span><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star-o"></i><i
+                  class="icon-star-o"></i><i class="icon-star-o"></i></span></p>
               </label>
             </div>
             <div class="form-check">
               <input type="checkbox" class="form-check-input" id="exampleCheck5">
               <label class="form-check-label" for="exampleCheck1">
-                <p class="rate"><span><i class="icon-star"></i><i class="icon-star-o"></i><i
-                  class="icon-star-o"></i><i class="icon-star-o"></i><i
-                  class="icon-star-o"></i></span></p>
+                <p class="rate"><span><i class="icon-star"></i><i class="icon-star-o"></i><i class="icon-star-o"></i><i
+                  class="icon-star-o"></i><i class="icon-star-o"></i></span></p>
               </label>
             </div>
           </form>
@@ -135,10 +120,10 @@
 
               <!-- Left and right controls -->
               <a class="carousel-control-prev" href="#demo" data-slide="prev">
-                <span class="carousel-control-prev-icon"></span>
+                <span class="carousel-control-prev-icon" style="background-color: black; width: 30px; height: 50px"></span>
               </a>
               <a class="carousel-control-next" href="#demo" data-slide="next">
-                <span class="carousel-control-next-icon"></span>
+                <span class="carousel-control-next-icon" style="background-color: black; width: 30px; height: 50px"></span>
               </a>
             </div>
           </div>
@@ -156,7 +141,7 @@
             <div class="row">
               <p class="col-md-10">
                 <br>
-                <span class="loc rate i"><a href="#"><i class="icon-map"></i> {{homestay.address}}</a></span>
+                <span class="loc rate i"><a href="#"><i class="icon-map"></i> {{homestay.address}}, {{homestay.city.name}}</a></span>
                 <span class="star">
     							<i class="icon-star"></i>
     							<i class="icon-star"></i>
@@ -166,24 +151,30 @@
     							8 Rating
                  </span>
               <div class="col-sm-2">
-                <input (click)="openBookHouse()" style="margin-right: 0" class="btn btn-primary"
+                <input (click)="openBookHouse(homestay)" style="margin-right: 0" class="btn btn-primary"
                        type="submit"
                        value="Đặt ngay">
               </div>
 
             </div>
-            <!--            <p>When she reached the first hills of the Italic Mountains, she had a last view back on the-->
-            <!--              skyline of her hometown Bookmarksgrove, the headline of Alphabet Village and the subline of-->
-            <!--              her own road, the Line Lane. Pityful a rethoric question ran over her cheek, then she-->
-            <!--              continued her way.</p>-->
             <div class="d-md-flex mt-5 mb-5">
-              <ul class="ml-md-5">
+              <ul class="ml-md-5 col-sm-3">
                 <li>Loại phòng: {{homestay.homestay_type.name}}</li>
                 <li>Số lượng phòng ngủ: {{homestay.bed_room}}</li>
                 <li>Số lượng phòng tắm: {{homestay.bath_room}}</li>
+                <li>Giới thiệu: {{homestay.description}}</li>
               </ul>
+              <div class="ml-md-5 col-sm-8">
+                <iframe
+                  width="100%"
+                  height="450"
+                  frameborder="0" style="border:0"
+                  referrerpolicy="no-referrer-when-downgrade"
+                  src="https://www.google.com/maps/embed/v1/place?key=AIzaSyDRgsm4D8UcW479Mj4malJdf92cl_sTLAI&q=Sân+vận+động+Quốc+gia+Mỹ+Đình&maptype=satellite&zoom=15"
+                  allowfullscreen>
+                </iframe>
+              </div>
             </div>
-            <p>{{homestay.description}}</p>
           </div>
 
           <div class="row" style="width: 88%">
@@ -561,11 +552,11 @@
               </div>
 
               <!-- Left and right controls -->
-              <a class="carousel-control-prev" href="#homestay" data-slide="prev">
-                <span class="carousel-control-prev-icon"></span>
+              <a class="carousel-control-prev" href="#homestay" data-slide="prev" style="width: 30px; left: -30px">
+                <span class="carousel-control-prev-icon" style="background-color: black; width: 30px; height: 50px"></span>
               </a>
-              <a class="carousel-control-next" href="#homestay" data-slide="next">
-                <span class="carousel-control-next-icon"></span>
+              <a class="carousel-control-next" href="#homestay" data-slide="next" style="width: 30px; right: -30px">
+                <span class="carousel-control-next-icon" style="background-color: black; width: 30px; height: 50px"></span>
               </a>
             </div>
 

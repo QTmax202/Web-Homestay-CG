@@ -40,16 +40,6 @@ public class AuthController {
     @Autowired
     private JwtService jwtService;
 
-    @PostMapping("/sign-up")
-    public ResponseEntity<?> register(@Valid @RequestBody Account account) {
-        if (accountService.existsByGmail(account.getGmail())) {
-            return new ResponseEntity<>("The username existed!", HttpStatus.OK);
-        }
-        Account appUser = new Account(account.getGmail(), passwordEncoder.encode(account.getPassword()), account.getRoles());
-        accountService.save(appUser);
-        return new ResponseEntity<>(appUser, HttpStatus.OK);
-    }
-
     @PostMapping("/sign-in")
     public ResponseEntity<?> login(@RequestBody Account account) {
         if (accountService.existsByGmail(account.getGmail())){
