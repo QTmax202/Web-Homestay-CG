@@ -34,11 +34,18 @@ import {MatInputModule} from "@angular/material/input";
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatSelectModule} from "@angular/material/select";
 import {MatChipsModule} from "@angular/material/chips";
+import {MatTableModule} from '@angular/material/table';
+import {MatPaginatorModule} from '@angular/material/paginator';
 import { EditHomestayComponent } from './dialog/edit-homestay/edit-homestay.component';
 import {environment} from "../environments/environment";
 import {AngularFireStorageModule} from "@angular/fire/compat/storage";
 import {AngularFireModule} from "@angular/fire/compat";
 import {NgToastModule} from "ng-angular-popup";
+import {MatSortModule} from "@angular/material/sort";
+import { ChangePassComponent } from './dialog/change-pass/change-pass.component';
+import { ConfirmBookComponent } from './dialog/confirm-book/confirm-book.component';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import {MatNativeDateModule} from "@angular/material/core";
 
 @NgModule({
   declarations: [
@@ -61,7 +68,9 @@ import {NgToastModule} from "ng-angular-popup";
     CreateHomestayComponent,
     ConfirmComponent,
     NotifyComponent,
-    EditHomestayComponent
+    EditHomestayComponent,
+    ChangePassComponent,
+    ConfirmBookComponent
   ],
   imports: [
     BrowserModule,
@@ -82,6 +91,12 @@ import {NgToastModule} from "ng-angular-popup";
     MatSelectModule,
     MatChipsModule,
     AngularFireStorageModule,
+    AngularFireModule.initializeApp(environment.firebaseConfig, "cloud"),
+    MatTableModule,
+    MatPaginatorModule,
+    MatSortModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
     NgToastModule,
     AngularFireModule.initializeApp(environment.firebaseConfig, "cloud")
   ],

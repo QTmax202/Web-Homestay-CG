@@ -109,4 +109,5 @@ public class AccountService implements IAccountService{
 
         registrationUserTokenRepository.deleteById(registrationUserToken.getId());
     }
+
 }

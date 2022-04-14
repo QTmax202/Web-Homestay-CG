@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import {AngularFireStorage} from "@angular/fire/compat/storage";
 import {finalize, Observable} from "rxjs";
+import {BookHomestayComponent} from "../../dialog/book-homestay/book-homestay.component";
+import {MatDialog} from "@angular/material/dialog";
+import {ChangePassComponent} from "../../dialog/change-pass/change-pass.component";
 
 @Component({
   selector: 'app-profile',
@@ -12,7 +15,8 @@ export class ProfileComponent implements OnInit {
   selectedFile?: File ;
   fb : any;
   downloadURL?: Observable<string>;
-  constructor(private storage: AngularFireStorage) { }
+  constructor(private storage: AngularFireStorage,
+              private dialog: MatDialog) { }
 
   ngOnInit(): void {
   }
@@ -44,4 +48,10 @@ export class ProfileComponent implements OnInit {
       });
   }
 
+  openChangePass() {
+    this.dialog.closeAll()
+    this.dialog.open(ChangePassComponent, {
+      width: '50%',
+    });
+  }
 }

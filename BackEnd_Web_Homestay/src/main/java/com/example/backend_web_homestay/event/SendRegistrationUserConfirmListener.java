@@ -2,7 +2,6 @@ package com.example.backend_web_homestay.event;
 
 import com.example.backend_web_homestay.service.Gmail.IGmailService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationEvent;
 import org.springframework.context.ApplicationListener;
 import org.springframework.stereotype.Component;
 

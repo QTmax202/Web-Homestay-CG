@@ -18,7 +18,7 @@ public interface IAccountRepository extends JpaRepository<Account, Long> {
 
     Optional<Account> findAccountByGmailAndPassword(String username,String password);
 
-    //    confirm mail
+//    confirm mail
     @Query("	SELECT 	a.status 		"
             + "	FROM 	Account a		"
             + " WHERE 	a.gmail = :gmail ")

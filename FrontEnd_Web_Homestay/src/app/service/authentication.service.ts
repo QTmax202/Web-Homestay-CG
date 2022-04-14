@@ -24,26 +24,10 @@ export class AuthenticationService {
   login(gmail: string, password: string) {
     return this.http.post<any>('http://localhost:8080/api/auth/sign-in', {gmail, password})
       .pipe(map(account => {
-        if (account.status == 200) {
-          if (account.error.text == "unverified account") {
-            localStorage.setItem('currentAccount', "unverified account");
-          } else {
-            localStorage.setItem('currentAccount', JSON.stringify(account));
-            this.currentUserSubject.next(account);
-            this.update.emit('login');
-          }
-        } else if (account.status == 202) {
-          localStorage.setItem('currentAccount', "not account");
-        }
-        return account;
+          localStorage.setItem('currentAccount', JSON.stringify(account));
+          this.currentUserSubject.next(account);
+          this.update.emit('login');
+          return account;
       }));
-  }
-
-  logout() {
-    localStorage.removeItem('currentAccount');
-    // localStorage.removeItem('ROLE');
-    // localStorage.removeItem('ACCESS_TOKEN');
-    // localStorage.removeItem('EMAIL');
-    // this.currentUserSubject.next(null);
   }
 }

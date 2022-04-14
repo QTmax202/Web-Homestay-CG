@@ -1,5 +1,6 @@
 package com.example.backend_web_homestay.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -13,8 +14,8 @@ public class Rate {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @JsonIgnore
     @ManyToOne
-    @JoinColumn(name = "homestay_id")
     private Homestay homestay;
 
     @ManyToOne

@@ -6,6 +6,7 @@ import com.example.backend_web_homestay.service.Account.IAccountService;
 import com.example.backend_web_homestay.service.Role.IRoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEventPublisher;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -33,7 +34,7 @@ public class AccountController {
     @PostMapping
     private ResponseEntity<?> createAccount(@RequestBody Account account) {
         if (accountService.existsByGmail(account.getGmail())) {
-            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+            return new ResponseEntity<>(true ,HttpStatus.BAD_REQUEST);
         } else {
             account.setPassword(passwordEncoder.encode(account.getPassword()));
             account.setAvatar_url("https://haycafe.vn/wp-content/uploads/2021/11/Anh-avatar-dep-chat-lam-hinh-dai-dien.jpg");
@@ -41,8 +42,7 @@ public class AccountController {
             roleSet.add(roleService.findById(1L).get());
             account.setRoles(roleSet);
             accountService.save(account);
-            return new ResponseEntity<>("We have sent an email. Please check email to active account!", HttpStatus.OK);
-
+            return new ResponseEntity<>(account, HttpStatus.OK);
         }
     }
 

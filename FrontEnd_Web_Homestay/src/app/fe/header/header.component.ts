@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {MatDialog, MAT_DIALOG_DATA} from "@angular/material/dialog";
 import {SignInComponent} from "../../dialog/sign-in/sign-in.component";
 import {NotifyComponent} from "../../dialog/notify/notify.component";
+import {ActivatedRoute, Router} from "@angular/router";
 
 @Component({
   selector: 'app-header',
@@ -10,16 +11,21 @@ import {NotifyComponent} from "../../dialog/notify/notify.component";
 })
 export class HeaderComponent implements OnInit {
 
-  constructor(public dialog: MatDialog) { }
+  pathUrl?: string;
+
+  constructor(public dialog: MatDialog,
+              private router: Router,
+              private activatedRoute: ActivatedRoute) { }
 
   ngOnInit(): void {
-
+    const {returnUrl: returnUrl} = this.activatedRoute.snapshot.queryParams;
+    this.pathUrl = returnUrl || '/home';
   }
 
   openNotify() {
     this.dialog.closeAll()
     this.dialog.open(NotifyComponent, {
-      width: '50%',
+      width: '40%',
     });
   }
 
@@ -28,5 +34,12 @@ export class HeaderComponent implements OnInit {
     this.dialog.open(SignInComponent, {
       width: '30%',
     });
+  }
+
+  logout() {
+    localStorage.removeItem('ACCESS_TOKEN');
+    localStorage.removeItem('ACCOUNT_ID');
+    localStorage.removeItem('currentAccount');
+    this.router.navigate([this.pathUrl]).then();
   }
 }
