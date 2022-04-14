@@ -70,6 +70,11 @@ public class AccountService implements IAccountService{
     }
 
     @Override
+    public Account saveProfile(Account account) {
+        return accountRepository.save(account);
+    }
+
+    @Override
     public Account save(Account account) {
         Account acc = accountRepository.save(account);
 
