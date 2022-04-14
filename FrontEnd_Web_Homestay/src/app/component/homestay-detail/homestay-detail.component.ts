@@ -9,6 +9,7 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {NotifyComponent} from "../../dialog/notify/notify.component";
 import {MatDialog} from "@angular/material/dialog";
 import {BookHomestayComponent} from "../../dialog/book-homestay/book-homestay.component";
+import {ImageOfHomestay} from "../../models/image-of-homestay";
 
 @Component({
   selector: 'app-homestay-detail',
@@ -21,6 +22,7 @@ export class HomestayDetailComponent implements OnInit {
   homestays!: Homestay2[];
   homestay!: Homestay2;
   google_api! :string;
+  images!: ImageOfHomestay[];
 
   formComment: FormGroup = new FormGroup({});
   comments?: any;
@@ -47,6 +49,7 @@ export class HomestayDetailComponent implements OnInit {
       }
     })
     this.getHomestayById();
+    this.getAllImage();
     this.getAllComment();
     this.getAllHomestay();
     console.log(localStorage.getItem('ACCOUNT_ID'))
@@ -59,6 +62,14 @@ export class HomestayDetailComponent implements OnInit {
     this.idH = this.route.snapshot.params['id'];
     this.homestayService.getHomestayById(this.idH).subscribe((data) => {
       this.homestay = data;
+    })
+  }
+
+  getAllImage() {
+    this.idH = this.route.snapshot.params['id'];
+    this.homestayService.findImageOfHomestaysByHomestay_Id(this.idH).subscribe((data) => {
+      this.images = data;
+      console.log(data);
     })
   }
 

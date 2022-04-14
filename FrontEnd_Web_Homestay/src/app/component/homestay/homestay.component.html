@@ -93,36 +93,25 @@
       <div class="col-lg-9">
         <div class="row">
 
-          <div class="col-md-4 assets/images" *ngFor="let h of homestays">
+          <div class="col-md-4 assets/images" *ngFor="let h of homestays; index as i">
             <div class="destination">
-              <a [routerLink]="['/homestay-detail/', h.id]" class="img img-2 d-flex justify-content-center align-items-center"
-                 style="background-image: url(assets/images/hotel-1.jpg);">
-                <div class="icon d-flex justify-content-center align-items-center">
-                  <span class="icon-search2"></span>
-                </div>
-              </a>
+              <div class="img img-2 d-flex justify-content-center align-items-center">
+                <img class="active" style="width: 254px; height: 200px"
+                     src="{{h.imageOfHomestays[1].images}}" alt="">
+              </div>
               <div class="text p-3">
                 <div class="d-flex">
                   <div class="one">
                     <h3><a [routerLink]="['/homestay-detail/', h.id]">{{h.name}}</a></h3>
-                    <p class="rate">
-                      <i class="icon-star"></i>
-                      <i class="icon-star"></i>
-                      <i class="icon-star"></i>
-                      <i class="icon-star"></i>
-                      <i class="icon-star-o"></i>
-                      <span>8 Rating</span>
-                    </p>
-                  </div>
-                  <div class="two">
-                    <span class="price per-price">{{h.price}}<small>/night</small></span>
+                    <div class="two">
+                      <p class="price per-price">{{h.price | currency :'đ' :true: '1.0-0'}}<small>/night</small></p>
+                    </div>
                   </div>
                 </div>
-                <p>{{h.description}}</p>
+                <p class="format-form-p" style="height: 30px">{{h.description}}</p>
                 <hr>
                 <p class="bottom-area d-flex">
-                  <span><i class="icon-map-o"></i> {{h.address}}</span>
-                  <span class="ml-auto"><a href="#">Book Now</a></span>
+                  <span class="format-form-span"><i class="icon-map-o"></i> {{h.address}}</span>
                 </p>
               </div>
             </div>
@@ -134,3 +123,18 @@
   </div>
 </section>
 
+<style>
+  .format-form-p {
+    height: 30px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .format-form-span {
+    width: 210px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+</style>
