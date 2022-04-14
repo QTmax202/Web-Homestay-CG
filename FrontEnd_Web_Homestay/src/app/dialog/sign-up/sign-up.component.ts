@@ -24,7 +24,6 @@ export class SignUpComponent implements OnInit {
   account!: Account;
   hide = true;
 
-
   constructor(private dialog: MatDialog,
               private accountService: AccountService,
               private fb: FormBuilder) {
@@ -69,9 +68,13 @@ export class SignUpComponent implements OnInit {
       password: this.formSignUp.value.password,
     }
     console.log("account" + account);
-    this.openConfirm();
+
     this.accountService.createAccount(account).subscribe(() => {
       this.formSignUp.reset();
+      // this.openConfirm();
+    }, error => {
+      // @ts-ignore
+      document.getElementById("error-form-sign-up").innerText = "Tài khoản email đã tồn tại!"
     })
   }
 

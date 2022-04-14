@@ -9,6 +9,7 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {NotifyComponent} from "../../dialog/notify/notify.component";
 import {MatDialog} from "@angular/material/dialog";
 import {BookHomestayComponent} from "../../dialog/book-homestay/book-homestay.component";
+import {ImageOfHomestay} from "../../models/image-of-homestay";
 
 @Component({
   selector: 'app-homestay-detail',
@@ -20,13 +21,16 @@ export class HomestayDetailComponent implements OnInit {
   idH!: number;
   homestays!: Homestay2[];
   homestay!: Homestay2;
-  google_api : string = "Sân+vận+động+Quốc+gia+Mỹ+Đình";
+  google_api! :string;
+  images!: ImageOfHomestay[];
 
   formComment: FormGroup = new FormGroup({});
   comments?: any;
 
   displayedColumns: string[] = ['image'];
   dataSource!: MatTableDataSource<any>;
+
+  idAcc = localStorage.getItem('ACCOUNT_ID')
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
@@ -47,8 +51,13 @@ export class HomestayDetailComponent implements OnInit {
       }
     })
     this.getHomestayById();
+    this.getAllImage();
     this.getAllComment();
-    this.getAllHomestay();
+    if (this.idAcc == null) {
+      this.getAllHomestay();
+    } else {
+      this.getAllHomestaySignIn();
+    }
     console.log(localStorage.getItem('ACCOUNT_ID'))
     // this.google_api = this.homestay.address + this.homestay.city.name;
     this.google_api = "Sân+vận+động+Quốc+gia+Mỹ+Đình";
@@ -59,6 +68,14 @@ export class HomestayDetailComponent implements OnInit {
     this.idH = this.route.snapshot.params['id'];
     this.homestayService.getHomestayById(this.idH).subscribe((data) => {
       this.homestay = data;
+    })
+  }
+
+  getAllImage() {
+    this.idH = this.route.snapshot.params['id'];
+    this.homestayService.findImageOfHomestaysByHomestay_Id(this.idH).subscribe((data) => {
+      this.images = data;
+      console.log(data);
     })
   }
 
@@ -97,6 +114,12 @@ export class HomestayDetailComponent implements OnInit {
 
   getAllHomestay() {
     this.homestayService.getAllHomestay().subscribe((data) => {
+      this.homestays = data;
+    })
+  }
+
+  getAllHomestaySignIn() {
+    this.homestayService.getAllHomestaySignIn(this.idAcc).subscribe((data) => {
       this.homestays = data;
     })
   }
