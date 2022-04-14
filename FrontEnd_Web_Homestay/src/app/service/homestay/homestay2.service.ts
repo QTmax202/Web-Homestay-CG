@@ -5,6 +5,7 @@ import {environment} from "../../../environments/environment";
 import {ImageOfHomestay} from "../../models/image-of-homestay";
 import {Rate} from "../../models/rate";
 import {Observable} from "rxjs";
+import {MyHomestayDto} from "../../models/my-homestay-dto";
 
 const API_URL = `${environment.apiUrl}`;
 
@@ -14,6 +15,12 @@ const API_URL = `${environment.apiUrl}`;
 export class Homestay2Service {
 
   constructor(private http: HttpClient) { }
+
+  //homestay by account
+
+  getHomestayByAccountId(id: any): Observable<any> {
+    return this.http.get<MyHomestayDto[]>(API_URL + 'homestay/acc/' + id);
+  }
 
   //home
 
