@@ -131,11 +131,11 @@
           <div class="col-md-12 hotel-single mt-4 mb-5 ">
             <span>Our Best hotels &amp; Rooms</span>
             <div class="row">
-              <div class="col-md-10">
+              <div class="col-md-9">
                 <h2>{{homestay.name}}</h2>
               </div>
-              <div class="col-md-2">
-                <h2 class="price per-price" style="color: #2f89fc">{{homestay.price}}<small>/night</small></h2>
+              <div class="col-md-3">
+                <h2 class="price per-price" style="color: #2f89fc">{{homestay.price | currency : 'đ' : true : '1.0-0' }}<small>/night</small></h2>
               </div>
             </div>
             <div class="row">

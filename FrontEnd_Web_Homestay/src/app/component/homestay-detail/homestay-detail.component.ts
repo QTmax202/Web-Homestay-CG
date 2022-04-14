@@ -20,7 +20,7 @@ export class HomestayDetailComponent implements OnInit {
   idH!: number;
   homestays!: Homestay2[];
   homestay!: Homestay2;
-  google_api! :string;
+  google_api : string = "Sân+vận+động+Quốc+gia+Mỹ+Đình";
 
   formComment: FormGroup = new FormGroup({});
   comments?: any;
