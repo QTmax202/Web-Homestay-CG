@@ -10,7 +10,7 @@ import java.util.List;
 @Repository
 public interface IBillRepository extends JpaRepository<Bill, Long> {
 
-    
+
     Iterable<Bill> getBillByHomestay_Id(Long id);
 
     @Query(value = "select * from bill b \n" +

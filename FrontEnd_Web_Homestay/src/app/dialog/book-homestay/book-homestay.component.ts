@@ -95,6 +95,6 @@ export class BookHomestayComponent implements OnInit {
           console.log('error_book_homestay');
         });
   }
-  
+
 
 }
