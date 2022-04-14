@@ -5,6 +5,7 @@ import {environment} from "../../../environments/environment";
 import {ImageOfHomestay} from "../../models/image-of-homestay";
 import {Rate} from "../../models/rate";
 import {Observable} from "rxjs";
+import {Homestay} from "../../models/homestay";
 
 const API_URL = `${environment.apiUrl}`;
 
@@ -43,5 +44,9 @@ export class Homestay2Service {
 
   getAllRateByAccount(id: number): Observable<any> {
     return this.http.get<Rate[]>(API_URL + 'rate/account/' + id);
+  }
+
+  editHome(id: number | undefined, home: Homestay2): Observable<any> {
+    return this.http.put(API_URL + 'homestay/' + id, home);
   }
 }

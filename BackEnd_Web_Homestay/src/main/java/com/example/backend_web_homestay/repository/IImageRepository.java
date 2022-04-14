@@ -7,4 +7,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface IImageRepository extends JpaRepository<ImageOfHomestay, Long> {
     Iterable<ImageOfHomestay> findImageOfHomestaysByHomestay_Id(long id);
+
+
 }

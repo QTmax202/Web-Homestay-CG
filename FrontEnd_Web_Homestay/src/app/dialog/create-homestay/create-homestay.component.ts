@@ -63,8 +63,8 @@ export class CreateHomestayComponent implements OnInit {
       this.formHome.controls['bed_room'].setValue(this.editData.bed_room);
       this.formHome.controls['bath_room'].setValue(this.editData.bath_room);
       this.formHome.controls['price'].setValue(this.editData.bath_room);
-      this.formHome.controls['homestay_type_id'].setValue(this.editData.homestay_type_id.id);
-      this.formHome.controls['city_id'].setValue(this.editData.city_id.id);
+      this.formHome.controls['homestay_type'].setValue(this.editData.homestay_type_id.id);
+      this.formHome.controls['city'].setValue(this.editData.city_id.id);
     }
   }
 
@@ -86,10 +86,10 @@ export class CreateHomestayComponent implements OnInit {
       bath_room: this.formHome.value.bath_room,
       price: this.formHome.value.price,
       description: this.formHome.value.description,
-      homestay_type_id: {
+      homestay_type: {
         id: this.formHome.value.homestay_type
       },
-      city_id: {
+      city: {
         id: this.formHome.value.city
       },
     }
@@ -99,7 +99,8 @@ export class CreateHomestayComponent implements OnInit {
       this.formHome.reset()
       this.dialogRef.close()
     }, error => {
-      this.toast.error({detail:"Error Message!", summary:"Create Failed. Please Try again!!", duration:5000})
+      console.log(error.summary)
+      this.toast.error({detail: "Error Message!", summary:'Create Failed, Please Try again', duration: 5000})
     })
   }
 }

@@ -2,8 +2,7 @@ package com.example.backend_web_homestay.controller;
 
 import com.example.backend_web_homestay.model.Homestay;
 import com.example.backend_web_homestay.model.ImageOfHomestay;
-import com.example.backend_web_homestay.model.Rate;
-import com.example.backend_web_homestay.service.HomeStay.IHomestayService;
+import com.example.backend_web_homestay.service.Homestay.IHomestayService;
 import com.example.backend_web_homestay.service.Image.IImageService;
 import com.example.backend_web_homestay.service.Rate.IRateService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,7 +35,7 @@ public class HomestayController {
         return new ResponseEntity<>(homestays, HttpStatus.OK);
     }
 
-    @GetMapping("/account/{id}")
+    @GetMapping("/acc/{id}")
     private ResponseEntity<?> getAllHomestay(@PathVariable long id) {
         Iterable<Homestay> homestays = homestayService.findAllHomeStay(id);
         if (!homestays.iterator().hasNext()) {
