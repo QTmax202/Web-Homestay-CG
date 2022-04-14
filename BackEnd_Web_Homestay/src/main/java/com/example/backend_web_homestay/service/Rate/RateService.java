@@ -1,5 +1,6 @@
 package com.example.backend_web_homestay.service.Rate;
 
+import com.example.backend_web_homestay.DTO.MyHomestay;
 import com.example.backend_web_homestay.model.Rate;
 import com.example.backend_web_homestay.repository.IRateRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,7 +45,7 @@ public class RateService implements IRateService {
     }
 
     @Override
-    public List<Object> getHomestayByAccountId(long id) {
+    public List<MyHomestay> getHomestayByAccountId(long id) {
         return rateRepository.getHomestayByAccountId(id);
     }
 }

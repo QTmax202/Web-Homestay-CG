@@ -1,8 +1,8 @@
 package com.example.backend_web_homestay.controller;
 
+import com.example.backend_web_homestay.DTO.MyHomestay;
 import com.example.backend_web_homestay.model.Homestay;
 import com.example.backend_web_homestay.model.ImageOfHomestay;
-import com.example.backend_web_homestay.model.Rate;
 import com.example.backend_web_homestay.service.HomeStay.IHomestayService;
 import com.example.backend_web_homestay.service.Image.IImageService;
 import com.example.backend_web_homestay.service.Rate.IRateService;
@@ -36,7 +36,8 @@ public class HomestayController {
         return new ResponseEntity<>(homestays, HttpStatus.OK);
     }
 
-    @GetMapping("/account/{id}")
+    // get homestay tru chu nha
+    @GetMapping("/acc/{id}")
     private ResponseEntity<?> getAllHomestay(@PathVariable long id) {
         Iterable<Homestay> homestays = homestayService.findAllHomeStay(id);
         if (!homestays.iterator().hasNext()) {
@@ -57,7 +58,7 @@ public class HomestayController {
 
     @GetMapping("/account/{id}")
     private ResponseEntity<?> getHomestayByAccountId(@PathVariable long id) {
-        List<Object> homestays = rateService.getHomestayByAccountId(id);
+        List<MyHomestay> homestays = rateService.getHomestayByAccountId(id);
         return new ResponseEntity<>(homestays, HttpStatus.OK);
     }
 
