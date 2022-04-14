@@ -50,24 +50,21 @@
           <div class="row">
             <div class="col-md-9">
               <div class="destination">
-                <form action="#">
+                <form  [formGroup]="editProfile" (ngSubmit)="updateProfile()">
                   <div class="form-group">
-                    <input type="text" class="form-control" placeholder="Your Name">
+                    <input type="text" class="form-control" placeholder="Your Name" id="name" formControlName="name" value="{{profile?.name}}">
                   </div>
                   <div class="form-group">
-                    <input type="text" class="form-control" placeholder="Your Email" readonly value="hehe">
+                    <input type="text" class="form-control" placeholder="Your Email" id="gmail"  formControlName="gmail" readonly value="{{profile?.gmail}}">
                   </div>
                   <div class="form-group">
-                    <input type="date" class="form-control" placeholder="Your Password">
+                    <input type="text" class="form-control" placeholder="Your Phone" id="phone_number" formControlName="phone_number" value="{{profile?.phone_number}}">
                   </div>
                   <div class="form-group">
-                    <input type="text" class="form-control" placeholder="Your Phone">
+                    <input type="text" class="form-control" placeholder="Your Address" id="address" formControlName="address" value="{{profile?.address}}">
                   </div>
                   <div class="form-group">
-                    <input type="text" class="form-control" placeholder="Your Address">
-                  </div>
-                  <div class="form-group">
-                    <input type="submit" value="Cập nhật" class="btn btn-primary py-3 px-5">
+                    <input class="btn btn-success" type="submit" value="Cập nhật" class="btn btn-primary py-3 px-5"/>
                   </div>
                 </form>
               </div>

@@ -94,27 +94,15 @@
           <div class="col-md-12 ">
             <div id="demo" class="carousel slide" data-ride="carousel">
 
-              <!-- Indicators -->
-              <ul class="carousel-indicators">
-                <li data-target="#demo" data-slide-to="0" class="active"></li>
-                <li data-target="#demo" data-slide-to="1"></li>
-                <li data-target="#demo" data-slide-to="2"></li>
-              </ul>
-
               <!-- The slideshow -->
               <div class="carousel-inner">
                 <div class="carousel-item active">
-                  <img
-                    src="https://vcdn1-dulich.vnecdn.net/2021/07/16/8-1626444967.jpg?w=1200&h=0&q=100&dpr=1&fit=crop&s=GfgGn4dNuKZexy1BGkAUNA"
-                    alt="Los Angeles" width="1100" height="500">
-                </div>
-                <div class="carousel-item">
-                  <img src="https://vcdn-dulich.vnecdn.net/2021/12/24/An-Giang-0-jpeg-1470-1640315739.jpg" alt="Chicago"
+                  <img src="{{images[images.length - 2].images}}" alt="Chicago"
                        width="1100" height="500">
                 </div>
-                <div class="carousel-item">
-                  <img src="https://cdn.pixabay.com/photo/2020/04/30/14/03/mountains-and-hills-5112952__480.jpg"
-                       alt="New York" width="1100" height="500">
+                <div class="carousel-item" *ngFor="let i of images">
+                  <img src="{{i.images}}" alt="Chicago"
+                       width="1100" height="500">
                 </div>
               </div>
 
@@ -141,7 +129,7 @@
             <div class="row">
               <p class="col-md-10">
                 <br>
-                <span class="loc rate i"><a href="#"><i class="icon-map"></i> {{homestay.address}}</a></span>
+                <span class="loc rate i"><a href="#"><i class="icon-map"></i> {{homestay.address}}, {{homestay.city.name}}</a></span>
                 <span class="star">
     							<i class="icon-star"></i>
     							<i class="icon-star"></i>
@@ -151,24 +139,30 @@
     							8 Rating
                  </span>
               <div class="col-sm-2">
-                <input (click)="openBookHouse()" style="margin-right: 0" class="btn btn-primary"
+                <input (click)="openBookHouse(homestay)" style="margin-right: 0" class="btn btn-primary"
                        type="submit"
                        value="Đặt ngay">
               </div>
 
             </div>
-            <!--            <p>When she reached the first hills of the Italic Mountains, she had a last view back on the-->
-            <!--              skyline of her hometown Bookmarksgrove, the headline of Alphabet Village and the subline of-->
-            <!--              her own road, the Line Lane. Pityful a rethoric question ran over her cheek, then she-->
-            <!--              continued her way.</p>-->
             <div class="d-md-flex mt-5 mb-5">
-              <ul class="ml-md-5">
+              <ul class="ml-md-5 col-sm-3">
                 <li>Loại phòng: {{homestay.homestay_type.name}}</li>
                 <li>Số lượng phòng ngủ: {{homestay.bed_room}}</li>
                 <li>Số lượng phòng tắm: {{homestay.bath_room}}</li>
+                <li>Giới thiệu: {{homestay.description}}</li>
               </ul>
+              <div class="ml-md-5 col-sm-8">
+                <iframe
+                  width="100%"
+                  height="450"
+                  frameborder="0" style="border:0"
+                  referrerpolicy="no-referrer-when-downgrade"
+                  src="https://www.google.com/maps/embed/v1/place?key=AIzaSyDRgsm4D8UcW479Mj4malJdf92cl_sTLAI&q=Sân+vận+động+Quốc+gia+Mỹ+Đình&maptype=satellite&zoom=15"
+                  allowfullscreen>
+                </iframe>
+              </div>
             </div>
-            <p>{{homestay.description}}</p>
           </div>
 
           <div class="row" style="width: 88%">

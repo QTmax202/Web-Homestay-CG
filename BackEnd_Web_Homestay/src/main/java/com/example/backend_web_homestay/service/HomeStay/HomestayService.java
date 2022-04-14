@@ -32,4 +32,9 @@ public class HomestayService implements IHomestayService{
     public void remove(Long id) {
         homestayRepository.deleteById(id);
     }
+
+    @Override
+    public Iterable<Homestay> findAllHomeStay(long id) {
+        return homestayRepository.findAllHomeStay(id);
+    }
 }
