@@ -58,7 +58,7 @@ public class HomestayController {
 
     @GetMapping("/account/{id}")
     private ResponseEntity<?> getHomestayByAccountId(@PathVariable long id) {
-        List<MyHomestayDTO> homestays = homestayService.getHomestayByAccountId(id);
+        Iterable<MyHomestayDTO> homestays = homestayService.getHomestayByAccountId(id);
         return new ResponseEntity<>(homestays, HttpStatus.OK);
     }
 

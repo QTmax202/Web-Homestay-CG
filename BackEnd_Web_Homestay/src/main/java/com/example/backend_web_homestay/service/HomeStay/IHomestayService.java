@@ -9,6 +9,6 @@ import java.util.List;
 public interface IHomestayService extends IGeneralService<Homestay> {
     Iterable<Homestay> findAllHomeStay(long id);
 
-    List<MyHomestayDTO> getHomestayByAccountId(long id);
+    Iterable<MyHomestayDTO> getHomestayByAccountId(long id);
 }
 

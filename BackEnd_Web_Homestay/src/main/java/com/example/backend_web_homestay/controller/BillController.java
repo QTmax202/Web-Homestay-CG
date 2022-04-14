@@ -18,9 +18,7 @@ import java.util.List;
 @RequestMapping("/api/bill")
 @CrossOrigin("*")
 public class BillController {
-<<<<<<< HEAD
 
-=======
     @Autowired
     private IBillRepository billRepository;
 
@@ -46,8 +44,7 @@ public class BillController {
 
     @GetMapping("/bill-homestay-status/{id}")
     private ResponseEntity<?> getBillHomestayStatus(@PathVariable long id){
-        List<Bill> bills = billRepository.findAllBillByHomestay_Status(id);
+        Iterable<Bill> bills = billRepository.findAllBillByHomestay_Status(id);
         return new ResponseEntity<>(bills, HttpStatus.OK);
     }
->>>>>>> 89f299eee6a782cb8fdf4efc45fdeb9fa7e67e43
 }

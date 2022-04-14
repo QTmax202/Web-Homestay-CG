@@ -24,5 +24,5 @@ public interface IHomestayRepository extends JpaRepository<Homestay, Long> {
             "join image_of_homestay img on img.homestay_id = hs.id \n" +
             "where hs.account_id = :id \n" +
             "group by hs.id", nativeQuery = true)
-    List<MyHomestayDTO> getHomestayByAccountId(long id);
+    Iterable<MyHomestayDTO> getHomestayByAccountId(long id);
 }
