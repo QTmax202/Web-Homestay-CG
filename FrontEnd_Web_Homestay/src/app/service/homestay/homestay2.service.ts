@@ -21,6 +21,10 @@ export class Homestay2Service {
     return this.http.get<Homestay2[]>(API_URL + 'homestay');
   }
 
+  getAllHomestaySignIn(id: any): Observable<any> {
+    return this.http.get<Homestay2[]>(API_URL + 'homestay/acc/' + id);
+  }
+
   getHomestayById(id: number): Observable<any> {
     return this.http.get<Homestay2>(API_URL + 'homestay/' + id);
   }
