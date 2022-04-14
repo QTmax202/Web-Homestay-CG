@@ -36,6 +36,7 @@ public class Homestay {
     @OneToMany(mappedBy = "homestay", fetch = FetchType.EAGER,cascade = CascadeType.ALL)
     private List<ImageOfHomestay> imageOfHomestays;
 
+
     public Homestay() {
     }
 
@@ -148,4 +149,5 @@ public class Homestay {
     public void setCity(City city) {
         this.city = city;
     }
+
 }
