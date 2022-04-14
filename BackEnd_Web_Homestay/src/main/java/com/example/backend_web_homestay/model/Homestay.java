@@ -1,12 +1,11 @@
 package com.example.backend_web_homestay.model;
 
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.Data;
 
 import javax.persistence.*;
-import java.util.List;
 
 @Entity
+@Data
 @Table(name = "homestay")
 public class Homestay {
     @Id
@@ -33,33 +32,7 @@ public class Homestay {
     @JoinColumn(name = "city_id")
     private City city;
 
-    @OneToMany(mappedBy = "homestay", fetch = FetchType.EAGER,cascade = CascadeType.ALL)
-    private List<ImageOfHomestay> imageOfHomestays;
-
-
     public Homestay() {
-    }
-
-    public Homestay(Long id, String name, String address, int bed_room, int bath_room, Long price, Boolean status, String description, HomestayType homestay_type, Account account, City city) {
-        this.id = id;
-        this.name = name;
-        this.address = address;
-        this.bed_room = bed_room;
-        this.bath_room = bath_room;
-        this.price = price;
-        this.status = status;
-        this.description = description;
-        this.homestay_type = homestay_type;
-        this.account = account;
-        this.city = city;
-    }
-
-    public List<ImageOfHomestay> getImageOfHomestays() {
-        return imageOfHomestays;
-    }
-
-    public void setImageOfHomestays(List<ImageOfHomestay> imageOfHomestays) {
-        this.imageOfHomestays = imageOfHomestays;
     }
 
     public Long getId() {
@@ -149,5 +122,4 @@ public class Homestay {
     public void setCity(City city) {
         this.city = city;
     }
-
 }
