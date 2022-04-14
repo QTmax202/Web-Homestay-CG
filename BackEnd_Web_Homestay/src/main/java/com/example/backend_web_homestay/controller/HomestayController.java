@@ -1,6 +1,6 @@
 package com.example.backend_web_homestay.controller;
 
-import com.example.backend_web_homestay.DTO.MyHomestay;
+import com.example.backend_web_homestay.DTO.MyHomestayDTO;
 import com.example.backend_web_homestay.model.Homestay;
 import com.example.backend_web_homestay.model.ImageOfHomestay;
 import com.example.backend_web_homestay.service.HomeStay.IHomestayService;
@@ -58,7 +58,7 @@ public class HomestayController {
 
     @GetMapping("/account/{id}")
     private ResponseEntity<?> getHomestayByAccountId(@PathVariable long id) {
-        List<MyHomestay> homestays = rateService.getHomestayByAccountId(id);
+        List<MyHomestayDTO> homestays = homestayService.getHomestayByAccountId(id);
         return new ResponseEntity<>(homestays, HttpStatus.OK);
     }
 

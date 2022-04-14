@@ -9,4 +9,5 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/bill")
 @CrossOrigin("*")
 public class BillController {
+
 }

@@ -13,6 +13,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 
 @RestController
@@ -30,6 +31,12 @@ public class AccountController {
 
     @Autowired
     private ApplicationEventPublisher applicationEventPublisher;
+
+    @GetMapping("/{id}")
+    private ResponseEntity<?> getInformationAccount(@PathVariable long id) {
+        Optional<Account> account = accountService.findById(id);
+        return new ResponseEntity<>(account, HttpStatus.OK);
+    }
 
     @PostMapping
     private ResponseEntity<?> createAccount(@RequestBody Account account) {

@@ -1,7 +1,7 @@
 package com.example.backend_web_homestay.DTO;
 
 
-public interface MyHomestay {
+public interface MyHomestayDTO {
     Long getId();
 
     String getName();

@@ -1,14 +1,16 @@
 package com.example.backend_web_homestay.service.HomeStay;
 
+import com.example.backend_web_homestay.DTO.MyHomestayDTO;
 import com.example.backend_web_homestay.model.Homestay;
 import com.example.backend_web_homestay.repository.IHomestayRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
-public class HomestayService implements IHomestayService{
+public class HomestayService implements IHomestayService {
 
     @Autowired
     private IHomestayRepository homestayRepository;
@@ -36,5 +38,10 @@ public class HomestayService implements IHomestayService{
     @Override
     public Iterable<Homestay> findAllHomeStay(long id) {
         return homestayRepository.findAllHomeStay(id);
+    }
+
+    @Override
+    public List<MyHomestayDTO> getHomestayByAccountId(long id) {
+        return homestayRepository.getHomestayByAccountId(id);
     }
 }

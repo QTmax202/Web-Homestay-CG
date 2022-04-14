@@ -1,6 +1,5 @@
 package com.example.backend_web_homestay.repository;
 
-import com.example.backend_web_homestay.DTO.MyHomestay;
 import com.example.backend_web_homestay.model.Comment;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
