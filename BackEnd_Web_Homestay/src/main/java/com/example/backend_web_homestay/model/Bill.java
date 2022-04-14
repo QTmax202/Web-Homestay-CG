@@ -28,7 +28,6 @@ public class Bill {
     private LocalDate start_date;
     private LocalDate end_date;
     private LocalDate registration_date;
-    private long price;
 
     public Bill() {
     }
@@ -87,13 +86,5 @@ public class Bill {
 
     public void setRegistration_date(LocalDate registration_date) {
         this.registration_date = registration_date;
-    }
-
-    public long getPrice() {
-        return price;
-    }
-
-    public void setPrice(long price) {
-        this.price = price;
     }
 }

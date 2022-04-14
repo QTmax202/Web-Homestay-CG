@@ -1,5 +1,6 @@
 package com.example.backend_web_homestay.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -14,8 +15,9 @@ public class ImageOfHomestay {
 
     private String images;
 
+
+    @JsonIgnore
     @ManyToOne
-    @JoinColumn(name = "homestay_id")
     private Homestay homestay;
 
     public ImageOfHomestay() {
@@ -35,13 +37,5 @@ public class ImageOfHomestay {
 
     public void setImages(String images) {
         this.images = images;
-    }
-
-    public Homestay getHomestay() {
-        return homestay;
-    }
-
-    public void setHomestay(Homestay homestay) {
-        this.homestay = homestay;
     }
 }

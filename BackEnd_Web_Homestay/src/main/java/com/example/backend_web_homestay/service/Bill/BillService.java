@@ -14,26 +14,21 @@ public class BillService implements IBillService{
 
     @Override
     public Iterable<Bill> findAll() {
-        return billRepository.findAll();
+        return null;
     }
 
     @Override
     public Optional<Bill> findById(Long id) {
-        return billRepository.findById(id);
+        return Optional.empty();
     }
 
     @Override
     public Bill save(Bill bill) {
-        return billRepository.save(bill);
+        return null;
     }
 
     @Override
     public void remove(Long id) {
-        billRepository.deleteById(id);
-    }
 
-    @Override
-    public Iterable<Bill> findBillByHomeStayId(Long id) {
-        return billRepository.getBillByHomestay_Id(id);
     }
 }

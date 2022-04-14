@@ -41,7 +41,7 @@ public class HomestayService implements IHomestayService {
     }
 
     @Override
-    public Iterable<MyHomestayDTO> getHomestayByAccountId(long id) {
+    public List<MyHomestayDTO> getHomestayByAccountId(long id) {
         return homestayRepository.getHomestayByAccountId(id);
     }
 }
