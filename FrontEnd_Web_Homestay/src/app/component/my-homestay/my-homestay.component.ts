@@ -23,6 +23,7 @@ export class MyHomestayComponent implements OnInit {
     this.getHomestayByAccountId()
   }
 
+
   getHomestayByAccountId() {
     this.homestayService.getHomestayByAccountId(this.idAcc).subscribe((data) => {
       this.homestays = data;
