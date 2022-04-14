@@ -14,7 +14,7 @@ import {MyHomestayDto} from "../../models/my-homestay-dto";
 export class MyHomestayComponent implements OnInit {
 
   idAcc = localStorage.getItem('ACCOUNT_ID')
-  homestays!: MyHomestayDto[];
+  myHomestays!: MyHomestayDto[];
 
   constructor(private dialog: MatDialog,
               private homestayService: Homestay2Service) { }
@@ -26,10 +26,8 @@ export class MyHomestayComponent implements OnInit {
 
   getHomestayByAccountId() {
     this.homestayService.getHomestayByAccountId(this.idAcc).subscribe((data) => {
-      this.homestays = data;
-      console.log(data)
-      console.log("-----------")
-      console.log(this.homestays)
+      this.myHomestays = data;
+      console.log(this.myHomestays);
     })
   }
 

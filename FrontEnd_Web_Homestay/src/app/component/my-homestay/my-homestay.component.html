@@ -23,14 +23,14 @@
             <div class="form-check">
               <label class="form-check-label">
                 <p class="rate">
-                                    <span>
-                                        <i class="icon-star"></i>
-                                        <i class="icon-star"></i>
-                                        <i class="icon-star"></i>
-                                        <i class="icon-star"></i>
-                                        <i class="icon-star"></i>
-                                        <span>3.8</span>
-                                    </span>
+                  <span>
+                    <i class="icon-star"></i>
+                    <i class="icon-star"></i>
+                    <i class="icon-star"></i>
+                    <i class="icon-star"></i>
+                    <i class="icon-star"></i>
+                    <span>3.8</span>
+                  </span>
                 </p>
               </label>
             </div>
@@ -38,9 +38,9 @@
         </div>
         <div class="sidebar-wrap bg-light ">
           <h3 class="heading mb-4">Quản lý</h3>
-          <input (click)="openMyHomestay()" type="submit" value="Nhà Của Tôi" class="btn btn-primary py-3 px-5" style="width: 100%;">
+          <input  type="submit" value="Nhà Của Tôi" class="btn btn-primary py-3 px-5" style="width: 100%;">
           <hr>
-          <input (click)="openMyBill()" type="submit" value="Đơn Thuê Nhà" class="btn btn-primary py-3 px-5" style="width: 100%;">
+          <input type="submit" value="Đơn Thuê Nhà" class="btn btn-primary py-3 px-5" style="width: 100%;">
         </div>
       </div>
 
@@ -51,16 +51,15 @@
                  style="width: 20%; margin-left: 635px">
         </div>
         <div class="col-md-12 hotel-single  mb-5 mt-5">
-          <!--          <h1 class="mb-9">Related Hotels</h1>-->
+          <h1 class="mb-9">Nhà của tôi</h1>
           <div class="row">
-            <div class="col-md-12">
+            <div class="col-md-12" *ngFor="let h of myHomestays">
               <div class="destination">
-                <a href="hotel-single.html" class="img img-2"
-                   style="background-image: url(assets/images/hotel-1.jpg);"></a>
+                <img src="{{h.images}}" alt="">
                 <div class="text p-3">
                   <div class="d-flex">
                     <div class="one">
-                      <h3><a href="hotel-single.html">Hotel, Italy</a></h3>
+                      <h3><a>{{h.name}}</a></h3>
                       <p class="rate">
                         <i class="icon-star"></i>
                         <i class="icon-star"></i>
@@ -71,76 +70,16 @@
                       </p>
                     </div>
                     <div class="two">
-                      <span class="price per-price">$40<br><small>/night</small></span>
+                      <span class="price per-price">{{h.price}}<br><small>/night</small></span>
                     </div>
                   </div>
-                  <p>Far far away, behind the word mountains, far from the countries</p>
+                  <p>{{h.description}}</p>
                   <hr>
                   <p class="bottom-area d-flex">
-                    <span><i class="icon-map-o"></i> Miami, Fl</span>
+                    <span><i class="icon-map-o"></i> {{h.address}}</span>
                     <span class="ml-auto"><button class="btn btn-warning"
                                                   style="margin-left: 520px">Edit</button></span>
                     <span class="ml-auto"><button class="btn btn-danger">Delete</button></span>
-                  </p>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-12">
-              <div class="destination">
-                <a href="hotel-single.html" class="img img-2"
-                   style="background-image: url(assets/images/hotel-2.jpg);"></a>
-                <div class="text p-3">
-                  <div class="d-flex">
-                    <div class="one">
-                      <h3><a href="hotel-single.html">Hotel, Italy</a></h3>
-                      <p class="rate">
-                        <i class="icon-star"></i>
-                        <i class="icon-star"></i>
-                        <i class="icon-star"></i>
-                        <i class="icon-star"></i>
-                        <i class="icon-star-o"></i>
-                        <span>8 Rating</span>
-                      </p>
-                    </div>
-                    <div class="two">
-                      <span class="price per-price">$40<br><small>/night</small></span>
-                    </div>
-                  </div>
-                  <p>Far far away, behind the word mountains, far from the countries</p>
-                  <hr>
-                  <p class="bottom-area d-flex">
-                    <span><i class="icon-map-o"></i> Miami, Fl</span>
-                    <span class="ml-auto"><a href="#">Book Now</a></span>
-                  </p>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-12">
-              <div class="destination">
-                <a href="hotel-single.html" class="img img-2"
-                   style="background-image: url(assets/images/hotel-3.jpg);"></a>
-                <div class="text p-3">
-                  <div class="d-flex">
-                    <div class="one">
-                      <h3><a href="hotel-single.html">Hotel, Italy</a></h3>
-                      <p class="rate">
-                        <i class="icon-star"></i>
-                        <i class="icon-star"></i>
-                        <i class="icon-star"></i>
-                        <i class="icon-star"></i>
-                        <i class="icon-star-o"></i>
-                        <span>8 Rating</span>
-                      </p>
-                    </div>
-                    <div class="two">
-                      <span class="price per-price">$40<br><small>/night</small></span>
-                    </div>
-                  </div>
-                  <p>Far far away, behind the word mountains, far from the countries</p>
-                  <hr>
-                  <p class="bottom-area d-flex">
-                    <span><i class="icon-map-o"></i> Miami, Fl</span>
-                    <span class="ml-auto"><a href="#">Book Now</a></span>
                   </p>
                 </div>
               </div>

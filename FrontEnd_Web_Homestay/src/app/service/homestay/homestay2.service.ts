@@ -19,7 +19,7 @@ export class Homestay2Service {
   //homestay by account
 
   getHomestayByAccountId(id: any): Observable<any> {
-    return this.http.get<MyHomestayDto[]>(API_URL + 'homestay/acc/' + id);
+    return this.http.get<MyHomestayDto[]>(API_URL + 'homestay/account/' + id);
   }
 
   //home
