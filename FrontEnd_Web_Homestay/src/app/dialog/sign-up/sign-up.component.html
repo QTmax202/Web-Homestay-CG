@@ -1,7 +1,6 @@
 <form class="example-form" style="justify-content: center" [formGroup]="formSignUp"
   (ngSubmit)="formSignUp.valid && createAccount()" novalidate>
   <h1 mat-dialog-title>ĐĂNG KÝ</h1>
-  <mat-error id="error-form-sign-up"></mat-error>
   <mat-form-field class="example-full-width" appearance="outline">
     <mat-label>Họ & Tên</mat-label>
     <input type="text" matInput formControlName="name">
