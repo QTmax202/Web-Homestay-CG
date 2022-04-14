@@ -26,9 +26,6 @@ export class MyHomestayComponent implements OnInit {
   getHomestayByAccountId() {
     this.homestayService.getHomestayByAccountId(this.idAcc).subscribe((data) => {
       this.homestays = data;
-      console.log(data)
-      console.log("-----------")
-      console.log(this.homestays)
     })
   }
 

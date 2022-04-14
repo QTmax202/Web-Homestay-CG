@@ -21,6 +21,8 @@ export class HomestayComponent implements OnInit {
   image!: ImageOfHomestay[];
   idAcc = localStorage.getItem('ACCOUNT_ID')
 
+
+
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 

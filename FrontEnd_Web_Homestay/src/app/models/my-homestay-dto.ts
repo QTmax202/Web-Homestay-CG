@@ -1,9 +1,10 @@
 export interface MyHomestayDto {
-  getId?: number;
-  getName?: string;
-  getPrice?: number;
-  getDescription?: string;
-  getAddress?: string;
-  getAvgRate?: number;
-  getImages?: any;
+  idd?: number;
+  name?: string;
+  price?: number;
+  description?: string;
+  address?: string;
+  avgRate?: number;
+  roundRate?: number;
+  images?: any;
 }
