@@ -46,7 +46,7 @@
               <div class="destination">
                 <div class="text p-3">
                   <div class="d-flex">
-                    <div class="one">
+                    <div class="one" style="width: 600px">
                       <h3><a href="hotel-single.html">{{m.homestayName}}</a></h3>
                       <p *ngIf="m.roundRate == 0" class="rate">
                         <i class="icon-star-o"></i>
@@ -111,9 +111,9 @@
                                                   disabled>Đã đặt</button></span>
                     <span *ngIf="m.statusHomeId == 3" class="ml-auto"><button class="btn btn-info" style="margin-left: 600px"
                                                   disabled>Đang ở</button></span>
-                    <span *ngIf="m.statusHomeId == 4" class="ml-auto"><button class="btn btn-dark" style="margin-left: 600px"
+                    <span *ngIf="m.statusHomeId == 4" class="ml-auto"><button class="btn btn-danger" style="margin-left: 600px" (click)="openRate()">Đánh giá</button></span>
+                    <span *ngIf="m.statusHomeId == 4" class="ml-auto"><button class="btn btn-dark"
                                                   disabled>Đã trả</button></span>
-                    <span *ngIf="m.statusHomeId == 4" class="ml-auto"><button class="btn btn-danger" (click)="openRate()">Đánh giá</button></span>
                   </p>
                 </div>
               </div>
