@@ -138,7 +138,7 @@
     							<i class="icon-star-o"></i>
     							8 Rating
                  </span>
-              <div class="col-sm-2">
+              <div class="col-sm-2" *ngIf="idAcc != null">
                 <input (click)="openBookHouse(homestay)" style="margin-right: 0" class="btn btn-primary"
                        type="submit"
                        value="Đặt ngay">
@@ -166,8 +166,8 @@
           </div>
 
           <div class="row" style="width: 88%">
-            <div class="col-md-12">
-              <div class="destination">
+            <div class="col-md-12" >
+              <div class="destination"  *ngIf="idAcc != null">
                 <form style="display: flex" [formGroup]="formComment" (ngSubmit)="createComment()" novalidate>
                   <div class="col-md-12">
                     <input type="text" class="form-control" formControlName="comment" placeholder="Your Comment"
@@ -192,7 +192,7 @@
                   <!-- ID Column -->
                   <ng-container matColumnDef="image">
                     <th mat-header-cell *matHeaderCellDef hidden> ID</th>
-                    <td mat-cell *matCellDef="let row">
+                    <td mat-cell *matCellDef="let row" style="width: 800px">
                       <div class="item">
                         <div class="testimony-wrap d-flex">
                           <div class="user-img mb-5">
@@ -201,23 +201,23 @@
                           </div>
                           <div class="text ml-md-4 hotel-single">
                             <div class="row">
-                              <div class="col-sm-10">
-                                <span class="star">
-    							                <i class="icon-star"></i>
-                                  <i class="icon-star"></i>
-    							                <i class="icon-star"></i>
-    							                <i class="icon-star"></i>
-                                  <i class="icon-star-o"></i>
-                                </span>
+                              <div class="col-sm-9">
+<!--                                <span class="star">-->
+<!--    							                <i class="icon-star"></i>-->
+<!--                                  <i class="icon-star"></i>-->
+<!--    							                <i class="icon-star"></i>-->
+<!--    							                <i class="icon-star"></i>-->
+<!--                                  <i class="icon-star-o"></i>-->
+<!--                                </span>-->
                               </div>
-                              <div class="col-sm-2">
+                              <div class="col-sm-3">
                                 <span>{{row.time_stamp}}</span>
                               </div>
                             </div>
                             <br>
-                            <!--<p class="mb-5">{{row.comment}}</p>-->
-                            <p class="mb-5">Far far away, behind the word mountains, far from the-->
-                              countries Vokalia and Consonantia, there live the blind texts.</p>
+                            <p class="mb-5">{{row.comment}}</p>
+<!--                            <p class="mb-5">Far far away, behind the word mountains, far from the&ndash;&gt;-->
+<!--                              countries Vokalia and Consonantia, there live the blind texts.</p>-->
                             <div class="row">
                               <span class="name">{{row.account.name}}</span>
                               <span>&ensp;|&ensp;</span>

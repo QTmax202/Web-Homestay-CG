@@ -54,93 +54,72 @@
           <!--          <h1 class="mb-9">Related Hotels</h1>-->
           <div class="row">
             <div class="col-md-12">
-              <div class="destination">
-                <a href="hotel-single.html" class="img img-2"
-                   style="background-image: url(assets/images/hotel-1.jpg);"></a>
+              <div class="destination" *ngFor="let h of homestays">
+                <img src="{{h.images}}" alt="" style="width: 795px; height: 200px">
                 <div class="text p-3">
                   <div class="d-flex">
                     <div class="one">
-                      <h3><a href="hotel-single.html">Hotel, Italy</a></h3>
-                      <p class="rate">
+                      <h3><a href="hotel-single.html">{{h.name}}</a></h3>
+                      <p *ngIf="h.roundRate == 0" class="rate">
+                        <i class="icon-star-o"></i>
+                        <i class="icon-star-o"></i>
+                        <i class="icon-star-o"></i>
+                        <i class="icon-star-o"></i>
+                        <i class="icon-star-o"></i>
+                        <span>{{h.avgRate}} Sao</span>
+                      </p>
+                      <p *ngIf="h.roundRate == 1" class="rate">
+                        <i class="icon-star"></i>
+                        <i class="icon-star-o"></i>
+                        <i class="icon-star-o"></i>
+                        <i class="icon-star-o"></i>
+                        <i class="icon-star-o"></i>
+                        <span>{{h.avgRate}} Sao</span>
+                      </p>
+                      <p *ngIf="h.roundRate == 2" class="rate">
+                        <i class="icon-star"></i>
+                        <i class="icon-star"></i>
+                        <i class="icon-star-o"></i>
+                        <i class="icon-star-o"></i>
+                        <i class="icon-star-o"></i>
+                        <span>{{h.avgRate}} Sao</span>
+                      </p>
+                      <p *ngIf="h.roundRate == 3" class="rate">
+                        <i class="icon-star"></i>
+                        <i class="icon-star"></i>
+                        <i class="icon-star"></i>
+                        <i class="icon-star-o"></i>
+                        <i class="icon-star-o"></i>
+                        <span>{{h.avgRate}} Sao</span>
+                      </p>
+                      <p *ngIf="h.roundRate == 4" class="rate">
                         <i class="icon-star"></i>
                         <i class="icon-star"></i>
                         <i class="icon-star"></i>
                         <i class="icon-star"></i>
                         <i class="icon-star-o"></i>
-                        <span>8 Rating</span>
+                        <span>{{h.avgRate}} Sao</span>
+                      </p>
+                      <p *ngIf="h.roundRate == 5" class="rate">
+                        <i class="icon-star"></i>
+                        <i class="icon-star"></i>
+                        <i class="icon-star"></i>
+                        <i class="icon-star"></i>
+                        <i class="icon-star"></i>
+                        <span>{{h.avgRate}} Sao</span>
                       </p>
                     </div>
                     <div class="two">
-                      <span class="price per-price">$40<br><small>/night</small></span>
+                      <span class="price per-price">{{h.price}}<br><small>/night</small></span>
                     </div>
                   </div>
-                  <p>Far far away, behind the word mountains, far from the countries</p>
+                  <p>{{h.description}}</p>
                   <hr>
                   <p class="bottom-area d-flex">
-                    <span><i class="icon-map-o"></i> Miami, Fl</span>
+                    <span><i class="icon-map-o"></i> {{h.address}}</span>
                     <span class="ml-auto"><button class="btn btn-warning"
                                                   style="margin-left: 520px">Edit</button></span>
                     <span class="ml-auto"><button class="btn btn-danger">Delete</button></span>
-                  </p>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-12">
-              <div class="destination">
-                <a href="hotel-single.html" class="img img-2"
-                   style="background-image: url(assets/images/hotel-2.jpg);"></a>
-                <div class="text p-3">
-                  <div class="d-flex">
-                    <div class="one">
-                      <h3><a href="hotel-single.html">Hotel, Italy</a></h3>
-                      <p class="rate">
-                        <i class="icon-star"></i>
-                        <i class="icon-star"></i>
-                        <i class="icon-star"></i>
-                        <i class="icon-star"></i>
-                        <i class="icon-star-o"></i>
-                        <span>8 Rating</span>
-                      </p>
-                    </div>
-                    <div class="two">
-                      <span class="price per-price">$40<br><small>/night</small></span>
-                    </div>
-                  </div>
-                  <p>Far far away, behind the word mountains, far from the countries</p>
-                  <hr>
-                  <p class="bottom-area d-flex">
-                    <span><i class="icon-map-o"></i> Miami, Fl</span>
-                    <span class="ml-auto"><a href="#">Book Now</a></span>
-                  </p>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-12">
-              <div class="destination">
-                <a href="hotel-single.html" class="img img-2"
-                   style="background-image: url(assets/images/hotel-3.jpg);"></a>
-                <div class="text p-3">
-                  <div class="d-flex">
-                    <div class="one">
-                      <h3><a href="hotel-single.html">Hotel, Italy</a></h3>
-                      <p class="rate">
-                        <i class="icon-star"></i>
-                        <i class="icon-star"></i>
-                        <i class="icon-star"></i>
-                        <i class="icon-star"></i>
-                        <i class="icon-star-o"></i>
-                        <span>8 Rating</span>
-                      </p>
-                    </div>
-                    <div class="two">
-                      <span class="price per-price">$40<br><small>/night</small></span>
-                    </div>
-                  </div>
-                  <p>Far far away, behind the word mountains, far from the countries</p>
-                  <hr>
-                  <p class="bottom-area d-flex">
-                    <span><i class="icon-map-o"></i> Miami, Fl</span>
-                    <span class="ml-auto"><a href="#">Book Now</a></span>
                   </p>
                 </div>
               </div>
@@ -155,95 +134,77 @@
         <div class="col-md-12 hotel-single  mb-5 mt-5">
           <h4 class="mb-9">Related Hotels</h4>
           <div class="row">
-            <div class="col-md-12">
+            <div class="col-md-12" *ngFor="let b of yourBill">
               <div class="destination">
-                <!--                                <a href="hotel-single.html" class="img img-2"-->
-                <!--                                   style="background-image: url(images/hotel-1.jpg);"></a>-->
                 <div class="text p-3">
                   <div class="d-flex">
                     <div class="one">
-                      <!--                                            ấn vào đây sang view detail-->
-                      <h3><a href="hotel-single.html">Hotel, Italy</a></h3>
-                      <p class="rate">
+                      <h3><a href="hotel-single.html">{{b.homestayName}}</a></h3>
+                      <p *ngIf="b.roundRate == 0" class="rate">
+                        <i class="icon-star-o"></i>
+                        <i class="icon-star-o"></i>
+                        <i class="icon-star-o"></i>
+                        <i class="icon-star-o"></i>
+                        <i class="icon-star-o"></i>
+                        <span>{{b.avgRate}} Sao</span>
+                      </p>
+                      <p *ngIf="b.roundRate == 1" class="rate">
+                        <i class="icon-star"></i>
+                        <i class="icon-star-o"></i>
+                        <i class="icon-star-o"></i>
+                        <i class="icon-star-o"></i>
+                        <i class="icon-star-o"></i>
+                        <span>{{b.avgRate}} Sao</span>
+                      </p>
+                      <p *ngIf="b.roundRate == 2" class="rate">
+                        <i class="icon-star"></i>
+                        <i class="icon-star"></i>
+                        <i class="icon-star-o"></i>
+                        <i class="icon-star-o"></i>
+                        <i class="icon-star-o"></i>
+                        <span>{{b.avgRate}} Sao</span>
+                      </p>
+                      <p *ngIf="b.roundRate == 3" class="rate">
+                        <i class="icon-star"></i>
+                        <i class="icon-star"></i>
+                        <i class="icon-star"></i>
+                        <i class="icon-star-o"></i>
+                        <i class="icon-star-o"></i>
+                        <span>{{b.avgRate}} Sao</span>
+                      </p>
+                      <p *ngIf="b.roundRate == 4" class="rate">
                         <i class="icon-star"></i>
                         <i class="icon-star"></i>
                         <i class="icon-star"></i>
                         <i class="icon-star"></i>
                         <i class="icon-star-o"></i>
-                        <span>5 star</span>
+                        <span>{{b.avgRate}} Sao</span>
+                      </p>
+                      <p *ngIf="b.roundRate == 5" class="rate">
+                        <i class="icon-star"></i>
+                        <i class="icon-star"></i>
+                        <i class="icon-star"></i>
+                        <i class="icon-star"></i>
+                        <i class="icon-star"></i>
+                        <span>{{b.avgRate}} Sao</span>
                       </p>
                     </div>
                     <div class="two">
-                      <span class="price per-price">$40<small>/2days</small></span>
+                      <span class="price per-price">{{b.price | currency :'đ' :true: '1.0-0'}}</span>
                     </div>
                   </div>
-                  <p>Người đặt: <a href="">Abcd</a></p>
-                  <p>Ngày bắt đầu: <span>12/12/2022</span> - Ngày kết thúc: <span>20/12/2022</span></p>
+                  <p>Người đặt: <a href="">{{b.accountName}}</a></p>
+                  <p>Ngày bắt đầu: <span>{{b.startDate}}</span> - Ngày kết thúc: <span>{{b.endDate}}</span></p>
                   <hr>
                   <p class="bottom-area d-flex">
-                    <span><i class="icon-map-o"></i> Miami, Fl</span>
-                    <span class="ml-auto"><button class="btn btn-info" style="margin-left: 520px"
-                                                  disabled>Status</button></span>
-                  </p>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-12">
-              <div class="destination">
-                <!--                                <a href="hotel-single.html" class="img img-2"-->
-                <!--                                   style="background-image: url(images/hotel-2.jpg);"></a>-->
-                <div class="text p-3">
-                  <div class="d-flex">
-                    <div class="one">
-                      <h3><a href="hotel-single.html">Hotel, Italy</a></h3>
-                      <p class="rate">
-                        <i class="icon-star"></i>
-                        <i class="icon-star"></i>
-                        <i class="icon-star"></i>
-                        <i class="icon-star"></i>
-                        <i class="icon-star-o"></i>
-                        <span>8 Rating</span>
-                      </p>
-                    </div>
-                    <div class="two">
-                      <span class="price per-price">$40<br><small>/night</small></span>
-                    </div>
-                  </div>
-                  <p>Far far away, behind the word mountains, far from the countries</p>
-                  <hr>
-                  <p class="bottom-area d-flex">
-                    <span><i class="icon-map-o"></i> Miami, Fl</span>
-                    <span class="ml-auto"><a href="#">Book Now</a></span>
-                  </p>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-12">
-              <div class="destination">
-                <a href="hotel-single.html" class="img img-2"
-                   style="background-image: url(assets/images/hotel-3.jpg);"></a>
-                <div class="text p-3">
-                  <div class="d-flex">
-                    <div class="one">
-                      <h3><a href="hotel-single.html">Hotel, Italy</a></h3>
-                      <p class="rate">
-                        <i class="icon-star"></i>
-                        <i class="icon-star"></i>
-                        <i class="icon-star"></i>
-                        <i class="icon-star"></i>
-                        <i class="icon-star-o"></i>
-                        <span>8 Rating</span>
-                      </p>
-                    </div>
-                    <div class="two">
-                      <span class="price per-price">$40<br><small>/night</small></span>
-                    </div>
-                  </div>
-                  <p>Far far away, behind the word mountains, far from the countries</p>
-                  <hr>
-                  <p class="bottom-area d-flex">
-                    <span><i class="icon-map-o"></i> Miami, Fl</span>
-                    <span class="ml-auto"><a href="#">Book Now</a></span>
+                    <span *ngIf="b.statusHomeId == 1" class="ml-auto"><button class="btn btn-warning"
+                                                  disabled>Chờ xác nhận</button></span>
+                    <span *ngIf="b.statusHomeId == 2" class="ml-auto"><button class="btn btn-success"
+                                                  disabled>Đã đặt</button></span>
+                    <span *ngIf="b.statusHomeId == 3" class="ml-auto"><button class="btn btn-info"
+                                                  disabled>Đang ở</button></span>
+                    <span *ngIf="b.statusHomeId == 4" class="ml-auto"><button class="btn btn-dark"
+                                                  disabled>Đã trả</button></span>
                   </p>
                 </div>
               </div>

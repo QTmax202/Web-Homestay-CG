@@ -18,7 +18,7 @@ public interface IHomestayRepository extends JpaRepository<Homestay, Long> {
 
     @Transactional
     @Modifying
-    @Query(value = "select hs.id as id, hs.name as name, hs.price as price, hs.description as description, hs.address as address, avg(rate.value_rate) as avgRate, img.images as images from homestay hs  \n" +
+    @Query(value = "select hs.id as id, hs.name as name, hs.price as price, hs.description as description, hs.address as address, avg(rate.value_rate) as avgRate, round(avg(rate.value_rate)) as roundRate, img.images as images from homestay hs  \n" +
             "join rate on hs.id = rate.homestay_id \n" +
             "join image_of_homestay img on img.homestay_id = hs.id \n" +
             "where hs.account_id = :id \n" +
