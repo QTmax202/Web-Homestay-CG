@@ -9,4 +9,6 @@ public interface IBillService extends IGeneralService<Bill> {
     Iterable<YourBillDTO> getYourBillByAccountId(long id);
 
     Iterable<MyBillDTO> getMyBillByAccountId(long id);
+
+    Iterable<Bill> findBillByHomeStayId(Long id);
 }
