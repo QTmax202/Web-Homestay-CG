@@ -24,4 +24,8 @@ public interface IHomestayRepository extends JpaRepository<Homestay, Long> {
             "where hs.account_id = :id \n" +
             "group by hs.id", nativeQuery = true)
     List<MyHomestayDTO> getHomestayByAccountId(long id);
+
+    @Query(value = "select * from homestay\n" +
+            "where name like %:name% and city_id = :idCity and status = 1 and price between :price1 and :price2", nativeQuery = true)
+    Iterable<Homestay> findHomestayByNameAndCityAndPrice(String name, Long idCity, Long price1, Long price2);
 }

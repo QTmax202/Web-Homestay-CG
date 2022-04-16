@@ -44,4 +44,9 @@ public class HomestayService implements IHomestayService {
     public List<MyHomestayDTO> getHomestayByAccountId(long id) {
         return homestayRepository.getHomestayByAccountId(id);
     }
+
+    @Override
+    public Iterable<Homestay> findHomestayByNameAndCityAndPrice(String name, Long idCity, Long price1, Long price2) {
+        return homestayRepository.findHomestayByNameAndCityAndPrice(name, idCity, price1, price2);
+    }
 }
