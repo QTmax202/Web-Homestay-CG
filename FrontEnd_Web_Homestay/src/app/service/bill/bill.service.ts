@@ -17,7 +17,7 @@ export class BillService {
     return this.http.post(API_URL + 'bill/create-bill',bill);
   }
 
-  bill_homestay_status(id : any){
-    return this.http.get(API_URL + 'bill/bill-homestay-status/' + id);
+  bill_homestay_status(id : any): Observable<any>{
+    return this.http.get<Bill[]>(API_URL + 'bill/bill-homestay-status/' + id);
   }
 }
