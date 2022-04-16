@@ -81,5 +81,10 @@ public class HomestayController {
         }
         return new ResponseEntity<>(imageOfHomestays, HttpStatus.OK);
     }
+
+    @PostMapping
+    private ResponseEntity<?> createHomestay(@RequestBody Homestay homestay) {
+        return new ResponseEntity<>(homestayService.save(homestay), HttpStatus.OK);
+    }
 }
 
