@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {Homestay2Service} from "../../service/homestay/homestay2.service";
 import {Homestay2} from "../../models/homestay2";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-home',
@@ -12,7 +13,7 @@ export class HomeComponent implements OnInit {
   idAcc = localStorage.getItem('ACCOUNT_ID')
 
   constructor(private homestayService: Homestay2Service,
-              ) { }
+              private router: Router) { }
 
   ngOnInit(): void {
     if (this.idAcc == null) {
