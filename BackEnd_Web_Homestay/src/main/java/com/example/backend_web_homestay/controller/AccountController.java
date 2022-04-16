@@ -38,10 +38,30 @@ public class AccountController {
         return new ResponseEntity<>(account, HttpStatus.OK);
     }
 
+    @PutMapping("/change-pass/{id}")
+    public ResponseEntity<?> changePassword(@RequestBody Account account, @PathVariable long id) {
+        Optional<Account> accountFind = accountService.findById(id);
+        account.setAddress(passwordEncoder.encode(account.getAddress()));
+        if (accountFind.get().getPassword().equals(account.getAddress())) {
+            account.setId(id);
+            account.setAddress(accountFind.get().getAddress());
+            account.setAvatar_url(accountFind.get().getAvatar_url());
+            account.setDate_birth(accountFind.get().getDate_birth());
+            account.setGmail(accountFind.get().getGmail());
+            account.setName(accountFind.get().getName());
+            account.setPhone_number(accountFind.get().getPhone_number());
+            account.setRoles(accountFind.get().getRoles());
+            account.setPassword(passwordEncoder.encode(account.getPassword()));
+            accountService.save(account);
+            return new ResponseEntity<>(account, HttpStatus.OK);
+        }
+        return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+    }
+
     @PostMapping
     private ResponseEntity<?> createAccount(@RequestBody Account account) {
         if (accountService.existsByGmail(account.getGmail())) {
-            return new ResponseEntity<>(true ,HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(true, HttpStatus.BAD_REQUEST);
         } else {
             account.setPassword(passwordEncoder.encode(account.getPassword()));
             account.setAvatar_url("https://haycafe.vn/wp-content/uploads/2021/11/Anh-avatar-dep-chat-lam-hinh-dai-dien.jpg");

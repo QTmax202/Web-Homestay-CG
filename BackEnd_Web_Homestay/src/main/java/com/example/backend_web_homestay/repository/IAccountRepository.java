@@ -16,6 +16,8 @@ public interface IAccountRepository extends JpaRepository<Account, Long> {
 
     Boolean existsByGmail(String username);
 
+    Boolean existsByPassword(String password);
+
     Optional<Account> findAccountByGmailAndPassword(String username,String password);
 
 //    confirm mail
