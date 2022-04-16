@@ -34,6 +34,10 @@ export class Homestay2Service {
 
   //home
 
+  createHomestay(homestay: Homestay2): Observable<any> {
+    return this.http.post<Homestay2>(API_URL + 'homestay', homestay);
+  }
+
   getAllHomestay(): Observable<any> {
     return this.http.get<Homestay2[]>(API_URL + 'homestay');
   }

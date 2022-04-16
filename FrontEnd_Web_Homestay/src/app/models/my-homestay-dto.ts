@@ -1,5 +1,5 @@
 export interface MyHomestayDto {
-  idd?: number;
+  id?: number;
   name?: string;
   price?: number;
   description?: string;

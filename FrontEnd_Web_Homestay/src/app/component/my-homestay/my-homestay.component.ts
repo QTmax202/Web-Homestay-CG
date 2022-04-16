@@ -6,6 +6,9 @@ import {Homestay2Service} from "../../service/homestay/homestay2.service";
 import {Homestay2} from "../../models/homestay2";
 import {MyHomestayDto} from "../../models/my-homestay-dto";
 import {YourBillDto} from "../../models/your-bill-dto";
+import {EditHomestayComponent} from "../../dialog/edit-homestay/edit-homestay.component";
+import {FormGroup} from "@angular/forms";
+import {newArray} from "@angular/compiler/src/util";
 
 @Component({
   selector: 'app-my-homestay',
@@ -18,6 +21,8 @@ export class MyHomestayComponent implements OnInit {
   homestays!: MyHomestayDto[];
   yourBill!: YourBillDto[];
 
+
+
   constructor(private dialog: MatDialog,
               private homestayService: Homestay2Service) { }
 
@@ -29,13 +34,13 @@ export class MyHomestayComponent implements OnInit {
   getHomestayByAccountId() {
     this.homestayService.getHomestayByAccountId(this.idAcc).subscribe((data) => {
       this.homestays = data;
+      console.log("hehe "+ this.homestays);
     })
   }
 
   getBillByAccountId() {
     this.homestayService.getYourBillByAccountId(this.idAcc).subscribe((data) => {
       this.yourBill = data;
-      console.log(this.yourBill);
     })
   }
 
@@ -58,5 +63,13 @@ export class MyHomestayComponent implements OnInit {
     document.getElementById("my-homestay").style.display = 'none';
     // @ts-ignore
     document.getElementById("my-bill").style.display = 'block';
+  }
+
+  openEditStatus(idHomestayDetail: any) {
+    this.dialog.closeAll();
+    this.dialog.open(EditHomestayComponent, {
+      width: '50%',
+      data: idHomestayDetail
+    });
   }
 }
