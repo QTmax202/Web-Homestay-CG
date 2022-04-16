@@ -21,7 +21,7 @@ export class HomestayDetailComponent implements OnInit {
   idH!: number;
   homestays!: Homestay2[];
   homestay!: Homestay2;
-  google_api! :string;
+  google_api!: string;
   images!: ImageOfHomestay[];
 
   formComment: FormGroup = new FormGroup({});
@@ -38,7 +38,8 @@ export class HomestayDetailComponent implements OnInit {
               private commentService: CommentService,
               private route: ActivatedRoute,
               private fb: FormBuilder,
-              private dialog: MatDialog) { }
+              private dialog: MatDialog) {
+  }
 
   ngOnInit(): void {
     this.formComment = this.fb.group({
@@ -58,14 +59,19 @@ export class HomestayDetailComponent implements OnInit {
     } else {
       this.getAllHomestaySignIn();
     }
-    console.log(localStorage.getItem('ACCOUNT_ID'))
+    // this.formSearch = this.fb.group({
+    //   name: [''],
+    //   idCity: ['', [Validators.required]],
+    //   price1: [''],
+    //   price2: ['']
+    // })
   }
 
   getHomestayById() {
     this.idH = this.route.snapshot.params['id'];
     this.homestayService.getHomestayById(this.idH).subscribe((data) => {
       this.homestay = data;
-      this.google_api = this.homestay.address +", "+ this.homestay.city.name;
+      this.google_api = this.homestay.address + ", " + this.homestay.city.name;
       this.google_api = this.google_api?.split(" ").join("+");
       console.log(this.google_api);
       // @ts-ignore
@@ -126,23 +132,60 @@ export class HomestayDetailComponent implements OnInit {
     })
   }
 
-  openBookHouse(homestay : any) {
+  openBookHouse(homestay: any) {
     this.dialog.closeAll()
-    this.dialog.open(BookHomestayComponent,{
+    this.dialog.open(BookHomestayComponent, {
       width: '45%',
-      data : homestay
+      data: homestay
     });
   }
 
-  getGoogleApi(address:any){
+  getGoogleApi(address: any) {
     console.log(address);
     return '<iframe\n' +
       '                  width="100%"\n' +
       '                  height="450"\n' +
       '                  frameborder="0" style="border:0"\n' +
       '                  referrerpolicy="no-referrer-when-downgrade"\n' +
-      '                  src="https://www.google.com/maps/embed/v1/place?key=AIzaSyDRgsm4D8UcW479Mj4malJdf92cl_sTLAI&q='+address+'&maptype=satellite&zoom=15"\n' +
+      '                  src="https://www.google.com/maps/embed/v1/place?key=AIzaSyDRgsm4D8UcW479Mj4malJdf92cl_sTLAI&q=' + address + '&maptype=satellite&zoom=15"\n' +
       '                  allowfullscreen>\n' +
       '                </iframe>'
   }
+
+  // formSearch: FormGroup = new FormGroup({});
+  // name!: string;
+  // idCity!: number;
+  // price1 = 0;
+  // price2 = 99999999;
+  //
+  // fetch1(value: any) {
+  //   this.price1 = value;
+  // }
+  //
+  // fetch2(value: any) {
+  //   this.price2 = value;
+  // }
+  //
+  //
+  // searchHomestay() {
+  //   this.name = this.formSearch.value.name;
+  //   this.idCity = this.formSearch.value.idCity
+  //   console.log(this.name)
+  //   console.log(this.idCity)
+  //   console.log(this.price1)
+  //   console.log(this.price2)
+  //   if (this.price1 > this.price2) {
+  //     this.homestayService.findHomestayByNameAndCityAndPrice(this.name,this.idCity, this.price2, this.price1).subscribe((data) => {
+  //       this.homestays = data;
+  //       console.log(data);
+  //       console.log(this.homestay);
+  //     });
+  //   } else if (this.price1 < this.price2){
+  //     this.homestayService.findHomestayByNameAndCityAndPrice(this.name,this.idCity, this.price1, this.price2).subscribe((data) => {
+  //       this.homestays = data;
+  //       console.log(data);
+  //       console.log(this.homestay);
+  //     });
+  //   }
+  // }
 }

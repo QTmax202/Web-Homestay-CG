@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import {FormBuilder} from "@angular/forms";
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {Homestay2Service} from "../../service/homestay/homestay2.service";
 import {Homestay2} from "../../models/homestay2";
 import {MatPaginator} from '@angular/material/paginator';
@@ -39,6 +39,12 @@ export class HomestayComponent implements OnInit {
     } else {
       this.getAllHomestaySignIn();
     }
+    this.formSearch = this.fb.group({
+      name: [''],
+      idCity: ['', [Validators.required]],
+      price1: [''],
+      price2: ['']
+    })
   }
 
   getAllHomestay() {
@@ -51,5 +57,42 @@ export class HomestayComponent implements OnInit {
     this.homestayService.getAllHomestaySignIn(this.idAcc).subscribe((data) => {
       this.homestays = data;
     })
+  }
+
+  formSearch: FormGroup = new FormGroup({});
+  name!: string;
+  idCity!: number;
+  price1 = 0;
+  price2 = 99999999;
+
+  fetch1(value: any) {
+    this.price1 = value;
+  }
+
+  fetch2(value: any) {
+    this.price2 = value;
+  }
+
+
+  searchHomestay() {
+    this.name = this.formSearch.value.name;
+    this.idCity = this.formSearch.value.idCity
+    console.log(this.name)
+    console.log(this.idCity)
+    console.log(this.price1)
+    console.log(this.price2)
+    if (this.price1 > this.price2) {
+      this.homestayService.findHomestayByNameAndCityAndPrice(this.name,this.idCity, this.price2, this.price1).subscribe((data) => {
+        this.homestays = data;
+      }, error => {
+        this.homestays = [];
+      });
+    } else if (this.price1 < this.price2){
+      this.homestayService.findHomestayByNameAndCityAndPrice(this.name,this.idCity, this.price1, this.price2).subscribe((data) => {
+        this.homestays = data;
+      }, error => {
+        this.homestays = [];
+      });
+    }
   }
 }
