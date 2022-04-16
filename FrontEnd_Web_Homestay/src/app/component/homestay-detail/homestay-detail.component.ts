@@ -59,15 +59,17 @@ export class HomestayDetailComponent implements OnInit {
       this.getAllHomestaySignIn();
     }
     console.log(localStorage.getItem('ACCOUNT_ID'))
-    // this.google_api = this.homestay.address + this.homestay.city.name;
-    this.google_api = "Sân+vận+động+Quốc+gia+Mỹ+Đình";
-    console.log(this.google_api);
   }
 
   getHomestayById() {
     this.idH = this.route.snapshot.params['id'];
     this.homestayService.getHomestayById(this.idH).subscribe((data) => {
       this.homestay = data;
+      this.google_api = this.homestay.address +", "+ this.homestay.city.name;
+      this.google_api = this.google_api?.split(" ").join("+");
+      console.log(this.google_api);
+      // @ts-ignore
+      document.getElementById('google-api-maps').innerHTML = this.getGoogleApi(this.google_api);
     })
   }
 
@@ -130,5 +132,17 @@ export class HomestayDetailComponent implements OnInit {
       width: '45%',
       data : homestay
     });
+  }
+
+  getGoogleApi(address:any){
+    console.log(address);
+    return '<iframe\n' +
+      '                  width="100%"\n' +
+      '                  height="450"\n' +
+      '                  frameborder="0" style="border:0"\n' +
+      '                  referrerpolicy="no-referrer-when-downgrade"\n' +
+      '                  src="https://www.google.com/maps/embed/v1/place?key=AIzaSyDRgsm4D8UcW479Mj4malJdf92cl_sTLAI&q='+address+'&maptype=satellite&zoom=15"\n' +
+      '                  allowfullscreen>\n' +
+      '                </iframe>'
   }
 }

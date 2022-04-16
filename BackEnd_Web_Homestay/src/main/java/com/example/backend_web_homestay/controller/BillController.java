@@ -13,6 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
+import java.util.Iterator;
 import java.util.List;
 
 @RestController
@@ -57,7 +58,7 @@ public class BillController {
 
     @GetMapping("/bill-homestay-status/{id}")
     private ResponseEntity<?> getBillHomestayStatus(@PathVariable long id){
-        List<Bill> bills = billRepository.findAllBillByHomestay_Status(id);
+        Iterable<Bill> bills = billRepository.findAllBillByHomestay_Status(id);
         return new ResponseEntity<>(bills, HttpStatus.OK);
     }
 }

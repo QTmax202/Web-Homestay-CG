@@ -123,7 +123,7 @@
                 <h2>{{homestay.name}}</h2>
               </div>
               <div class="col-md-2">
-                <h2 class="price per-price" style="color: #2f89fc">{{homestay.price}}<small>/night</small></h2>
+                <h2 class="price per-price" style="color: #2f89fc">{{homestay.price | currency :'đ' :true: '1.0-0'}}<small>/night</small></h2>
               </div>
             </div>
             <div class="row">
@@ -152,15 +152,15 @@
                 <li>Số lượng phòng tắm: {{homestay.bath_room}}</li>
                 <li>Giới thiệu: {{homestay.description}}</li>
               </ul>
-              <div class="ml-md-5 col-sm-8">
-                <iframe
-                  width="100%"
-                  height="450"
-                  frameborder="0" style="border:0"
-                  referrerpolicy="no-referrer-when-downgrade"
-                  src="https://www.google.com/maps/embed/v1/place?key=AIzaSyDRgsm4D8UcW479Mj4malJdf92cl_sTLAI&q=Sân+vận+động+Quốc+gia+Mỹ+Đình&maptype=satellite&zoom=15"
-                  allowfullscreen>
-                </iframe>
+              <div class="ml-md-5 col-sm-8" id="google-api-maps">
+<!--                <iframe-->
+<!--                  width="100%"-->
+<!--                  height="450"-->
+<!--                  frameborder="0" style="border:0"-->
+<!--                  referrerpolicy="no-referrer-when-downgrade"-->
+<!--                  src="https://www.google.com/maps/embed/v1/place?key=AIzaSyDRgsm4D8UcW479Mj4malJdf92cl_sTLAI&q={{google_api}}&maptype=satellite&zoom=15"-->
+<!--                  allowfullscreen>-->
+<!--                </iframe>-->
               </div>
             </div>
           </div>
