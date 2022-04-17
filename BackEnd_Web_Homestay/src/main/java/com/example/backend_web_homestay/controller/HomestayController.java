@@ -105,5 +105,12 @@ public class HomestayController {
         }
         return new ResponseEntity<>(homestays, HttpStatus.OK);
     }
+
+    // top 5 homestay
+    @GetMapping("/top-5")
+    public ResponseEntity<?> getTop5Homestay() {
+        Iterable<MyHomestayDTO> myHomestayDTOS = homestayService.getTop5Homestay();
+        return new ResponseEntity<>(myHomestayDTOS, HttpStatus.OK);
+    }
 }
 
