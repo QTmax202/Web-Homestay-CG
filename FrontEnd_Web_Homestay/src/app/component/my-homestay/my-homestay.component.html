@@ -41,6 +41,8 @@
           <input (click)="openMyHomestay()" type="submit" value="Nhà Của Tôi" class="btn btn-primary py-3 px-5" style="width: 100%;">
           <hr>
           <input (click)="openMyBill()" type="submit" value="Đơn Thuê Nhà" class="btn btn-primary py-3 px-5" style="width: 100%;">
+          <hr>
+          <input (click)="openTurnOver()" type="submit" value="Doanh Thu" class="btn btn-primary py-3 px-5" style="width: 100%;">
         </div>
       </div>
 
@@ -110,7 +112,7 @@
                       </p>
                     </div>
                     <div class="two">
-                      <span class="price per-price">{{h.price}}<br><small>/night</small></span>
+                      <span class="price per-price">{{h.price | currency :'đ' :true: '1.0-0'}}<br><small>/ngày</small></span>
                     </div>
                   </div>
                   <p>{{h.description}}</p>
