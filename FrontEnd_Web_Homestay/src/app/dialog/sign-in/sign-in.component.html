@@ -29,6 +29,9 @@
     </span>
     <span (click)="openSignUp()" style="color: blue; margin-left: 150px; cursor: pointer">Tạo tài khoản</span>
   </div>
+  <div>
+    <button (click)="authGoogleService.GoogleAuth()"><span class="icon-google mr-3">đăng nhập bằng google</span></button>
+  </div>
   <div mat-dialog-actions [align]="'end'">
     <button mat-raised-button color="warn" mat-dialog-close>Đóng</button>
     <button mat-raised-button color="primary" (click)="login()" [disabled]="loginForm.invalid">Đăng Nhập</button>
