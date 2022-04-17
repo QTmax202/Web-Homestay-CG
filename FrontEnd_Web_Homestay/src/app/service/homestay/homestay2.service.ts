@@ -18,8 +18,8 @@ const API_URL = `${environment.apiUrl}`;
 export class Homestay2Service {
 
   constructor(private http: HttpClient) { }
-   public createHome(homestay: Homestay2): Observable<Homestay2[]> {
-    return this.http.post<any>('http://localhost:8080/api/homestay/create', homestay);
+   public createHome(id: number, homestay: Homestay2): Observable<Homestay2[]> {
+    return this.http.post<any>(API_URL +`homestay/create/${id}` , homestay);
   }
 
   //   createHomestay(homestay: Homestay2): Observable<any> {

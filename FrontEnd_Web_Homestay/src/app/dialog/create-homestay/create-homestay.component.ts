@@ -19,7 +19,7 @@ import {parse} from "url";
 })
 export class CreateHomestayComponent implements OnInit {
 
-
+  idUser = parseInt(<string>localStorage.getItem('ACCOUNT_ID'))
   formHome!: FormGroup;
 
   myItem: File[] = [];
@@ -48,17 +48,16 @@ export class CreateHomestayComponent implements OnInit {
     this.getAllHomestayType()
     this.getAllCity()
     this.formHome = this.formGroup.group({
-      name:'',
-      address: '',
-      bed_room:'',
-      bath_room:'',
-      price:'',
-      status:'',
-      description:'',
-      homestay_type:'',
-      city:'',
+      name:['',[Validators.required]],
+      address:['',[Validators.required]],
+      bed_room:['',[Validators.required]],
+      bath_room:['',[Validators.required]],
+      price:['',[Validators.required]],
+      status:['',[Validators.required]],
+      description:['',[Validators.required]],
+      homestay_type:['',[Validators.required]],
+      city:['',[Validators.required]],
     })
-
   }
 
   getAllHomestayType(){
@@ -72,7 +71,6 @@ export class CreateHomestayComponent implements OnInit {
     })
   }
   createHome() {
-
     const home = {
       name: this.formHome.value.name,
       address: this.formHome.value.address,
@@ -83,13 +81,11 @@ export class CreateHomestayComponent implements OnInit {
       homestay_type: {
         id: this.formHome.value.homestay_type
       },
-      account:JSON.parse(<string>localStorage.getItem('ACCOUNT_ID')),
       city: {
         id: this.formHome.value.city
       },
     }
-    console.log(home)
-    this.homestayService.createHome(home).subscribe(() => {
+    this.homestayService.createHome(this.idUser, home).subscribe(() => {
       this.toast.success({detail:"Success Message!", summary:"Create Successfully!", duration: 5000})
       this.formHome.reset()
       this.dialogRef.close()
@@ -98,63 +94,5 @@ export class CreateHomestayComponent implements OnInit {
       this.toast.error({detail: "Error Message!", summary:'Create Failed, Please Try again', duration: 5000})
     })
   }
-  // setHomestayTypeForm(){
-  //   for (let i = 0; i < this.homestayTypes.length; i++){
-  //     if (this.homestayTypes[i].id == this.formHome.get('homestay_type')?.value) {
-  //       this.homestay_type = this.homestayTypes[i];
-  //     }
-  //   }
-  // }
-  // setCityForm(){
-  //   for (let i = 0; i < this.cities.length; i++){
-  //     if (this.cities[i].id == this.formHome.get('city')?.value){
-  //       this.city = this.cities[i];
-  //     }
-  //   }
-  // }
-  // prepareForm(){
-  //   this.formHome = this.formGroup.group({
-  //     name:['',[Validators.required]],
-  //     address:['',[Validators.required]],
-  //     bed_room:['',[Validators.required]],
-  //     bath_room:['',[Validators.required]],
-  //     price:['',[Validators.required]],
-  //     description:['',[Validators.required]],
-  //     status:['',[Validators.required]],
-  //     homestay_type:['',[Validators.required]],
-  //     city:['',[Validators.required]]
-  //   })
-  // }
-  // setNewHome(){
-  //   this.home = {
-  //     name: this.formHome.get('name')?.value,
-  //     address: this.formHome.get('address')?.value,
-  //     bed_room: this.formHome.get('bed_room')?.value,
-  //     bath_room: this.formHome.get('bath_room')?.value,
-  //     price: this.formHome.get('price')?.value,
-  //     description: this.formHome.get('description')?.value,
-  //     homestay_type: this.homestay_type,
-  //     city: this.city,
-  //   }
-  // }
-  // createHome(){
-  //   this.authenticationService.currentUser.subscribe(value => {
-  //     this.setHomestayTypeForm();
-  //     this.setCityForm();
-  //     this.setNewHome();
-  //     this.accountService.getInformationAccount(value.id + '').subscribe(result => {
-  //       this.currentUser.id = result
-  //       console.log(this.home);
-  //       // @ts-ignore
-  //       this.homestayService.createHome(this.currentUser.id, this.home).subscribe(() => {
-  //         this.toast.success({detail:'Success Message', summary:'Tạo nhà thành công!', duration:5000})
-  //         this.formHome.reset();
-  //         this.dialogRef.close()
-  //       }, error => {
-  //         console.log(error.summary)
-  //         this.toast.error({detail:'Error Message', summary:'Tạo nhà thất bại. Vui lòng nhập lại',duration: 5000})
-  //       })
-  //     })
-  //   })
-  // }
+
 }

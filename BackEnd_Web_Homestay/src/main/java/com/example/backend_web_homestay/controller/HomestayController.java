@@ -84,9 +84,9 @@ public class HomestayController {
         return new ResponseEntity<>(imageOfHomestays, HttpStatus.OK);
     }
     //tao nha
-    @PostMapping("/create")
+    @PostMapping("/create/{account_id}")
     public ResponseEntity<Homestay> createHome(@RequestBody Homestay homestay,
-                                               @PathVariable('id') long id) {
+                                               @PathVariable("account_id") long id) {
         Optional<Account> account = accountService.findById(id);
         if (!account.isPresent()) {
             throw new RuntimeException("User doesn't exist");
