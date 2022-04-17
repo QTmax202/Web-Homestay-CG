@@ -56,6 +56,7 @@ export class HomestayComponent implements OnInit {
   getAllHomestaySignIn() {
     this.homestayService.getAllHomestaySignIn(this.idAcc).subscribe((data) => {
       this.homestays = data;
+      console.log(this.homestays)
     })
   }
 
