@@ -25,6 +25,8 @@ public class Bill {
     @JoinColumn(name = "status_homestay_id")
     private StatusHomestay status_homestay;
 
+    private long price;
+
     private LocalDate start_date;
     private LocalDate end_date;
     private LocalDate registration_date;

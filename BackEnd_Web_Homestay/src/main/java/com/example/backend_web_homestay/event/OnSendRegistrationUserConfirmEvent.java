@@ -1,6 +1,5 @@
 package com.example.backend_web_homestay.event;
 
-import javafx.application.Application;
 import org.springframework.context.ApplicationEvent;
 
 public class OnSendRegistrationUserConfirmEvent extends ApplicationEvent {

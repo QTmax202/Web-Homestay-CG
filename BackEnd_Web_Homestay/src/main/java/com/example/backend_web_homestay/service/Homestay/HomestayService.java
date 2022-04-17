@@ -1,48 +1,36 @@
-package com.example.backend_web_homestay.service.Homestay;
+package com.example.backend_web_homestay.service.HomeStay;
 
-
+import com.example.backend_web_homestay.DTO.MyHomestayDTO;
 import com.example.backend_web_homestay.model.City;
 import com.example.backend_web_homestay.model.Homestay;
 import com.example.backend_web_homestay.model.HomestayType;
-import com.example.backend_web_homestay.repository.CityRepository;
-import com.example.backend_web_homestay.repository.HomestayTypeRepository;
+import com.example.backend_web_homestay.repository.ICityRepository;
 import com.example.backend_web_homestay.repository.IHomestayRepository;
+import com.example.backend_web_homestay.repository.IHomestayTypeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
 public class HomestayService implements IHomestayService {
+
     @Autowired
     private IHomestayRepository homestayRepository;
-
     @Autowired
-    private CityRepository cityRepository;
-
+    private IHomestayTypeRepository homestayTypeRepository;
     @Autowired
-    private HomestayTypeRepository homestayTypeRepository;
-
-
-    @Override
-    public Iterable<Homestay> findAllHomeStay(long id) {
-        return findAllHomeStay(id);
-    }
-
-    @Override
-    public Iterable<Homestay> getAllHomestays() {
-        return homestayRepository.findAll();
-    }
-
+    private ICityRepository cityRepository;
 
     @Override
     public Iterable<Homestay> findAll() {
-        return null;
+        return homestayRepository.findAll();
     }
 
     @Override
     public Optional<Homestay> findById(Long id) {
-        return Optional.empty();
+        return homestayRepository.findById(id);
     }
 
     @Override
@@ -56,8 +44,13 @@ public class HomestayService implements IHomestayService {
     }
 
     @Override
-    public void delete(Long id) {
-        homestayRepository.deleteById(id);
+    public Iterable<Homestay> findAllHomeStay(long id) {
+        return homestayRepository.findAllHomeStay(id);
+    }
+
+    @Override
+    public List<MyHomestayDTO> getHomestayByAccountId(long id) {
+        return homestayRepository.getHomestayByAccountId(id);
     }
 
     @Override
@@ -69,4 +62,11 @@ public class HomestayService implements IHomestayService {
     public Iterable<City> findAllCity() {
         return cityRepository.findAll();
     }
+
+    @Override
+    public HomestayType findByName(String name) {
+        return homestayTypeRepository.findByName(name);
+    }
+
+
 }

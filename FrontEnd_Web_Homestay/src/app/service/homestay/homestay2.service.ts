@@ -5,7 +5,10 @@ import {environment} from "../../../environments/environment";
 import {ImageOfHomestay} from "../../models/image-of-homestay";
 import {Rate} from "../../models/rate";
 import {Observable} from "rxjs";
-import {Homestay} from "../../models/homestay";
+import {MyHomestayDto} from "../../models/my-homestay-dto";
+import {YourBillDto} from "../../models/your-bill-dto";
+import {HomestayType} from "../../models/homestay-type";
+import {City} from "../../models/city";
 
 const API_URL = `${environment.apiUrl}`;
 
@@ -15,11 +18,45 @@ const API_URL = `${environment.apiUrl}`;
 export class Homestay2Service {
 
   constructor(private http: HttpClient) { }
+   public createHome(homestay: Homestay2): Observable<Homestay2[]> {
+    return this.http.post<any>('http://localhost:8080/api/homestay/create', homestay);
+  }
+
+  //   createHomestay(homestay: Homestay2): Observable<any> {
+  //       return this.http.post<Homestay2>(API_URL + 'homestay', homestay);
+  // }
+  editHome(id: any, homestay: Homestay2):Observable<Homestay2>{
+    return this.http.put<Homestay2>(API_URL + `${id}`, homestay);
+  }
+  public getAllType(): Observable<HomestayType[]> {
+    return this.http.get<HomestayType[]>('http://localhost:8080/api/homestay/type-home')
+  }
+  public getAllCity(): Observable<City[]> {
+    return this.http.get<City[]>('http://localhost:8080/api/homestay/city')
+  }
+  //bill by account
+  getYourBillByAccountId(id: any): Observable<any> {
+    return this.http.get<YourBillDto[]>(API_URL + 'bill/account/' + id);
+  }
+
+  getMyBillByAccountId(id: any): Observable<any> {
+    return this.http.get<YourBillDto[]>(API_URL + 'bill/account-my-bill/' + id);
+  }
+
+  //homestay by account
+
+  getHomestayByAccountId(id: any): Observable<any> {
+    return this.http.get<MyHomestayDto[]>(API_URL + 'homestay/account/' + id);
+  }
 
   //home
 
   getAllHomestay(): Observable<any> {
     return this.http.get<Homestay2[]>(API_URL + 'homestay');
+  }
+
+  getAllHomestaySignIn(id: any): Observable<any> {
+    return this.http.get<Homestay2[]>(API_URL + 'homestay/acc/' + id);
   }
 
   getHomestayById(id: number): Observable<any> {
@@ -46,7 +83,5 @@ export class Homestay2Service {
     return this.http.get<Rate[]>(API_URL + 'rate/account/' + id);
   }
 
-  editHome(id: number | undefined, home: Homestay2): Observable<any> {
-    return this.http.put(API_URL + 'homestay/' + id, home);
-  }
+
 }

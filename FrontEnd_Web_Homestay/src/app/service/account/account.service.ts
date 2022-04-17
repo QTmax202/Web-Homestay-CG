@@ -16,4 +16,8 @@ export class AccountService {
   createAccount(account: Account): Observable<any> {
     return this.http.post(API_URL + 'sign-up', account);
   }
+
+  getInformationAccount(id: any): Observable<any> {
+    return this.http.get(API_URL + 'sign-up/' + id);
+  }
 }

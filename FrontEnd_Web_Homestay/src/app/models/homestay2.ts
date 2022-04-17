@@ -1,4 +1,7 @@
 import {ImageOfHomestay} from "./image-of-homestay";
+import {HomestayType} from "./homestay-type";
+import {City} from "./city";
+import {Account} from "./account";
 
 export interface Homestay2 {
   id?: number;

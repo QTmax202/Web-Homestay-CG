@@ -1,4 +1,4 @@
-<form class="example-form" [formGroup]="formHome"  (ngSubmit)="createHome()">
+<form class="example-form" [formGroup]="formHome" >
   <h1 mat-dialog-title>THÊM NHÀ</h1>
   <mat-form-field class="example-full-width" appearance="outline">
     <mat-label>Tên Nhà</mat-label>
@@ -113,6 +113,6 @@
 
   <div mat-dialog-actions [align]="'end'">
     <button mat-raised-button color="warn" mat-dialog-close>Đóng</button>
-    <button type="submit" mat-raised-button color="primary">{{actionBtn}}</button>
+    <button type="submit" mat-raised-button color="primary" (click)="createHome()">Xác nhận</button>
   </div>
 </form>

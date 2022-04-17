@@ -40,12 +40,12 @@ import { EditHomestayComponent } from './dialog/edit-homestay/edit-homestay.comp
 import {environment} from "../environments/environment";
 import {AngularFireStorageModule} from "@angular/fire/compat/storage";
 import {AngularFireModule} from "@angular/fire/compat";
-import {NgToastModule} from "ng-angular-popup";
 import {MatSortModule} from "@angular/material/sort";
 import { ChangePassComponent } from './dialog/change-pass/change-pass.component';
 import { ConfirmBookComponent } from './dialog/confirm-book/confirm-book.component';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatNativeDateModule} from "@angular/material/core";
+import {NgToastModule} from "ng-angular-popup";
 
 @NgModule({
   declarations: [
@@ -97,8 +97,7 @@ import {MatNativeDateModule} from "@angular/material/core";
     MatSortModule,
     MatDatepickerModule,
     MatNativeDateModule,
-    NgToastModule,
-    AngularFireModule.initializeApp(environment.firebaseConfig, "cloud")
+    NgToastModule
   ],
   providers: [],
   bootstrap: [AppComponent]

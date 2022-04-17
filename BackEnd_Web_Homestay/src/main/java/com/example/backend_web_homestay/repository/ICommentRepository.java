@@ -10,4 +10,6 @@ public interface ICommentRepository extends JpaRepository<Comment, Long> {
 
     @Query("SELECT c FROM Comment c WHERE c.homestay.id = :id ORDER BY c.time_stamp DESC")
     Iterable<Comment> getCommentsByHomestayId(long id);
+
+
 }

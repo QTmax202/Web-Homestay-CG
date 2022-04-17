@@ -9,6 +9,8 @@ import java.util.Optional;
 public interface IAccountService extends IGeneralService<Account>, UserDetailsService {
     Optional<Account> findByGmail(String username);
 
+    Optional<Account> findAccountById(Long id);
+
     Boolean existsByGmail(String username);
 
     Optional<Account> findAccountByGmailAndPassword(String username,String password);

@@ -1,5 +1,7 @@
 package com.example.backend_web_homestay.service.Bill;
 
+import com.example.backend_web_homestay.DTO.MyBillDTO;
+import com.example.backend_web_homestay.DTO.YourBillDTO;
 import com.example.backend_web_homestay.model.Bill;
 import com.example.backend_web_homestay.repository.IBillRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,23 +14,39 @@ public class BillService implements IBillService{
     @Autowired
     private IBillRepository billRepository;
 
+
     @Override
     public Iterable<Bill> findAll() {
-        return null;
+        return billRepository.findAll();
     }
 
     @Override
     public Optional<Bill> findById(Long id) {
-        return Optional.empty();
+        return billRepository.findById(id);
     }
 
     @Override
     public Bill save(Bill bill) {
-        return null;
+        return billRepository.save(bill);
     }
 
     @Override
     public void remove(Long id) {
+        billRepository.deleteById(id);
+    }
 
+    @Override
+    public Iterable<YourBillDTO> getYourBillByAccountId(long id) {
+        return billRepository.getYourBillByAccountId(id);
+    }
+
+    @Override
+    public Iterable<MyBillDTO> getMyBillByAccountId(long id) {
+        return billRepository.getMyBillByAccountId(id);
+    }
+
+    @Override
+    public Iterable<Bill> findBillByHomeStayId(Long id) {
+        return billRepository.getBillByHomestay_Id(id);
     }
 }

@@ -1,9 +1,6 @@
 package com.example.backend_web_homestay.model;
 
 import lombok.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.Date;

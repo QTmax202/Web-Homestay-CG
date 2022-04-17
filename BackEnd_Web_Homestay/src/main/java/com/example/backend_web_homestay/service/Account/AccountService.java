@@ -33,6 +33,11 @@ public class AccountService implements IAccountService{
     }
 
     @Override
+    public Optional<Account> findAccountById(Long id) {
+        return accountRepository.findById(id);
+    }
+
+    @Override
     public Iterable<Account> findAll() {
         return accountRepository.findAll();
     }

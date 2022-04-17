@@ -1,17 +1,13 @@
-import {Component, OnInit} from '@angular/core';
-import {finalize, Subscription} from "rxjs";
+import {Component, Inject, OnInit} from '@angular/core';
+import {finalize} from "rxjs";
 import {AngularFireStorage} from "@angular/fire/compat/storage";
-import {HomestayService} from "../../service/homestay.service";
+import {Homestay2} from "../../models/homestay2";
+import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
+import {Homestay2Service} from "../../service/homestay/homestay2.service";
+import {MAT_DIALOG_DATA, MatDialog} from "@angular/material/dialog";
+import {NgToastService} from "ng-angular-popup";
 import {HomestayType} from "../../models/homestay-type";
 import {City} from "../../models/city";
-import {NgToastService} from "ng-angular-popup";
-import {ActivatedRoute, ParamMap} from "@angular/router";
-import {FormBuilder, FormGroup} from "@angular/forms";
-import {Homestay2Service} from "../../service/homestay/homestay2.service";
-import {Homestay} from "../../models/homestay";
-import {Homestay2} from "../../models/homestay2";
-import {MatDialogRef} from "@angular/material/dialog";
-import {HomestayComponent} from "../../component/homestay/homestay.component";
 
 @Component({
   selector: 'app-edit-homestay',
@@ -26,38 +22,111 @@ export class EditHomestayComponent implements OnInit {
   selectedImages: any[] = [];
   homestayTypes!: HomestayType[];
   cities!: City[];
-  id?: number;
-  formHome: FormGroup = new FormGroup({});
-  sub!: Subscription;
-  home: Homestay2 = {};
+  homestay!: Homestay2;
+  idHomestay!: number;
+  formHome: FormGroup = new FormGroup({
+    name: new FormControl(),
+        address: new FormControl(),
+        bed_room: new FormControl(),
+        bath_room: new FormControl(),
+        price: new FormControl(),
+        status: new FormControl(),
+        description: new FormControl(),
+        homestay_type: new FormControl(),
+        account: new FormControl(),
+        city: new FormControl()
+  });
 
   constructor(private storage: AngularFireStorage,
               private homestayService: Homestay2Service,
-              private toast: NgToastService,
-              private route: ActivatedRoute,
+              private dialog: MatDialog,
               private formBuilder: FormBuilder,
-              private dialogRef: MatDialogRef<HomestayComponent>) {
-    this.sub = this.route.paramMap.subscribe((paramMap: ParamMap) => {
-      this.id = Number(paramMap.get('id'));
-      this.homestayService.getHomestayById(this.id).subscribe(data => {
-        console.log(data);
-        this.home.id = data.id;
-        this.home.name = data.name;
-        this.home.address = data.address;
-        this.home.bed_room = data.bed_room;
-        this.home.bath_room = data.bath_room;
-        this.home.description = data.description;
-        this.home.homestay_type = data.homestay_type.id;
-        this.home.city = data.city.id;
-        this.home.imageOfHomestays = data.imageOfHomestays.id
-      })
-    })
+              @Inject(MAT_DIALOG_DATA) public data: any,
+              private toast: NgToastService
+  ) {
   }
 
   ngOnInit(): void {
+    this.idHomestay = this.data;
+    this.getHomestayById()
+    this.getAllHomestayType()
+    this.getAllCity()
+    this.formHome = this.formBuilder.group({
+      id:'',
+      name:'',
+      address: '',
+      bed_room:'',
+      bath_room:'',
+      price:'',
+      status: ['', [Validators.required]],
+      description:'',
+      homestay_type:'',
+      city:'',
+      imageOfHomestay:''
+    })
+  }
+  getHomestay(idHomestay: number){
+    this.homestayService.getHomestayById(idHomestay).subscribe(data =>{
+      this.formHome = new FormGroup({
+        name: new FormControl(data.name),
+        address: new FormControl(data.address),
+        bed_room: new FormControl(data.bed_room),
+        bath_room: new FormControl(data.bath_room),
+        price: new FormControl(data.price),
+        status: new FormControl(data.status),
+        description: new FormControl(data.description),
+        homestay_type: new FormControl(data.homestay_type.id),
+        account: new FormControl(data.account.id),
+        city: new FormControl(data.city.id)
+      })
+    })
+  }
+  editStatusHomestay(idHomestay: number) {
+    const statusHomestay = this.formHome.value
+    this.homestayService.editHome(idHomestay, statusHomestay).subscribe(()=> {
+      this.toast.success({detail:'SuccessMessage', summary:'Cập nhật thành công!', duration: 5000})
+    })
+      // id: this.homestay.id,
+      // name: this.homestay.name,
+      // address: this.homestay.address,
+      // bed_room: this.homestay.bed_room,
+      // bath_room: this.homestay.bath_room,
+      // price: this.homestay.price,
+      // status: this.formHome.value.status,
+      // description: this.homestay.description,
+      // homestay_type: {
+      //   id: this.homestay.homestay_type.id,
+      // },
+      // account: {
+      //   id: this.homestay.account.id,
+      // },
+      // city: {
+      //   id: this.homestay.city.id,
+      //
+      // },
+
+
 
   }
 
+  getHomestayById() {
+    this.homestayService.getHomestayById(this.idHomestay).subscribe((data) => {
+      this.homestay = data;
+      console.log(this.homestay)
+    })
+  }
+
+  getAllHomestayType() {
+    this.homestayService.getAllType().subscribe(data => {
+      this.homestayTypes = data;
+    })
+  }
+
+  getAllCity() {
+    this.homestayService.getAllCity().subscribe(data => {
+      this.cities = data
+    })
+  }
 
   showPreview(event: any) {
     this.loading = true;
@@ -87,18 +156,15 @@ export class EditHomestayComponent implements OnInit {
               }
             });
           })
-        ).subscribe(() => {
+        ).
+        subscribe(url => {
+          if (url) {
+            console.log(url)
+          }
         });
       }
     }
 
   }
 
-  ngSubmit() {
-    this.homestayService.editHome(this.home.id, this.home).subscribe(data1 => {
-      console.log(data1)
-      this.toast.success({detail: 'Success Message', summary: "Update Successfully!", duration: 5000});
-      this.dialogRef.close();
-    })
-  }
 }
