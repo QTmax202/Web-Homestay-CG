@@ -93,9 +93,6 @@ export class HomestayDetailComponent implements OnInit {
       this.dataSource = new MatTableDataSource<any>(data);
       this.comments = data;
       this.dataSource.paginator = this.paginator;
-      console.log(data)
-      console.log("-----------")
-      console.log(this.comments)
     })
   }
 
@@ -111,9 +108,7 @@ export class HomestayDetailComponent implements OnInit {
         id: localStorage.getItem('ACCOUNT_ID')
       }
     };
-    console.log(comment);
     this.commentService.createComment(comment).subscribe(() => {
-      console.log(comment);
       alert(comment);
       this.formComment.reset();
       this.getAllComment();

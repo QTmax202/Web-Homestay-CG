@@ -27,8 +27,7 @@ export class EditHomestayComponent implements OnInit {
               private homestayService: Homestay2Service,
               private dialog: MatDialog,
               private formBuilder: FormBuilder,
-              @Inject(MAT_DIALOG_DATA) public data: any,
-              ) { }
+              @Inject(MAT_DIALOG_DATA) public data: any,) { }
 
   ngOnInit(): void {
     this.idHomestay = this.data;

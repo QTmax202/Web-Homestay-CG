@@ -46,6 +46,8 @@ import { ConfirmBookComponent } from './dialog/confirm-book/confirm-book.compone
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatNativeDateModule} from "@angular/material/core";
 import {AngularFireAuthModule} from "@angular/fire/compat/auth";
+import {CommonModule} from "@angular/common";
+import {MatSnackBarModule} from "@angular/material/snack-bar";
 
 @NgModule({
   declarations: [
@@ -98,6 +100,8 @@ import {AngularFireAuthModule} from "@angular/fire/compat/auth";
     MatSortModule,
     MatDatepickerModule,
     MatNativeDateModule,
+    CommonModule,
+    MatSnackBarModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -31,10 +31,11 @@ export class TripsComponent implements OnInit {
     })
   }
 
-  openRate() {
+  openRate(homeId: any) {
     this.dialog.closeAll()
     this.dialog.open(RateCommentComponent, {
       width: '50%',
+      data : homeId
     });
   }
 }
