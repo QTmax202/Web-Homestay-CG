@@ -2,6 +2,7 @@ package com.example.backend_web_homestay.controller;
 
 
 import com.example.backend_web_homestay.DTO.MyBillDTO;
+import com.example.backend_web_homestay.DTO.TurnOverDTO;
 import com.example.backend_web_homestay.DTO.YourBillDTO;
 import com.example.backend_web_homestay.model.Bill;
 import com.example.backend_web_homestay.repository.IBillRepository;
@@ -43,7 +44,7 @@ public class BillController {
     }
 
     @PostMapping("/create-bill")
-    private ResponseEntity<?> createBill(@RequestBody Bill bill){
+    private ResponseEntity<?> createBill(@RequestBody Bill bill) {
         bill.setRegistration_date(LocalDate.now());
         bill.setStatus_homestay(statusHomestayService.findById(1L).get());
         Bill bill1 = billService.save(bill);
@@ -51,14 +52,25 @@ public class BillController {
     }
 
     @GetMapping("/bill-homestay/{id}")
-    private ResponseEntity<?> getBillHomestay(@PathVariable long id){
+    private ResponseEntity<?> getBillHomestay(@PathVariable long id) {
         Iterable<Bill> billHomestay = billService.findBillByHomeStayId(id);
         return new ResponseEntity<>(billHomestay, HttpStatus.OK);
     }
 
     @GetMapping("/bill-homestay-status/{id}")
-    private ResponseEntity<?> getBillHomestayStatus(@PathVariable long id){
+    private ResponseEntity<?> getBillHomestayStatus(@PathVariable long id) {
         Iterable<Bill> bills = billRepository.findAllBillByHomestay_Status(id);
         return new ResponseEntity<>(bills, HttpStatus.OK);
+    }
+
+    @GetMapping("/turn-over")
+    public ResponseEntity<?> findTurnOverByAccountAndStartDate(@RequestParam(required = false) long id,
+                                                               @RequestParam(required = false) String startDate1,
+                                                               @RequestParam(required = false) String startDate2) {
+        Iterable<TurnOverDTO> turnOverDTOS = billService.findTurnOverByAccountAndStartDate(id, startDate1, startDate2);
+        if (!turnOverDTOS.iterator().hasNext()) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+        return new ResponseEntity<>(turnOverDTOS, HttpStatus.OK);
     }
 }
