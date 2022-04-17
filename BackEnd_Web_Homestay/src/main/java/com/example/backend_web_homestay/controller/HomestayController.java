@@ -86,5 +86,24 @@ public class HomestayController {
     private ResponseEntity<?> createHomestay(@RequestBody Homestay homestay) {
         return new ResponseEntity<>(homestayService.save(homestay), HttpStatus.OK);
     }
+
+    // find homestay
+    @GetMapping("/search")
+    private ResponseEntity<?> findHomestayByNameAndCityAndPrice(@RequestParam(required = false) String name,
+                                                                @RequestParam(required = false) Long idCity,
+                                                                @RequestParam(required = false) Long price1,
+                                                                @RequestParam(required = false) Long price2) {
+        if (price1 == null) {
+            price1 = 0L;
+        }
+        if (price2 == null) {
+            price2 = 999999999L;
+        }
+        Iterable<Homestay> homestays = homestayService.findHomestayByNameAndCityAndPrice(name, idCity, price1, price2);
+        if (!homestays.iterator().hasNext()) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<>(homestays, HttpStatus.OK);
+    }
 }
 
