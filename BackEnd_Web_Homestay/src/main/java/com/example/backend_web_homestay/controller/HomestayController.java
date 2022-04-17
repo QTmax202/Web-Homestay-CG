@@ -83,9 +83,11 @@ public class HomestayController {
         }
         return new ResponseEntity<>(imageOfHomestays, HttpStatus.OK);
     }
+    //tao nha
     @PostMapping("/create")
-    public ResponseEntity<?> createHome(@PathVariable("id") Long id, @RequestBody Homestay homestay) {
-        Optional<Account> account = accountService.findAccountById(id);
+    public ResponseEntity<Homestay> createHome(@RequestBody Homestay homestay,
+                                               @PathVariable('id') long id) {
+        Optional<Account> account = accountService.findById(id);
         if (!account.isPresent()) {
             throw new RuntimeException("User doesn't exist");
         }
@@ -93,32 +95,30 @@ public class HomestayController {
         homestayService.save(homestay);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
-
+    // them anh nha
+    @PostMapping("/save-image")
+    public ResponseEntity<?> saveImage(@RequestBody ImageOfHomestay image){
+        return new ResponseEntity<>(iImageService.save(image), HttpStatus.CREATED);
+    }
+    //Sua thong tin nha
     @PutMapping("/{id}")
     public ResponseEntity<?> editHome(@RequestBody Homestay homestayEdit, @PathVariable Long id) {
         Optional<Homestay> homestay = homestayService.findById(id);
-        return homestay.map(home -> {
-            home.setId(home.getId());
-            home.setName(home.getName());
-            home.setAddress(home.getAddress());
-            home.setBed_room(home.getBed_room());
-            home.setBath_room(home.getBath_room());
-            home.setStatus(home.getStatus());
-            home.setPrice(home.getPrice());
-            home.setHomestay_type(home.getHomestay_type());
-            home.setCity(home.getCity());
-            Iterable<ImageOfHomestay> image = iImageService.findImageOfHomestaysByHomestay_Id(id);
-            for (ImageOfHomestay images: image) {
-                iImageService.remove(images.getId());
-            }
-            if (home.getImageOfHomestays() != null) {
-                for (ImageOfHomestay image1: home.getImageOfHomestays()) {
-                    image1.setHomestay(homestayEdit);
-                    iImageService.save(image1);
-                }
-            }
-            return new ResponseEntity<>(homestayService.save(home), HttpStatus.OK);
-        }).orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
+        if (!homestay.isPresent()){
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        homestayEdit.setId(homestay.get().getId());
+        homestayEdit.setName(homestay.get().getName());
+        homestayEdit.setAddress(homestay.get().getAddress());
+        homestayEdit.setBed_room(homestay.get().getBed_room());
+        homestayEdit.setBath_room(homestay.get().getBath_room());
+        homestayEdit.setPrice(homestay.get().getPrice());
+        homestayEdit.setStatus(homestay.get().getStatus());
+        homestayEdit.setDescription(homestay.get().getDescription());
+        homestayEdit.setHomestay_type(homestay.get().getHomestay_type());
+        homestayEdit.setCity(homestay.get().getCity());
+        homestayEdit = homestayService.save(homestayEdit);
+        return new ResponseEntity<>(homestayEdit, HttpStatus.OK);
     }
     @GetMapping("/type-home")
     public ResponseEntity<?> getAllType() {

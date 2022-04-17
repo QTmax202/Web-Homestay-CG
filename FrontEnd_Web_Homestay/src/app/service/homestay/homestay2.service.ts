@@ -28,6 +28,9 @@ export class Homestay2Service {
   editHome(id: any, homestay: Homestay2):Observable<Homestay2>{
     return this.http.put<Homestay2>(API_URL + `${id}`, homestay);
   }
+  getImageOfHomestayById(id: any):Observable<ImageOfHomestay>{
+    return this.http.get<ImageOfHomestay>(API_URL + `image-of-homestay/${id}`)
+  }
   public getAllType(): Observable<HomestayType[]> {
     return this.http.get<HomestayType[]>('http://localhost:8080/api/homestay/type-home')
   }

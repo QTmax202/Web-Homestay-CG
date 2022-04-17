@@ -83,7 +83,7 @@ export class CreateHomestayComponent implements OnInit {
       homestay_type: {
         id: this.formHome.value.homestay_type
       },
-      account:JSON.parse(<string>localStorage.getItem('ACCOUNT_ID')).id,
+      account:JSON.parse(<string>localStorage.getItem('ACCOUNT_ID')),
       city: {
         id: this.formHome.value.city
       },

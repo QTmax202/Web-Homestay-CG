@@ -8,6 +8,7 @@ import {MAT_DIALOG_DATA, MatDialog} from "@angular/material/dialog";
 import {NgToastService} from "ng-angular-popup";
 import {HomestayType} from "../../models/homestay-type";
 import {City} from "../../models/city";
+import {ImageOfHomestay} from "../../models/image-of-homestay";
 
 @Component({
   selector: 'app-edit-homestay',
@@ -15,7 +16,7 @@ import {City} from "../../models/city";
   styleUrls: ['./edit-homestay.component.css']
 })
 export class EditHomestayComponent implements OnInit {
-
+  homestayImage!: ImageOfHomestay
   public loading = false;
   imgs: any[] = [];
   fb: any;
@@ -24,26 +25,15 @@ export class EditHomestayComponent implements OnInit {
   cities!: City[];
   homestay!: Homestay2;
   idHomestay!: number;
-  formHome: FormGroup = new FormGroup({
-    name: new FormControl(),
-        address: new FormControl(),
-        bed_room: new FormControl(),
-        bath_room: new FormControl(),
-        price: new FormControl(),
-        status: new FormControl(),
-        description: new FormControl(),
-        homestay_type: new FormControl(),
-        account: new FormControl(),
-        city: new FormControl()
-  });
+  formHome: FormGroup = new FormGroup({});
 
   constructor(private storage: AngularFireStorage,
               private homestayService: Homestay2Service,
               private dialog: MatDialog,
               private formBuilder: FormBuilder,
               @Inject(MAT_DIALOG_DATA) public data: any,
-              private toast: NgToastService
-  ) {
+              private toast: NgToastService){
+
   }
 
   ngOnInit(): void {
@@ -65,50 +55,43 @@ export class EditHomestayComponent implements OnInit {
       imageOfHomestay:''
     })
   }
-  getHomestay(idHomestay: number){
-    this.homestayService.getHomestayById(idHomestay).subscribe(data =>{
-      this.formHome = new FormGroup({
-        name: new FormControl(data.name),
-        address: new FormControl(data.address),
-        bed_room: new FormControl(data.bed_room),
-        bath_room: new FormControl(data.bath_room),
-        price: new FormControl(data.price),
-        status: new FormControl(data.status),
-        description: new FormControl(data.description),
-        homestay_type: new FormControl(data.homestay_type.id),
-        account: new FormControl(data.account.id),
-        city: new FormControl(data.city.id)
-      })
+
+  editStatusHomestay() {
+    const statusHomestay = {
+
+      id: this.homestay.id,
+      name: this.homestay.name,
+      address: this.homestay.address,
+      bed_room: this.homestay.bed_room,
+      bath_room: this.homestay.bath_room,
+      price: this.homestay.price,
+      status: this.formHome.value.status,
+      description: this.homestay.description,
+      homestay_type: {
+        id: this.homestay.homestay_type.id,
+      },
+      account: {
+        id: this.homestay.account.id,
+      },
+      city: {
+        id: this.homestay.city.id,
+      },
+      imageOfHomestay: this.selectedImages,
+    };
+    this.homestayService.createHome(statusHomestay).subscribe(()=>{
+      this.toast.success({detail:'SuccessMessage', summary:'Cập nhật thành công', duration: 5000})
+      this.formHome.reset()
+      }
+    )
+  }
+  saveId(id: any, name: string) {
+    localStorage.setItem(name, id);
+  }
+  getImageHome(id: any){
+    this.homestayService.getImageOfHomestayById(id).subscribe(data =>{
+      this.homestayImage = data;
     })
   }
-  editStatusHomestay(idHomestay: number) {
-    const statusHomestay = this.formHome.value
-    this.homestayService.editHome(idHomestay, statusHomestay).subscribe(()=> {
-      this.toast.success({detail:'SuccessMessage', summary:'Cập nhật thành công!', duration: 5000})
-    })
-      // id: this.homestay.id,
-      // name: this.homestay.name,
-      // address: this.homestay.address,
-      // bed_room: this.homestay.bed_room,
-      // bath_room: this.homestay.bath_room,
-      // price: this.homestay.price,
-      // status: this.formHome.value.status,
-      // description: this.homestay.description,
-      // homestay_type: {
-      //   id: this.homestay.homestay_type.id,
-      // },
-      // account: {
-      //   id: this.homestay.account.id,
-      // },
-      // city: {
-      //   id: this.homestay.city.id,
-      //
-      // },
-
-
-
-  }
-
   getHomestayById() {
     this.homestayService.getHomestayById(this.idHomestay).subscribe((data) => {
       this.homestay = data;
