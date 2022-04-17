@@ -39,30 +39,30 @@
   </div>
 
   <div class="row">
-    <div class="col-lg-4">
-      <mat-form-field appearance="outline">
-        <mat-label>Số Lượng Phòng Ngủ</mat-label>
-        <mat-select formControlName="bed_room" name="bed_room">
-          <mat-option value="1">1 Phòng</mat-option>
-          <mat-option value="2">2 Phòng</mat-option>
-          <mat-option value="3">3 Phòng</mat-option>
-          <mat-option value="4">4 Phòng</mat-option>
-          <mat-option value="5">5 Phòng</mat-option>
-          <mat-option value="6">6 Phòng</mat-option>
-          <mat-option value="7">7 Phòng</mat-option>
-          <mat-option value="8">8 Phòng</mat-option>
-          <mat-option value="9">9 Phòng</mat-option>
-          <mat-option value="10">10 Phòng</mat-option>
-          <mat-error *ngIf="formHome.hasError('required', 'bed_room')">
-            Vui lòng chọn số phòng ngủ
-          </mat-error>
-        </mat-select>
-      </mat-form-field>
-    </div>
-    <div class="col-lg-4">
-      <mat-form-field appearance="outline">
-        <mat-label>Số Lượng Phòng Tắm</mat-label>
-        <mat-select formControlName="bath_room" name="bath_room">
+        <div class="col-lg-4">
+          <mat-form-field appearance="outline">
+            <mat-label>Số Lượng Phòng Ngủ</mat-label>
+            <mat-select formControlName="bed_room" name="bed_room">
+              <mat-option value="1">1 Phòng</mat-option>
+              <mat-option value="2">2 Phòng</mat-option>
+              <mat-option value="3">3 Phòng</mat-option>
+              <mat-option value="4">4 Phòng</mat-option>
+              <mat-option value="5">5 Phòng</mat-option>
+              <mat-option value="6">6 Phòng</mat-option>
+              <mat-option value="7">7 Phòng</mat-option>
+              <mat-option value="8">8 Phòng</mat-option>
+              <mat-option value="9">9 Phòng</mat-option>
+              <mat-option value="10">10 Phòng</mat-option>
+              <mat-error *ngIf="formHome.hasError('required', 'bed_room')">
+                Vui lòng chọn số phòng ngủ
+              </mat-error>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div class="col-lg-4">
+          <mat-form-field appearance="outline">
+            <mat-label>Số Lượng Phòng Tắm</mat-label>
+            <mat-select formControlName="bath_room" name="bath_room">
           <mat-option value="1">1 Phòng</mat-option>
           <mat-option value="2">2 Phòng</mat-option>
           <mat-option value="3">3 Phòng</mat-option>

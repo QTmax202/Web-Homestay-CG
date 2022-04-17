@@ -85,6 +85,8 @@ export class Homestay2Service {
   getAllRateByAccount(id: number): Observable<any> {
     return this.http.get<Rate[]>(API_URL + 'rate/account/' + id);
   }
-
+  createImage(image: ImageOfHomestay): Observable<any> {
+    return this.http.post(API_URL + `save-image`, image);
+  }
 
 }
