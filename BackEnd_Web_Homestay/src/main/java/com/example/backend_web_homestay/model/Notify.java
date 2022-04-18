@@ -21,6 +21,12 @@ public class Notify {
     @JoinColumn(name = "account_id")
     private Account account;
 
+    @ManyToOne
+    @JoinColumn(name = "bill_id")
+    private Bill bill;
+
+    private LocalDate date_notify;
+
     private Boolean status = false;
     private String content;
 
@@ -51,19 +57,35 @@ public class Notify {
         this.account = account;
     }
 
-    public Boolean getStatus() {
-        return status;
-    }
-
-    public void setStatus(Boolean status) {
-        this.status = status;
-    }
-
     public String getContent() {
         return content;
     }
 
     public void setContent(String content) {
         this.content = content;
+    }
+
+    public LocalDate getDate_notify() {
+        return date_notify;
+    }
+
+    public void setDate_notify(LocalDate date_notify) {
+        this.date_notify = date_notify;
+    }
+
+    public Bill getBill() {
+        return bill;
+    }
+
+    public void setBill(Bill bill) {
+        this.bill = bill;
+    }
+
+    public Boolean getStatus() {
+        return status;
+    }
+
+    public void setStatus(Boolean status) {
+        this.status = status;
     }
 }

@@ -3,6 +3,7 @@ package com.example.backend_web_homestay.controller;
 import com.example.backend_web_homestay.DTO.MyHomestayDTO;
 import com.example.backend_web_homestay.model.Homestay;
 import com.example.backend_web_homestay.model.ImageOfHomestay;
+import com.example.backend_web_homestay.model.Rate;
 import com.example.backend_web_homestay.service.HomeStay.IHomestayService;
 import com.example.backend_web_homestay.service.Image.IImageService;
 import com.example.backend_web_homestay.service.Rate.IRateService;
@@ -58,7 +59,7 @@ public class HomestayController {
 
     @GetMapping("/account/{id}")
     private ResponseEntity<?> getHomestayByAccountId(@PathVariable long id) {
-        Iterable<MyHomestayDTO> homestays = homestayService.getHomestayByAccountId(id);
+        List<MyHomestayDTO> homestays = homestayService.getHomestayByAccountId(id);
         return new ResponseEntity<>(homestays, HttpStatus.OK);
     }
 
@@ -80,6 +81,37 @@ public class HomestayController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
         return new ResponseEntity<>(imageOfHomestays, HttpStatus.OK);
+    }
+
+    @PostMapping
+    private ResponseEntity<?> createHomestay(@RequestBody Homestay homestay) {
+        return new ResponseEntity<>(homestayService.save(homestay), HttpStatus.OK);
+    }
+
+    // find homestay
+    @GetMapping("/search")
+    private ResponseEntity<?> findHomestayByNameAndCityAndPrice(@RequestParam(required = false) String name,
+                                                                @RequestParam(required = false) Long idCity,
+                                                                @RequestParam(required = false) Long price1,
+                                                                @RequestParam(required = false) Long price2) {
+        if (price1 == null) {
+            price1 = 0L;
+        }
+        if (price2 == null) {
+            price2 = 999999999L;
+        }
+        Iterable<Homestay> homestays = homestayService.findHomestayByNameAndCityAndPrice(name, idCity, price1, price2);
+        if (!homestays.iterator().hasNext()) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+        return new ResponseEntity<>(homestays, HttpStatus.OK);
+    }
+
+    // top 5 homestay
+    @GetMapping("/top-5")
+    public ResponseEntity<?> getTop5Homestay() {
+        Iterable<MyHomestayDTO> myHomestayDTOS = homestayService.getTop5Homestay();
+        return new ResponseEntity<>(myHomestayDTOS, HttpStatus.OK);
     }
 }
 

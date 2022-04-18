@@ -1,16 +1,51 @@
 <form class="example-form">
   <h1 mat-dialog-title>Đổi mật khẩu</h1>
   <mat-form-field class="example-full-width" appearance="outline">
-    <mat-label>Mật khẩu cũ</mat-label>
-    <input type="password" matInput value="Hehe">
+    <mat-label>Mật Khẩu Cũ</mat-label>
+    <input matInput [type]="hide ? 'password' : 'text'" formControlName="password"  required minlength="6" maxlength="8">
+    <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+      <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+    </button>
+    <mat-error *ngIf="formSignUp.hasError('minlength','password') ||
+                      formSignUp.hasError('maxlength','password') &&
+                      !formSignUp.hasError('required','password')">
+      Mật khẩu từ <strong>6 đến 8</strong> ký tự!
+    </mat-error>
+    <mat-error *ngIf="formSignUp.hasError('required','password')">
+      Không được bỏ trống!
+    </mat-error>
   </mat-form-field>
   <mat-form-field class="example-full-width" appearance="outline">
-    <mat-label>Mật khẩu mới</mat-label>
-    <input type="password" matInput value="Hehe">
+    <mat-label>Mật Khẩu Mới</mat-label>
+    <input matInput [type]="hide ? 'password' : 'text'" formControlName="password"  required minlength="6" maxlength="8">
+    <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+      <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+    </button>
+    <mat-error *ngIf="formSignUp.hasError('minlength','password') ||
+                      formSignUp.hasError('maxlength','password') &&
+                      !formSignUp.hasError('required','password')">
+      Mật khẩu từ <strong>6 đến 8</strong> ký tự!
+    </mat-error>
+    <mat-error *ngIf="formSignUp.hasError('required','password')">
+      Không được bỏ trống!
+    </mat-error>
   </mat-form-field>
   <mat-form-field class="example-full-width" appearance="outline">
-    <mat-label>Nhập lại mật khẩu</mat-label>
-    <input type="password" matInput value="Hehe">
+    <mat-label>Xác Nhận Mật Khẩu</mat-label>
+    <input matInput [type]="hide ? 'password' : 'text'" formControlName="rePassword"  required minlength="6" maxlength="8">
+    <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+      <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+    </button>
+    <mat-error *ngIf="formSignUp.hasError('minlength','rePassword') ||
+                      formSignUp.hasError('maxlength','rePassword') &&
+                      !formSignUp.hasError('required','rePassword')">
+      Mật khẩu từ <strong>6 đến 8</strong> ký tự!
+    </mat-error>
+    <mat-error *ngIf="formSignUp.hasError('required','rePassword')">
+      Không được bỏ trống!
+    </mat-error>
+    <mat-error *ngIf="formSignUp.hasError('confirmedValidator','rePassword')">
+      Mật khẩu không trùng. Vui lòng nhập lại!</mat-error>
   </mat-form-field>
   <div mat-dialog-actions [align]="'end'">
     <button mat-raised-button color="warn" mat-dialog-close>Đóng</button>

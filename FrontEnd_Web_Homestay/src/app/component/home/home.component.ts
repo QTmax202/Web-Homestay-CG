@@ -1,24 +1,38 @@
 import { Component, OnInit } from '@angular/core';
-import {City} from "../../models/city";
-import {CityService} from "../../service/city/city.service";
+import {Homestay2Service} from "../../service/homestay/homestay2.service";
+import {Homestay2} from "../../models/homestay2";
+
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-  cities!: City[];
+  homestays!: Homestay2[];
+  idAcc = localStorage.getItem('ACCOUNT_ID')
 
-  constructor( private cityService: CityService) { }
+  constructor(private homestayService: Homestay2Service,
+              ) { }
 
   ngOnInit(): void {
-    this.getAllCity()
+    if (this.idAcc == null) {
+      this.getAllHomestay();
+    } else {
+      this.getAllHomestaySignIn();
+    }
   }
-  getAllCity(){
-    this.cityService.getAll().subscribe((database)=>{
-      this.cities = database;
-      console.log(this.cities)
+
+  getAllHomestay() {
+    this.homestayService.getAllHomestay().subscribe((data) => {
+      this.homestays = data;
+      console.log(this.homestays)
     })
   }
 
+  getAllHomestaySignIn() {
+    this.homestayService.getAllHomestaySignIn(this.idAcc).subscribe((data) => {
+      this.homestays = data;
+      console.log(this.homestays)
+    })
+  }
 }

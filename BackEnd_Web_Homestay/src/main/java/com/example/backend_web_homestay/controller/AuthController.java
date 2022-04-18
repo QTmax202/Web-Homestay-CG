@@ -57,4 +57,14 @@ public class AuthController {
         return ResponseEntity.ok(jwtResponse);
     }
 
+    @GetMapping("/check-mail/{mail}")
+    public ResponseEntity<?> checkMail(@PathVariable String mail) {
+        if (accountService.existsByGmail(mail)){
+            if (accountService.findByGmail(mail).get().getStatus()){
+                return new ResponseEntity<>(accountService.findByGmail(mail), HttpStatus.OK);
+            }
+        }
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
+
 }

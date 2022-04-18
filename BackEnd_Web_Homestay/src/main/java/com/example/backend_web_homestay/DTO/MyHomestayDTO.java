@@ -14,6 +14,8 @@ public interface MyHomestayDTO {
 
     Double getAvgRate();
 
+    Long getRoundRate();
+
     String getImages();
 
 }

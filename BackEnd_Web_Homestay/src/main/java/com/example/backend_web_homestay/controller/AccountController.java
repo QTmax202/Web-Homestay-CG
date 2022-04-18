@@ -1,5 +1,6 @@
 package com.example.backend_web_homestay.controller;
 
+import com.example.backend_web_homestay.DTO.ChangePasswordForm;
 import com.example.backend_web_homestay.model.Account;
 import com.example.backend_web_homestay.model.Role;
 import com.example.backend_web_homestay.service.Account.IAccountService;
@@ -37,6 +38,45 @@ public class AccountController {
         Optional<Account> account = accountService.findById(id);
         return new ResponseEntity<>(account, HttpStatus.OK);
     }
+
+    @PutMapping("{id}")
+    public ResponseEntity<?> changePassword(@PathVariable("id") Long id, @RequestBody ChangePasswordForm changePassword) {
+        Account account = new Account();
+        if (accountService.findById(id).isPresent()){
+            account = accountService.findById(id).get();
+        }
+        if (!passwordEncoder.matches(changePassword.getCurrentPassword(), account.getPassword())) {
+//            Mã 600 là lỗi sai mật khẩu hiện tại
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+        else if (!changePassword.getNewPassword().equals(changePassword.getConfirmPassword())) {
+//            Mã 601 là lỗi xác nhận mật khẩu mới sai
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+        account.setPassword(passwordEncoder.encode(changePassword.getNewPassword()));
+        accountService.save(account);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+//    @PutMapping("/change-pass/{id}")
+//    public ResponseEntity<?> changePassword(@RequestBody Account account, @PathVariable long id) {
+//        Optional<Account> accountFind = accountService.findById(id);
+//        account.setAddress(passwordEncoder.encode(account.getAddress()));
+//        if (accountFind.get().getPassword().equals(account.getAddress())) {
+//            account.setId(id);
+//            account.setAddress(accountFind.get().getAddress());
+//            account.setAvatar_url(accountFind.get().getAvatar_url());
+//            account.setDate_birth(accountFind.get().getDate_birth());
+//            account.setGmail(accountFind.get().getGmail());
+//            account.setName(accountFind.get().getName());
+//            account.setPhone_number(accountFind.get().getPhone_number());
+//            account.setRoles(accountFind.get().getRoles());
+//            account.setPassword(passwordEncoder.encode(account.getPassword()));
+//            accountService.save(account);
+//            return new ResponseEntity<>(account, HttpStatus.OK);
+//        }
+//        return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+//    }
 
     @PostMapping
     private ResponseEntity<?> createAccount(@RequestBody Account account) {

@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class HomestayService implements IHomestayService {
+public class HomestayService implements IHomestayService{
 
     @Autowired
     private IHomestayRepository homestayRepository;
@@ -41,7 +41,17 @@ public class HomestayService implements IHomestayService {
     }
 
     @Override
-    public Iterable<MyHomestayDTO> getHomestayByAccountId(long id) {
+    public List<MyHomestayDTO> getHomestayByAccountId(long id) {
         return homestayRepository.getHomestayByAccountId(id);
+    }
+
+    @Override
+    public Iterable<Homestay> findHomestayByNameAndCityAndPrice(String name, Long idCity, Long price1, Long price2) {
+        return homestayRepository.findHomestayByNameAndCityAndPrice(name, idCity, price1, price2);
+    }
+
+    @Override
+    public Iterable<MyHomestayDTO> getTop5Homestay() {
+        return homestayRepository.getTop5Homestay();
     }
 }

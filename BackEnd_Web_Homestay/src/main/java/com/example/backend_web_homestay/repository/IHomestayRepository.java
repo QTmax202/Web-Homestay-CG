@@ -16,13 +16,28 @@ public interface IHomestayRepository extends JpaRepository<Homestay, Long> {
     @Query(value = "select * from homestay hs where hs.account_id != :id and hs.status = true", nativeQuery = true)
     Iterable<Homestay> findAllHomeStay(long id);
 
-
     @Transactional
     @Modifying
-    @Query(value = "select hs.id as id, hs.name as name, hs.price as price, hs.description as description, hs.address as address, avg(rate.value_rate) as avgRate, img.images as images from homestay hs  \n" +
+    @Query(value = "select hs.id as id, hs.name as name, hs.price as price, hs.description as description, hs.address as address, avg(rate.value_rate) as avgRate, round(avg(rate.value_rate)) as roundRate, img.images as images from homestay hs  \n" +
             "join rate on hs.id = rate.homestay_id \n" +
             "join image_of_homestay img on img.homestay_id = hs.id \n" +
             "where hs.account_id = :id \n" +
             "group by hs.id", nativeQuery = true)
-    Iterable<MyHomestayDTO> getHomestayByAccountId(long id);
+    List<MyHomestayDTO> getHomestayByAccountId(long id);
+
+    @Query(value = "select * from homestay\n" +
+            "where name like %:name% and city_id = :idCity and status = 1 and price between :price1 and :price2", nativeQuery = true)
+    Iterable<Homestay> findHomestayByNameAndCityAndPrice(String name, Long idCity, Long price1, Long price2);
+
+    @Query(value = "select hs.id as id, hs.name as name, hs.price as price, hs.description as description, hs.address as address, \n" +
+            "avg(rate.value_rate) as avgRate, round(avg(rate.value_rate)) as roundRate, \n" +
+            "img.images as images, count(b.homestay_id) as countBill\n" +
+            "from homestay hs\n" +
+            "\tleft join rate on rate.homestay_id = hs.id\n" +
+            "    left join image_of_homestay img on img.homestay_id = hs.id\n" +
+            "\tleft join bill b on b.homestay_id = hs.id\n" +
+            "\tgroup by hs.id\n" +
+            "\torder by countBill desc, avgRate desc\n" +
+            "    limit 5;", nativeQuery = true)
+    Iterable<MyHomestayDTO> getTop5Homestay();
 }
