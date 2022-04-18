@@ -130,22 +130,22 @@
             </div>
           </div>
 
-          <div class="row" style="width: 88%">
-            <div class="col-md-12" >
-              <div class="destination"  *ngIf="idAcc != null">
-                <form style="display: flex" [formGroup]="formComment" (ngSubmit)="createComment()" novalidate>
-                  <div class="col-md-12">
-                    <input type="text" class="form-control" formControlName="comment" placeholder="Your Comment"
-                           required>
-                  </div>
-                  <div class="col-md-12">
-                    <button type="submit" class="btn btn-primary py-2 px-4" [disabled]="formComment.invalid">Gửi
-                    </button>
-                  </div>
-                </form>
-              </div>
-            </div>
-          </div>
+<!--          <div class="row" style="width: 88%">-->
+<!--            <div class="col-md-12" >-->
+<!--              <div class="destination"  *ngIf="idAcc != null">-->
+<!--                <form style="display: flex" [formGroup]="formComment" (ngSubmit)="createComment()" novalidate>-->
+<!--                  <div class="col-md-12">-->
+<!--                    <input type="text" class="form-control" formControlName="comment" placeholder="Your Comment"-->
+<!--                           required>-->
+<!--                  </div>-->
+<!--                  <div class="col-md-12">-->
+<!--                    <button type="submit" class="btn btn-primary py-2 px-4" [disabled]="formComment.invalid">Gửi-->
+<!--                    </button>-->
+<!--                  </div>-->
+<!--                </form>-->
+<!--              </div>-->
+<!--            </div>-->
+<!--          </div>-->
           <br>
           <div class="col-md-12">
             <h2><strong>Our</strong> Guests Says</h2>
@@ -167,13 +167,54 @@
                           <div class="text ml-md-4 hotel-single">
                             <div class="row">
                               <div class="col-sm-9">
-<!--                                <span class="star">-->
-<!--    							                <i class="icon-star"></i>-->
-<!--                                  <i class="icon-star"></i>-->
-<!--    							                <i class="icon-star"></i>-->
-<!--    							                <i class="icon-star"></i>-->
-<!--                                  <i class="icon-star-o"></i>-->
-<!--                                </span>-->
+                                <p *ngIf="row.id == 0" class="rate">
+                                  <i class="icon-star-o"></i>
+                                  <i class="icon-star-o"></i>
+                                  <i class="icon-star-o"></i>
+                                  <i class="icon-star-o"></i>
+                                  <i class="icon-star-o"></i>
+                                  <span>{{row.id}} Sao</span>
+                                </p>
+                                <p *ngIf="row.id == 1" class="rate">
+                                  <i class="icon-star"></i>
+                                  <i class="icon-star-o"></i>
+                                  <i class="icon-star-o"></i>
+                                  <i class="icon-star-o"></i>
+                                  <i class="icon-star-o"></i>
+                                  <span>{{row.id}} Sao</span>
+                                </p>
+                                <p *ngIf="row.id == 2" class="rate">
+                                  <i class="icon-star"></i>
+                                  <i class="icon-star"></i>
+                                  <i class="icon-star-o"></i>
+                                  <i class="icon-star-o"></i>
+                                  <i class="icon-star-o"></i>
+                                  <span>{{row.id}} Sao</span>
+                                </p>
+                                <p *ngIf="row.id == 3" class="rate">
+                                  <i class="icon-star"></i>
+                                  <i class="icon-star"></i>
+                                  <i class="icon-star"></i>
+                                  <i class="icon-star-o"></i>
+                                  <i class="icon-star-o"></i>
+                                  <span>{{row.id}} Sao</span>
+                                </p>
+                                <p *ngIf="row.id == 4" class="rate">
+                                  <i class="icon-star"></i>
+                                  <i class="icon-star"></i>
+                                  <i class="icon-star"></i>
+                                  <i class="icon-star"></i>
+                                  <i class="icon-star-o"></i>
+                                  <span>{{row.id}} Sao</span>
+                                </p>
+                                <p *ngIf="row.id == 5" class="rate">
+                                  <i class="icon-star"></i>
+                                  <i class="icon-star"></i>
+                                  <i class="icon-star"></i>
+                                  <i class="icon-star"></i>
+                                  <i class="icon-star"></i>
+                                  <span>{{row.id}} Sao</span>
+                                </p>
                               </div>
                               <div class="col-sm-3">
                                 <span>{{row.time_stamp}}</span>
@@ -181,8 +222,6 @@
                             </div>
                             <br>
                             <p class="mb-5">{{row.comment}}</p>
-<!--                            <p class="mb-5">Far far away, behind the word mountains, far from the&ndash;&gt;-->
-<!--                              countries Vokalia and Consonantia, there live the blind texts.</p>-->
                             <div class="row">
                               <span class="name">{{row.account.name}}</span>
                               <span>&ensp;|&ensp;</span>

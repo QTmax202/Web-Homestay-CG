@@ -113,7 +113,9 @@
                     <span *ngIf="m.statusHomeId == 3" class="ml-auto">
                       <button class="btn btn-info" style="margin-left: 600px" disabled>Đang ở</button></span>
                     <span *ngIf="m.statusHomeId == 4" class="ml-auto">
-                      <button class="btn btn-danger" style="margin-left: 600px" (click)="openRate(m.homeId)">Đánh giá</button></span>
+                      <button *ngIf="m.exist == true" disabled class="btn btn-danger" style="margin-left: 600px" (click)="openRate(m.homeId)">Đánh giá</button>
+                      <button *ngIf="m.exist == false" class="btn btn-danger" style="margin-left: 600px" (click)="openRate(m.homeId)">Đánh giá</button>
+                    </span>
                     <span *ngIf="m.statusHomeId == 4" class="ml-auto">
                       <button class="btn btn-dark" disabled>Đã trả</button></span>
                     <span *ngIf="m.statusHomeId == 5" class="ml-auto">
