@@ -4,8 +4,7 @@
 
 export const environment = {
   production: false,
-  apiUrl: 'http://localhost:8080/api',
-
+  apiUrl: 'http://localhost:8080/api/',
   firebaseConfig : {
     apiKey: "AIzaSyBreE-HEeEviMPLa4TfGLRojjL_PBEkud8",
     authDomain: "web-homestay-cg.firebaseapp.com",
@@ -18,7 +17,7 @@ export const environment = {
 
 };
 
-export const pathUrl = 'http://localhost:8080/api';
+export const pathUrl = 'http://localhost:8080/api/';
 /*
  * For easier debugging in development mode, you can import the following file
  * to ignore zone related error stack frames such as `zone.run`, `zoneDelegate.invokeTask`.

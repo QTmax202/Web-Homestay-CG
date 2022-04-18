@@ -19,6 +19,9 @@ export class HomestayComponent implements OnInit {
   idH!: number;
   images!: ImageOfHomestay[];
   image!: ImageOfHomestay[];
+  idAcc = localStorage.getItem('ACCOUNT_ID')
+
+
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
@@ -31,15 +34,22 @@ export class HomestayComponent implements OnInit {
               private route: ActivatedRoute,) { }
 
   ngOnInit(): void {
-    this.getAllHomestay();
+    if (this.idAcc == null) {
+      this.getAllHomestay();
+    } else {
+      this.getAllHomestaySignIn();
+    }
   }
 
   getAllHomestay() {
     this.homestayService.getAllHomestay().subscribe((data) => {
       this.homestays = data;
-      console.log(data);
-      console.log("--------------");
-      console.log(this.homestays);
+    })
+  }
+
+  getAllHomestaySignIn() {
+    this.homestayService.getAllHomestaySignIn(this.idAcc).subscribe((data) => {
+      this.homestays = data;
     })
   }
 }

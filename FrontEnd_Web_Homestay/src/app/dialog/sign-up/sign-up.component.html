@@ -37,7 +37,7 @@
     </mat-error>
   </mat-form-field>
   <mat-form-field class="example-full-width" appearance="outline">
-    <mat-label>Mật Khẩu</mat-label>
+    <mat-label>Xác Nhận Mật Khẩu</mat-label>
     <input matInput [type]="hide ? 'password' : 'text'" formControlName="rePassword"  required minlength="6" maxlength="8">
     <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
       <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>

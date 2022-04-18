@@ -1,12 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import {AngularFireStorage} from "@angular/fire/compat/storage";
 import {finalize, Observable} from "rxjs";
+import {BookHomestayComponent} from "../../dialog/book-homestay/book-homestay.component";
 import {MatDialog} from "@angular/material/dialog";
 import {ChangePassComponent} from "../../dialog/change-pass/change-pass.component";
-import {FormControl, FormGroup, Validators} from "@angular/forms";
-import {AccountService} from "../../service/account/account.service";
 import {Account} from "../../models/account";
-import {ActivatedRoute} from "@angular/router";
+import {FormControl, FormGroup} from "@angular/forms";
+import {ActivatedRoute, Router} from "@angular/router";
+import {AccountService} from "../../service/account/account.service";
+import {updateProfile} from "@angular/fire/auth";
+import {NgToastService} from "ng-angular-popup";
 
 @Component({
   selector: 'app-profile',
@@ -14,7 +17,7 @@ import {ActivatedRoute} from "@angular/router";
   styleUrls: ['./profile.component.css']
 })
 export class ProfileComponent implements OnInit {
-
+  // idUser = parseInt(<string>localStorage.getItem("ACCOUNT_ID"))
   profile: Account | undefined;
   account: Account[] | undefined;
 
@@ -26,52 +29,45 @@ export class ProfileComponent implements OnInit {
     address: new FormControl('')
   });
 
+  selectedFile?: File ;
   fb : any;
   downloadURL?: Observable<string>;
-  componentsService: any;
-
   constructor(private storage: AngularFireStorage,
               private dialog: MatDialog,
+              private activeRoute: ActivatedRoute,
+              private router: Router,
               private accountService: AccountService,
-              private activeRoute: ActivatedRoute) { }
+              private toast: NgToastService) { }
 
   ngOnInit(): void {
     this.activeRoute.paramMap.subscribe(paramap => {
       const id = localStorage.getItem('ACCOUNT_ID');
-      this.accountService.findById(id).subscribe(data => {
-        this.profile = data
-        console.log(this.profile)
+      this.accountService.findById(id).subscribe(value => {
+        this.profile = value
+        console.log(this.profile);
       }, error => {
-        console.log(error)
+        console.log(error);
       })
     })
-    // this.accountService.findById(localStorage.getItem('ACCOUNT_ID')).subscribe(result => {
-    //   this.profile = result;
-    //   this.editProfile.controls[`id`].setValue(result.name);
-    //   this.editProfile.controls[`phone_number`].setValue(result.phone_number);
-    //   this.editProfile.controls[`gmail`].setValue(result.gmail);
-    //   this.editProfile.controls[`address`].setValue(result.address);
-    //   // this.id = Number(idSearch);
-    //   console.log(result)
-    // })
   }
 
   updateProfile() {
     this.activeRoute.paramMap.subscribe(paramap => {
-      const form = this.editProfile.value;
-      const profile = {
-        name: form.name,
-        phone_number: form.phone_number,
-        gmail: form.gmail,
-        address: form.address
+      const updateProfile = {
+        name: this.editProfile.value.name,
+        phone_number: this.editProfile.value.phone_number,
+        gmail: this.editProfile.value.gmail,
+        address: this.editProfile.value.address
       }
-      console.log(this.profile);
-      this.accountService.updateProfile(profile, localStorage.getItem('ACCOUNT_ID')).subscribe();
-    });
+      console.log(this.updateProfile);
+      this.accountService.updateProfile(updateProfile, localStorage.getItem('ACCOUNT_ID')).subscribe(() => {
+        this.toast.success({detail: 'SuccessMes', summary: 'Cập nhật thành công!!', duration: 5000})
+        this.editProfile.reset();
+      })
+    })
   }
 
   onFileSelected(event : any) {
-    localStorage.getItem('ACCOUNT_ID')
     let date = Date.now();
     const file = event.target.files[0];
     const filePath = `Avatar_Images/${date}`;

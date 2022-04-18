@@ -45,6 +45,7 @@ import { ChangePassComponent } from './dialog/change-pass/change-pass.component'
 import { ConfirmBookComponent } from './dialog/confirm-book/confirm-book.component';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatNativeDateModule} from "@angular/material/core";
+import {NgToastModule} from "ng-angular-popup";
 
 @NgModule({
   declarations: [
@@ -96,6 +97,7 @@ import {MatNativeDateModule} from "@angular/material/core";
     MatSortModule,
     MatDatepickerModule,
     MatNativeDateModule,
+    NgToastModule
   ],
   providers: [],
   bootstrap: [AppComponent]

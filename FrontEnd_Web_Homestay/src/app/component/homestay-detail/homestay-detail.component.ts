@@ -30,6 +30,8 @@ export class HomestayDetailComponent implements OnInit {
   displayedColumns: string[] = ['image'];
   dataSource!: MatTableDataSource<any>;
 
+  idAcc = localStorage.getItem('ACCOUNT_ID')
+
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   constructor(private homestayService: Homestay2Service,
@@ -51,7 +53,11 @@ export class HomestayDetailComponent implements OnInit {
     this.getHomestayById();
     this.getAllImage();
     this.getAllComment();
-    this.getAllHomestay();
+    if (this.idAcc == null) {
+      this.getAllHomestay();
+    } else {
+      this.getAllHomestaySignIn();
+    }
     console.log(localStorage.getItem('ACCOUNT_ID'))
     // this.google_api = this.homestay.address + this.homestay.city.name;
     this.google_api = "Sân+vận+động+Quốc+gia+Mỹ+Đình";
@@ -108,6 +114,12 @@ export class HomestayDetailComponent implements OnInit {
 
   getAllHomestay() {
     this.homestayService.getAllHomestay().subscribe((data) => {
+      this.homestays = data;
+    })
+  }
+
+  getAllHomestaySignIn() {
+    this.homestayService.getAllHomestaySignIn(this.idAcc).subscribe((data) => {
       this.homestays = data;
     })
   }

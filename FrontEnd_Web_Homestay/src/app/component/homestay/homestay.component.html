@@ -1,4 +1,4 @@
-<div class="hero-wrap js-fullheight" style="background-image: url('assets/images/bg_2.jpg'); height: 680px">
+<div class="hero-wrap js-fullheight" style="background-image: url('https://media.vov.vn/sites/default/files/styles/large/public/2020-09/99-thuyen_hoa.jpg'); height: 680px">
   <div class="overlay"></div>
   <div class="container">
     <div class="row no-gutters slider-text js-fullheight align-items-center justify-content-center"
@@ -96,7 +96,7 @@
           <div class="col-md-4 assets/images" *ngFor="let h of homestays; index as i">
             <div class="destination">
               <div class="img img-2 d-flex justify-content-center align-items-center">
-                <img class="active" style="width: 254px; height: 200px"
+                <img [routerLink]="['/homestay-detail/', h.id]" class="active" style="width: 254px; height: 200px; cursor: pointer"
                      src="{{h.imageOfHomestays[1].images}}" alt="">
               </div>
               <div class="text p-3">

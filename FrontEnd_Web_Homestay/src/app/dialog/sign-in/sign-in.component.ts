@@ -5,6 +5,7 @@ import {first} from "rxjs";
 import {MatDialog} from "@angular/material/dialog";
 import {SignUpComponent} from "../sign-up/sign-up.component";
 import {AuthenticationService} from "../../service/authentication.service";
+import {AccountService} from "../../service/account/account.service";
 
 @Component({
   selector: 'app-sign-in',
@@ -61,8 +62,9 @@ export class SignInComponent implements OnInit {
             localStorage.setItem('ACCESS_TOKEN', data.token);
             localStorage.setItem('ACCOUNT_ID', data.id);
             console.log(localStorage.getItem('currentAccount'));
-              this.router.navigate([this.accountUrl]);
-              this.dialog.closeAll();
+            window.location.reload();
+            this.router.navigate([this.accountUrl]);
+            this.dialog.closeAll();
           }
         },
         error => {
