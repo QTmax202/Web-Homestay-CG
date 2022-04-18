@@ -6,6 +6,8 @@ import {Homestay2Service} from "../../service/homestay/homestay2.service";
 import {YourBillDto} from "../../models/your-bill-dto";
 import {MyHomestayDto} from "../../models/my-homestay-dto";
 import {MyBillDto} from "../../models/my-bill-dto";
+import {ConfirmBookComponent} from "../../dialog/confirm-book/confirm-book.component";
+import {Bill} from "../../models/bill";
 
 @Component({
   selector: 'app-trips',
@@ -36,6 +38,13 @@ export class TripsComponent implements OnInit {
     this.dialog.open(RateCommentComponent, {
       width: '50%',
       data : homeId
+    });
+  }
+
+  openConfirm(myBill:MyBillDto) {
+    this.dialog.open(ConfirmBookComponent, {
+      width: '50%',
+      data :  myBill
     });
   }
 }
