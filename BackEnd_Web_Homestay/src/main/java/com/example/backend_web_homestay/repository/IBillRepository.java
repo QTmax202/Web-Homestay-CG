@@ -20,9 +20,9 @@ public interface IBillRepository extends JpaRepository<Bill, Long> {
             "join homestay h on h.id = b.homestay_id\n" +
             "join rate on rate.homestay_id = h.id\n" +
             "join account a on b.account_id = a.id\n" +
-            "where h.account_id = 2\n" +
+            "where h.account_id = ?\n" +
             "group by b.id;", nativeQuery = true)
-    Iterable<YourBillDTO> getYourBillByAccountId(long id);
+    Iterable<YourBillDTO> getYourBillByAccountId(Long id);
 
     @Query(value = "select b.id as id, b.end_date as endDate, b.registration_date as regisDate, b.start_date as startDate, " +
             "b.homestay_id as homeId, b.status_homestay_id as statusHomeId, b.price as Price, h.name as homestayName, " +
@@ -30,9 +30,9 @@ public interface IBillRepository extends JpaRepository<Bill, Long> {
             "join homestay h on h.id = b.homestay_id\n" +
             "join rate on rate.homestay_id = h.id\n" +
             "join account a on b.account_id = a.id\n" +
-            "where a.id = 2\n" +
+            "where a.id = ?\n" +
             "group by b.id;", nativeQuery = true)
-    Iterable<MyBillDTO> getMyBillByAccountId(long id);
+    Iterable<MyBillDTO> getMyBillByAccountId(Long id);
 
     Iterable<Bill> getBillByHomestay_Id(Long id);
 
@@ -46,5 +46,5 @@ public interface IBillRepository extends JpaRepository<Bill, Long> {
             "join bill b on b.homestay_id = hs.id\n" +
             "where hs.account_id = :id and b.start_date between :startDate1 and :startDate2\n" +
             "group by hs.id;", nativeQuery = true)
-    Iterable<TurnOverDTO> findTurnOverByAccountAndStartDate(long id, String startDate1, String startDate2);
+    Iterable<TurnOverDTO> findTurnOverByAccountAndStartDate(Long id, String startDate1, String startDate2);
 }
