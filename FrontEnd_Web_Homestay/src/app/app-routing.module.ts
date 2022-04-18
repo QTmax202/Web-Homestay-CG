@@ -21,7 +21,7 @@ const routes: Routes = [
   {path: 'contact', component: ContactComponent},
   {path: 'homestay', component: HomestayComponent},
   {path: 'homestay-detail/:id', component: HomestayDetailComponent},
-  {path: 'create', component: CreateHomestayComponent},
+  {path: 'create/:id', component: CreateHomestayComponent},
   {path: 'my-homestay', component: MyHomestayComponent},
   {path: 'profile', component: ProfileComponent},
   {path: 'trips', component: TripsComponent},

@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Homestay2} from "../../models/homestay2";
 import {environment} from "../../../environments/environment";
@@ -17,26 +17,32 @@ const API_URL = `${environment.apiUrl}`;
 })
 export class Homestay2Service {
 
-  constructor(private http: HttpClient) { }
-   public createHome(id: number, homestay: Homestay2): Observable<Homestay2[]> {
-    return this.http.post<any>(API_URL +`homestay/create/${id}` , homestay);
+  constructor(private http: HttpClient) {
+  }
+  createHome(id: number, homestay: Homestay2): Observable<Homestay2[]> {
+    return this.http.post<any>(API_URL + `homestay/create/${id}`, homestay);
   }
 
-  //   createHomestay(homestay: Homestay2): Observable<any> {
-  //       return this.http.post<Homestay2>(API_URL + 'homestay', homestay);
-  // }
-  editHome(id: any, homestay: Homestay2):Observable<Homestay2>{
+  createHomestay(homestay: Homestay2): Observable<any> {
+    return this.http.post<Homestay2>(API_URL + 'homestay', homestay);
+  }
+
+  editHome(id: any, homestay: Homestay2): Observable<Homestay2> {
     return this.http.put<Homestay2>(API_URL + `${id}`, homestay);
   }
-  getImageOfHomestayById(id: any):Observable<ImageOfHomestay>{
+
+  getImageOfHomestayById(id: any): Observable<ImageOfHomestay> {
     return this.http.get<ImageOfHomestay>(API_URL + `image-of-homestay/${id}`)
   }
-  public getAllType(): Observable<HomestayType[]> {
+
+  getAllType(): Observable<HomestayType[]> {
     return this.http.get<HomestayType[]>('http://localhost:8080/api/homestay/type-home')
   }
-  public getAllCity(): Observable<City[]> {
+
+  getAllCity(): Observable<City[]> {
     return this.http.get<City[]>('http://localhost:8080/api/homestay/city')
   }
+
   //bill by account
   getYourBillByAccountId(id: any): Observable<any> {
     return this.http.get<YourBillDto[]>(API_URL + 'bill/account/' + id);
@@ -85,8 +91,8 @@ export class Homestay2Service {
   getAllRateByAccount(id: number): Observable<any> {
     return this.http.get<Rate[]>(API_URL + 'rate/account/' + id);
   }
-  createImage(image: ImageOfHomestay): Observable<any> {
-    return this.http.post(API_URL + `save-image`, image);
-  }
 
+  create(image: ImageOfHomestay): Observable<ImageOfHomestay> {
+    return this.http.post<ImageOfHomestay>(API_URL + `save-image`, image);
+  }
 }

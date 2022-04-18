@@ -98,7 +98,8 @@ public class HomestayController {
     // them anh nha
     @PostMapping("/save-image")
     public ResponseEntity<?> saveImage(@RequestBody ImageOfHomestay image){
-        return new ResponseEntity<>(iImageService.save(image), HttpStatus.CREATED);
+        iImageService.save(image);
+        return new ResponseEntity<>(HttpStatus.CREATED);
     }
     //Sua thong tin nha
     @PutMapping("/{id}")

@@ -9,6 +9,7 @@ import {NgToastService} from "ng-angular-popup";
 import {HomestayType} from "../../models/homestay-type";
 import {City} from "../../models/city";
 import {ImageOfHomestay} from "../../models/image-of-homestay";
+import {AngularFireDatabase} from "@angular/fire/compat/database";
 
 @Component({
   selector: 'app-edit-homestay',
@@ -28,6 +29,7 @@ export class EditHomestayComponent implements OnInit {
   formHome: FormGroup = new FormGroup({});
 
   constructor(private storage: AngularFireStorage,
+              private db: AngularFireDatabase,
               private homestayService: Homestay2Service,
               private dialog: MatDialog,
               private formBuilder: FormBuilder,
@@ -58,7 +60,6 @@ export class EditHomestayComponent implements OnInit {
 
   editStatusHomestay() {
     const statusHomestay = {
-
       id: this.homestay.id,
       name: this.homestay.name,
       address: this.homestay.address,
@@ -78,7 +79,7 @@ export class EditHomestayComponent implements OnInit {
       },
       imageOfHomestay: this.selectedImages,
     };
-    this.homestayService.createHome(statusHomestay).subscribe(()=>{
+    this.homestayService.createHomestay(statusHomestay).subscribe(()=>{
       this.toast.success({detail:'SuccessMessage', summary:'Cập nhật thành công', duration: 5000})
       this.formHome.reset()
       }
@@ -147,7 +148,6 @@ export class EditHomestayComponent implements OnInit {
         });
       }
     }
-
   }
 
 }
