@@ -27,4 +27,12 @@ export class BillService {
     return this.http.get<TurnOver[]>(API_URL + 'bill/turn-over?id=' + id +
       '&startDate1=' + startDate1 + '&startDate2=' + startDate2)
   }
+
+  findBillById(id:any):Observable<any> {
+    return this.http.get<Bill>(API_URL + 'bill/find-bill/' + id);
+  }
+
+  cancellingInvoiceClient(id:any): Observable<any> {
+    return this.http.post(API_URL + 'bill/cancelling-invoice-client', id);
+  }
 }

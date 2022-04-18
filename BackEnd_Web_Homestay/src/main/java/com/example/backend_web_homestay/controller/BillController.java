@@ -5,8 +5,11 @@ import com.example.backend_web_homestay.DTO.MyBillDTO;
 import com.example.backend_web_homestay.DTO.TurnOverDTO;
 import com.example.backend_web_homestay.DTO.YourBillDTO;
 import com.example.backend_web_homestay.model.Bill;
+import com.example.backend_web_homestay.model.Notify;
 import com.example.backend_web_homestay.repository.IBillRepository;
+import com.example.backend_web_homestay.repository.INotifyRepository;
 import com.example.backend_web_homestay.service.Bill.IBillService;
+import com.example.backend_web_homestay.service.Notify.INotifyService;
 import com.example.backend_web_homestay.service.StatusHomestay.IStatusHomestayService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -32,6 +35,12 @@ public class BillController {
     @Autowired
     private IBillService billService;
 
+    @Autowired
+    private INotifyRepository notifyRepository;
+
+    @Autowired
+    private INotifyService notifyService;
+
     @GetMapping("/account/{id}")
     private ResponseEntity<?> getYourBillByAccountId(@PathVariable long id) {
         Iterable<YourBillDTO> yourBillDTOS = billService.getYourBillByAccountId(id);
@@ -49,6 +58,20 @@ public class BillController {
         bill.setRegistration_date(LocalDate.now());
         bill.setStatus_homestay(statusHomestayService.findById(1L).get());
         Bill bill1 = billService.save(bill);
+        Notify notify_client = new Notify();
+        notify_client.setBill(bill1);
+        notify_client.setDate_notify(LocalDate.now());
+        notify_client.setAccount(bill1.getAccount());
+        notify_client.setHomestay(bill1.getHomestay());
+        notify_client.setContent("Bạn đã đăng ký thuê Homestay "+ bill1.getHomestay().getName());
+        notifyService.save(notify_client);
+        Notify notify_host = new Notify();
+        notify_host.setBill(bill1);
+        notify_host.setDate_notify(LocalDate.now());
+        notify_host.setAccount(bill1.getHomestay().getAccount());
+        notify_host.setHomestay(bill1.getHomestay());
+        notify_host.setContent("" + bill1.getAccount().getName() + " đã đăng ký thuê Homestay "+ bill1.getHomestay().getName());
+        notifyService.save(notify_host);
         return new ResponseEntity<>(bill1, HttpStatus.OK);
     }
 
@@ -75,13 +98,58 @@ public class BillController {
         return new ResponseEntity<>(turnOverDTOS, HttpStatus.OK);
     }
 
-    @PostMapping("/cancelling-invoice/{id}")
-    private ResponseEntity<?> cancellingInvoice(@PathVariable long id){
+    @PostMapping("/registration-confirmation/{id}")
+    private ResponseEntity<?> registrationConfirmation(@RequestBody long id){
+        Optional<Bill> bill = billService.findById(id);
+        if (LocalDate.now().isBefore(bill.get().getStart_date())){
+            bill.get().setId(id);
+            bill.get().setStatus_homestay(statusHomestayService.findById(2L).get());
+            billService.save(bill.get());
+            Notify notify_client = new Notify();
+            notify_client.setBill(bill.get());
+            notify_client.setDate_notify(LocalDate.now());
+            notify_client.setAccount(bill.get().getAccount());
+            notify_client.setHomestay(bill.get().getHomestay());
+            notify_client.setContent("Chủ Homestay "+bill.get().getHomestay().getName()+" đã xác nhận đăng ký thuê Homestay ");
+            notifyService.save(notify_client);
+            return new ResponseEntity<>(bill, HttpStatus.OK);
+        }
+        return new ResponseEntity<>(bill, HttpStatus.ACCEPTED);
+    }
+
+    @PostMapping("/cancelling-invoice-client")
+    private ResponseEntity<?> cancellingInvoiceClient(@RequestBody long id){
         Optional<Bill> bill = billService.findById(id);
         if (LocalDate.now().isBefore(bill.get().getStart_date())){
             bill.get().setId(id);
             bill.get().setStatus_homestay(statusHomestayService.findById(5L).get());
-//            Bill bill_edit = billService.save(bill.get());
+            billService.save(bill.get());
+            Notify notify_host = new Notify();
+            notify_host.setBill(bill.get());
+            notify_host.setDate_notify(LocalDate.now());
+            notify_host.setAccount(bill.get().getHomestay().getAccount());
+            notify_host.setHomestay(bill.get().getHomestay());
+            notify_host.setContent("" + bill.get().getAccount().getName() + " đã hủy đăng ký thuê Homestay "+ bill.get().getHomestay().getName());
+            notifyService.save(notify_host);
+            return new ResponseEntity<>(bill, HttpStatus.OK);
+        }
+        return new ResponseEntity<>(bill, HttpStatus.ACCEPTED);
+    }
+
+    @PostMapping("/cancelling-invoice-host/{id}")
+    private ResponseEntity<?> cancellingInvoiceHost(@PathVariable long id){
+        Optional<Bill> bill = billService.findById(id);
+        if (LocalDate.now().isBefore(bill.get().getStart_date())){
+            bill.get().setId(id);
+            bill.get().setStatus_homestay(statusHomestayService.findById(5L).get());
+            billService.save(bill.get());
+            Notify notify_client = new Notify();
+            notify_client.setBill(bill.get());
+            notify_client.setDate_notify(LocalDate.now());
+            notify_client.setAccount(bill.get().getAccount());
+            notify_client.setHomestay(bill.get().getHomestay());
+            notify_client.setContent("Chủ Homestay "+bill.get().getHomestay().getName()+" đã hủy đăng ký thuê Homestay ");
+            notifyService.save(notify_client);
             return new ResponseEntity<>(bill, HttpStatus.OK);
         }
         return new ResponseEntity<>(bill, HttpStatus.ACCEPTED);
@@ -93,7 +161,14 @@ public class BillController {
         if (bill.isPresent()){
             bill.get().setId(id);
             bill.get().setStatus_homestay(statusHomestayService.findById(3L).get());
-//            Bill bill_edit = billService.save(bill.get());
+            billService.save(bill.get());
+            Notify notify_host = new Notify();
+            notify_host.setBill(bill.get());
+            notify_host.setDate_notify(LocalDate.now());
+            notify_host.setAccount(bill.get().getHomestay().getAccount());
+            notify_host.setHomestay(bill.get().getHomestay());
+            notify_host.setContent("" + bill.get().getAccount().getName() + " đã nhận phòng ở Homestay "+ bill.get().getHomestay().getName());
+            notifyService.save(notify_host);
             return new ResponseEntity<>(bill, HttpStatus.OK);
         }
         return new ResponseEntity<>(bill, HttpStatus.ACCEPTED);
@@ -105,8 +180,15 @@ public class BillController {
         if (bill.isPresent()){
             bill.get().setId(id);
             bill.get().setStatus_homestay(statusHomestayService.findById(4L).get());
-            Bill bill_edit = billService.save(bill.get());
-            return new ResponseEntity<>(bill_edit, HttpStatus.OK);
+            billService.save(bill.get());
+            Notify notify_host = new Notify();
+            notify_host.setBill(bill.get());
+            notify_host.setDate_notify(LocalDate.now());
+            notify_host.setAccount(bill.get().getHomestay().getAccount());
+            notify_host.setHomestay(bill.get().getHomestay());
+            notify_host.setContent("" + bill.get().getAccount().getName() + " đã trả phòng ở Homestay "+ bill.get().getHomestay().getName());
+            notifyService.save(notify_host);
+            return new ResponseEntity<>(bill, HttpStatus.OK);
         }
         return new ResponseEntity<>(bill, HttpStatus.ACCEPTED);
     }
