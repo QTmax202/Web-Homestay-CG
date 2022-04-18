@@ -4,7 +4,6 @@ import {HttpClient} from "@angular/common/http";
 import {Comment} from "../../models/comment";
 import {Observable} from "rxjs";
 import {Rate} from "../../models/rate";
-import {RateDto} from "../../models/rate-dto";
 
 const API_URL = `${environment.apiUrl}`;
 

@@ -34,6 +34,7 @@ export class TripsComponent implements OnInit {
   getBillByAccountId() {
     this.homestayService.getMyBillByAccountId(this.idAcc).subscribe((data) => {
       this.myBill = data;
+      console.log(this.myBill)
       for (let i = 0; i < this.myBill.length; i++) {
         console.log(this.myBill[i].homeId)
         this.commentService.existsCommentByAccount_IdAndHomestay_Id(this.idAcc, this.myBill[i].homeId).subscribe((dataExist) => {
@@ -43,6 +44,7 @@ export class TripsComponent implements OnInit {
       }
     })
   }
+
 
   openRate(homeId: any) {
     this.dialog.closeAll()

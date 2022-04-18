@@ -7,13 +7,14 @@ import {Homestay2} from "../../models/homestay2";
 import {MyHomestayDto} from "../../models/my-homestay-dto";
 import {YourBillDto} from "../../models/your-bill-dto";
 import {EditHomestayComponent} from "../../dialog/edit-homestay/edit-homestay.component";
-import {FormBuilder, FormGroup} from "@angular/forms";
+import {FormBuilder, FormControl, FormGroup} from "@angular/forms";
 import {newArray} from "@angular/compiler/src/util";
 import { MatPaginator } from '@angular/material/paginator';
 import {MatSort} from "@angular/material/sort";
 import {MatTableDataSource} from "@angular/material/table";
 import {BillService} from "../../service/bill/bill.service";
 import {TurnOver} from "../../models/turn-over";
+import {formatDate} from "@angular/common";
 
 @Component({
   selector: 'app-my-homestay',
@@ -49,7 +50,7 @@ export class MyHomestayComponent implements OnInit {
     this.getBillByAccountId()
     this.formTurnOver = this.fb.group({
       startDate1: [''],
-      startDate2: ['']
+      startDate2: [''],
     })
     this.findTurnOverByAccountAndStartDate();
   }
@@ -67,6 +68,7 @@ export class MyHomestayComponent implements OnInit {
     }
     this.billService.findTurnOverByAccountAndStartDate(this.idAcc,this.startDate1, this.startDate2).subscribe((data) => {
       this.turnOver = data;
+      this.totalTurnOver = 0;
       this.dataSource = new MatTableDataSource<any>(data);
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
