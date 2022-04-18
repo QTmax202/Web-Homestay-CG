@@ -21,7 +21,10 @@ public class Notify {
     @JoinColumn(name = "account_id")
     private Account account;
 
-    private Boolean status = false;
+    private LocalDate date_notify;
+
+    private Boolean status_client = false;
+    private Boolean status_host = false;
     private String content;
 
     public Notify() {
@@ -51,19 +54,35 @@ public class Notify {
         this.account = account;
     }
 
-    public Boolean getStatus() {
-        return status;
-    }
-
-    public void setStatus(Boolean status) {
-        this.status = status;
-    }
-
     public String getContent() {
         return content;
     }
 
     public void setContent(String content) {
         this.content = content;
+    }
+
+    public LocalDate getDate_notify() {
+        return date_notify;
+    }
+
+    public void setDate_notify(LocalDate date_notify) {
+        this.date_notify = date_notify;
+    }
+
+    public Boolean getStatus_client() {
+        return status_client;
+    }
+
+    public void setStatus_client(Boolean status_client) {
+        this.status_client = status_client;
+    }
+
+    public Boolean getStatus_host() {
+        return status_host;
+    }
+
+    public void setStatus_host(Boolean status_host) {
+        this.status_host = status_host;
     }
 }

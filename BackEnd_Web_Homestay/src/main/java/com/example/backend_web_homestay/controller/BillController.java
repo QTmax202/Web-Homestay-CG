@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import java.time.LocalDate;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/bill")
@@ -60,5 +61,47 @@ public class BillController {
     private ResponseEntity<?> getBillHomestayStatus(@PathVariable long id){
         Iterable<Bill> bills = billRepository.findAllBillByHomestay_Status(id);
         return new ResponseEntity<>(bills, HttpStatus.OK);
+    }
+
+    @PostMapping("/cancelling-invoice/{id}")
+    private ResponseEntity<?> cancellingInvoice(@PathVariable long id){
+        Optional<Bill> bill = billService.findById(id);
+        if (LocalDate.now().isBefore(bill.get().getStart_date())){
+            bill.get().setId(id);
+            bill.get().setStatus_homestay(statusHomestayService.findById(5L).get());
+//            Bill bill_edit = billService.save(bill.get());
+            return new ResponseEntity<>(bill, HttpStatus.OK);
+        }
+        return new ResponseEntity<>(bill, HttpStatus.ACCEPTED);
+    }
+
+    @PostMapping("/homestay-check-in/{id}")
+    private ResponseEntity<?> HomestayCheckIn(@PathVariable long id){
+        Optional<Bill> bill = billService.findById(id);
+        if (bill.isPresent()){
+            bill.get().setId(id);
+            bill.get().setStatus_homestay(statusHomestayService.findById(3L).get());
+//            Bill bill_edit = billService.save(bill.get());
+            return new ResponseEntity<>(bill, HttpStatus.OK);
+        }
+        return new ResponseEntity<>(bill, HttpStatus.ACCEPTED);
+    }
+
+    @PostMapping("/homestay-check-out/{id}")
+    private ResponseEntity<?> homestayCheckOut(@PathVariable long id){
+        Optional<Bill> bill = billService.findById(id);
+        if (bill.isPresent()){
+            bill.get().setId(id);
+            bill.get().setStatus_homestay(statusHomestayService.findById(4L).get());
+            Bill bill_edit = billService.save(bill.get());
+            return new ResponseEntity<>(bill_edit, HttpStatus.OK);
+        }
+        return new ResponseEntity<>(bill, HttpStatus.ACCEPTED);
+    }
+
+    @GetMapping("/find-bill/{id}")
+    private ResponseEntity<?> getFindBill(@PathVariable long id){
+        Optional<Bill> bill = billService.findById(id);
+        return new ResponseEntity<>(bill, HttpStatus.OK);
     }
 }
