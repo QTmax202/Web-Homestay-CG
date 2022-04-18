@@ -59,12 +59,6 @@ export class HomestayDetailComponent implements OnInit {
     } else {
       this.getAllHomestaySignIn();
     }
-    // this.formSearch = this.fb.group({
-    //   name: [''],
-    //   idCity: ['', [Validators.required]],
-    //   price1: [''],
-    //   price2: ['']
-    // })
   }
 
   getHomestayById() {
@@ -95,24 +89,6 @@ export class HomestayDetailComponent implements OnInit {
       this.dataSource.paginator = this.paginator;
     })
   }
-
-  // createComment() {
-  //   const comment = {
-  //     id: this.formComment.value.id,
-  //     comment: this.formComment.value.comment,
-  //     time_stamp: new Date(),
-  //     homestay: {
-  //       id: this.idH
-  //     },
-  //     account: {
-  //       id: localStorage.getItem('ACCOUNT_ID')
-  //     }
-  //   };
-  //   this.commentService.createComment(comment).subscribe(() => {
-  //     this.formComment.reset();
-  //     this.getAllComment();
-  //   })
-  // }
 
   getAllHomestay() {
     this.homestayService.getAllHomestay().subscribe((data) => {
@@ -146,40 +122,17 @@ export class HomestayDetailComponent implements OnInit {
       '                </iframe>'
   }
 
-  // formSearch: FormGroup = new FormGroup({});
-  // name!: string;
-  // idCity!: number;
-  // price1 = 0;
-  // price2 = 99999999;
-  //
-  // fetch1(value: any) {
-  //   this.price1 = value;
-  // }
-  //
-  // fetch2(value: any) {
-  //   this.price2 = value;
-  // }
-  //
-  //
-  // searchHomestay() {
-  //   this.name = this.formSearch.value.name;
-  //   this.idCity = this.formSearch.value.idCity
-  //   console.log(this.name)
-  //   console.log(this.idCity)
-  //   console.log(this.price1)
-  //   console.log(this.price2)
-  //   if (this.price1 > this.price2) {
-  //     this.homestayService.findHomestayByNameAndCityAndPrice(this.name,this.idCity, this.price2, this.price1).subscribe((data) => {
-  //       this.homestays = data;
-  //       console.log(data);
-  //       console.log(this.homestay);
-  //     });
-  //   } else if (this.price1 < this.price2){
-  //     this.homestayService.findHomestayByNameAndCityAndPrice(this.name,this.idCity, this.price1, this.price2).subscribe((data) => {
-  //       this.homestays = data;
-  //       console.log(data);
-  //       console.log(this.homestay);
-  //     });
-  //   }
-  // }
+  openDescription() {
+    // @ts-ignore
+    document.getElementById("home-description").style.display = "block";
+    // @ts-ignore
+    document.getElementById("home-comment-rate").style.display = "none";
+  }
+
+  openCommentRate() {
+    // @ts-ignore
+    document.getElementById("home-comment-rate").style.display = "block";
+    // @ts-ignore
+    document.getElementById("home-description").style.display = "none";
+  }
 }

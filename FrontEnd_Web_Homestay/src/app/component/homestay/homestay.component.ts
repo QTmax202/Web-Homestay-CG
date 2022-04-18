@@ -63,8 +63,8 @@ export class HomestayComponent implements OnInit {
   formSearch: FormGroup = new FormGroup({});
   name!: string;
   idCity!: number;
-  price1 = 0;
-  price2 = 99999999;
+  price1 = 200000;
+  price2 = 10000000;
 
   fetch1(value: any) {
     this.price1 = value;
