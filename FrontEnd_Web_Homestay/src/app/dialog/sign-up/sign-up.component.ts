@@ -5,7 +5,6 @@ import {ConfirmComponent} from "../confirm/confirm.component";
 import {AbstractControl, FormBuilder, FormGroup, ValidationErrors, Validators} from "@angular/forms";
 import {Account} from "../../models/account";
 import {AccountService} from "../../service/account/account.service";
-import {NgToastService} from "ng-angular-popup";
 
 export function forbidden(c: AbstractControl): ValidationErrors | null {
   const v = c.value;
@@ -27,8 +26,7 @@ export class SignUpComponent implements OnInit {
 
   constructor(private dialog: MatDialog,
               private accountService: AccountService,
-              private fb: FormBuilder,
-              private toast: NgToastService) {
+              private fb: FormBuilder) {
   }
 
   ngOnInit(): void {
@@ -69,9 +67,7 @@ export class SignUpComponent implements OnInit {
       gmail: this.formSignUp.value.gmail,
       password: this.formSignUp.value.password,
     }
-    console.log("account" + account);
     this.accountService.createAccount(account).subscribe(() => {
-      this.toast.success({detail:'SuccessMessage', summary:'Tạo tài khoản thành công'})
       this.formSignUp.reset();
       // this.openConfirm();
     }, error => {

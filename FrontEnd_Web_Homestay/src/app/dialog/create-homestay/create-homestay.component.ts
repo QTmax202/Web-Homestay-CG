@@ -1,19 +1,7 @@
-import {Component, Inject, OnInit} from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {Homestay2} from "../../models/homestay2";
-import {ActivatedRoute} from "@angular/router";
-import {City} from "../../models/city";
-import {HomestayType} from "../../models/homestay-type";
-import {AuthenticationService} from "../../service/authentication.service";
-import {NgToastService} from "ng-angular-popup";
-import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
-import {HomestayComponent} from "../../component/homestay/homestay.component";
-import {Homestay2Service} from "../../service/homestay/homestay2.service";
-import {AccountService} from "../../service/account/account.service";
-import {AngularFireStorage} from "@angular/fire/compat/storage";
-import {finalize} from "rxjs";
+import { Component, OnInit } from '@angular/core';
+import {FormGroup} from "@angular/forms";
 import {ImageOfHomestay} from "../../models/image-of-homestay";
-import firebase from "firebase/compat";
+import {Homestay2} from "../../models/homestay2";
 
 @Component({
   selector: 'app-create-homestay',
@@ -21,6 +9,7 @@ import firebase from "firebase/compat";
   styleUrls: ['./create-homestay.component.css']
 })
 export class CreateHomestayComponent implements OnInit {
+
   public loading = false;
   imgs: any[] = [];
   fb: any;
@@ -100,43 +89,5 @@ export class CreateHomestayComponent implements OnInit {
       console.log(error.summary)
       this.toast.error({detail: "Error Message!", summary:'Create Failed, Please Try again', duration: 5000})
     })
-  }
-  // showPreview(event: any) {
-  //   this.loading = true;
-  //   let newSelectedImages = [];
-  //   if (event.target.files && event.target.files[0]) {
-  //     const reader = new FileReader();
-  //     reader.readAsDataURL(event.target.files[0]);
-  //     newSelectedImages = event.target.files;
-  //     for (let i = 0; i < event.target.files.length; i++) {
-  //       this.selectedImages.push(event.target.files[i]);
-  //     }
-  //   } else {
-  //     this.selectedImages = [];
-  //   }
-  //   if (newSelectedImages.length !== 0) {
-  //     for (let i = 0; i < newSelectedImages.length; i++) {
-  //       let selectedImage = newSelectedImages[i];
-  //       var n = Date.now();
-  //       const filePath = `Homestay_Images/${n}`;
-  //       const fileRef = this.storage.ref(filePath);
-  //       this.storage.upload(filePath, selectedImage).snapshotChanges().pipe(
-  //         finalize(() => {
-  //           fileRef.getDownloadURL().subscribe(url => {
-  //             this.imgs.push(url);
-  //             if (this.imgs.length == newSelectedImages.length) {
-  //               this.loading = false;
-  //             }
-  //           });
-  //         })
-  //       ).
-  //       subscribe(url => {
-  //         if (url) {
-  //           console.log(url)
-  //         }
-  //       });
-  //     }
-  //   }
-  // }
 
 }

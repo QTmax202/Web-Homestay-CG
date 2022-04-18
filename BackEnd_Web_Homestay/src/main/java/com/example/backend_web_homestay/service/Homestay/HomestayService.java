@@ -19,9 +19,12 @@ public class HomestayService implements IHomestayService {
     @Autowired
     private IHomestayRepository homestayRepository;
     @Autowired
-    private IHomestayTypeRepository homestayTypeRepository;
-    @Autowired
     private ICityRepository cityRepository;
+
+    @Autowired
+    private IHomestayTypeRepository homestayTypeRepository;
+
+
 
     @Override
     public Iterable<Homestay> findAll() {
@@ -54,8 +57,13 @@ public class HomestayService implements IHomestayService {
     }
 
     @Override
-    public Iterable<HomestayType> findAllTypes() {
-        return homestayTypeRepository.findAll();
+    public Iterable<Homestay> findHomestayByNameAndCityAndPrice(String name, Long idCity, Long price1, Long price2) {
+        return homestayRepository.findHomestayByNameAndCityAndPrice(name, idCity, price1, price2);
+    }
+
+    @Override
+    public Iterable<MyHomestayDTO> getTop5Homestay() {
+        return homestayRepository.getTop5Homestay();
     }
 
     @Override
@@ -64,9 +72,7 @@ public class HomestayService implements IHomestayService {
     }
 
     @Override
-    public HomestayType findByName(String name) {
-        return homestayTypeRepository.findByName(name);
+    public Iterable<HomestayType> findAllType() {
+        return homestayTypeRepository.findAll();
     }
-
-
 }

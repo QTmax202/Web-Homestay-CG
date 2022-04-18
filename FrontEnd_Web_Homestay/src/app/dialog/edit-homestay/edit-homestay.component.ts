@@ -1,15 +1,11 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {finalize} from "rxjs";
 import {AngularFireStorage} from "@angular/fire/compat/storage";
-import {Homestay2} from "../../models/homestay2";
-import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {Homestay2Service} from "../../service/homestay/homestay2.service";
 import {MAT_DIALOG_DATA, MatDialog} from "@angular/material/dialog";
-import {NgToastService} from "ng-angular-popup";
-import {HomestayType} from "../../models/homestay-type";
-import {City} from "../../models/city";
-import {ImageOfHomestay} from "../../models/image-of-homestay";
-import {AngularFireDatabase} from "@angular/fire/compat/database";
+import {MyHomestayDto} from "../../models/my-homestay-dto";
+import {Homestay2} from "../../models/homestay2";
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 
 @Component({
   selector: 'app-edit-homestay',
@@ -17,45 +13,29 @@ import {AngularFireDatabase} from "@angular/fire/compat/database";
   styleUrls: ['./edit-homestay.component.css']
 })
 export class EditHomestayComponent implements OnInit {
-  homestayImage!: ImageOfHomestay
+
   public loading = false;
   imgs: any[] = [];
-  fb: any;
+  fb : any;
   selectedImages: any[] = [];
-  homestayTypes!: HomestayType[];
-  cities!: City[];
+
   homestay!: Homestay2;
   idHomestay!: number;
-  formHome: FormGroup = new FormGroup({});
+  formStatus: FormGroup = new FormGroup({});
 
   constructor(private storage: AngularFireStorage,
-              private db: AngularFireDatabase,
               private homestayService: Homestay2Service,
               private dialog: MatDialog,
               private formBuilder: FormBuilder,
-              @Inject(MAT_DIALOG_DATA) public data: any,
-              private toast: NgToastService){
-
-  }
+              @Inject(MAT_DIALOG_DATA) public data: any,) { }
 
   ngOnInit(): void {
     this.idHomestay = this.data;
     this.getHomestayById()
-    this.getAllHomestayType()
-    this.getAllCity()
-    this.formHome = this.formBuilder.group({
-      id:'',
-      name:'',
-      address: '',
-      bed_room:'',
-      bath_room:'',
-      price:'',
+    this.formStatus = this.formBuilder.group({
       status: ['', [Validators.required]],
-      description:'',
-      homestay_type:'',
-      city:'',
-      imageOfHomestay:''
     })
+
   }
 
   editStatusHomestay() {
@@ -66,49 +46,28 @@ export class EditHomestayComponent implements OnInit {
       bed_room: this.homestay.bed_room,
       bath_room: this.homestay.bath_room,
       price: this.homestay.price,
-      status: this.formHome.value.status,
+      status: this.formStatus.value.status,
       description: this.homestay.description,
       homestay_type: {
         id: this.homestay.homestay_type.id,
       },
       account: {
-        id: this.homestay.account.id,
+        id:  this.homestay.account.id,
       },
       city: {
-        id: this.homestay.city.id,
+        id: this.homestay.city.id
       },
-      imageOfHomestay: this.selectedImages,
-    };
-    this.homestayService.createHomestay(statusHomestay).subscribe(()=>{
-      this.toast.success({detail:'SuccessMessage', summary:'Cập nhật thành công', duration: 5000})
-      this.formHome.reset()
-      }
-    )
-  }
-  saveId(id: any, name: string) {
-    localStorage.setItem(name, id);
-  }
-  getImageHome(id: any){
-    this.homestayService.getImageOfHomestayById(id).subscribe(data =>{
-      this.homestayImage = data;
+    }
+    console.log(statusHomestay)
+    this.homestayService.createHomestay(statusHomestay).subscribe(() => {
+      this.dialog.closeAll();
     })
   }
+
   getHomestayById() {
     this.homestayService.getHomestayById(this.idHomestay).subscribe((data) => {
       this.homestay = data;
       console.log(this.homestay)
-    })
-  }
-
-  getAllHomestayType() {
-    this.homestayService.getAllType().subscribe(data => {
-      this.homestayTypes = data;
-    })
-  }
-
-  getAllCity() {
-    this.homestayService.getAllCity().subscribe(data => {
-      this.cities = data
     })
   }
 
@@ -140,14 +99,12 @@ export class EditHomestayComponent implements OnInit {
               }
             });
           })
-        ).
-        subscribe(url => {
-          if (url) {
-            console.log(url)
-          }
+        ).subscribe(() => {
         });
       }
     }
+
   }
+
 
 }

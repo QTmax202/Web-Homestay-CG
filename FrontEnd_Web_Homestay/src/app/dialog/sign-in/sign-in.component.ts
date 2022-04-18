@@ -6,6 +6,7 @@ import {MatDialog} from "@angular/material/dialog";
 import {SignUpComponent} from "../sign-up/sign-up.component";
 import {AuthenticationService} from "../../service/authentication.service";
 import {AccountService} from "../../service/account/account.service";
+import {AuthGoogleService} from "../../service/auth-google/auth-google.service";
 
 @Component({
   selector: 'app-sign-in',
@@ -15,8 +16,8 @@ import {AccountService} from "../../service/account/account.service";
 export class SignInComponent implements OnInit {
 
   loginForm: FormGroup = new FormGroup({
-    gmail: new FormControl('',[Validators.required, Validators.email]),
-    password: new FormControl('',[Validators.required, Validators.minLength(5)])
+    gmail: new FormControl('', [Validators.required, Validators.email]),
+    password: new FormControl('', [Validators.required, Validators.minLength(5)])
   });
 
   accountUrl?: string;
@@ -25,7 +26,8 @@ export class SignInComponent implements OnInit {
   constructor(private dialog: MatDialog,
               private activatedRoute: ActivatedRoute,
               private router: Router,
-              private authenticationService: AuthenticationService) {
+              private authenticationService: AuthenticationService,
+              public authGoogleService: AuthGoogleService) {
     console.log(this.authenticationService.currentUserValue);
   }
 
@@ -46,19 +48,19 @@ export class SignInComponent implements OnInit {
       .pipe(first())
       .subscribe(
         data => {
-          if (data.status == 202){
+          if (data.status == 202) {
             // @ts-ignore
             document.getElementById("error-form-login").innerHTML = 'Tài khoản của bạn chưa có trong hệ thống hoặc sai mật khẩu!'
             localStorage.removeItem('ACCESS_TOKEN');
             localStorage.removeItem('ACCOUNT_ID');
             localStorage.removeItem('currentAccount');
-          } else if (data.error){
+          } else if (data.error) {
             // @ts-ignore
             document.getElementById("error-form-login").innerHTML = 'Tài khoản của bạn đã bị khoá hoặc sai mật khẩu!'
             localStorage.removeItem('ACCESS_TOKEN');
             localStorage.removeItem('ACCOUNT_ID');
             localStorage.removeItem('currentAccount');
-          } else if (data.token != undefined){
+          } else if (data.token != undefined) {
             localStorage.setItem('ACCESS_TOKEN', data.token);
             localStorage.setItem('ACCOUNT_ID', data.id);
             console.log(localStorage.getItem('currentAccount'));

@@ -1,9 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {AngularFireStorage} from "@angular/fire/compat/storage";
 import {finalize, Observable} from "rxjs";
 import {BookHomestayComponent} from "../../dialog/book-homestay/book-homestay.component";
 import {MatDialog} from "@angular/material/dialog";
 import {ChangePassComponent} from "../../dialog/change-pass/change-pass.component";
+import {ProfileDto} from "../../models/profile-dto";
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {newArray} from "@angular/compiler/src/util";
+import {AccountService} from "../../service/account/account.service";
+import {Account} from "../../models/account";
 
 @Component({
   selector: 'app-profile',
@@ -12,16 +17,55 @@ import {ChangePassComponent} from "../../dialog/change-pass/change-pass.componen
 })
 export class ProfileComponent implements OnInit {
 
-  selectedFile?: File ;
-  fb : any;
+  selectedFile?: File;
+  fb: any;
   downloadURL?: Observable<string>;
-  constructor(private storage: AngularFireStorage,
-              private dialog: MatDialog) { }
+  account!: Account;
+  profile!: ProfileDto;
+  formProfile: FormGroup = new FormGroup({});
+  idAcc = localStorage.getItem('ACCOUNT_ID')
 
-  ngOnInit(): void {
+  constructor(private storage: AngularFireStorage,
+              private dialog: MatDialog,
+              private formBuilder: FormBuilder,
+              private accountService: AccountService) {
   }
 
-  onFileSelected(event : any) {
+  ngOnInit(): void {
+    this.getInformationAccount();
+    this.formProfile = this.formBuilder.group({
+      name: ['',[Validators.required]],
+      gmail:['',[Validators.required]],
+      phone_number:['',[Validators.required]],
+      address:['',[Validators.required]],
+    })
+  }
+
+  getInformationAccount() {
+    this.accountService.getInformationAccount(this.idAcc).subscribe((data) => {
+      this.account = data;
+      this.formProfile.controls['name'].setValue(this.account.name),
+      this.formProfile.controls['gmail'].setValue(this.account.gmail),
+      this.formProfile.controls['phone_number'].setValue(this.account.phone_number),
+      this.formProfile.controls['address'].setValue(this.account.address)
+    })
+  }
+
+
+  updateProfile() {
+    const information = {
+      name: this.formProfile.value.name,
+      gmail: this.formProfile.value.gmail,
+      phone_number: this.formProfile.value.phone_number,
+      address: this.formProfile.value.address,
+    }
+    console.log(information)
+    this.accountService.updateProfile(information, this.idAcc).subscribe((data) => {
+      console.log(information)
+    })
+  }
+
+  onFileSelected(event: any) {
     let date = Date.now();
     const file = event.target.files[0];
     const filePath = `Avatar_Images/${date}`;
@@ -54,4 +98,5 @@ export class ProfileComponent implements OnInit {
       width: '50%',
     });
   }
+
 }

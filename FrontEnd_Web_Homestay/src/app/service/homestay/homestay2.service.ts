@@ -1,4 +1,4 @@
-import {Injectable} from '@angular/core';
+import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Homestay2} from "../../models/homestay2";
 import {environment} from "../../../environments/environment";
@@ -7,8 +7,6 @@ import {Rate} from "../../models/rate";
 import {Observable} from "rxjs";
 import {MyHomestayDto} from "../../models/my-homestay-dto";
 import {YourBillDto} from "../../models/your-bill-dto";
-import {HomestayType} from "../../models/homestay-type";
-import {City} from "../../models/city";
 
 const API_URL = `${environment.apiUrl}`;
 
@@ -17,30 +15,17 @@ const API_URL = `${environment.apiUrl}`;
 })
 export class Homestay2Service {
 
-  constructor(private http: HttpClient) {
-  }
-  createHome(id: number, homestay: Homestay2): Observable<Homestay2[]> {
-    return this.http.post<any>(API_URL + `homestay/create/${id}`, homestay);
+  constructor(private http: HttpClient) { }
+
+  //top 5 nha nhieu luot thue
+  getTop5Homestay(): Observable<any> {
+    return this.http.get<MyHomestayDto>(API_URL + 'homestay/top-5')
   }
 
-  createHomestay(homestay: Homestay2): Observable<any> {
-    return this.http.post<Homestay2>(API_URL + 'homestay', homestay);
-  }
-
-  editHome(id: any, homestay: Homestay2): Observable<Homestay2> {
-    return this.http.put<Homestay2>(API_URL + `${id}`, homestay);
-  }
-
-  getImageOfHomestayById(id: any): Observable<ImageOfHomestay> {
-    return this.http.get<ImageOfHomestay>(API_URL + `image-of-homestay/${id}`)
-  }
-
-  getAllType(): Observable<HomestayType[]> {
-    return this.http.get<HomestayType[]>('http://localhost:8080/api/homestay/type-home')
-  }
-
-  getAllCity(): Observable<City[]> {
-    return this.http.get<City[]>('http://localhost:8080/api/homestay/city')
+  //search homestay full option
+  findHomestayByNameAndCityAndPrice(name: string, idCity: number, price1: number, price2: number): Observable<any> {
+    return this.http.get<Homestay2>(API_URL + 'homestay/search?name=' + name + '&idCity=' + idCity +
+      '&price1=' + price1 +'&price2=' + price2);
   }
 
   //bill by account
@@ -59,6 +44,10 @@ export class Homestay2Service {
   }
 
   //home
+
+  createHomestay(homestay: Homestay2): Observable<any> {
+    return this.http.post<Homestay2>(API_URL + 'homestay', homestay);
+  }
 
   getAllHomestay(): Observable<any> {
     return this.http.get<Homestay2[]>(API_URL + 'homestay');
@@ -91,7 +80,15 @@ export class Homestay2Service {
   getAllRateByAccount(id: number): Observable<any> {
     return this.http.get<Rate[]>(API_URL + 'rate/account/' + id);
   }
-
+  // tao nha theo id account
+  createHome(id: number, homestay: Homestay2): Observable<Homestay2[]> {
+    return this.http.post<any>(API_URL + `homestay/create/${id}`, homestay);
+  }
+  // sua thong tin nha
+  editHome(id: any, homestay: Homestay2): Observable<Homestay2> {
+    return this.http.put<Homestay2>(API_URL + `${id}`, homestay);
+  }
+  //them anh
   create(image: ImageOfHomestay): Observable<ImageOfHomestay> {
     return this.http.post<ImageOfHomestay>(API_URL + `save-image`, image);
   }

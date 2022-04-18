@@ -45,7 +45,9 @@ import { ChangePassComponent } from './dialog/change-pass/change-pass.component'
 import { ConfirmBookComponent } from './dialog/confirm-book/confirm-book.component';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatNativeDateModule} from "@angular/material/core";
-import {NgToastModule} from "ng-angular-popup";
+import {AngularFireAuthModule} from "@angular/fire/compat/auth";
+import {CommonModule} from "@angular/common";
+import {MatSnackBarModule} from "@angular/material/snack-bar";
 
 @NgModule({
   declarations: [
@@ -92,12 +94,14 @@ import {NgToastModule} from "ng-angular-popup";
     MatChipsModule,
     AngularFireStorageModule,
     AngularFireModule.initializeApp(environment.firebaseConfig, "cloud"),
+    AngularFireAuthModule,
     MatTableModule,
     MatPaginatorModule,
     MatSortModule,
     MatDatepickerModule,
     MatNativeDateModule,
-    NgToastModule
+    CommonModule,
+    MatSnackBarModule
   ],
   providers: [],
   bootstrap: [AppComponent]

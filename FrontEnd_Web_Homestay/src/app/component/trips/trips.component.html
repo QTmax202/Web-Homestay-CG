@@ -3,9 +3,9 @@
   <div class="container">
     <div class="row no-gutters slider-text js-fullheight align-items-center justify-content-center" data-scrollax-parent="true">
       <div class="col-md-9 text-center" style="margin-top: 24%">
-        <p class="breadcrumbs" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }"><span
-          class="mr-2"><a routerLink="home">Trang Chủ</a></span>|<span>&nbsp;Chuyến Đi</span></p>
-        <br>
+<!--        <p class="breadcrumbs" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }"><span-->
+<!--          class="mr-2"><a routerLink="home">Trang Chủ</a></span>|<span>&nbsp;Chuyến Đi</span></p>-->
+<!--        <br>-->
         <h1 class="mb-3 bread" style="font-size: 70px">Chuyến đi</h1>
       </div>
     </div>
@@ -22,14 +22,14 @@
             <div class="form-check">
               <label class="form-check-label">
                 <p class="rate">
-                                    <span>
-                                        <i class="icon-star"></i>
-                                        <i class="icon-star"></i>
-                                        <i class="icon-star"></i>
-                                        <i class="icon-star"></i>
-                                        <i class="icon-star"></i>
-                                        <span>3.8</span>
-                                    </span>
+                  <span>
+                    <i class="icon-star"></i>
+                    <i class="icon-star"></i>
+                    <i class="icon-star"></i>
+                    <i class="icon-star"></i>
+                    <i class="icon-star"></i>
+                    <span>3.8</span>
+                  </span>
                 </p>
               </label>
             </div>
@@ -48,6 +48,14 @@
                   <div class="d-flex">
                     <div class="one" style="width: 600px">
                       <h3><a href="hotel-single.html">{{m.homestayName}}</a></h3>
+                      <p *ngIf="m.roundRate == null" class="rate">
+                        <i class="icon-star-o"></i>
+                        <i class="icon-star-o"></i>
+                        <i class="icon-star-o"></i>
+                        <i class="icon-star-o"></i>
+                        <i class="icon-star-o"></i>
+                        <span>Chưa có đánh giá</span>
+                      </p>
                       <p *ngIf="m.roundRate == 0" class="rate">
                         <i class="icon-star-o"></i>
                         <i class="icon-star-o"></i>
@@ -101,19 +109,26 @@
                       <span class="price per-price">{{m.price | currency :'đ' :true: '1.0-0'}}</span>
                     </div>
                   </div>
+                  <p>Ngày đặt: <span>{{m.regisDate}}</span></p>
                   <p>Ngày bắt đầu: <span>{{m.startDate}}</span> - Ngày kết thúc: <span>{{m.endDate}}</span></p>
                   <hr>
                   <p class="bottom-area d-flex">
-                    <span *ngIf="m.statusHomeId == 1" class="ml-auto"><button class="btn btn-primary" style="margin-left: 600px">Hủy</button></span>
-                    <span *ngIf="m.statusHomeId == 1" class="ml-auto"><button class="btn btn-warning"
-                                                  disabled>Chờ xác nhận</button></span>
-                    <span *ngIf="m.statusHomeId == 2" class="ml-auto"><button class="btn btn-success" style="margin-left: 600px"
-                                                  disabled>Đã đặt</button></span>
-                    <span *ngIf="m.statusHomeId == 3" class="ml-auto"><button class="btn btn-info" style="margin-left: 600px"
-                                                  disabled>Đang ở</button></span>
-                    <span *ngIf="m.statusHomeId == 4" class="ml-auto"><button class="btn btn-danger" style="margin-left: 600px" (click)="openRate()">Đánh giá</button></span>
-                    <span *ngIf="m.statusHomeId == 4" class="ml-auto"><button class="btn btn-dark"
-                                                  disabled>Đã trả</button></span>
+                    <span *ngIf="m.statusHomeId == 1" class="ml-auto">
+                      <button class="btn btn-primary" style="margin-left: 600px">Hủy</button></span>
+                    <span *ngIf="m.statusHomeId == 1" class="ml-auto">
+                      <button class="btn btn-warning" disabled>Chờ xác nhận</button></span>
+                    <span *ngIf="m.statusHomeId == 2" class="ml-auto">
+                      <button class="btn btn-success" style="margin-left: 600px" disabled>Đã xác nhận</button></span>
+                    <span *ngIf="m.statusHomeId == 3" class="ml-auto">
+                      <button class="btn btn-info" style="margin-left: 600px" disabled>Đang ở</button></span>
+                    <span *ngIf="m.statusHomeId == 4" class="ml-auto">
+                      <button *ngIf="m.exist == true" disabled class="btn btn-danger" style="margin-left: 600px" (click)="openRate(m.homeId)">Đánh giá</button>
+                      <button *ngIf="m.exist == false" class="btn btn-danger" style="margin-left: 600px" (click)="openRate(m.homeId)">Đánh giá</button>
+                    </span>
+                    <span *ngIf="m.statusHomeId == 4" class="ml-auto">
+                      <button class="btn btn-dark" disabled>Đã trả</button></span>
+                    <span *ngIf="m.statusHomeId == 5" class="ml-auto">
+                      <button class="btn btn-success" style="margin-left: 600px" disabled>Đã hủy</button></span>
                   </p>
                 </div>
               </div>

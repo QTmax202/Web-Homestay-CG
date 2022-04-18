@@ -4,10 +4,10 @@
     <div class="row no-gutters slider-text js-fullheight align-items-center justify-content-center"
          data-scrollax-parent="true">
       <div class="col-md-9 text-center" style="margin-top: 24%">
-        <p class="breadcrumbs" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }"><span
-          class="mr-2"><a routerLink="home">Trang Chủ</a></span>|<span>&nbsp;Homestay</span></p>
-        <br>
-        <h1 class="mb-3 bread" style="font-size: 70px">Homestay</h1>
+<!--        <p class="breadcrumbs" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }"><span-->
+<!--          class="mr-2"><a routerLink="home">Trang Chủ</a></span>|<span>&nbsp;Homestay</span></p>-->
+<!--        <br>-->
+        <h1 class="mb-3 bread" style="font-size: 70px">Homestay detail</h1>
       </div>
     </div>
   </div>
@@ -17,77 +17,42 @@
   <div class="container">
     <div class="row">
       <div class="col-lg-3 sidebar">
-        <div class="sidebar-wrap bg-light assets/images">
-          <h3 class="heading mb-4">Tìm Kiếm</h3>
-          <form action="#">
-            <div class="fields">
-              <div class="form-group">
-                <input type="text" class="form-control" placeholder="Tên Homestay">
-              </div>
-              <div class="form-group">
-                <div class="select-wrap one-third">
-                  <div class="icon"><span class="ion-ios-arrow-down"></span></div>
-                  <select name="" id="" class="form-control">
-                    <option value="">Select Location</option>
-                    <option value="">San Francisco USA</option>
-                    <option value="">Berlin Germany</option>
-                    <option value="">Lodon United Kingdom</option>
-                    <option value="">Paris Italy</option>
-                  </select>
-                </div>
-              </div>
-              <div class="form-group">
-                <input type="text" id="checkin_date1" class="form-control" placeholder="Ngày Bắt Đầu">
-              </div>
-              <div class="form-group">
-                <input type="text" id="checkin_date2" class="form-control" placeholder="Ngày Kết Thúc">
-              </div>
-              <div class="form-group">
-                <input type="submit" value="Search" class="btn btn-primary py-3 px-5">
-              </div>
-            </div>
-          </form>
-        </div>
-        <div class="sidebar-wrap bg-light assets/images">
-          <h3 class="heading mb-4">Đánh Giá Tốt</h3>
-          <form method="post" class="star-rating">
-            <div class="form-check">
-              <input type="checkbox" class="form-check-input" id="exampleCheck1">
-              <label class="form-check-label" for="exampleCheck1">
-                <p class="rate"><span><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i><i
-                  class="icon-star"></i><i class="icon-star"></i></span></p>
-              </label>
-            </div>
-            <div class="form-check">
-              <input type="checkbox" class="form-check-input" id="exampleCheck2">
-              <label class="form-check-label" for="exampleCheck1">
-                <p class="rate"><span><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i><i
-                  class="icon-star"></i><i class="icon-star-o"></i></span></p>
-              </label>
-            </div>
-            <div class="form-check">
-              <input type="checkbox" class="form-check-input" id="exampleCheck3">
-              <label class="form-check-label" for="exampleCheck1">
-                <p class="rate"><span><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i><i
-                  class="icon-star-o"></i><i class="icon-star-o"></i></span></p>
-              </label>
-            </div>
-            <div class="form-check">
-              <input type="checkbox" class="form-check-input" id="exampleCheck4">
-              <label class="form-check-label" for="exampleCheck1">
-                <p class="rate"><span><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star-o"></i><i
-                  class="icon-star-o"></i><i class="icon-star-o"></i></span></p>
-              </label>
-            </div>
-            <div class="form-check">
-              <input type="checkbox" class="form-check-input" id="exampleCheck5">
-              <label class="form-check-label" for="exampleCheck1">
-                <p class="rate"><span><i class="icon-star"></i><i class="icon-star-o"></i><i class="icon-star-o"></i><i
-                  class="icon-star-o"></i><i class="icon-star-o"></i></span></p>
-              </label>
-            </div>
-          </form>
-        </div>
+<!--        <div class="sidebar-wrap bg-light assets/images">-->
+<!--          <h3 class="heading mb-4">Tìm Kiếm</h3>-->
+<!--          <form action="#" [formGroup]="formSearch" (ngSubmit)="searchHomestay()">-->
+<!--            <div class="fields">-->
+<!--              <div class="form-group">-->
+<!--                <input type="text" class="form-control" placeholder="Tên Homestay" formControlName="name">-->
+<!--              </div>-->
+<!--              <div class="form-group">-->
+<!--                <div class="select-wrap one-third">-->
+<!--                  <div class="icon"><span class="ion-ios-arrow-down"></span></div>-->
+<!--                  <select name="" id="" class="form-control" formControlName="idCity">-->
+<!--                    <option value="1">1</option>-->
+<!--                    <option value="2">2</option>-->
+<!--                    <option value="3">3</option>-->
+<!--                    <option value="4">4</option>-->
+<!--                    <option value="5">5</option>-->
+<!--                  </select>-->
+<!--                </div>-->
+<!--              </div>-->
+<!--              <div class="form-group">-->
+<!--                <div class="range-slider">-->
+<!--		              		<span>-->
+<!--										    <input type="number" value="{{price1}}" formControlName="price1" min="100000" max="50000000"/>	- -->
+<!--										    <input type="number" value="{{price2}}" formControlName="price2" min="100000" max="50000000"/>-->
+<!--										  </span>-->
+<!--                  <input #element1 value="100000" min="100000" max="50000000" step="10000" type="range" (change)="fetch1(element1.value)"/>-->
+<!--                  <input #element2 value="50000000" min="100000" max="50000000" step="10000" type="range" (change)="fetch2(element2.value)"/>-->
+<!--                </div>-->
+<!--              </div>-->
+<!--              <div class="form-group">-->
+<!--                <input type="submit" value="Search" class="btn btn-primary py-3 px-5">-->
+<!--              </div>-->
+<!--            </div>-->
+<!--          </form>-->
+<!--        </div>-->
+
       </div>
       <div class="col-lg-9">
         <div class="row">
@@ -123,7 +88,7 @@
                 <h2>{{homestay.name}}</h2>
               </div>
               <div class="col-md-2">
-                <h2 class="price per-price" style="color: #2f89fc">{{homestay.price}}<small>/night</small></h2>
+                <h2 class="price per-price" style="color: #2f89fc">{{homestay.price | currency :'đ' :true: '1.0-0'}}<small>/night</small></h2>
               </div>
             </div>
             <div class="row">
@@ -152,35 +117,35 @@
                 <li>Số lượng phòng tắm: {{homestay.bath_room}}</li>
                 <li>Giới thiệu: {{homestay.description}}</li>
               </ul>
-              <div class="ml-md-5 col-sm-8">
-                <iframe
-                  width="100%"
-                  height="450"
-                  frameborder="0" style="border:0"
-                  referrerpolicy="no-referrer-when-downgrade"
-                  src="https://www.google.com/maps/embed/v1/place?key=AIzaSyDRgsm4D8UcW479Mj4malJdf92cl_sTLAI&q=Sân+vận+động+Quốc+gia+Mỹ+Đình&maptype=satellite&zoom=15"
-                  allowfullscreen>
-                </iframe>
+              <div class="ml-md-5 col-sm-8" id="google-api-maps">
+<!--                <iframe-->
+<!--                  width="100%"-->
+<!--                  height="450"-->
+<!--                  frameborder="0" style="border:0"-->
+<!--                  referrerpolicy="no-referrer-when-downgrade"-->
+<!--                  src="https://www.google.com/maps/embed/v1/place?key=AIzaSyDRgsm4D8UcW479Mj4malJdf92cl_sTLAI&q={{google_api}}&maptype=satellite&zoom=15"-->
+<!--                  allowfullscreen>-->
+<!--                </iframe>-->
               </div>
             </div>
           </div>
 
-          <div class="row" style="width: 88%">
-            <div class="col-md-12" >
-              <div class="destination"  *ngIf="idAcc != null">
-                <form style="display: flex" [formGroup]="formComment" (ngSubmit)="createComment()" novalidate>
-                  <div class="col-md-12">
-                    <input type="text" class="form-control" formControlName="comment" placeholder="Your Comment"
-                           required>
-                  </div>
-                  <div class="col-md-12">
-                    <button type="submit" class="btn btn-primary py-2 px-4" [disabled]="formComment.invalid">Gửi
-                    </button>
-                  </div>
-                </form>
-              </div>
-            </div>
-          </div>
+<!--          <div class="row" style="width: 88%">-->
+<!--            <div class="col-md-12" >-->
+<!--              <div class="destination"  *ngIf="idAcc != null">-->
+<!--                <form style="display: flex" [formGroup]="formComment" (ngSubmit)="createComment()" novalidate>-->
+<!--                  <div class="col-md-12">-->
+<!--                    <input type="text" class="form-control" formControlName="comment" placeholder="Your Comment"-->
+<!--                           required>-->
+<!--                  </div>-->
+<!--                  <div class="col-md-12">-->
+<!--                    <button type="submit" class="btn btn-primary py-2 px-4" [disabled]="formComment.invalid">Gửi-->
+<!--                    </button>-->
+<!--                  </div>-->
+<!--                </form>-->
+<!--              </div>-->
+<!--            </div>-->
+<!--          </div>-->
           <br>
           <div class="col-md-12">
             <h2><strong>Our</strong> Guests Says</h2>
@@ -202,13 +167,54 @@
                           <div class="text ml-md-4 hotel-single">
                             <div class="row">
                               <div class="col-sm-9">
-<!--                                <span class="star">-->
-<!--    							                <i class="icon-star"></i>-->
-<!--                                  <i class="icon-star"></i>-->
-<!--    							                <i class="icon-star"></i>-->
-<!--    							                <i class="icon-star"></i>-->
-<!--                                  <i class="icon-star-o"></i>-->
-<!--                                </span>-->
+                                <p *ngIf="row.id == 0" class="rate">
+                                  <i class="icon-star-o"></i>
+                                  <i class="icon-star-o"></i>
+                                  <i class="icon-star-o"></i>
+                                  <i class="icon-star-o"></i>
+                                  <i class="icon-star-o"></i>
+                                  <span>{{row.id}} Sao</span>
+                                </p>
+                                <p *ngIf="row.id == 1" class="rate">
+                                  <i class="icon-star"></i>
+                                  <i class="icon-star-o"></i>
+                                  <i class="icon-star-o"></i>
+                                  <i class="icon-star-o"></i>
+                                  <i class="icon-star-o"></i>
+                                  <span>{{row.id}} Sao</span>
+                                </p>
+                                <p *ngIf="row.id == 2" class="rate">
+                                  <i class="icon-star"></i>
+                                  <i class="icon-star"></i>
+                                  <i class="icon-star-o"></i>
+                                  <i class="icon-star-o"></i>
+                                  <i class="icon-star-o"></i>
+                                  <span>{{row.id}} Sao</span>
+                                </p>
+                                <p *ngIf="row.id == 3" class="rate">
+                                  <i class="icon-star"></i>
+                                  <i class="icon-star"></i>
+                                  <i class="icon-star"></i>
+                                  <i class="icon-star-o"></i>
+                                  <i class="icon-star-o"></i>
+                                  <span>{{row.id}} Sao</span>
+                                </p>
+                                <p *ngIf="row.id == 4" class="rate">
+                                  <i class="icon-star"></i>
+                                  <i class="icon-star"></i>
+                                  <i class="icon-star"></i>
+                                  <i class="icon-star"></i>
+                                  <i class="icon-star-o"></i>
+                                  <span>{{row.id}} Sao</span>
+                                </p>
+                                <p *ngIf="row.id == 5" class="rate">
+                                  <i class="icon-star"></i>
+                                  <i class="icon-star"></i>
+                                  <i class="icon-star"></i>
+                                  <i class="icon-star"></i>
+                                  <i class="icon-star"></i>
+                                  <span>{{row.id}} Sao</span>
+                                </p>
                               </div>
                               <div class="col-sm-3">
                                 <span>{{row.time_stamp}}</span>
@@ -216,8 +222,6 @@
                             </div>
                             <br>
                             <p class="mb-5">{{row.comment}}</p>
-<!--                            <p class="mb-5">Far far away, behind the word mountains, far from the&ndash;&gt;-->
-<!--                              countries Vokalia and Consonantia, there live the blind texts.</p>-->
                             <div class="row">
                               <span class="name">{{row.account.name}}</span>
                               <span>&ensp;|&ensp;</span>

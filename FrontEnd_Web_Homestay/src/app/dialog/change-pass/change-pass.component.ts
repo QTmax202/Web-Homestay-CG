@@ -1,4 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {AbstractControl, FormBuilder, FormGroup, ValidationErrors, Validators} from "@angular/forms";
+import {Account} from "../../models/account";
+import {MatDialog} from "@angular/material/dialog";
+import {AccountService} from "../../service/account/account.service";
+import {ChangePassword} from "../../models/change-password";
+
+
 
 @Component({
   selector: 'app-change-pass',
@@ -7,9 +14,36 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ChangePassComponent implements OnInit {
 
-  constructor() { }
+  changePasswordForm!: ChangePassword;
+  formPassword: FormGroup = new FormGroup({});
+  idAcc = localStorage.getItem('ACCOUNT_ID')
+  hide = true;
 
-  ngOnInit(): void {
+  constructor(private dialog: MatDialog,
+              private accountService: AccountService,
+              private fb: FormBuilder) {
   }
 
+  ngOnInit(): void {
+    this.formPassword = this.fb.group({
+      currentPassword: ['', [Validators.required]],
+      newPassword: ['', [Validators.required]],
+      confirmPassword: ['', [Validators.required]],
+    })
+  }
+
+  changePassword() {
+    const changePass = {
+      currentPassword: this.formPassword.value.currentPassword,
+      newPassword: this.formPassword.value.newPassword,
+      confirmPassword: this.formPassword.value.confirmPassword,
+    }
+    console.log(changePass)
+    this.accountService.changePassword(changePass, this.idAcc).subscribe((data) => {
+      this.dialog.closeAll();
+    }, error => {
+      // @ts-ignore
+      document.getElementById("error-form-change-password").innerText = "Sai mật khẩu cũ hoặc mật khẩu xác nhân không đúng"
+    })
+  }
 }

@@ -1,4 +1,4 @@
-<form class="example-form" [formGroup]="formHome">
+<form class="example-form" [formGroup]="formStatus">
   <h1 mat-dialog-title>CẬP NHẬT TRẠNG THÁI</h1>
   <mat-form-field class="example-full-width" appearance="outline">
     <mat-label>Tên Nhà</mat-label>
@@ -8,61 +8,6 @@
     <mat-label>Địa Chỉ</mat-label>
     <input type="text" matInput readonly value="{{homestay.address}}, {{homestay.city.name}}">
   </mat-form-field>
-  <section class="example-section">
-    <label class="example-margin" >Loại Phòng:</label>
-    <mat-radio-group formControlName="homestay_type" name="homestay_type">
-      <mat-radio-button class="example-margin"  style="margin-left: 30px"
-                        *ngFor="let homestay of homestayTypes" value="{{homestay.id}}">{{homestay.name}}</mat-radio-button>
-      <mat-error *ngIf="formHome.hasError('required', 'homestay_type')">
-        Không được bỏ trống
-      </mat-error>
-    </mat-radio-group>
-  </section>
-  <div class="row">
-        <div class="col-lg-4">
-          <mat-form-field appearance="outline">
-            <mat-label>Số Lượng Phòng Ngủ</mat-label>
-            <mat-select formControlName="bed_room" name="bed_room">
-              <mat-option value="1">1 Phòng</mat-option>
-              <mat-option value="2">2 Phòng</mat-option>
-              <mat-option value="3">3 Phòng</mat-option>
-              <mat-option value="4">4 Phòng</mat-option>
-              <mat-option value="5">5 Phòng</mat-option>
-              <mat-option value="6">6 Phòng</mat-option>
-              <mat-option value="7">7 Phòng</mat-option>
-              <mat-option value="8">8 Phòng</mat-option>
-              <mat-option value="9">9 Phòng</mat-option>
-              <mat-option value="10">10 Phòng</mat-option>
-              <mat-error *ngIf="formHome.hasError('required', 'bed_room')">
-                Vui lòng chọn số phòng ngủ
-              </mat-error>
-            </mat-select>
-          </mat-form-field>
-        </div>
-        <div class="col-lg-4">
-          <mat-form-field appearance="outline">
-            <mat-label>Số Lượng Phòng Tắm</mat-label>
-            <mat-select formControlName="bath_room" name="bath_room">
-          <mat-option value="1">1 Phòng</mat-option>
-          <mat-option value="2">2 Phòng</mat-option>
-          <mat-option value="3">3 Phòng</mat-option>
-        </mat-select>
-      </mat-form-field>
-    </div>
-    <div class="col-lg-4">
-      <mat-form-field class="example-full-width" appearance="outline">
-        <mat-label>Giá tiền</mat-label>
-        <input type="number" matInput placeholder="VNĐ" formControlName="price" name="price">
-        <mat-error *ngIf="formHome.hasError('required', 'price')">
-          Vui lòng nhập giá tiền
-        </mat-error>
-      </mat-form-field>
-    </div>
-  </div>
-  <mat-form-field class="example-full-width" appearance="outline">
-    <mat-label>Mô tả</mat-label>
-    <textarea matInput formControlName="description" name="description"></textarea>
-  </mat-form-field>
   <mat-form-field appearance="outline">
     <mat-label>Trạng Thái Homestay</mat-label>
     <mat-select name="status" formControlName="status">
@@ -70,21 +15,6 @@
       <mat-option [value]="0">Đóng</mat-option>
     </mat-select>
   </mat-form-field>
-
-  <div class="row">
-    <div class="col-lg-4">
-      <section class="example-section">
-        <label for="img">Chọn Ảnh</label>
-        <img id="img" alt="" style="border-radius: 50%; width: 80%">
-        <input type="file"
-               multiple
-               (change)="showPreview($event)"
-               name="image"
-               autocomplete="off">
-      </section>
-    </div>
-  </div>
-
   <div mat-dialog-actions [align]="'end'">
     <button mat-raised-button color="warn" mat-dialog-close>Đóng</button>
     <button type="submit" mat-raised-button color="primary" (click)="editStatusHomestay()">Xác Nhận</button>

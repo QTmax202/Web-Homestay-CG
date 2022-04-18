@@ -12,7 +12,6 @@ import {TripsComponent} from "./component/trips/trips.component";
 import {SignInComponent} from "./dialog/sign-in/sign-in.component";
 import {SignUpComponent} from "./dialog/sign-up/sign-up.component";
 import {NotifyComponent} from "./dialog/notify/notify.component";
-import {CreateHomestayComponent} from "./dialog/create-homestay/create-homestay.component";
 
 const routes: Routes = [
   {path: 'home', component: HomeComponent},
@@ -21,7 +20,6 @@ const routes: Routes = [
   {path: 'contact', component: ContactComponent},
   {path: 'homestay', component: HomestayComponent},
   {path: 'homestay-detail/:id', component: HomestayDetailComponent},
-  {path: 'create/:id', component: CreateHomestayComponent},
   {path: 'my-homestay', component: MyHomestayComponent},
   {path: 'profile', component: ProfileComponent},
   {path: 'trips', component: TripsComponent},
