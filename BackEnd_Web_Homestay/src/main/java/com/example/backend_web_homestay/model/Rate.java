@@ -14,8 +14,8 @@ public class Rate {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @JsonIgnore
     @ManyToOne
+    @JoinColumn(name = "homestay_id")
     private Homestay homestay;
 
     @ManyToOne

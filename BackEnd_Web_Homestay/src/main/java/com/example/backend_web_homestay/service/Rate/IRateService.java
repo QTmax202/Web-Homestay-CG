@@ -7,6 +7,4 @@ public interface IRateService extends IGeneralService<Rate> {
     Iterable<Rate> getRateByHomestay(long id);
 
     Iterable<Rate> getRateByAccount(long id);
-
-
 }
