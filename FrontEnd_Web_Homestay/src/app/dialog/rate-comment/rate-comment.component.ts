@@ -1,9 +1,10 @@
 import {Component, Inject, OnInit} from '@angular/core';
-import {MAT_DIALOG_DATA} from "@angular/material/dialog";
+import {MAT_DIALOG_DATA, MatDialog} from "@angular/material/dialog";
 import {Homestay2Service} from "../../service/homestay/homestay2.service";
 import {Homestay2} from "../../models/homestay2";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {MatSnackBar} from "@angular/material/snack-bar";
+import {CommentService} from "../../service/comment/comment.service";
 
 @Component({
   selector: 'app-rate-comment',
@@ -31,7 +32,9 @@ export class RateCommentComponent implements OnInit {
   constructor(@Inject(MAT_DIALOG_DATA) public data: any,
               private homestayService: Homestay2Service,
               private fb: FormBuilder,
-              private snackBar: MatSnackBar) {
+              private snackBar: MatSnackBar,
+              private commentService: CommentService,
+              private dialog: MatDialog) {
     this.ratingArr = Array(this.starCount).fill(false);
   }
 
@@ -86,6 +89,12 @@ export class RateCommentComponent implements OnInit {
     };
     console.log(comment)
     console.log(rate)
+    this.commentService.createComment(comment).subscribe(() => {
+    })
+    this.commentService.createRate(rate).subscribe(() => {
+      this.formRateComment.reset();
+      this.dialog.closeAll();
+    })
   }
 
   getHomestayById() {

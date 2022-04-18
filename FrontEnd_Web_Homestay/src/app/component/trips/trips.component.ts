@@ -6,6 +6,7 @@ import {Homestay2Service} from "../../service/homestay/homestay2.service";
 import {YourBillDto} from "../../models/your-bill-dto";
 import {MyHomestayDto} from "../../models/my-homestay-dto";
 import {MyBillDto} from "../../models/my-bill-dto";
+import {CommentService} from "../../service/comment/comment.service";
 
 @Component({
   selector: 'app-trips',
@@ -18,16 +19,28 @@ export class TripsComponent implements OnInit {
   myBill!: MyBillDto[];
 
   constructor(private dialog: MatDialog,
-              private homestayService: Homestay2Service) { }
+              private homestayService: Homestay2Service,
+              private commentService: CommentService) { }
 
   ngOnInit(): void {
     this.getBillByAccountId()
+    this.existsCommentByAccount_IdAndHomestay_Id()
+  }
+
+  existsCommentByAccount_IdAndHomestay_Id() {
+    console.log(this.myBill)
   }
 
   getBillByAccountId() {
     this.homestayService.getMyBillByAccountId(this.idAcc).subscribe((data) => {
       this.myBill = data;
-      console.log(this.myBill);
+      for (let i = 0; i < this.myBill.length; i++) {
+        console.log(this.myBill[i].homeId)
+        this.commentService.existsCommentByAccount_IdAndHomestay_Id(this.idAcc, this.myBill[i].homeId).subscribe((dataExist) => {
+          this.myBill[i].exist = dataExist;
+          console.log(this.myBill[i].exist)
+        })
+      }
     })
   }
 

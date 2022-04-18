@@ -96,24 +96,23 @@ export class HomestayDetailComponent implements OnInit {
     })
   }
 
-  createComment() {
-    const comment = {
-      id: this.formComment.value.id,
-      comment: this.formComment.value.comment,
-      time_stamp: new Date(),
-      homestay: {
-        id: this.idH
-      },
-      account: {
-        id: localStorage.getItem('ACCOUNT_ID')
-      }
-    };
-    this.commentService.createComment(comment).subscribe(() => {
-      alert(comment);
-      this.formComment.reset();
-      this.getAllComment();
-    })
-  }
+  // createComment() {
+  //   const comment = {
+  //     id: this.formComment.value.id,
+  //     comment: this.formComment.value.comment,
+  //     time_stamp: new Date(),
+  //     homestay: {
+  //       id: this.idH
+  //     },
+  //     account: {
+  //       id: localStorage.getItem('ACCOUNT_ID')
+  //     }
+  //   };
+  //   this.commentService.createComment(comment).subscribe(() => {
+  //     this.formComment.reset();
+  //     this.getAllComment();
+  //   })
+  // }
 
   getAllHomestay() {
     this.homestayService.getAllHomestay().subscribe((data) => {
