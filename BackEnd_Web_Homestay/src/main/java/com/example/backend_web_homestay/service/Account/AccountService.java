@@ -1,5 +1,6 @@
 package com.example.backend_web_homestay.service.Account;
 
+import com.example.backend_web_homestay.DTO.ProfileDTO;
 import com.example.backend_web_homestay.event.OnSendRegistrationUserConfirmEvent;
 import com.example.backend_web_homestay.model.Account;
 import com.example.backend_web_homestay.model.AccountPrinciple;
@@ -30,6 +31,11 @@ public class AccountService implements IAccountService{
     @Override
     public Optional<Account> findByGmail(String username) {
         return accountRepository.findByGmail(username);
+    }
+
+    @Override
+    public Account update(Account account) {
+        return accountRepository.save(account);
     }
 
     @Override

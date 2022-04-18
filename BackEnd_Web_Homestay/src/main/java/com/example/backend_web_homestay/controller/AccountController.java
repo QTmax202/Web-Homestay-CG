@@ -1,13 +1,13 @@
 package com.example.backend_web_homestay.controller;
 
-import com.example.backend_web_homestay.DTO.ChangePasswordForm;
+import com.example.backend_web_homestay.DTO.ChangePasswordDTO;
+import com.example.backend_web_homestay.DTO.ProfileDTO;
 import com.example.backend_web_homestay.model.Account;
 import com.example.backend_web_homestay.model.Role;
 import com.example.backend_web_homestay.service.Account.IAccountService;
 import com.example.backend_web_homestay.service.Role.IRoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEventPublisher;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -40,7 +40,7 @@ public class AccountController {
     }
 
     @PutMapping("{id}")
-    public ResponseEntity<?> changePassword(@PathVariable("id") Long id, @RequestBody ChangePasswordForm changePassword) {
+    public ResponseEntity<?> changePassword(@PathVariable("id") Long id, @RequestBody ChangePasswordDTO changePassword) {
         Account account = new Account();
         if (accountService.findById(id).isPresent()){
             account = accountService.findById(id).get();
@@ -58,25 +58,17 @@ public class AccountController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-//    @PutMapping("/change-pass/{id}")
-//    public ResponseEntity<?> changePassword(@RequestBody Account account, @PathVariable long id) {
-//        Optional<Account> accountFind = accountService.findById(id);
-//        account.setAddress(passwordEncoder.encode(account.getAddress()));
-//        if (accountFind.get().getPassword().equals(account.getAddress())) {
-//            account.setId(id);
-//            account.setAddress(accountFind.get().getAddress());
-//            account.setAvatar_url(accountFind.get().getAvatar_url());
-//            account.setDate_birth(accountFind.get().getDate_birth());
-//            account.setGmail(accountFind.get().getGmail());
-//            account.setName(accountFind.get().getName());
-//            account.setPhone_number(accountFind.get().getPhone_number());
-//            account.setRoles(accountFind.get().getRoles());
-//            account.setPassword(passwordEncoder.encode(account.getPassword()));
-//            accountService.save(account);
-//            return new ResponseEntity<>(account, HttpStatus.OK);
-//        }
-//        return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-//    }
+    @PutMapping("/update-profile/{id}")
+    public ResponseEntity<?> updateProfile(@RequestBody ProfileDTO profileDTO,
+                                           @PathVariable long id) {
+        Optional<Account> account = accountService.findById(id);
+        account.get().setName(profileDTO.getName());
+        account.get().setGmail(profileDTO.getGmail());
+        account.get().setPhone_number(profileDTO.getPhone_number());
+        account.get().setAddress(profileDTO.getAddress());
+        accountService.update(account.get());
+        return new ResponseEntity<>(account.get(), HttpStatus.OK);
+    }
 
     @PostMapping
     private ResponseEntity<?> createAccount(@RequestBody Account account) {
