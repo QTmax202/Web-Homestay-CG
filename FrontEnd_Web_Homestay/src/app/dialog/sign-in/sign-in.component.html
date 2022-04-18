@@ -1,27 +1,26 @@
-<form class="example-form" [formGroup]="loginForm" novalidate>
-  <h1 mat-dialog-title>ĐĂNG NHẬP</h1>
+<form class="example-form" [formGroup]="loginForm"  novalidate>
+  <h2 class="col-md-5" mat-dialog-title>ĐĂNG NHẬP</h2>
   <mat-card-content style="color: #c82333" id="error-form-login"></mat-card-content>
-  <mat-form-field class="example-full-width" appearance="fill">
+  <mat-form-field class="example-full-width" appearance="outline">
     <mat-label>Email</mat-label>
     <input type="email" matInput placeholder="Ex. pat@example.com" formControlName="gmail" required>
     <mat-error *ngIf="loginForm.hasError('email','gmail') && !loginForm.hasError('required','gmail')">
-      Vui lòng nhập một địa chỉ email hợp lệ!
+      Vui lòng nhập <strong>email</strong> hợp lệ!
     </mat-error>
     <mat-error *ngIf="loginForm.hasError('required','gmail')">
-      Bạn phải nhập một giá trị!
+      Không được bỏ trống!
     </mat-error>
     <mat-icon matSuffix>email</mat-icon>
   </mat-form-field>
-  <mat-form-field class="example-full-width" appearance="fill">
+  <mat-form-field class="example-full-width" appearance="outline">
     <mat-label>Mật Khẩu</mat-label>
-    <input matInput [type]="hide ? 'password' : 'text'" formControlName="password" required>
+    <input matInput [type]="hide ? 'password' : 'text'" formControlName="password" required minlength="6" maxlength="8">
     <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
       <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
     </button>
     <mat-error *ngIf="loginForm.hasError('minlength','password') || loginForm.hasError('required','password')">
-      Bạn phải nhập ít nhất 5 giá trị!
+      Mật khẩu từ <strong>6 đến 8</strong> ký tự!
     </mat-error>
-<!--    <mat-icon matSuffix>password</mat-icon>-->
   </mat-form-field>
   <div>
     <span>
@@ -29,11 +28,13 @@
     </span>
     <span (click)="openSignUp()" style="color: blue; margin-left: 150px; cursor: pointer">Tạo tài khoản</span>
   </div>
-  <div>
-    <button (click)="authGoogleService.GoogleAuth()"><span class="icon-google mr-3">đăng nhập bằng google</span></button>
-  </div>
   <div mat-dialog-actions [align]="'end'">
     <button mat-raised-button color="warn" mat-dialog-close>Đóng</button>
     <button mat-raised-button color="primary" (click)="login()" [disabled]="loginForm.invalid">Đăng Nhập</button>
+  </div>
+  <hr>
+  <div>
+    <button style="height: 36px; margin-left: 70px" mat-raised-button color="warn" (click)="authGoogleService.GoogleAuth()">
+      <i class="icon icon-google"></i>&nbsp;Đăng Nhập Bằng Google</button>
   </div>
 </form>

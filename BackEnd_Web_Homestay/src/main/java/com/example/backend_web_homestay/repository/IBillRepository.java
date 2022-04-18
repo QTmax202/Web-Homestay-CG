@@ -1,12 +1,14 @@
 package com.example.backend_web_homestay.repository;
 
 import com.example.backend_web_homestay.DTO.MyBillDTO;
+import com.example.backend_web_homestay.DTO.TurnOverDTO;
 import com.example.backend_web_homestay.DTO.YourBillDTO;
 import com.example.backend_web_homestay.model.Bill;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
+import java.time.LocalDate;
 import java.util.Iterator;
 import java.util.List;
 
@@ -39,4 +41,10 @@ public interface IBillRepository extends JpaRepository<Bill, Long> {
             "having (s.id = 2 or s.id =  3) and b.homestay_id = ?;"
             , nativeQuery = true)
     Iterable<Bill> findAllBillByHomestay_Status(Long id);
+
+    @Query(value = "select hs.id as id, hs.name as name, sum(b.price) as sumPrice, count(b.price) as countPrice from homestay hs\n" +
+            "join bill b on b.homestay_id = hs.id\n" +
+            "where hs.account_id = :id and b.start_date between :startDate1 and :startDate2\n" +
+            "group by hs.id;", nativeQuery = true)
+    Iterable<TurnOverDTO> findTurnOverByAccountAndStartDate(long id, String startDate1, String startDate2);
 }

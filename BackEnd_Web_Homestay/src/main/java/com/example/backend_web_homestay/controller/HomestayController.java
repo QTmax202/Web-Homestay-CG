@@ -101,9 +101,16 @@ public class HomestayController {
         }
         Iterable<Homestay> homestays = homestayService.findHomestayByNameAndCityAndPrice(name, idCity, price1, price2);
         if (!homestays.iterator().hasNext()) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
         return new ResponseEntity<>(homestays, HttpStatus.OK);
+    }
+
+    // top 5 homestay
+    @GetMapping("/top-5")
+    public ResponseEntity<?> getTop5Homestay() {
+        Iterable<MyHomestayDTO> myHomestayDTOS = homestayService.getTop5Homestay();
+        return new ResponseEntity<>(myHomestayDTOS, HttpStatus.OK);
     }
 }
 

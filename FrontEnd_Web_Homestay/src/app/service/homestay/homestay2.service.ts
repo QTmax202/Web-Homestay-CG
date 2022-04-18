@@ -17,6 +17,11 @@ export class Homestay2Service {
 
   constructor(private http: HttpClient) { }
 
+  //top 5 nha nhieu luot thue
+  getTop5Homestay(): Observable<any> {
+    return this.http.get<MyHomestayDto>(API_URL + 'homestay/top-5')
+  }
+
   //search homestay full option
   findHomestayByNameAndCityAndPrice(name: string, idCity: number, price1: number, price2: number): Observable<any> {
     return this.http.get<Homestay2>(API_URL + 'homestay/search?name=' + name + '&idCity=' + idCity +

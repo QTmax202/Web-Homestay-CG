@@ -2,6 +2,7 @@ package com.example.backend_web_homestay.controller;
 
 
 import com.example.backend_web_homestay.DTO.MyBillDTO;
+import com.example.backend_web_homestay.DTO.TurnOverDTO;
 import com.example.backend_web_homestay.DTO.YourBillDTO;
 import com.example.backend_web_homestay.model.Bill;
 import com.example.backend_web_homestay.repository.IBillRepository;
@@ -61,6 +62,17 @@ public class BillController {
     private ResponseEntity<?> getBillHomestayStatus(@PathVariable long id){
         Iterable<Bill> bills = billRepository.findAllBillByHomestay_Status(id);
         return new ResponseEntity<>(bills, HttpStatus.OK);
+    }
+
+    @GetMapping("/turn-over")
+    public ResponseEntity<?> findTurnOverByAccountAndStartDate(@RequestParam(required = false) long id,
+                                                               @RequestParam(required = false) String startDate1,
+                                                               @RequestParam(required = false) String startDate2) {
+        Iterable<TurnOverDTO> turnOverDTOS = billService.findTurnOverByAccountAndStartDate(id, startDate1, startDate2);
+        if (!turnOverDTOS.iterator().hasNext()) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+        return new ResponseEntity<>(turnOverDTOS, HttpStatus.OK);
     }
 
     @PostMapping("/cancelling-invoice/{id}")

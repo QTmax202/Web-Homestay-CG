@@ -22,14 +22,14 @@
             <div class="form-check">
               <label class="form-check-label">
                 <p class="rate">
-                                    <span>
-                                        <i class="icon-star"></i>
-                                        <i class="icon-star"></i>
-                                        <i class="icon-star"></i>
-                                        <i class="icon-star"></i>
-                                        <i class="icon-star"></i>
-                                        <span>3.8</span>
-                                    </span>
+                  <span>
+                    <i class="icon-star"></i>
+                    <i class="icon-star"></i>
+                    <i class="icon-star"></i>
+                    <i class="icon-star"></i>
+                    <i class="icon-star"></i>
+                    <span>3.8</span>
+                  </span>
                 </p>
               </label>
             </div>
@@ -104,16 +104,18 @@
                   <p>Ngày bắt đầu: <span>{{m.startDate}}</span> - Ngày kết thúc: <span>{{m.endDate}}</span></p>
                   <hr>
                   <p class="bottom-area d-flex">
-                    <span *ngIf="m.statusHomeId == 1" class="ml-auto"><button class="btn btn-primary" style="margin-left: 600px">Hủy</button></span>
-                    <span *ngIf="m.statusHomeId == 1" class="ml-auto"><button class="btn btn-warning"
-                                                  disabled>Chờ xác nhận</button></span>
-                    <span *ngIf="m.statusHomeId == 2" class="ml-auto"><button class="btn btn-success" style="margin-left: 600px"
-                                                  disabled>Đã đặt</button></span>
-                    <span *ngIf="m.statusHomeId == 3" class="ml-auto"><button class="btn btn-info" style="margin-left: 600px"
-                                                  disabled>Đang ở</button></span>
-                    <span *ngIf="m.statusHomeId == 4" class="ml-auto"><button class="btn btn-danger" style="margin-left: 600px" (click)="openRate()">Đánh giá</button></span>
-                    <span *ngIf="m.statusHomeId == 4" class="ml-auto"><button class="btn btn-dark"
-                                                  disabled>Đã trả</button></span>
+                    <span *ngIf="m.statusHomeId == 1" class="ml-auto">
+                      <button class="btn btn-primary" style="margin-left: 600px">Hủy</button></span>
+                    <span *ngIf="m.statusHomeId == 1" class="ml-auto">
+                      <button class="btn btn-warning" disabled>Chờ xác nhận</button></span>
+                    <span *ngIf="m.statusHomeId == 2" class="ml-auto">
+                      <button class="btn btn-success" style="margin-left: 600px" disabled>Đã đặt</button></span>
+                    <span *ngIf="m.statusHomeId == 3" class="ml-auto">
+                      <button class="btn btn-info" style="margin-left: 600px" disabled>Đang ở</button></span>
+                    <span *ngIf="m.statusHomeId == 4" class="ml-auto">
+                      <button class="btn btn-danger" style="margin-left: 600px" (click)="openRate(m.homeId)">Đánh giá</button></span>
+                    <span *ngIf="m.statusHomeId == 4" class="ml-auto">
+                      <button class="btn btn-dark" disabled>Đã trả</button></span>
                   </p>
                 </div>
               </div>
