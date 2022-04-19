@@ -121,8 +121,8 @@
               <div class="carousel-item active">
                 <div style="display: flex">
                   <div class="item col-sm-3" *ngFor="let c of city1">
-                    <div class="destination">
-                      <img src="{{c.image}}" alt="" style="width: 250px; height: 280px">
+                    <div class="destination" style="cursor: pointer" (click)="redirectByCityId(c.id)">
+                      <img src="{{c.image}}" alt="" style="width: 247px; height: 300px">
                       <div class="text p-3">
                         <h3><a href="#">{{c.name}}</a></h3>
                         <span class="listing">{{c.countCity}} Homestay</span>
@@ -134,7 +134,7 @@
               <div class="carousel-item">
                 <div style="display: flex">
                   <div class="item col-sm-3" *ngFor="let c of city2">
-                    <div class="destination">
+                    <div class="destination" style="cursor: pointer" (click)="redirectByCityId(c.id)">
                       <img src="{{c.image}}" alt="" style="width: 247px; height: 300px">
                       <div class="text p-3">
                         <h3><a href="#">{{c.name}}</a></h3>
@@ -147,10 +147,10 @@
               <div class="carousel-item">
                 <div style="display: flex">
                   <div class="item col-sm-3" *ngFor="let c of city3">
-                    <div class="destination">
+                    <div class="destination" style="cursor: pointer" (click)="redirectByCityId(c.id)">
                       <img src="{{c.image}}" alt="" style="width: 247px; height: 300px">
                       <div class="text p-3">
-                        <h3><a href="#">{{c.name}}</a></h3>
+                        <h3><a>{{c.name}}</a></h3>
                         <span class="listing">{{c.countCity}} Homestay</span>
                       </div>
                     </div>
@@ -186,13 +186,13 @@
   </div>
   <div class="container-fluid">
     <div class="row">
-      <div class="col-sm col-md-6 col-lg " *ngFor="let h of homestayDTOS" style="width: 218px; height: 500px">
+      <div class="col-sm col-md-6 col-lg " *ngFor="let h of topHomestayDTOS" style="width: 218px; height: 500px">
         <div class="destination">
           <img src="{{h.images}}" alt="" style="width: 226px; height: 200px">
           <div class="text p-3">
             <div class="d-flex">
               <div>
-                <h3 style="width: 220px; height: 56px"><a href="#">{{h.name }}</a></h3>
+                <h3 style="width: 220px; height: 56px" ><a style="cursor: pointer" (click)="redirectByHomestay(h.id)">{{h.name }}</a></h3>
                 <div class="two">
                   <p class="price per-price">{{h.price | currency :'đ' :true: '1.0-0'}}<small>/ngày</small></p>
                 </div>
@@ -338,58 +338,154 @@
           <div class="carousel-item active">
             <div class="col-sm col-md-8 col-lg ">
               <div class="destination">
-                <img src="{{homestays[3].imageOfHomestays[1].images}}" alt="" style="width: 100%; height: 450px">
+                <img src="{{homestayDTOS[3].images}}" alt="" style="width: 100%; height: 450px">
                 <div class="text p-3">
                   <div class="d-flex">
                     <div class="one">
-                      <h3><a href="#">{{homestays[3].name}}</a></h3>
-                      <p class="rate">
+                      <h3><a style="cursor: pointer" (click)="redirectByHomestay(homestayDTOS[3].id)">{{homestayDTOS[3].name}}</a></h3>
+                      <p *ngIf="homestayDTOS[3].roundRate == null" class="rate">
+                        <i class="icon-star-o"></i>
+                        <i class="icon-star-o"></i>
+                        <i class="icon-star-o"></i>
+                        <i class="icon-star-o"></i>
+                        <i class="icon-star-o"></i>
+                        <span>Chưa có đánh giá</span>
+                      </p>
+                      <p *ngIf="homestayDTOS[3].roundRate == 0" class="rate">
+                        <i class="icon-star-o"></i>
+                        <i class="icon-star-o"></i>
+                        <i class="icon-star-o"></i>
+                        <i class="icon-star-o"></i>
+                        <i class="icon-star-o"></i>
+                        <span>{{homestayDTOS[3].avgRate}} Sao</span>
+                      </p>
+                      <p *ngIf="homestayDTOS[3].roundRate == 1" class="rate">
+                        <i class="icon-star"></i>
+                        <i class="icon-star-o"></i>
+                        <i class="icon-star-o"></i>
+                        <i class="icon-star-o"></i>
+                        <i class="icon-star-o"></i>
+                        <span>{{homestayDTOS[3].avgRate}} Sao</span>
+                      </p>
+                      <p *ngIf="homestayDTOS[3].roundRate == 2" class="rate">
+                        <i class="icon-star"></i>
+                        <i class="icon-star"></i>
+                        <i class="icon-star-o"></i>
+                        <i class="icon-star-o"></i>
+                        <i class="icon-star-o"></i>
+                        <span>{{homestayDTOS[3].avgRate}} Sao</span>
+                      </p>
+                      <p *ngIf="homestayDTOS[3].roundRate == 3" class="rate">
+                        <i class="icon-star"></i>
+                        <i class="icon-star"></i>
+                        <i class="icon-star"></i>
+                        <i class="icon-star-o"></i>
+                        <i class="icon-star-o"></i>
+                        <span>{{homestayDTOS[3].avgRate}} Sao</span>
+                      </p>
+                      <p *ngIf="homestayDTOS[3].roundRate == 4" class="rate">
                         <i class="icon-star"></i>
                         <i class="icon-star"></i>
                         <i class="icon-star"></i>
                         <i class="icon-star"></i>
                         <i class="icon-star-o"></i>
-                        <span>8 Rating</span>
+                        <span>{{homestayDTOS[3].avgRate}} Sao</span>
+                      </p>
+                      <p *ngIf="homestayDTOS[3].roundRate == 5" class="rate">
+                        <i class="icon-star"></i>
+                        <i class="icon-star"></i>
+                        <i class="icon-star"></i>
+                        <i class="icon-star"></i>
+                        <i class="icon-star"></i>
+                        <span>{{homestayDTOS[3].avgRate}} Sao</span>
                       </p>
                     </div>
                     <div class="two" style="margin-left: -50px">
-                      <span class="price per-price">{{homestays[3].price | currency :'đ' :true: '1.0-0'}}<br><small>/ngày</small></span>
+                      <span class="price per-price">{{homestayDTOS[3].price | currency :'đ' :true: '1.0-0'}}<br><small>/ngày</small></span>
                     </div>
                   </div>
-                  <p class="format-form-p">{{homestays[3].description}}</p>
+                  <p class="format-form-p-bot">{{homestayDTOS[3].description}}</p>
                   <hr>
                   <p class="bottom-area d-flex">
-                    <span class="format-form-span"><i class="icon-map-o"></i> {{homestays[3].address}}</span>
+                    <span class="format-form-span-bot"><i class="icon-map-o"></i> {{homestayDTOS[3].address}}</span>
                   </p>
                 </div>
               </div>
             </div>
           </div>
-          <div class="carousel-item" *ngFor="let h of homestays">
+          <div class="carousel-item" *ngFor="let h of homestayDTOS">
             <div class="col-sm col-md-8 col-lg " >
               <div class="destination">
-                <img src="{{h.imageOfHomestays[1].images}}" alt="" style="width: 100%; height: 450px">
+                <img src="{{h.images}}" alt="" style="width: 100%; height: 450px">
                 <div class="text p-3">
                   <div class="d-flex">
                     <div class="one">
-                      <h3><a href="#">{{h.name}}</a></h3>
-                      <p class="rate">
+                      <h3><a style="cursor: pointer" (click)="redirectByHomestay(h.id)">{{h.name}}</a></h3>
+                      <p *ngIf="h.roundRate == null" class="rate">
+                        <i class="icon-star-o"></i>
+                        <i class="icon-star-o"></i>
+                        <i class="icon-star-o"></i>
+                        <i class="icon-star-o"></i>
+                        <i class="icon-star-o"></i>
+                        <span>Chưa có đánh giá</span>
+                      </p>
+                      <p *ngIf="h.roundRate == 0" class="rate">
+                        <i class="icon-star-o"></i>
+                        <i class="icon-star-o"></i>
+                        <i class="icon-star-o"></i>
+                        <i class="icon-star-o"></i>
+                        <i class="icon-star-o"></i>
+                        <span>{{h.avgRate}} Sao</span>
+                      </p>
+                      <p *ngIf="h.roundRate == 1" class="rate">
+                        <i class="icon-star"></i>
+                        <i class="icon-star-o"></i>
+                        <i class="icon-star-o"></i>
+                        <i class="icon-star-o"></i>
+                        <i class="icon-star-o"></i>
+                        <span>{{h.avgRate}} Sao</span>
+                      </p>
+                      <p *ngIf="h.roundRate == 2" class="rate">
+                        <i class="icon-star"></i>
+                        <i class="icon-star"></i>
+                        <i class="icon-star-o"></i>
+                        <i class="icon-star-o"></i>
+                        <i class="icon-star-o"></i>
+                        <span>{{h.avgRate}} Sao</span>
+                      </p>
+                      <p *ngIf="h.roundRate == 3" class="rate">
+                        <i class="icon-star"></i>
+                        <i class="icon-star"></i>
+                        <i class="icon-star"></i>
+                        <i class="icon-star-o"></i>
+                        <i class="icon-star-o"></i>
+                        <span>{{h.avgRate}} Sao</span>
+                      </p>
+                      <p *ngIf="h.roundRate == 4" class="rate">
                         <i class="icon-star"></i>
                         <i class="icon-star"></i>
                         <i class="icon-star"></i>
                         <i class="icon-star"></i>
                         <i class="icon-star-o"></i>
-                        <span>8 Rating</span>
+                        <span>{{h.avgRate}} Sao</span>
+                      </p>
+                      <p *ngIf="h.roundRate == 5" class="rate">
+                        <i class="icon-star"></i>
+                        <i class="icon-star"></i>
+                        <i class="icon-star"></i>
+                        <i class="icon-star"></i>
+                        <i class="icon-star"></i>
+                        <span>{{h.avgRate}} Sao</span>
                       </p>
                     </div>
                     <div class="two" style="margin-left: -50px">
-                      <span class="price per-price">{{h.price | currency :'đ' :true: '1.0-0'}}<br><small>/ngày</small></span>
+                      <span class="price per-price">{{h.price | currency :'đ' :true: '1.0-0'}}<small>/ngày</small></span>
                     </div>
                   </div>
-                  <p class="format-form-p">{{h.description}}</p>
+                  <p class="format-form-p-bot">{{h.description}}</p>
                   <hr>
                   <p class="bottom-area d-flex">
-                    <span class="format-form-span"><i class="icon-map-o"></i> {{h.address}}</span>
+                    <span class="format-form-span-bot"><i class="icon-map-o"></i> {{h.address}}</span>
                   </p>
                 </div>
               </div>
@@ -526,6 +622,21 @@
 
   .format-form-span {
     width: 210px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .format-form-p-bot {
+    height: 30px;
+    width: 735px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .format-form-span-bot {
+    width: 735px;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;

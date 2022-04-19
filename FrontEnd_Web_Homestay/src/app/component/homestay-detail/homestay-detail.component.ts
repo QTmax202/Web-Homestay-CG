@@ -1,7 +1,7 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {Homestay2Service} from "../../service/homestay/homestay2.service";
 import {Homestay2} from "../../models/homestay2";
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {MatTableDataSource} from "@angular/material/table";
 import {MatPaginator} from "@angular/material/paginator";
 import {CommentService} from "../../service/comment/comment.service";
@@ -10,6 +10,7 @@ import {NotifyComponent} from "../../dialog/notify/notify.component";
 import {MatDialog} from "@angular/material/dialog";
 import {BookHomestayComponent} from "../../dialog/book-homestay/book-homestay.component";
 import {ImageOfHomestay} from "../../models/image-of-homestay";
+import {MyHomestayDto} from "../../models/my-homestay-dto";
 
 @Component({
   selector: 'app-homestay-detail',
@@ -23,20 +24,23 @@ export class HomestayDetailComponent implements OnInit {
   homestay!: Homestay2;
   google_api!: string;
   images!: ImageOfHomestay[];
+  homestayDTOS!: MyHomestayDto[];
 
   formComment: FormGroup = new FormGroup({});
   comments?: any;
 
-  displayedColumns: string[] = ['image'];
+  displayedColumns: string[] = ['id'];
   dataSource!: MatTableDataSource<any>;
 
   idAcc = localStorage.getItem('ACCOUNT_ID')
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
+  input: any;
 
   constructor(private homestayService: Homestay2Service,
               private commentService: CommentService,
               private route: ActivatedRoute,
+              private router: Router,
               private fb: FormBuilder,
               private dialog: MatDialog) {
   }
@@ -53,11 +57,10 @@ export class HomestayDetailComponent implements OnInit {
     })
     this.getHomestayById();
     this.getAllImage();
-    this.getAllComment();
     if (this.idAcc == null) {
-      this.getAllHomestay();
+      this.getAllHomestayRate();
     } else {
-      this.getAllHomestaySignIn();
+      this.getAllYourHomestayRate();
     }
   }
 
@@ -73,6 +76,25 @@ export class HomestayDetailComponent implements OnInit {
     })
   }
 
+  redirectByHomestay(id: any) {
+    this.router.navigateByUrl('/homestay-detail/' + id, {state: {id}})
+    this.getHomestayById()
+  }
+
+  getAllHomestayRate() {
+    this.homestayService.getAllHomestayRate().subscribe((data) => {
+      this.homestayDTOS = data;
+    })
+  }
+
+  getAllYourHomestayRate() {
+    this.homestayService.getAllYourHomestayRate(this.idAcc).subscribe((data) => {
+      this.homestayDTOS = data;
+    })
+  }
+
+
+
   getAllImage() {
     this.idH = this.route.snapshot.params['id'];
     this.homestayService.findImageOfHomestaysByHomestay_Id(this.idH).subscribe((data) => {
@@ -84,21 +106,9 @@ export class HomestayDetailComponent implements OnInit {
   getAllComment() {
     this.idH = this.route.snapshot.params['id'];
     this.commentService.getCommentsByHomestayId(this.idH).subscribe((data) => {
-      this.dataSource = new MatTableDataSource<any>(data);
       this.comments = data;
+      this.dataSource = new MatTableDataSource<any>(data);
       this.dataSource.paginator = this.paginator;
-    })
-  }
-
-  getAllHomestay() {
-    this.homestayService.getAllHomestay().subscribe((data) => {
-      this.homestays = data;
-    })
-  }
-
-  getAllHomestaySignIn() {
-    this.homestayService.getAllHomestaySignIn(this.idAcc).subscribe((data) => {
-      this.homestays = data;
     })
   }
 
@@ -130,6 +140,7 @@ export class HomestayDetailComponent implements OnInit {
   }
 
   openCommentRate() {
+    this.getAllComment()
     // @ts-ignore
     document.getElementById("home-comment-rate").style.display = "block";
     // @ts-ignore

@@ -73,7 +73,10 @@
     							8 Rating
                  </span>
               <div class="col-sm-2" *ngIf="idAcc != null">
-                <input (click)="openBookHouse(homestay)" style="margin-right: 0" class="btn btn-primary"
+                <input *ngIf="idAcc == homestay.account" disabled (click)="openBookHouse(homestay)" style="margin-right: 0" class="btn btn-primary"
+                       type="submit"
+                       value="Đặt ngay">
+                <input *ngIf="idAcc != homestay.account" (click)="openBookHouse(homestay)" style="margin-right: 0" class="btn btn-primary"
                        type="submit"
                        value="Đặt ngay">
               </div>
@@ -95,7 +98,8 @@
             <h3>
               <span (click)="openDescription()" style="cursor: pointer; color: #f85959; font-size: 18px"><b><u>Giới thiệu</u></b></span>
               <span style="color: #f85959">  |  </span>
-              <span (click)="openCommentRate()" style="cursor: pointer; color: #f85959; font-size: 18px"><b><u>Đánh giá</u></b></span>
+              <span (click)="openCommentRate()"
+                    style="cursor: pointer; color: #f85959; font-size: 18px"><b><u>Đánh giá</u></b></span>
             </h3>
           </div>
           <div id="home-comment-rate" class="row" style="display: none">
@@ -103,7 +107,7 @@
               <div class="container-table row">
                 <table mat-table [dataSource]="dataSource" style="display: flex; width: 100%">
                   <!-- ID Column -->
-                  <ng-container matColumnDef="image">
+                  <ng-container matColumnDef="id">
                     <th mat-header-cell *matHeaderCellDef hidden> ID</th>
                     <td mat-cell *matCellDef="let row" style="width: 800px">
                       <div class="item">
@@ -188,11 +192,14 @@
 
                   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
                   <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+                  <!-- Row shown when there is no matching data. -->
+                  <tr class="mat-row" *matNoDataRow>
+                    <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
+                  </tr>
                 </table>
 
-
-                <mat-paginator style="right: 0" [pageSizeOptions]="[3, 6, 9, 15]"
-                               aria-label="Select page of users"></mat-paginator>
+                <mat-paginator [pageSizeOptions]="[3, 6, 9, 12]" aria-label="Select page of users"></mat-paginator>
               </div>
             </div>
           </div>
@@ -206,292 +213,165 @@
         </div>
 
         <div class="col-md-12 hotel-single  mb-5 mt-4">
-          <h4 class="mb-4">Our Rooms</h4>
+          <h4 class="mb-4"><strong>Homestay</strong> khác</h4>
           <div class="row">
 
-            <div id="homestay" class="carousel slide" data-ride="carousel">
+            <div id="all-homestay" class="carousel slide col-md-12" data-ride="carousel" style="width: 100%">
 
               <!-- The slideshow -->
               <div class="carousel-inner">
                 <div class="carousel-item active">
-                  <div style="display: flex">
-                    <div class="col-md-4">
-                      <div class="destination">
-                        <a href="hotel-single.html" class="img img-2"
-                           style="background-image: url(assets/images/room-4.jpg);"></a>
-                        <div class="text p-3">
-                          <div class="d-flex">
-                            <div class="one">
-                              <h3><a href="hotel-single.html">Hotel, Italy</a></h3>
-                              <p class="rate">
-                                <i class="icon-star"></i>
-                                <i class="icon-star"></i>
-                                <i class="icon-star"></i>
-                                <i class="icon-star"></i>
-                                <i class="icon-star-o"></i>
-                                <span>8 Rating</span>
-                              </p>
-                            </div>
-                            <div class="two">
-                              <span class="price per-price">$40<br><small>/night</small></span>
-                            </div>
+                  <div class="col-sm col-md-12 col-lg ">
+                    <div class="destination">
+                      <img src="{{homestayDTOS[3].images}}" alt="" style="width: 100%; height: 450px">
+                      <div class="text p-3">
+                        <div class="d-flex">
+                          <div class="one">
+                            <h3><a style="cursor: pointer" (click)="redirectByHomestay(homestayDTOS[3].id)">{{homestayDTOS[3].name}}</a></h3>
+                            <p *ngIf="homestayDTOS[3].roundRate == null" class="rate">
+                              <i class="icon-star-o"></i>
+                              <i class="icon-star-o"></i>
+                              <i class="icon-star-o"></i>
+                              <i class="icon-star-o"></i>
+                              <i class="icon-star-o"></i>
+                              <span>Chưa có đánh giá</span>
+                            </p>
+                            <p *ngIf="homestayDTOS[3].roundRate == 0" class="rate">
+                              <i class="icon-star-o"></i>
+                              <i class="icon-star-o"></i>
+                              <i class="icon-star-o"></i>
+                              <i class="icon-star-o"></i>
+                              <i class="icon-star-o"></i>
+                              <span>{{homestayDTOS[3].avgRate}} Sao</span>
+                            </p>
+                            <p *ngIf="homestayDTOS[3].roundRate == 1" class="rate">
+                              <i class="icon-star"></i>
+                              <i class="icon-star-o"></i>
+                              <i class="icon-star-o"></i>
+                              <i class="icon-star-o"></i>
+                              <i class="icon-star-o"></i>
+                              <span>{{homestayDTOS[3].avgRate}} Sao</span>
+                            </p>
+                            <p *ngIf="homestayDTOS[3].roundRate == 2" class="rate">
+                              <i class="icon-star"></i>
+                              <i class="icon-star"></i>
+                              <i class="icon-star-o"></i>
+                              <i class="icon-star-o"></i>
+                              <i class="icon-star-o"></i>
+                              <span>{{homestayDTOS[3].avgRate}} Sao</span>
+                            </p>
+                            <p *ngIf="homestayDTOS[3].roundRate == 3" class="rate">
+                              <i class="icon-star"></i>
+                              <i class="icon-star"></i>
+                              <i class="icon-star"></i>
+                              <i class="icon-star-o"></i>
+                              <i class="icon-star-o"></i>
+                              <span>{{homestayDTOS[3].avgRate}} Sao</span>
+                            </p>
+                            <p *ngIf="homestayDTOS[3].roundRate == 4" class="rate">
+                              <i class="icon-star"></i>
+                              <i class="icon-star"></i>
+                              <i class="icon-star"></i>
+                              <i class="icon-star"></i>
+                              <i class="icon-star-o"></i>
+                              <span>{{homestayDTOS[3].avgRate}} Sao</span>
+                            </p>
+                            <p *ngIf="homestayDTOS[3].roundRate == 5" class="rate">
+                              <i class="icon-star"></i>
+                              <i class="icon-star"></i>
+                              <i class="icon-star"></i>
+                              <i class="icon-star"></i>
+                              <i class="icon-star"></i>
+                              <span>{{homestayDTOS[3].avgRate}} Sao</span>
+                            </p>
                           </div>
-                          <p>Far far away, behind the word mountains, far from the countries</p>
-                          <hr>
-                          <p class="bottom-area d-flex">
-                            <span><i class="icon-map-o"></i> Miami, Fl</span>
-                            <span class="ml-auto"><a href="#">Book Now</a></span>
-                          </p>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="col-md-4">
-                      <div class="destination">
-                        <a href="hotel-single.html" class="img img-2"
-                           style="background-image: url(assets/images/room-5.jpg);"></a>
-                        <div class="text p-3">
-                          <div class="d-flex">
-                            <div class="one">
-                              <h3><a href="hotel-single.html">Hotel, Italy</a></h3>
-                              <p class="rate">
-                                <i class="icon-star"></i>
-                                <i class="icon-star"></i>
-                                <i class="icon-star"></i>
-                                <i class="icon-star"></i>
-                                <i class="icon-star-o"></i>
-                                <span>8 Rating</span>
-                              </p>
-                            </div>
-                            <div class="two">
-                              <span class="price per-price">$40<br><small>/night</small></span>
-                            </div>
+                          <div class="two" style="margin-left: -50px">
+                            <span class="price per-price">{{homestayDTOS[3].price | currency :'đ' :true: '1.0-0'}}<small>/ngày</small></span>
                           </div>
-                          <p>Far far away, behind the word mountains, far from the countries</p>
-                          <hr>
-                          <p class="bottom-area d-flex">
-                            <span><i class="icon-map-o"></i> Miami, Fl</span>
-                            <span class="ml-auto"><a href="#">Book Now</a></span>
-                          </p>
                         </div>
-                      </div>
-                    </div>
-                    <div class="col-md-4">
-                      <div class="destination">
-                        <a href="hotel-single.html" class="img img-2"
-                           style="background-image: url(assets/images/room-6.jpg);"></a>
-                        <div class="text p-3">
-                          <div class="d-flex">
-                            <div class="one">
-                              <h3><a href="hotel-single.html">Hotel, Italy</a></h3>
-                              <p class="rate">
-                                <i class="icon-star"></i>
-                                <i class="icon-star"></i>
-                                <i class="icon-star"></i>
-                                <i class="icon-star"></i>
-                                <i class="icon-star-o"></i>
-                                <span>8 Rating</span>
-                              </p>
-                            </div>
-                            <div class="two">
-                              <span class="price per-price">$40<br><small>/night</small></span>
-                            </div>
-                          </div>
-                          <p>Far far away, behind the word mountains, far from the countries</p>
-                          <hr>
-                          <p class="bottom-area d-flex">
-                            <span><i class="icon-map-o"></i> Miami, Fl</span>
-                            <span class="ml-auto"><a href="#">Book Now</a></span>
-                          </p>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
-                </div>
-                <div class="carousel-item">
-                  <div style="display: flex">
-                    <div class="col-md-4">
-                      <div class="destination">
-                        <a href="hotel-single.html" class="img img-2"
-                           style="background-image: url(assets/images/room-5.jpg);"></a>
-                        <div class="text p-3">
-                          <div class="d-flex">
-                            <div class="one">
-                              <h3><a href="hotel-single.html">Hotel, Italy</a></h3>
-                              <p class="rate">
-                                <i class="icon-star"></i>
-                                <i class="icon-star"></i>
-                                <i class="icon-star"></i>
-                                <i class="icon-star"></i>
-                                <i class="icon-star-o"></i>
-                                <span>8 Rating</span>
-                              </p>
-                            </div>
-                            <div class="two">
-                              <span class="price per-price">$40<br><small>/night</small></span>
-                            </div>
-                          </div>
-                          <p>Far far away, behind the word mountains, far from the countries</p>
-                          <hr>
-                          <p class="bottom-area d-flex">
-                            <span><i class="icon-map-o"></i> Miami, Fl</span>
-                            <span class="ml-auto"><a href="#">Book Now</a></span>
-                          </p>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="col-md-4">
-                      <div class="destination">
-                        <a href="hotel-single.html" class="img img-2"
-                           style="background-image: url(assets/images/room-6.jpg);"></a>
-                        <div class="text p-3">
-                          <div class="d-flex">
-                            <div class="one">
-                              <h3><a href="hotel-single.html">Hotel, Italy</a></h3>
-                              <p class="rate">
-                                <i class="icon-star"></i>
-                                <i class="icon-star"></i>
-                                <i class="icon-star"></i>
-                                <i class="icon-star"></i>
-                                <i class="icon-star-o"></i>
-                                <span>8 Rating</span>
-                              </p>
-                            </div>
-                            <div class="two">
-                              <span class="price per-price">$40<br><small>/night</small></span>
-                            </div>
-                          </div>
-                          <p>Far far away, behind the word mountains, far from the countries</p>
-                          <hr>
-                          <p class="bottom-area d-flex">
-                            <span><i class="icon-map-o"></i> Miami, Fl</span>
-                            <span class="ml-auto"><a href="#">Book Now</a></span>
-                          </p>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="col-md-4">
-                      <div class="destination">
-                        <a href="hotel-single.html" class="img img-2"
-                           style="background-image: url(assets/images/room-4.jpg);"></a>
-                        <div class="text p-3">
-                          <div class="d-flex">
-                            <div class="one">
-                              <h3><a href="hotel-single.html">Hotel, Italy</a></h3>
-                              <p class="rate">
-                                <i class="icon-star"></i>
-                                <i class="icon-star"></i>
-                                <i class="icon-star"></i>
-                                <i class="icon-star"></i>
-                                <i class="icon-star-o"></i>
-                                <span>8 Rating</span>
-                              </p>
-                            </div>
-                            <div class="two">
-                              <span class="price per-price">$40<br><small>/night</small></span>
-                            </div>
-                          </div>
-                          <p>Far far away, behind the word mountains, far from the countries</p>
-                          <hr>
-                          <p class="bottom-area d-flex">
-                            <span><i class="icon-map-o"></i> Miami, Fl</span>
-                            <span class="ml-auto"><a href="#">Book Now</a></span>
-                          </p>
-                        </div>
+                        <p class="format-form-p-bot">{{homestayDTOS[3].description}}</p>
+                        <hr>
+                        <p class="bottom-area d-flex">
+                          <span class="format-form-span-bot"><i class="icon-map-o"></i> {{homestayDTOS[3].address}}</span>
+                        </p>
                       </div>
                     </div>
                   </div>
                 </div>
-                <div class="carousel-item">
-                  <div style="display: flex">
-                    <div class="col-md-4">
-                      <div class="destination">
-                        <a href="hotel-single.html" class="img img-2"
-                           style="background-image: url(assets/images/room-6.jpg);"></a>
-                        <div class="text p-3">
-                          <div class="d-flex">
-                            <div class="one">
-                              <h3><a href="hotel-single.html">Hotel, Italy</a></h3>
-                              <p class="rate">
-                                <i class="icon-star"></i>
-                                <i class="icon-star"></i>
-                                <i class="icon-star"></i>
-                                <i class="icon-star"></i>
-                                <i class="icon-star-o"></i>
-                                <span>8 Rating</span>
-                              </p>
-                            </div>
-                            <div class="two">
-                              <span class="price per-price">$40<br><small>/night</small></span>
-                            </div>
+                <div class="carousel-item" *ngFor="let h of homestayDTOS">
+                  <div class="col-sm col-md-8 col-lg " >
+                    <div class="destination">
+                      <img src="{{h.images}}" alt="" style="width: 100%; height: 450px">
+                      <div class="text p-3">
+                        <div class="d-flex">
+                          <div class="one">
+                            <h3><a style="cursor: pointer" (click)="redirectByHomestay(h.id)">{{h.name}}</a></h3>
+                            <p *ngIf="h.roundRate == null" class="rate">
+                              <i class="icon-star-o"></i>
+                              <i class="icon-star-o"></i>
+                              <i class="icon-star-o"></i>
+                              <i class="icon-star-o"></i>
+                              <i class="icon-star-o"></i>
+                              <span>Chưa có đánh giá</span>
+                            </p>
+                            <p *ngIf="h.roundRate == 0" class="rate">
+                              <i class="icon-star-o"></i>
+                              <i class="icon-star-o"></i>
+                              <i class="icon-star-o"></i>
+                              <i class="icon-star-o"></i>
+                              <i class="icon-star-o"></i>
+                              <span>{{h.avgRate}} Sao</span>
+                            </p>
+                            <p *ngIf="h.roundRate == 1" class="rate">
+                              <i class="icon-star"></i>
+                              <i class="icon-star-o"></i>
+                              <i class="icon-star-o"></i>
+                              <i class="icon-star-o"></i>
+                              <i class="icon-star-o"></i>
+                              <span>{{h.avgRate}} Sao</span>
+                            </p>
+                            <p *ngIf="h.roundRate == 2" class="rate">
+                              <i class="icon-star"></i>
+                              <i class="icon-star"></i>
+                              <i class="icon-star-o"></i>
+                              <i class="icon-star-o"></i>
+                              <i class="icon-star-o"></i>
+                              <span>{{h.avgRate}} Sao</span>
+                            </p>
+                            <p *ngIf="h.roundRate == 3" class="rate">
+                              <i class="icon-star"></i>
+                              <i class="icon-star"></i>
+                              <i class="icon-star"></i>
+                              <i class="icon-star-o"></i>
+                              <i class="icon-star-o"></i>
+                              <span>{{h.avgRate}} Sao</span>
+                            </p>
+                            <p *ngIf="h.roundRate == 4" class="rate">
+                              <i class="icon-star"></i>
+                              <i class="icon-star"></i>
+                              <i class="icon-star"></i>
+                              <i class="icon-star"></i>
+                              <i class="icon-star-o"></i>
+                              <span>{{h.avgRate}} Sao</span>
+                            </p>
+                            <p *ngIf="h.roundRate == 5" class="rate">
+                              <i class="icon-star"></i>
+                              <i class="icon-star"></i>
+                              <i class="icon-star"></i>
+                              <i class="icon-star"></i>
+                              <i class="icon-star"></i>
+                              <span>{{h.avgRate}} Sao</span>
+                            </p>
                           </div>
-                          <p>Far far away, behind the word mountains, far from the countries</p>
-                          <hr>
-                          <p class="bottom-area d-flex">
-                            <span><i class="icon-map-o"></i> Miami, Fl</span>
-                            <span class="ml-auto"><a href="#">Book Now</a></span>
-                          </p>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="col-md-4">
-                      <div class="destination">
-                        <a href="hotel-single.html" class="img img-2"
-                           style="background-image: url(assets/images/room-5.jpg);"></a>
-                        <div class="text p-3">
-                          <div class="d-flex">
-                            <div class="one">
-                              <h3><a href="hotel-single.html">Hotel, Italy</a></h3>
-                              <p class="rate">
-                                <i class="icon-star"></i>
-                                <i class="icon-star"></i>
-                                <i class="icon-star"></i>
-                                <i class="icon-star"></i>
-                                <i class="icon-star-o"></i>
-                                <span>8 Rating</span>
-                              </p>
-                            </div>
-                            <div class="two">
-                              <span class="price per-price">$40<br><small>/night</small></span>
-                            </div>
+                          <div class="two" style="margin-left: -70px">
+                            <span class="price per-price">{{h.price | currency :'đ' :true: '1.0-0'}}<small>/ngày</small></span>
                           </div>
-                          <p>Far far away, behind the word mountains, far from the countries</p>
-                          <hr>
-                          <p class="bottom-area d-flex">
-                            <span><i class="icon-map-o"></i> Miami, Fl</span>
-                            <span class="ml-auto"><a href="#">Book Now</a></span>
-                          </p>
                         </div>
-                      </div>
-                    </div>
-                    <div class="col-md-4">
-                      <div class="destination">
-                        <a href="hotel-single.html" class="img img-2"
-                           style="background-image: url(assets/images/room-4.jpg);"></a>
-                        <div class="text p-3">
-                          <div class="d-flex">
-                            <div class="one">
-                              <h3><a href="hotel-single.html">Hotel, Italy</a></h3>
-                              <p class="rate">
-                                <i class="icon-star"></i>
-                                <i class="icon-star"></i>
-                                <i class="icon-star"></i>
-                                <i class="icon-star"></i>
-                                <i class="icon-star-o"></i>
-                                <span>8 Rating</span>
-                              </p>
-                            </div>
-                            <div class="two">
-                              <span class="price per-price">$40<br><small>/night</small></span>
-                            </div>
-                          </div>
-                          <p>Far far away, behind the word mountains, far from the countries</p>
-                          <hr>
-                          <p class="bottom-area d-flex">
-                            <span><i class="icon-map-o"></i> Miami, Fl</span>
-                            <span class="ml-auto"><a href="#">Book Now</a></span>
-                          </p>
-                        </div>
+                        <p class="format-form-p-bot">{{h.description}}</p>
+                        <hr>
+                        <p class="bottom-area d-flex">
+                          <span class="format-form-span-bot"><i class="icon-map-o"></i> {{h.address}}</span>
+                        </p>
                       </div>
                     </div>
                   </div>
@@ -499,14 +379,15 @@
               </div>
 
               <!-- Left and right controls -->
-              <a class="carousel-control-prev" href="#homestay" data-slide="prev" style="width: 30px; left: -30px">
-                <span class="carousel-control-prev-icon"
-                      style="background-color: black; width: 30px; height: 50px"></span>
+              <a class="carousel-control-prev" href="#all-homestay" data-slide="prev" style="width: 30px; left: -20px">
+              <span class="carousel-control-prev-icon"
+                    style="background-color: black; width: 30px; height: 50px"></span>
               </a>
-              <a class="carousel-control-next" href="#homestay" data-slide="next" style="width: 30px; right: -30px">
-                <span class="carousel-control-next-icon"
-                      style="background-color: black; width: 30px; height: 50px"></span>
+              <a class="carousel-control-next" href="#all-homestay" data-slide="next" style="width: 30px; right: -20px">
+              <span class="carousel-control-next-icon"
+                    style="background-color: black; width: 30px; height: 50px"></span>
               </a>
+
             </div>
 
           </div>
@@ -515,3 +396,19 @@
     </div> <!-- .col-md-8 -->
   </div>
 </section>
+<style>
+  .format-form-p-bot {
+    height: 30px;
+    width: 630px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .format-form-span-bot {
+    width: 630px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+</style>

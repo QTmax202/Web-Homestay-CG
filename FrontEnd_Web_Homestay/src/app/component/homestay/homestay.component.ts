@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, Inject, OnInit, ViewChild} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {Homestay2Service} from "../../service/homestay/homestay2.service";
 import {Homestay2} from "../../models/homestay2";
@@ -7,6 +7,7 @@ import {MatSort} from '@angular/material/sort';
 import {MatTableDataSource} from '@angular/material/table';
 import {ActivatedRoute} from "@angular/router";
 import {ImageOfHomestay} from "../../models/image-of-homestay";
+import {MAT_DIALOG_DATA} from "@angular/material/dialog";
 
 @Component({
   selector: 'app-homestay',
@@ -20,6 +21,11 @@ export class HomestayComponent implements OnInit {
   images!: ImageOfHomestay[];
   image!: ImageOfHomestay[];
   idAcc = localStorage.getItem('ACCOUNT_ID')
+  formSearch: FormGroup = new FormGroup({});
+  name!: string;
+  idCity!: number;
+  price1 !: number;
+  price2 !: number;
 
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -34,6 +40,8 @@ export class HomestayComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.price1 = 200000
+    this.price2 = 15000000
     if (this.idAcc == null) {
       this.getAllHomestay();
     } else {
@@ -56,15 +64,10 @@ export class HomestayComponent implements OnInit {
   getAllHomestaySignIn() {
     this.homestayService.getAllHomestaySignIn(this.idAcc).subscribe((data) => {
       this.homestays = data;
-      console.log(this.homestays)
     })
   }
 
-  formSearch: FormGroup = new FormGroup({});
-  name!: string;
-  idCity!: number;
-  price1 = 200000;
-  price2 = 10000000;
+
 
   fetch1(value: any) {
     this.price1 = value;

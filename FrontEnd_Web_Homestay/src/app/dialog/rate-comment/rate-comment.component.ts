@@ -22,11 +22,11 @@ export class RateCommentComponent implements OnInit {
 
   snackBarDuration = 1000;
   response = [
-    'You broke my heart!',
-    'Really?',
-    'We will do better next time.',
-    'Glad you like it!',
-    'Thank you so much!'
+    'Bạn đã làm tan nát trái tim tôi! :(',
+    'Thật sao? :|',
+    'Chúng tôi sẽ làm tốt hơn vào lần tới. :3',
+    'Hạnh phúc vì bạn thích nó! :)',
+    'Cảm ơn bạn rất nhiều! <3'
   ]
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: any,
@@ -94,6 +94,7 @@ export class RateCommentComponent implements OnInit {
     this.commentService.createRate(rate).subscribe(() => {
       this.formRateComment.reset();
       this.dialog.closeAll();
+
     })
   }
 

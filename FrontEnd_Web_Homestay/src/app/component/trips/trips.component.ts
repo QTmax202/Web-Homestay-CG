@@ -27,22 +27,14 @@ export class TripsComponent implements OnInit {
 
   ngOnInit(): void {
     this.getBillByAccountId()
-    this.existsCommentByAccount_IdAndHomestay_Id()
-  }
-
-  existsCommentByAccount_IdAndHomestay_Id() {
-    console.log(this.myBill)
   }
 
   getBillByAccountId() {
     this.homestayService.getMyBillByAccountId(this.idAcc).subscribe((data) => {
       this.myBill = data;
-      console.log(this.myBill)
       for (let i = 0; i < this.myBill.length; i++) {
-        console.log(this.myBill[i].homeId)
         this.commentService.existsCommentByAccount_IdAndHomestay_Id(this.idAcc, this.myBill[i].homeId).subscribe((dataExist) => {
           this.myBill[i].exist = dataExist;
-          console.log(this.myBill[i].exist)
         })
       }
     })
@@ -54,8 +46,12 @@ export class TripsComponent implements OnInit {
     this.dialog.open(RateCommentComponent, {
       width: '50%',
       data : homeId
+    }).afterClosed().subscribe(() => {
+      this.getBillByAccountId()
     });
   }
+
+
 
   openCancellingInvoiceClient(myBill:MyBillDto) {
     this.dialog.open(ConfirmBookComponent, {

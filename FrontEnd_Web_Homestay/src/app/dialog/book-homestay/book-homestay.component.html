@@ -23,8 +23,8 @@
         <mat-datepicker-toggle matSuffix [for]="rangePicker"></mat-datepicker-toggle>
         <mat-date-range-picker #rangePicker>
           <mat-date-range-picker-actions>
-            <button mat-button matDateRangePickerCancel>Cancel</button>
-            <button mat-raised-button color="primary" matDateRangePickerApply (click)="start_end_date()">Apply</button>
+<!--            <button mat-button matDateRangePickerCancel>Cancel</button>-->
+            <button mat-raised-button color="primary" matDateRangePickerApply (click)="start_end_date()">Xác Nhận</button>
           </mat-date-range-picker-actions>
         </mat-date-range-picker>
       </mat-form-field>
@@ -43,7 +43,7 @@
     </div>
   </div>
   <div mat-dialog-actions [align]="'end'">
-    <button mat-raised-button color="warn" mat-dialog-close>Đóng</button>
+<!--    <button mat-raised-button color="warn" mat-dialog-close>Đóng</button>-->
     <button type="submit" mat-raised-button color="primary" (click)="book_homestay()">Xác Nhận</button>
   </div>
 </form>

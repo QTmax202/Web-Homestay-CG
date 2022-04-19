@@ -48,7 +48,7 @@ export class MyHomestayComponent implements OnInit {
               private fb: FormBuilder) { }
 
   ngOnInit(): void {
-    this.getHomestayByAccountId()
+    this.getAllMyHomestayRate()
     this.getBillByAccountId()
     this.formTurnOver = this.fb.group({
       startDate1: [''],
@@ -77,11 +77,14 @@ export class MyHomestayComponent implements OnInit {
       for (let i = 0; i < this.turnOver.length; i++) {
         this.totalTurnOver += this.turnOver[i].sumPrice;
       }
+    }, error => {
+      this.totalTurnOver = 0;
+      this.dataSource = new MatTableDataSource<any>([])
     })
   }
 
-  getHomestayByAccountId() {
-    this.homestayService.getHomestayByAccountId(this.idAcc).subscribe((data) => {
+  getAllMyHomestayRate() {
+    this.homestayService.getAllMyHomestayRate(this.idAcc).subscribe((data) => {
       this.homestays = data;
     })
   }

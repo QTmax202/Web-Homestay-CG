@@ -35,7 +35,7 @@
                 <div class="select-wrap one-third">
                   <div class="icon"><span class="ion-ios-arrow-down"></span></div>
                   <select name="" id="" class="form-control" formControlName="idCity" required>
-                    <option selected="selected" value="1">TP.Hà Nội</option>
+                    <option value="1">TP.Hà Nội</option>
                     <option value="2">Hải Phòng</option>
                     <option value="3">Quảng Ninh</option>
                     <option value="4">Lào Cai</option>
@@ -56,9 +56,10 @@
 										    <input type="number" value="{{price1}}" formControlName="price1" min="100000" max="20000000"/>	-
 										    <input type="number" value="{{price2}}" formControlName="price2" min="100000" max="20000000"/>
 										  </span>
-                  <input #element1 value="100000" min="100000" max="20000000" step="10000" type="range"
+                      <span>VNĐ</span>
+                  <input #element1 value="200000" min="100000" max="20000000" step="10000" type="range"
                          (change)="fetch1(element1.value)"/>
-                  <input #element2 value="20000000" min="100000" max="20000000" step="10000" type="range"
+                  <input #element2 value="15000000" min="100000" max="20000000" step="10000" type="range"
                          (change)="fetch2(element2.value)"/>
                 </div>
               </div>
@@ -79,7 +80,7 @@
               <div class="img img-2 d-flex justify-content-center align-items-center">
                 <img [routerLink]="['/homestay-detail/', h.id]" class="active"
                      style="width: 254px; height: 200px; cursor: pointer"
-                     src="{{h.imageOfHomestays[1].images}}" alt="">
+                     src="{{h.imageOfHomestays[0].images}}" alt="">
               </div>
               <div class="text p-3">
                 <div class="d-flex">
