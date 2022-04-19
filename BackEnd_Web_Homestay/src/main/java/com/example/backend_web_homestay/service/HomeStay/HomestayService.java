@@ -1,8 +1,12 @@
 package com.example.backend_web_homestay.service.HomeStay;
 
 import com.example.backend_web_homestay.DTO.MyHomestayDTO;
+import com.example.backend_web_homestay.model.City;
 import com.example.backend_web_homestay.model.Homestay;
+import com.example.backend_web_homestay.model.HomestayType;
+import com.example.backend_web_homestay.repository.ICityRepository;
 import com.example.backend_web_homestay.repository.IHomestayRepository;
+import com.example.backend_web_homestay.repository.IHomestayTypeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,6 +18,11 @@ public class HomestayService implements IHomestayService {
 
     @Autowired
     private IHomestayRepository homestayRepository;
+    @Autowired
+    private ICityRepository cityRepository;
+
+    @Autowired
+    private IHomestayTypeRepository homestayTypeRepository;
 
     @Override
     public Iterable<Homestay> findAll() {
@@ -68,5 +77,14 @@ public class HomestayService implements IHomestayService {
     @Override
     public Iterable<MyHomestayDTO> getTop5Homestay() {
         return homestayRepository.getTop5Homestay();
+    }
+    @Override
+    public Iterable<City> findAllCity() {
+        return cityRepository.findAll();
+    }
+
+    @Override
+    public Iterable<HomestayType> findAllType() {
+        return homestayTypeRepository.findAll();
     }
 }

@@ -20,7 +20,7 @@ public interface IHomestayRepository extends JpaRepository<Homestay, Long> {
     @Modifying
     @Query(value = "select hs.id as id, hs.name as name, hs.price as price, hs.description as description, hs.address as address, avg(rate.value_rate) as avgRate, round(avg(rate.value_rate)) as roundRate, img.images as images from homestay hs  \n" +
             "left join rate on hs.id = rate.homestay_id \n" +
-            "join image_of_homestay img on img.homestay_id = hs.id \n" +
+            "left join image_of_homestay img on img.homestay_id = hs.id \n" +
             "where hs.account_id = :id \n" +
             "group by hs.id \n" +
             "order by hs.id desc", nativeQuery = true)
@@ -29,13 +29,14 @@ public interface IHomestayRepository extends JpaRepository<Homestay, Long> {
     @Query(value = "select hs.id as id, hs.name as name, hs.price as price, hs.description as description, hs.address as address, avg(rate.value_rate) as avgRate, round(avg(rate.value_rate)) as roundRate, img.images as images from homestay hs  \n" +
             "left join rate on hs.id = rate.homestay_id \n" +
             "join image_of_homestay img on img.homestay_id = hs.id \n" +
-            "where hs.account_id != :id \n" +
+            "where hs.account_id != :id and hs.status = 1 \n" +
             "group by hs.id", nativeQuery = true)
     List<MyHomestayDTO> getAllYourHomestayRate(long id);
 
     @Query(value = "select hs.id as id, hs.name as name, hs.price as price, hs.description as description, hs.address as address, avg(rate.value_rate) as avgRate, round(avg(rate.value_rate)) as roundRate, img.images as images from homestay hs  \n" +
             "left join rate on hs.id = rate.homestay_id \n" +
             "join image_of_homestay img on img.homestay_id = hs.id \n" +
+            "where hs.status = 1 \n" +
             "group by hs.id", nativeQuery = true)
     List<MyHomestayDTO> getAllHomestayRate();
 
