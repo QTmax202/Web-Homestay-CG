@@ -22,7 +22,7 @@ public interface IHomestayRepository extends JpaRepository<Homestay, Long> {
             "left join rate on hs.id = rate.homestay_id \n" +
             "join image_of_homestay img on img.homestay_id = hs.id \n" +
             "where hs.account_id = :id \n" +
-            "group by hs.id" +
+            "group by hs.id \n" +
             "order by hs.id desc", nativeQuery = true)
     List<MyHomestayDTO> getAllMyHomestayRate(long id);
 
