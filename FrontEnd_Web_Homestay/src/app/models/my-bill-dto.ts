@@ -10,4 +10,5 @@ export interface MyBillDto {
   accountName: string,
   avgRate: number,
   roundRate: number,
+  exist: boolean;
 }

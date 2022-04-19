@@ -1,14 +1,14 @@
 package com.example.backend_web_homestay.DTO;
 
-public class ChangePasswordForm {
+public class ChangePasswordDTO {
     private String currentPassword;
     private String newPassword;
     private String confirmPassword;
 
-    public ChangePasswordForm() {
+    public ChangePasswordDTO() {
     }
 
-    public ChangePasswordForm(String currentPassword, String newPassword, String confirmPassword) {
+    public ChangePasswordDTO(String currentPassword, String newPassword, String confirmPassword) {
         this.currentPassword = currentPassword;
         this.newPassword = newPassword;
         this.confirmPassword = confirmPassword;

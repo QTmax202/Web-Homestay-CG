@@ -29,6 +29,10 @@ public interface IHomestayRepository extends JpaRepository<Homestay, Long> {
             "where name like %:name% and city_id = :idCity and status = 1 and price between :price1 and :price2", nativeQuery = true)
     Iterable<Homestay> findHomestayByNameAndCityAndPrice(String name, Long idCity, Long price1, Long price2);
 
+    @Query(value = "select * from homestay\n" +
+            "where account_id != :idAcc and name like %:name% and city_id = :idCity and status = 1 and price between :price1 and :price2", nativeQuery = true)
+    Iterable<Homestay> findHomestayByNameAndCityAndPriceSignIn(Long idAcc, String name, Long idCity, Long price1, Long price2);
+
     @Query(value = "select hs.id as id, hs.name as name, hs.price as price, hs.description as description, hs.address as address, \n" +
             "avg(rate.value_rate) as avgRate, round(avg(rate.value_rate)) as roundRate, \n" +
             "img.images as images, count(b.homestay_id) as countBill\n" +

@@ -48,6 +48,14 @@
                   <div class="d-flex">
                     <div class="one" style="width: 600px">
                       <h3><a href="hotel-single.html">{{m.homestayName}}</a></h3>
+                      <p *ngIf="m.roundRate == null" class="rate">
+                        <i class="icon-star-o"></i>
+                        <i class="icon-star-o"></i>
+                        <i class="icon-star-o"></i>
+                        <i class="icon-star-o"></i>
+                        <i class="icon-star-o"></i>
+                        <span>Chưa có đánh giá</span>
+                      </p>
                       <p *ngIf="m.roundRate == 0" class="rate">
                         <i class="icon-star-o"></i>
                         <i class="icon-star-o"></i>
@@ -101,6 +109,7 @@
                       <span class="price per-price">{{m.price | currency :'đ' :true: '1.0-0'}}</span>
                     </div>
                   </div>
+                  <p>Ngày đặt: <span>{{m.regisDate}}</span></p>
                   <p>Ngày bắt đầu: <span>{{m.startDate}}</span> - Ngày kết thúc: <span>{{m.endDate}}</span></p>
                   <hr>
                   <p class="bottom-area d-flex">
@@ -115,7 +124,9 @@
                       <button class="btn btn-warning" *ngIf="!onCheckToday(m.startDate)" style="margin-left: 500px" (click)="openCheckOutBill(m)">Trả phòng</button>
                       <button class="btn btn-info" disabled>Đang ở</button></span>
                     <span *ngIf="m.statusHomeId == 4" class="ml-auto">
-                      <button class="btn btn-danger" style="margin-left: 600px" (click)="openRate(m.homeId)">Đánh giá</button></span>
+                      <button *ngIf="m.exist == true" disabled class="btn btn-danger" style="margin-left: 600px" (click)="openRate(m.homeId)">Đánh giá</button>
+                      <button *ngIf="m.exist == false" class="btn btn-danger" style="margin-left: 600px" (click)="openRate(m.homeId)">Đánh giá</button>
+                    </span>
                     <span *ngIf="m.statusHomeId == 4" class="ml-auto">
                       <button class="btn btn-dark" disabled>Đã trả</button></span>
                     <span *ngIf="m.statusHomeId == 5" class="ml-auto">

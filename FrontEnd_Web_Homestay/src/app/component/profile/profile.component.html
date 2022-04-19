@@ -50,24 +50,37 @@
           <div class="row">
             <div class="col-md-9">
               <div class="destination">
-                <form action="#">
+                <form  class="example-form" [formGroup]="formProfile">
+                  <p>
+                    <mat-form-field appearance="outline">
+                      <mat-label>Họ và tên</mat-label>
+                      <input matInput placeholder="Họ và tên" formControlName="name" name="name"  required>
+                      <mat-icon matSuffix>people</mat-icon>
+                    </mat-form-field>
+                  </p>
+                  <p>
+                    <mat-form-field appearance="outline">
+                      <mat-label>Email</mat-label>
+                      <input matInput placeholder="Email" formControlName="gmail" name="gmail"  readonly required>
+                      <mat-icon matSuffix>email</mat-icon>
+                    </mat-form-field>
+                  </p>
+                  <p>
+                    <mat-form-field appearance="outline">
+                      <mat-label>Số điện thoại</mat-label>
+                      <input matInput placeholder="Số điện thoại" formControlName="phone_number" name="phone_number" required>
+                      <mat-icon matSuffix>phone</mat-icon>
+                    </mat-form-field>
+                  </p>
+                  <p>
+                    <mat-form-field appearance="outline">
+                      <mat-label>Địa chỉ</mat-label>
+                      <input matInput placeholder="Địa chỉ" formControlName="address" name="address"  required>
+                      <mat-icon matSuffix>home</mat-icon>
+                    </mat-form-field>
+                  </p>
                   <div class="form-group">
-                    <input type="text" class="form-control" placeholder="Your Name">
-                  </div>
-                  <div class="form-group">
-                    <input type="text" class="form-control" placeholder="Your Email" readonly value="hehe">
-                  </div>
-                  <div class="form-group">
-                    <input type="date" class="form-control" placeholder="Your Password">
-                  </div>
-                  <div class="form-group">
-                    <input type="text" class="form-control" placeholder="Your Phone">
-                  </div>
-                  <div class="form-group">
-                    <input type="text" class="form-control" placeholder="Your Address">
-                  </div>
-                  <div class="form-group">
-                    <input type="submit" value="Cập nhật" class="btn btn-primary py-3 px-5">
+                    <input (click)="updateProfile()" value="Cập nhật" class="btn btn-primary py-3 px-5" style="border-radius: 60px">
                   </div>
                 </form>
               </div>

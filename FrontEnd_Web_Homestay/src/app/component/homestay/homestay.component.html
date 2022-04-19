@@ -26,7 +26,7 @@
           <h3 *ngIf="idAcc != null" class="heading mb-4"><span>Tìm kiếm</span>
             <span style="margin-left: 30px"> | </span>
             <span (click)="getAllHomestaySignIn()" style="margin-left: 30px; cursor: pointer">Tất cả</span></h3>
-          <form action="#" [formGroup]="formSearch" (ngSubmit)="searchHomestay()">
+          <form action="#" [formGroup]="formSearch">
             <div class="fields">
               <div class="form-group">
                 <input type="text" class="form-control" placeholder="Tên Homestay" formControlName="name">
@@ -34,36 +34,36 @@
               <div class="form-group">
                 <div class="select-wrap one-third">
                   <div class="icon"><span class="ion-ios-arrow-down"></span></div>
-                  <select name="" id="" class="form-control" formControlName="idCity">
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                    <option value="5">5</option>
-                    <option value="6">5</option>
-                    <option value="7">5</option>
-                    <option value="8">5</option>
-                    <option value="9">5</option>
-                    <option value="10">5</option>
-                    <option value="11">5</option>
-                    <option value="12">5</option>
+                  <select name="" id="" class="form-control" formControlName="idCity" required>
+                    <option selected="selected" value="1">TP.Hà Nội</option>
+                    <option value="2">Hải Phòng</option>
+                    <option value="3">Quảng Ninh</option>
+                    <option value="4">Lào Cai</option>
+                    <option value="5">Đà Nẵng</option>
+                    <option value="6">Thừa Thiên Huế</option>
+                    <option value="7">Lâm Đồng</option>
+                    <option value="8">Khánh Hòa</option>
+                    <option value="9">Bình Định</option>
+                    <option value="10">TP.Hồ Chí Minh</option>
+                    <option value="11">Vũng Tàu</option>
+                    <option value="12">Kiên Giang</option>
                   </select>
                 </div>
               </div>
               <div class="form-group">
                 <div class="range-slider">
 		              		<span>
-										    <input type="number" value="{{price1}}" formControlName="price1" min="100000" max="50000000"/>	-
-										    <input type="number" value="{{price2}}" formControlName="price2" min="100000" max="50000000"/>
+										    <input type="number" value="{{price1}}" formControlName="price1" min="100000" max="20000000"/>	-
+										    <input type="number" value="{{price2}}" formControlName="price2" min="100000" max="20000000"/>
 										  </span>
-                  <input #element1 value="100000" min="100000" max="50000000" step="10000" type="range"
+                  <input #element1 value="100000" min="100000" max="20000000" step="10000" type="range"
                          (change)="fetch1(element1.value)"/>
-                  <input #element2 value="50000000" min="100000" max="50000000" step="10000" type="range"
+                  <input #element2 value="20000000" min="100000" max="20000000" step="10000" type="range"
                          (change)="fetch2(element2.value)"/>
                 </div>
               </div>
               <div class="form-group">
-                <input type="submit" value="Tìm Kiếm" class="btn btn-primary py-3 px-5">
+                <input type="submit" (click)="searchHomestay()" [disabled]="formSearch.invalid" value="Tìm Kiếm" class="btn btn-primary py-3 px-5">
               </div>
             </div>
           </form>

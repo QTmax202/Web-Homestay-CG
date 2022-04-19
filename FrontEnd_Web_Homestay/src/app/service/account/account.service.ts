@@ -4,6 +4,7 @@ import {HttpClient} from "@angular/common/http";
 import {Account} from "../../models/account";
 import {Observable} from "rxjs";
 import {ChangePassword} from "../../models/change-password";
+import {ProfileDto} from "../../models/profile-dto";
 
 const API_URL = `${environment.apiUrl}`;
 
@@ -13,6 +14,11 @@ const API_URL = `${environment.apiUrl}`;
 export class AccountService {
 
   constructor(private http: HttpClient) { }
+
+  // update profile
+  updateProfile(profile: ProfileDto, id: any): Observable<any> {
+    return this.http.put(API_URL + 'sign-up/update-profile/' + id, profile);
+  }
 
   // change password
   changePassword(changePassword: ChangePassword, id: any): Observable<any> {
@@ -24,6 +30,6 @@ export class AccountService {
   }
 
   getInformationAccount(id: any): Observable<any> {
-    return this.http.get(API_URL + 'sign-up/' + id);
+    return this.http.get<Account>(API_URL + 'sign-up/' + id);
   }
 }

@@ -28,6 +28,11 @@ export class Homestay2Service {
       '&price1=' + price1 +'&price2=' + price2);
   }
 
+  findHomestayByNameAndCityAndPriceSignIn(idAcc: any, name: string, idCity: number, price1: number, price2: number): Observable<any> {
+    return this.http.get<Homestay2>(API_URL + 'homestay/' + idAcc + '/search?name=' + name + '&idCity=' + idCity +
+      '&price1=' + price1 +'&price2=' + price2);
+  }
+
   //bill by account
   getYourBillByAccountId(id: any): Observable<any> {
     return this.http.get<YourBillDto[]>(API_URL + 'bill/account/' + id);

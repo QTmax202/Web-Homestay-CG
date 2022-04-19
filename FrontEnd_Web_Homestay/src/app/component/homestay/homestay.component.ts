@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {Homestay2Service} from "../../service/homestay/homestay2.service";
 import {Homestay2} from "../../models/homestay2";
@@ -14,13 +14,12 @@ import {ImageOfHomestay} from "../../models/image-of-homestay";
   styleUrls: ['./homestay.component.css']
 })
 export class HomestayComponent implements OnInit {
-  displayedColumns: string[] = ['homestay1','homestay2','homestay3'];
+  displayedColumns: string[] = ['homestay1', 'homestay2', 'homestay3'];
   dataSource!: MatTableDataSource<any>;
   idH!: number;
   images!: ImageOfHomestay[];
   image!: ImageOfHomestay[];
   idAcc = localStorage.getItem('ACCOUNT_ID')
-
 
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -31,7 +30,8 @@ export class HomestayComponent implements OnInit {
 
   constructor(private fb: FormBuilder,
               private homestayService: Homestay2Service,
-              private route: ActivatedRoute,) { }
+              private route: ActivatedRoute,) {
+  }
 
   ngOnInit(): void {
     if (this.idAcc == null) {
@@ -63,8 +63,8 @@ export class HomestayComponent implements OnInit {
   formSearch: FormGroup = new FormGroup({});
   name!: string;
   idCity!: number;
-  price1 = 0;
-  price2 = 99999999;
+  price1 = 200000;
+  price2 = 10000000;
 
   fetch1(value: any) {
     this.price1 = value;
@@ -78,22 +78,34 @@ export class HomestayComponent implements OnInit {
   searchHomestay() {
     this.name = this.formSearch.value.name;
     this.idCity = this.formSearch.value.idCity
-    console.log(this.name)
-    console.log(this.idCity)
-    console.log(this.price1)
-    console.log(this.price2)
     if (this.price1 > this.price2) {
-      this.homestayService.findHomestayByNameAndCityAndPrice(this.name,this.idCity, this.price2, this.price1).subscribe((data) => {
-        this.homestays = data;
-      }, error => {
-        this.homestays = [];
-      });
-    } else if (this.price1 < this.price2){
-      this.homestayService.findHomestayByNameAndCityAndPrice(this.name,this.idCity, this.price1, this.price2).subscribe((data) => {
-        this.homestays = data;
-      }, error => {
-        this.homestays = [];
-      });
+      if (this.idAcc == null) {
+        this.homestayService.findHomestayByNameAndCityAndPrice(this.name, this.idCity, this.price2, this.price1).subscribe((data) => {
+          this.homestays = data;
+        }, error => {
+          this.homestays = [];
+        });
+      } else if (this.idAcc != null) {
+        this.homestayService.findHomestayByNameAndCityAndPriceSignIn(this.idAcc, this.name, this.idCity, this.price2, this.price1).subscribe((data) => {
+          this.homestays = data;
+        }, error => {
+          this.homestays = [];
+        });
+      }
+    } else if (this.price1 < this.price2) {
+      if (this.idAcc == null) {
+        this.homestayService.findHomestayByNameAndCityAndPrice(this.name, this.idCity, this.price1, this.price2).subscribe((data) => {
+          this.homestays = data;
+        }, error => {
+          this.homestays = [];
+        });
+      } else if (this.idAcc != null) {
+        this.homestayService.findHomestayByNameAndCityAndPriceSignIn(this.idAcc, this.name, this.idCity, this.price1, this.price2).subscribe((data) => {
+          this.homestays = data;
+        }, error => {
+          this.homestays = [];
+        });
+      }
     }
   }
 }
