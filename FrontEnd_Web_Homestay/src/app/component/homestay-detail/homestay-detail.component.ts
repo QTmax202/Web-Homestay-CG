@@ -29,12 +29,13 @@ export class HomestayDetailComponent implements OnInit {
   formComment: FormGroup = new FormGroup({});
   comments?: any;
 
-  displayedColumns: string[] = ['image'];
+  displayedColumns: string[] = ['id'];
   dataSource!: MatTableDataSource<any>;
 
   idAcc = localStorage.getItem('ACCOUNT_ID')
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
+  input: any;
 
   constructor(private homestayService: Homestay2Service,
               private commentService: CommentService,
@@ -56,7 +57,6 @@ export class HomestayDetailComponent implements OnInit {
     })
     this.getHomestayById();
     this.getAllImage();
-    this.getAllComment();
     if (this.idAcc == null) {
       this.getAllHomestayRate();
     } else {
@@ -68,7 +68,6 @@ export class HomestayDetailComponent implements OnInit {
     this.idH = this.route.snapshot.params['id'];
     this.homestayService.getHomestayById(this.idH).subscribe((data) => {
       this.homestay = data;
-      console.log(this.homestay)
       this.google_api = this.homestay.address + ", " + this.homestay.city.name;
       this.google_api = this.google_api?.split(" ").join("+");
       console.log(this.google_api);
@@ -107,8 +106,8 @@ export class HomestayDetailComponent implements OnInit {
   getAllComment() {
     this.idH = this.route.snapshot.params['id'];
     this.commentService.getCommentsByHomestayId(this.idH).subscribe((data) => {
-      this.dataSource = new MatTableDataSource<any>(data);
       this.comments = data;
+      this.dataSource = new MatTableDataSource<any>(data);
       this.dataSource.paginator = this.paginator;
     })
   }
@@ -141,6 +140,7 @@ export class HomestayDetailComponent implements OnInit {
   }
 
   openCommentRate() {
+    this.getAllComment()
     // @ts-ignore
     document.getElementById("home-comment-rate").style.display = "block";
     // @ts-ignore

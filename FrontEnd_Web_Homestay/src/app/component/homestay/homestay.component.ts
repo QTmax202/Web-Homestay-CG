@@ -21,6 +21,11 @@ export class HomestayComponent implements OnInit {
   images!: ImageOfHomestay[];
   image!: ImageOfHomestay[];
   idAcc = localStorage.getItem('ACCOUNT_ID')
+  formSearch: FormGroup = new FormGroup({});
+  name!: string;
+  idCity!: number;
+  price1 !: number;
+  price2 !: number;
 
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -35,6 +40,8 @@ export class HomestayComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.price1 = 200000
+    this.price2 = 15000000
     if (this.idAcc == null) {
       this.getAllHomestay();
     } else {
@@ -60,11 +67,7 @@ export class HomestayComponent implements OnInit {
     })
   }
 
-  formSearch: FormGroup = new FormGroup({});
-  name!: string;
-  idCity!: number;
-  price1 = 200000;
-  price2 = 10000000;
+
 
   fetch1(value: any) {
     this.price1 = value;

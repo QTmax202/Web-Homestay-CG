@@ -40,9 +40,9 @@
     </div>
   </div>
   <div mat-dialog-actions [align]="'end'">
-    <button mat-raised-button color="warn" mat-dialog-close>Đóng</button>
-    <button type="submit" mat-raised-button color="primary" (click)="cancellingInvoiceClient(myBill.id)" id="cancelling-invoice-client" hidden>Xác Nhận Hủy Thuê</button>
-    <button type="submit" mat-raised-button color="primary" (click)="cancellingInvoiceHost(myBill.id)" id="cancelling-invoice-host" hidden>Xác Nhận Hủy Thuê</button>
+    <button mat-raised-button mat-dialog-close>Đóng</button>
+    <button type="submit" mat-raised-button color="warn" (click)="cancellingInvoiceClient(myBill.id)" id="cancelling-invoice-client" hidden>Xác Nhận Hủy Thuê</button>
+    <button type="submit" mat-raised-button color="warn" (click)="cancellingInvoiceHost(myBill.id)" id="cancelling-invoice-host" hidden>Xác Nhận Hủy Thuê</button>
     <button type="submit" mat-raised-button color="primary" (click)="HomestayCheckIn(myBill.id)" id="check-in-bill-client" hidden>Nhận Phòng</button>
     <button type="submit" mat-raised-button color="primary" (click)="HomestayCheckOut(myBill.id)" id="check-out-bill-client" hidden>Trả Phòng</button>
     <button type="submit" mat-raised-button color="primary" (click)="HomestayConfirmHost(myBill.id)" id="confirm-host" hidden>Xác Nhận Thuê</button>
