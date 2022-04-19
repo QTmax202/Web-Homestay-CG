@@ -5,15 +5,17 @@ public class ProfileDTO {
     private String gmail;
     private String phone_number;
     private String address;
+    private String avatar_url;
 
     public ProfileDTO() {
     }
 
-    public ProfileDTO(String name, String gmail, String phone_number, String address) {
+    public ProfileDTO(String name, String gmail, String phone_number, String address, String avatar) {
         this.name = name;
         this.gmail = gmail;
         this.phone_number = phone_number;
         this.address = address;
+        this.avatar_url = avatar;
     }
 
     public String getName() {
@@ -46,5 +48,13 @@ public class ProfileDTO {
 
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    public String getAvatar_url() {
+        return avatar_url;
+    }
+
+    public void setAvatar_url(String avatar_url) {
+        this.avatar_url = avatar_url;
     }
 }

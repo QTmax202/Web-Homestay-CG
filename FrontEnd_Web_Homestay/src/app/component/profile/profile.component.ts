@@ -4,11 +4,11 @@ import {finalize, Observable} from "rxjs";
 import {BookHomestayComponent} from "../../dialog/book-homestay/book-homestay.component";
 import {MatDialog} from "@angular/material/dialog";
 import {ChangePassComponent} from "../../dialog/change-pass/change-pass.component";
-import {ProfileDto} from "../../models/profile-dto";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {newArray} from "@angular/compiler/src/util";
 import {AccountService} from "../../service/account/account.service";
 import {Account} from "../../models/account";
+import {ProfileDto} from "../../models/profile-dto";
 
 @Component({
   selector: 'app-profile',
@@ -22,6 +22,7 @@ export class ProfileComponent implements OnInit {
   downloadURL?: Observable<string>;
   account!: Account;
   profile!: ProfileDto;
+  avataUrl!:string;
   formProfile: FormGroup = new FormGroup({});
   idAcc = localStorage.getItem('ACCOUNT_ID')
 
@@ -44,6 +45,7 @@ export class ProfileComponent implements OnInit {
   getInformationAccount() {
     this.accountService.getInformationAccount(this.idAcc).subscribe((data) => {
       this.account = data;
+      this.avataUrl = data.avatar_url;
       this.formProfile.controls['name'].setValue(this.account.name),
       this.formProfile.controls['gmail'].setValue(this.account.gmail),
       this.formProfile.controls['phone_number'].setValue(this.account.phone_number),
@@ -58,10 +60,12 @@ export class ProfileComponent implements OnInit {
       gmail: this.formProfile.value.gmail,
       phone_number: this.formProfile.value.phone_number,
       address: this.formProfile.value.address,
+      avatar_url: this.avataUrl,
     }
     console.log(information)
     this.accountService.updateProfile(information, this.idAcc).subscribe((data) => {
       console.log(information)
+      window.location.reload();
     })
   }
 
@@ -78,16 +82,15 @@ export class ProfileComponent implements OnInit {
           this.downloadURL = fileRef.getDownloadURL();
           this.downloadURL.subscribe(url => {
             if (url) {
-              this.fb = url;
+              this.avataUrl = url;
             }
-            console.log(this.fb);
+            console.log(this.avataUrl);
           });
         })
       )
       .subscribe(url => {
         if (url) {
           console.log(url);
-
         }
       });
   }
