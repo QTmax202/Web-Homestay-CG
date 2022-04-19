@@ -35,4 +35,36 @@ export class BillService {
   cancellingInvoiceClient(id:any): Observable<any> {
     return this.http.post(API_URL + 'bill/cancelling-invoice-client', id);
   }
+
+  cancellingInvoiceHost(id:any): Observable<any> {
+    return this.http.post(API_URL + 'bill/cancelling-invoice-host', id);
+  }
+
+  cancellingInvoiceHostAuto(id:any): Observable<any> {
+    return this.http.post(API_URL + 'bill/cancelling-invoice-host-auto', id);
+  }
+
+  registrationConfirmation(id:any): Observable<any> {
+    return this.http.post(API_URL + 'bill/registration-confirmation', id);
+  }
+
+  HomestayCheckIn(id:any): Observable<any> {
+    return this.http.post(API_URL + 'bill/homestay-check-in', id);
+  }
+
+  HomestayCheckOut(id:any): Observable<any> {
+    return this.http.post(API_URL + 'bill/homestay-check-out', id);
+  }
+
+  HomestayCheckOutAuto(id:any): Observable<any> {
+    return this.http.post(API_URL + 'bill/homestay-check-out-auto', id);
+  }
+
+  getBillByAccountId(id:any):Observable<any> {
+    return this.http.get<Bill>(API_URL + 'bill/bill-by-account-id/' + id);
+  }
+
+  getBillByHomestayAccountId(id:any):Observable<any> {
+    return this.http.get<Bill>(API_URL + 'bill/bill-by-homestay-account-id/' + id);
+  }
 }

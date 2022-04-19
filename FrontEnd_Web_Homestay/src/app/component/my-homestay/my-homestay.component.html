@@ -214,14 +214,17 @@
                   <p>Ngày bắt đầu: <span>{{b.startDate}}</span> - Ngày kết thúc: <span>{{b.endDate}}</span></p>
                   <hr>
                   <p class="bottom-area d-flex">
-                    <span *ngIf="b.statusHomeId == 1" class="ml-auto"><button class="btn btn-warning"
-                                                  disabled>Chờ xác nhận</button></span>
-                    <span *ngIf="b.statusHomeId == 2" class="ml-auto"><button class="btn btn-success"
-                                                  disabled>Đã đặt</button></span>
-                    <span *ngIf="b.statusHomeId == 3" class="ml-auto"><button class="btn btn-info"
-                                                  disabled>Đang ở</button></span>
-                    <span *ngIf="b.statusHomeId == 4" class="ml-auto"><button class="btn btn-dark"
-                                                  disabled>Đã trả</button></span>
+                    <span *ngIf="b.statusHomeId == 1" class="ml-auto">
+                      <button class="btn btn-primary" *ngIf="!onCheckToday(b.startDate)" (click)="openCancellingInvoiceHost(b)">Hủy thuê</button>
+                      <button class="btn btn-warning" (click)="openConfirmHost(b)">Chờ xác nhận</button></span>
+                    <span *ngIf="b.statusHomeId == 2" class="ml-auto">
+                      <button class="btn btn-success" disabled>Đã xác nhận</button></span>
+                    <span *ngIf="b.statusHomeId == 3" class="ml-auto">
+                      <button class="btn btn-info" disabled>Đang ở</button></span>
+                    <span *ngIf="b.statusHomeId == 4" class="ml-auto">
+                      <button class="btn btn-dark" disabled>Đã trả</button></span>
+                    <span *ngIf="b.statusHomeId == 5" class="ml-auto">
+                      <button class="btn btn-dark" disabled>Đã hủy</button></span>
                   </p>
                 </div>
               </div>
