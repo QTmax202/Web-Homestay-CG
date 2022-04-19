@@ -134,7 +134,7 @@ export class MyHomestayComponent implements OnInit {
     });
   }
 
-  openConfirmHost(myBill:MyBillDto) {
+  openConfirmHost(myBill:YourBillDto) {
     this.dialog.open(ConfirmBookComponent, {
       width: '50%',
       data :  myBill
@@ -143,7 +143,7 @@ export class MyHomestayComponent implements OnInit {
     document.getElementById("confirm-host").hidden = false;
   }
 
-  openCancellingInvoiceHost(myBill:MyBillDto) {
+  openCancellingInvoiceHost(myBill:YourBillDto) {
     this.dialog.open(ConfirmBookComponent, {
       width: '50%',
       data :  myBill

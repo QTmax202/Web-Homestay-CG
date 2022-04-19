@@ -3,4 +3,5 @@ export interface ProfileDto {
   gmail: string;
   phone_number: string;
   address: string;
+  avatar_url:string;
 }
