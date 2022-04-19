@@ -41,8 +41,18 @@ public class HomestayService implements IHomestayService {
     }
 
     @Override
-    public List<MyHomestayDTO> getHomestayByAccountId(long id) {
-        return homestayRepository.getHomestayByAccountId(id);
+    public List<MyHomestayDTO> getAllMyHomestayRate(long id) {
+        return homestayRepository.getAllMyHomestayRate(id);
+    }
+
+    @Override
+    public List<MyHomestayDTO> getAllYourHomestayRate(long id) {
+        return homestayRepository.getAllYourHomestayRate(id);
+    }
+
+    @Override
+    public List<MyHomestayDTO> getAllHomestayRate() {
+        return homestayRepository.getAllHomestayRate();
     }
 
     @Override

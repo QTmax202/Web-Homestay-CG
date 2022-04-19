@@ -56,9 +56,21 @@ public class HomestayController {
         return new ResponseEntity<>(homestay, HttpStatus.OK);
     }
 
-    @GetMapping("/account/{id}")
-    private ResponseEntity<?> getHomestayByAccountId(@PathVariable long id) {
-        List<MyHomestayDTO> homestays = homestayService.getHomestayByAccountId(id);
+    @GetMapping("/my-homestay/{id}")
+    private ResponseEntity<?> getAllMyHomestayRate(@PathVariable long id) {
+        List<MyHomestayDTO> homestays = homestayService.getAllMyHomestayRate(id);
+        return new ResponseEntity<>(homestays, HttpStatus.OK);
+    }
+
+    @GetMapping("/your-homestay/{id}")
+    private ResponseEntity<?> getAllYourHomestayRate(@PathVariable long id) {
+        List<MyHomestayDTO> homestays = homestayService.getAllYourHomestayRate(id);
+        return new ResponseEntity<>(homestays, HttpStatus.OK);
+    }
+
+    @GetMapping("/their-homestay")
+    private ResponseEntity<?> getAllHomestayRate() {
+        List<MyHomestayDTO> homestays = homestayService.getAllHomestayRate();
         return new ResponseEntity<>(homestays, HttpStatus.OK);
     }
 
