@@ -47,4 +47,12 @@ public interface IBillRepository extends JpaRepository<Bill, Long> {
             "where hs.account_id = :id and b.start_date between :startDate1 and :startDate2\n" +
             "group by hs.id;", nativeQuery = true)
     Iterable<TurnOverDTO> findTurnOverByAccountAndStartDate(Long id, String startDate1, String startDate2);
+
+    @Query(value = "select b.id , b.account_id, b.homestay_id, b.status_homestay_id, b.price, b.start_date , b.end_date, b.registration_date from bill b \n" +
+            "join homestay h on h.id = b.homestay_id\n" +
+            "where h.account_id = ?;"
+            , nativeQuery = true)
+    Iterable<Bill> findBillByHomestay_Account_Id(Long id);
+
+    Iterable<Bill> getBillByAccount_Id(Long id);
 }

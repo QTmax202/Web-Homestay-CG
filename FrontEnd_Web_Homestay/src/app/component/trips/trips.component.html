@@ -105,19 +105,21 @@
                   <hr>
                   <p class="bottom-area d-flex">
                     <span *ngIf="m.statusHomeId == 1" class="ml-auto">
-                      <button class="btn btn-primary" style="margin-left: 600px">Hủy</button></span>
-                    <span *ngIf="m.statusHomeId == 1" class="ml-auto">
+                      <button class="btn btn-primary" *ngIf="!onCheckToday(m.startDate)" style="margin-left: 500px" (click)="openCancellingInvoiceClient(m)">Hủy</button>
                       <button class="btn btn-warning" disabled>Chờ xác nhận</button></span>
                     <span *ngIf="m.statusHomeId == 2" class="ml-auto">
-                      <button class="btn btn-success" style="margin-left: 600px" disabled>Đã xác nhận</button></span>
+                       <button class="btn btn-primary" *ngIf="!onCheckToday(m.startDate)" style="margin-left: 450px" (click)="openCancellingInvoiceClient(m)">Hủy</button>
+                      <button class="btn btn-warning" (click)="openCheckInBill(m)">Nhận phòng</button>
+                      <button class="btn btn-success" disabled>Đã xác nhận</button></span>
                     <span *ngIf="m.statusHomeId == 3" class="ml-auto">
-                      <button class="btn btn-info" style="margin-left: 600px" disabled>Đang ở</button></span>
+                      <button class="btn btn-warning" *ngIf="!onCheckToday(m.startDate)" style="margin-left: 500px" (click)="openCheckOutBill(m)">Trả phòng</button>
+                      <button class="btn btn-info" disabled>Đang ở</button></span>
                     <span *ngIf="m.statusHomeId == 4" class="ml-auto">
                       <button class="btn btn-danger" style="margin-left: 600px" (click)="openRate(m.homeId)">Đánh giá</button></span>
                     <span *ngIf="m.statusHomeId == 4" class="ml-auto">
                       <button class="btn btn-dark" disabled>Đã trả</button></span>
                     <span *ngIf="m.statusHomeId == 5" class="ml-auto">
-                      <button class="btn btn-success" style="margin-left: 600px" disabled>Đã hủy</button></span>
+                      <button class="btn btn-dark" style="margin-left: 600px" disabled>Đã hủy</button></span>
                   </p>
                 </div>
               </div>

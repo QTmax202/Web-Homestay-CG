@@ -1,6 +1,5 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialog} from "@angular/material/dialog";
-import {MyBillDto} from "../../models/my-bill-dto";
 import {BillService} from "../../service/bill/bill.service";
 import {Bill} from "../../models/bill";
 import {first} from "rxjs";
@@ -20,18 +19,11 @@ export class ConfirmBookComponent implements OnInit {
 
   ngOnInit(): void {
     this.getBillById(this.data.id);
-    // this.myBill = this.data;
-    // console.log(new Date(this.data.endDate).getTime());
-    // console.log(new Date(this.data.startDate).getTime());
-    // this.number_date = Math.ceil(((new Date(this.data.end_date).getTime() - new Date(this.data.startDate).getTime()) / (24*60*60*1000)) + 1);
-    // console.log(this.number_date);
   }
 
   getBillById(id : any){
     this.billService.findBillById(id).subscribe(data =>{
       this.myBill = data;
-      console.log(data.end_date);
-      console.log(new Date(data.start_date).getTime());
       this.number_date = Math.ceil(((new Date(data.end_date).getTime() - new Date(data.start_date).getTime()) / (24*60*60*1000)) + 1);
       console.log(this.number_date);
     })
@@ -46,6 +38,7 @@ export class ConfirmBookComponent implements OnInit {
             document.getElementById("error-registration-confirmation").innerHTML="Lỗi hủy (chỉ được hủy trước 1 ngày)!"
           } else {
             console.log(data);
+            window.location.reload();
             this.dialog.closeAll();
           }
         },
@@ -53,6 +46,75 @@ export class ConfirmBookComponent implements OnInit {
           // @ts-ignore
           document.getElementById("error-registration-confirmation").innerHTML="Lỗi hủy (chỉ được hủy trước 1 ngày)!"
         });
+  }
+
+  cancellingInvoiceHost(id : any){
+    this.billService.cancellingInvoiceHost(id).pipe(first())
+      .subscribe(
+        data => {
+          if (data.status == 202){
+            // @ts-ignore
+            document.getElementById("error-registration-confirmation").innerHTML="Lỗi hủy (chỉ được hủy trước 1 ngày)!"
+          } else {
+            console.log(data);
+            window.location.reload();
+            // @ts-ignore
+            document.getElementById("my-homestay").style.display = 'none';
+            // @ts-ignore
+            document.getElementById("my-bill").style.display = 'block';
+            // @ts-ignore
+            document.getElementById("my-turn-over").style.display = 'none';
+            this.dialog.closeAll();
+          }
+        }, error => {
+          // @ts-ignore
+          document.getElementById("error-registration-confirmation").innerHTML="Lỗi hủy (chỉ được hủy trước 1 ngày)!"
+        });
+  }
+
+  HomestayCheckIn(id :any){
+    this.billService.HomestayCheckIn(id).pipe(first())
+      .subscribe(
+        data => {
+          console.log(data);
+          window.location.reload();
+          this.dialog.closeAll();
+        },error => {
+          console.log(error);
+        }
+      )
+  }
+
+  HomestayCheckOut(id :any){
+    this.billService.HomestayCheckOut(id).pipe(first())
+      .subscribe(
+        data => {
+          console.log(data);
+          window.location.reload();
+          this.dialog.closeAll();
+        },error => {
+          console.log(error);
+        }
+      )
+  }
+
+  HomestayConfirmHost(id :any){
+    this.billService.registrationConfirmation(id).pipe(first())
+      .subscribe(
+        data => {
+          console.log(data);
+          window.location.reload();
+          // @ts-ignore
+          document.getElementById("my-homestay").style.display = 'none';
+          // @ts-ignore
+          document.getElementById("my-bill").style.display = 'block';
+          // @ts-ignore
+          document.getElementById("my-turn-over").style.display = 'none';
+          this.dialog.closeAll();
+        },error => {
+          console.log(error);
+        }
+      )
   }
 
 }

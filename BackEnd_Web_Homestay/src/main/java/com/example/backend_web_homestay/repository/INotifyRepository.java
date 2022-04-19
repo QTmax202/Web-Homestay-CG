@@ -6,4 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface INotifyRepository extends JpaRepository<Notify, Long> {
+    Iterable<Notify> getNotifyByAccount_Id(Long id);
 }

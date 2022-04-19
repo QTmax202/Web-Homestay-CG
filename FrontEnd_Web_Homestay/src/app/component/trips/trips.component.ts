@@ -18,6 +18,7 @@ export class TripsComponent implements OnInit {
 
   idAcc = localStorage.getItem('ACCOUNT_ID')
   myBill!: MyBillDto[];
+  date_today! : any;
 
   constructor(private dialog: MatDialog,
               private homestayService: Homestay2Service) { }
@@ -41,10 +42,40 @@ export class TripsComponent implements OnInit {
     });
   }
 
-  openConfirm(myBill:MyBillDto) {
+  openCancellingInvoiceClient(myBill:MyBillDto) {
     this.dialog.open(ConfirmBookComponent, {
       width: '50%',
       data :  myBill
     });
+    // @ts-ignore
+    document.getElementById("cancelling-invoice-client").hidden = false;
   }
+
+  openCheckInBill(myBill:MyBillDto) {
+    this.dialog.open(ConfirmBookComponent, {
+      width: '50%',
+      data :  myBill
+    });
+    // @ts-ignore
+    document.getElementById("check-in-bill-client").hidden = false;
+  }
+
+  openCheckOutBill(myBill:MyBillDto) {
+    this.dialog.open(ConfirmBookComponent, {
+      width: '50%',
+      data :  myBill
+    });
+    // @ts-ignore
+    document.getElementById("check-out-bill-client").hidden = false;
+  }
+
+  onCheckToday(date :any){
+
+    let today = new Date();
+
+    this.date_today = new Date(today.getFullYear(), today.getMonth(), today.getDate());
+
+    return new Date(date) < this.date_today;
+  }
+
 }

@@ -14,6 +14,8 @@ import {MatSort} from "@angular/material/sort";
 import {MatTableDataSource} from "@angular/material/table";
 import {BillService} from "../../service/bill/bill.service";
 import {TurnOver} from "../../models/turn-over";
+import {MyBillDto} from "../../models/my-bill-dto";
+import {ConfirmBookComponent} from "../../dialog/confirm-book/confirm-book.component";
 
 @Component({
   selector: 'app-my-homestay',
@@ -85,6 +87,7 @@ export class MyHomestayComponent implements OnInit {
   getBillByAccountId() {
     this.homestayService.getYourBillByAccountId(this.idAcc).subscribe((data) => {
       this.yourBill = data;
+      console.log(this.yourBill)
     })
   }
 
@@ -130,5 +133,30 @@ export class MyHomestayComponent implements OnInit {
     });
   }
 
+  openConfirmHost(myBill:MyBillDto) {
+    this.dialog.open(ConfirmBookComponent, {
+      width: '50%',
+      data :  myBill
+    });
+    // @ts-ignore
+    document.getElementById("confirm-host").hidden = false;
+  }
 
+  openCancellingInvoiceHost(myBill:MyBillDto) {
+    this.dialog.open(ConfirmBookComponent, {
+      width: '50%',
+      data :  myBill
+    });
+    // @ts-ignore
+    document.getElementById("cancelling-invoice-host").hidden = false;
+  }
+
+  onCheckToday(date :any){
+
+    let today = new Date();
+
+    let date_today = new Date(today.getFullYear(), today.getMonth(), today.getDate());
+
+    return new Date(date) < date_today;
+  }
 }
