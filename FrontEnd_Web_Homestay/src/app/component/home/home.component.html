@@ -338,12 +338,12 @@
           <div class="carousel-item active">
             <div class="col-sm col-md-8 col-lg ">
               <div class="destination">
-                <img src="{{homestayDTOS[3].images}}" alt="" style="width: 100%; height: 450px">
+                <img src="{{homestayDTOS[2].images}}" alt="" style="width: 100%; height: 450px">
                 <div class="text p-3">
                   <div class="d-flex">
                     <div class="one">
-                      <h3><a style="cursor: pointer" (click)="redirectByHomestay(homestayDTOS[3].id)">{{homestayDTOS[3].name}}</a></h3>
-                      <p *ngIf="homestayDTOS[3].roundRate == null" class="rate">
+                      <h3><a style="cursor: pointer" (click)="redirectByHomestay(homestayDTOS[2].id)">{{homestayDTOS[2].name}}</a></h3>
+                      <p *ngIf="homestayDTOS[2].roundRate == null" class="rate">
                         <i class="icon-star-o"></i>
                         <i class="icon-star-o"></i>
                         <i class="icon-star-o"></i>
@@ -351,63 +351,63 @@
                         <i class="icon-star-o"></i>
                         <span>Chưa có đánh giá</span>
                       </p>
-                      <p *ngIf="homestayDTOS[3].roundRate == 0" class="rate">
+                      <p *ngIf="homestayDTOS[2].roundRate == 0" class="rate">
                         <i class="icon-star-o"></i>
                         <i class="icon-star-o"></i>
                         <i class="icon-star-o"></i>
                         <i class="icon-star-o"></i>
                         <i class="icon-star-o"></i>
-                        <span>{{homestayDTOS[3].avgRate}} Sao</span>
+                        <span>{{homestayDTOS[2].avgRate}} Sao</span>
                       </p>
-                      <p *ngIf="homestayDTOS[3].roundRate == 1" class="rate">
+                      <p *ngIf="homestayDTOS[2].roundRate == 1" class="rate">
                         <i class="icon-star"></i>
                         <i class="icon-star-o"></i>
                         <i class="icon-star-o"></i>
                         <i class="icon-star-o"></i>
                         <i class="icon-star-o"></i>
-                        <span>{{homestayDTOS[3].avgRate}} Sao</span>
+                        <span>{{homestayDTOS[2].avgRate}} Sao</span>
                       </p>
-                      <p *ngIf="homestayDTOS[3].roundRate == 2" class="rate">
+                      <p *ngIf="homestayDTOS[2].roundRate == 2" class="rate">
                         <i class="icon-star"></i>
                         <i class="icon-star"></i>
                         <i class="icon-star-o"></i>
                         <i class="icon-star-o"></i>
                         <i class="icon-star-o"></i>
-                        <span>{{homestayDTOS[3].avgRate}} Sao</span>
+                        <span>{{homestayDTOS[2].avgRate}} Sao</span>
                       </p>
-                      <p *ngIf="homestayDTOS[3].roundRate == 3" class="rate">
+                      <p *ngIf="homestayDTOS[2].roundRate == 3" class="rate">
                         <i class="icon-star"></i>
                         <i class="icon-star"></i>
                         <i class="icon-star"></i>
                         <i class="icon-star-o"></i>
                         <i class="icon-star-o"></i>
-                        <span>{{homestayDTOS[3].avgRate}} Sao</span>
+                        <span>{{homestayDTOS[2].avgRate}} Sao</span>
                       </p>
-                      <p *ngIf="homestayDTOS[3].roundRate == 4" class="rate">
+                      <p *ngIf="homestayDTOS[2].roundRate == 4" class="rate">
                         <i class="icon-star"></i>
                         <i class="icon-star"></i>
                         <i class="icon-star"></i>
                         <i class="icon-star"></i>
                         <i class="icon-star-o"></i>
-                        <span>{{homestayDTOS[3].avgRate}} Sao</span>
+                        <span>{{homestayDTOS[2].avgRate}} Sao</span>
                       </p>
-                      <p *ngIf="homestayDTOS[3].roundRate == 5" class="rate">
+                      <p *ngIf="homestayDTOS[2].roundRate == 5" class="rate">
                         <i class="icon-star"></i>
                         <i class="icon-star"></i>
                         <i class="icon-star"></i>
                         <i class="icon-star"></i>
                         <i class="icon-star"></i>
-                        <span>{{homestayDTOS[3].avgRate}} Sao</span>
+                        <span>{{homestayDTOS[2].avgRate}} Sao</span>
                       </p>
                     </div>
                     <div class="two" style="margin-left: -50px">
-                      <span class="price per-price">{{homestayDTOS[3].price | currency :'đ' :true: '1.0-0'}}<br><small>/ngày</small></span>
+                      <span class="price per-price">{{homestayDTOS[2].price | currency :'đ' :true: '1.0-0'}}<br><small>/ngày</small></span>
                     </div>
                   </div>
-                  <p class="format-form-p-bot">{{homestayDTOS[3].description}}</p>
+                  <p class="format-form-p-bot">{{homestayDTOS[2].description}}</p>
                   <hr>
                   <p class="bottom-area d-flex">
-                    <span class="format-form-span-bot"><i class="icon-map-o"></i> {{homestayDTOS[3].address}}</span>
+                    <span class="format-form-span-bot"><i class="icon-map-o"></i> {{homestayDTOS[2].address}}</span>
                   </p>
                 </div>
               </div>
