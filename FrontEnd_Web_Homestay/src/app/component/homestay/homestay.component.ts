@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, Inject, OnInit, ViewChild} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {Homestay2Service} from "../../service/homestay/homestay2.service";
 import {Homestay2} from "../../models/homestay2";
@@ -7,6 +7,7 @@ import {MatSort} from '@angular/material/sort';
 import {MatTableDataSource} from '@angular/material/table';
 import {ActivatedRoute} from "@angular/router";
 import {ImageOfHomestay} from "../../models/image-of-homestay";
+import {MAT_DIALOG_DATA} from "@angular/material/dialog";
 
 @Component({
   selector: 'app-homestay',
@@ -56,7 +57,6 @@ export class HomestayComponent implements OnInit {
   getAllHomestaySignIn() {
     this.homestayService.getAllHomestaySignIn(this.idAcc).subscribe((data) => {
       this.homestays = data;
-      console.log(this.homestays)
     })
   }
 

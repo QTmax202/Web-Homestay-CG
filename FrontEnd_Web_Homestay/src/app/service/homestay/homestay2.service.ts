@@ -43,9 +43,16 @@ export class Homestay2Service {
   }
 
   //homestay by account
+  getAllMyHomestayRate(id: any): Observable<any> {
+    return this.http.get<MyHomestayDto[]>(API_URL + 'homestay/my-homestay/' + id);
+  }
 
-  getHomestayByAccountId(id: any): Observable<any> {
-    return this.http.get<MyHomestayDto[]>(API_URL + 'homestay/account/' + id);
+  getAllYourHomestayRate(id: any): Observable<any> {
+    return this.http.get<MyHomestayDto[]>(API_URL + 'homestay/your-homestay/' + id);
+  }
+
+  getAllHomestayRate(): Observable<any> {
+    return this.http.get<MyHomestayDto[]>(API_URL + 'homestay/their-homestay');
   }
 
   //home

@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Homestay2Service} from "../../service/homestay/homestay2.service";
 import {Homestay2} from "../../models/homestay2";
-import {Router} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {CityService} from "../../service/city/city.service";
 import {CityDto} from "../../models/city-dto";
 import {MyHomestayDto} from "../../models/my-homestay-dto";
@@ -13,15 +13,18 @@ import {MyHomestayDto} from "../../models/my-homestay-dto";
 })
 export class HomeComponent implements OnInit {
   homestays!: Homestay2[];
+  topHomestayDTOS!: MyHomestayDto[];
   homestayDTOS!: MyHomestayDto[];
   idAcc = localStorage.getItem('ACCOUNT_ID')
   city1!: CityDto[];
   city2!: CityDto[];
   city3!: CityDto[];
 
+
   constructor(private homestayService: Homestay2Service,
               private router: Router,
-              private cityService: CityService) {
+              private cityService: CityService,
+              private route: ActivatedRoute) {
   }
 
   ngOnInit(): void {
@@ -30,27 +33,27 @@ export class HomeComponent implements OnInit {
     this.getCity3()
     this.getTop5Homestay()
     if (this.idAcc == null) {
-      this.getAllHomestay();
+      this.getAllHomestayRate();
     } else {
-      this.getAllHomestaySignIn();
+      this.getAllYourHomestayRate();
     }
   }
 
   getTop5Homestay() {
     this.homestayService.getTop5Homestay().subscribe((data) => {
+      this.topHomestayDTOS = data;
+    })
+  }
+
+  getAllHomestayRate() {
+    this.homestayService.getAllHomestayRate().subscribe((data) => {
       this.homestayDTOS = data;
     })
   }
 
-  getAllHomestay() {
-    this.homestayService.getAllHomestay().subscribe((data) => {
-      this.homestays = data;
-    })
-  }
-
-  getAllHomestaySignIn() {
-    this.homestayService.getAllHomestaySignIn(this.idAcc).subscribe((data) => {
-      this.homestays = data;
+  getAllYourHomestayRate() {
+    this.homestayService.getAllYourHomestayRate(this.idAcc).subscribe((data) => {
+      this.homestayDTOS = data;
     })
   }
 
@@ -70,5 +73,15 @@ export class HomeComponent implements OnInit {
     this.cityService.getCityTop3().subscribe((data) => {
       this.city3 = data;
     })
+  }
+
+
+
+  redirectByCityId(id: any) {
+    this.router.navigateByUrl('/homestay', {state: {id}})
+  }
+
+  redirectByHomestay(id: any) {
+    this.router.navigateByUrl('/homestay-detail/' + id, {state: {id}})
   }
 }

@@ -1,7 +1,7 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {Homestay2Service} from "../../service/homestay/homestay2.service";
 import {Homestay2} from "../../models/homestay2";
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {MatTableDataSource} from "@angular/material/table";
 import {MatPaginator} from "@angular/material/paginator";
 import {CommentService} from "../../service/comment/comment.service";
@@ -10,6 +10,7 @@ import {NotifyComponent} from "../../dialog/notify/notify.component";
 import {MatDialog} from "@angular/material/dialog";
 import {BookHomestayComponent} from "../../dialog/book-homestay/book-homestay.component";
 import {ImageOfHomestay} from "../../models/image-of-homestay";
+import {MyHomestayDto} from "../../models/my-homestay-dto";
 
 @Component({
   selector: 'app-homestay-detail',
@@ -23,6 +24,7 @@ export class HomestayDetailComponent implements OnInit {
   homestay!: Homestay2;
   google_api!: string;
   images!: ImageOfHomestay[];
+  homestayDTOS!: MyHomestayDto[];
 
   formComment: FormGroup = new FormGroup({});
   comments?: any;
@@ -37,6 +39,7 @@ export class HomestayDetailComponent implements OnInit {
   constructor(private homestayService: Homestay2Service,
               private commentService: CommentService,
               private route: ActivatedRoute,
+              private router: Router,
               private fb: FormBuilder,
               private dialog: MatDialog) {
   }
@@ -55,9 +58,9 @@ export class HomestayDetailComponent implements OnInit {
     this.getAllImage();
     this.getAllComment();
     if (this.idAcc == null) {
-      this.getAllHomestay();
+      this.getAllHomestayRate();
     } else {
-      this.getAllHomestaySignIn();
+      this.getAllYourHomestayRate();
     }
   }
 
@@ -65,6 +68,7 @@ export class HomestayDetailComponent implements OnInit {
     this.idH = this.route.snapshot.params['id'];
     this.homestayService.getHomestayById(this.idH).subscribe((data) => {
       this.homestay = data;
+      console.log(this.homestay)
       this.google_api = this.homestay.address + ", " + this.homestay.city.name;
       this.google_api = this.google_api?.split(" ").join("+");
       console.log(this.google_api);
@@ -72,6 +76,25 @@ export class HomestayDetailComponent implements OnInit {
       document.getElementById('google-api-maps').innerHTML = this.getGoogleApi(this.google_api);
     })
   }
+
+  redirectByHomestay(id: any) {
+    this.router.navigateByUrl('/homestay-detail/' + id, {state: {id}})
+    this.getHomestayById()
+  }
+
+  getAllHomestayRate() {
+    this.homestayService.getAllHomestayRate().subscribe((data) => {
+      this.homestayDTOS = data;
+    })
+  }
+
+  getAllYourHomestayRate() {
+    this.homestayService.getAllYourHomestayRate(this.idAcc).subscribe((data) => {
+      this.homestayDTOS = data;
+    })
+  }
+
+
 
   getAllImage() {
     this.idH = this.route.snapshot.params['id'];
@@ -87,18 +110,6 @@ export class HomestayDetailComponent implements OnInit {
       this.dataSource = new MatTableDataSource<any>(data);
       this.comments = data;
       this.dataSource.paginator = this.paginator;
-    })
-  }
-
-  getAllHomestay() {
-    this.homestayService.getAllHomestay().subscribe((data) => {
-      this.homestays = data;
-    })
-  }
-
-  getAllHomestaySignIn() {
-    this.homestayService.getAllHomestaySignIn(this.idAcc).subscribe((data) => {
-      this.homestays = data;
     })
   }
 

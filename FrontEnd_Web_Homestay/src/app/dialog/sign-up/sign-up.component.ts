@@ -68,8 +68,7 @@ export class SignUpComponent implements OnInit {
       password: this.formSignUp.value.password,
     }
     this.accountService.createAccount(account).subscribe(() => {
-      this.formSignUp.reset();
-      // this.openConfirm();
+      this.openConfirm();
     }, error => {
       // @ts-ignore
       document.getElementById("error-form-sign-up").innerText = "Tài khoản email đã tồn tại!"
