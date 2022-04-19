@@ -1,12 +1,13 @@
-<div class="hero-wrap js-fullheight" style="background-image: url('https://media.vov.vn/sites/default/files/styles/large/public/2020-09/99-thuyen_hoa.jpg'); height: 680px">
+<div class="hero-wrap js-fullheight"
+     style="background-image: url('https://media.vov.vn/sites/default/files/styles/large/public/2020-09/99-thuyen_hoa.jpg'); height: 680px">
   <div class="overlay"></div>
   <div class="container">
     <div class="row no-gutters slider-text js-fullheight align-items-center justify-content-center"
          data-scrollax-parent="true">
       <div class="col-md-9 text-center" style="margin-top: 24%">
-        <p class="breadcrumbs" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }"><span
-          class="mr-2"><a routerLink="home">Trang Chủ</a></span>|<span>&nbsp;Homestay</span></p>
-        <br>
+<!--        <p class="breadcrumbs" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }"><span-->
+<!--          class="mr-2"><a routerLink="home">Trang Chủ</a></span>|<span>&nbsp;Homestay</span></p>-->
+<!--        <br>-->
         <h1 class="mb-3 bread" style="font-size: 70px">Homestay</h1>
       </div>
     </div>
@@ -19,92 +20,73 @@
     <div class="row">
       <div class="col-lg-3 sidebar">
         <div class="sidebar-wrap bg-light assets/images">
-          <h3 class="heading mb-4">Tìm Kiếm</h3>
-          <form action="#">
+          <h3 *ngIf="idAcc == null" class="heading mb-4"><span>Tìm kiếm</span>
+            <span style="margin-left: 30px"> | </span>
+            <span (click)="getAllHomestay()" style="margin-left: 30px; cursor: pointer">Tất cả</span></h3>
+          <h3 *ngIf="idAcc != null" class="heading mb-4"><span>Tìm kiếm</span>
+            <span style="margin-left: 30px"> | </span>
+            <span (click)="getAllHomestaySignIn()" style="margin-left: 30px; cursor: pointer">Tất cả</span></h3>
+          <form action="#" [formGroup]="formSearch">
             <div class="fields">
               <div class="form-group">
-                <input type="text" class="form-control" placeholder="Tên Homestay">
+                <input type="text" class="form-control" placeholder="Tên Homestay" formControlName="name">
               </div>
               <div class="form-group">
                 <div class="select-wrap one-third">
                   <div class="icon"><span class="ion-ios-arrow-down"></span></div>
-                  <select name="" id="" class="form-control">
-                    <option value="">Select Location</option>
-                    <option value="">San Francisco USA</option>
-                    <option value="">Berlin Germany</option>
-                    <option value="">Lodon United Kingdom</option>
-                    <option value="">Paris Italy</option>
+                  <select name="" id="" class="form-control" formControlName="idCity" required>
+                    <option selected="selected" value="1">TP.Hà Nội</option>
+                    <option value="2">Hải Phòng</option>
+                    <option value="3">Quảng Ninh</option>
+                    <option value="4">Lào Cai</option>
+                    <option value="5">Đà Nẵng</option>
+                    <option value="6">Thừa Thiên Huế</option>
+                    <option value="7">Lâm Đồng</option>
+                    <option value="8">Khánh Hòa</option>
+                    <option value="9">Bình Định</option>
+                    <option value="10">TP.Hồ Chí Minh</option>
+                    <option value="11">Vũng Tàu</option>
+                    <option value="12">Kiên Giang</option>
                   </select>
                 </div>
               </div>
               <div class="form-group">
-                <input type="text" id="checkin_date1" class="form-control" placeholder="Ngày Bắt Đầu">
+                <div class="range-slider">
+		              		<span>
+										    <input type="number" value="{{price1}}" formControlName="price1" min="100000" max="20000000"/>	-
+										    <input type="number" value="{{price2}}" formControlName="price2" min="100000" max="20000000"/>
+										  </span>
+                  <input #element1 value="100000" min="100000" max="20000000" step="10000" type="range"
+                         (change)="fetch1(element1.value)"/>
+                  <input #element2 value="20000000" min="100000" max="20000000" step="10000" type="range"
+                         (change)="fetch2(element2.value)"/>
+                </div>
               </div>
               <div class="form-group">
-                <input type="text" id="checkin_date2" class="form-control" placeholder="Ngày Kết Thúc">
+                <input type="submit" (click)="searchHomestay()" [disabled]="formSearch.invalid" value="Tìm Kiếm" class="btn btn-primary py-3 px-5">
               </div>
-              <div class="form-group">
-                <input type="submit" value="Search" class="btn btn-primary py-3 px-5">
-              </div>
-            </div>
-          </form>
-        </div>
-        <div class="sidebar-wrap bg-light assets/images">
-          <h3 class="heading mb-4">Đánh Giá Tốt</h3>
-          <form method="post" class="star-rating">
-            <div class="form-check">
-              <input type="checkbox" class="form-check-input" id="exampleCheck1">
-              <label class="form-check-label" for="exampleCheck1">
-                <p class="rate"><span><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i><i
-                  class="icon-star"></i><i class="icon-star"></i></span></p>
-              </label>
-            </div>
-            <div class="form-check">
-              <input type="checkbox" class="form-check-input" id="exampleCheck2">
-              <label class="form-check-label" for="exampleCheck1">
-                <p class="rate"><span><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i><i
-                  class="icon-star"></i><i class="icon-star-o"></i></span></p>
-              </label>
-            </div>
-            <div class="form-check">
-              <input type="checkbox" class="form-check-input" id="exampleCheck3">
-              <label class="form-check-label" for="exampleCheck1">
-                <p class="rate"><span><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i><i
-                  class="icon-star-o"></i><i class="icon-star-o"></i></span></p>
-              </label>
-            </div>
-            <div class="form-check">
-              <input type="checkbox" class="form-check-input" id="exampleCheck4">
-              <label class="form-check-label" for="exampleCheck1">
-                <p class="rate"><span><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star-o"></i><i
-                  class="icon-star-o"></i><i class="icon-star-o"></i></span></p>
-              </label>
-            </div>
-            <div class="form-check">
-              <input type="checkbox" class="form-check-input" id="exampleCheck5">
-              <label class="form-check-label" for="exampleCheck1">
-                <p class="rate"><span><i class="icon-star"></i><i class="icon-star-o"></i><i class="icon-star-o"></i><i
-                  class="icon-star-o"></i><i class="icon-star-o"></i></span></p>
-              </label>
             </div>
           </form>
         </div>
       </div>
       <div class="col-lg-9">
-        <div class="row">
-
+        <div class="row" *ngIf="homestays == []">
+          <p>Không tìm thấy Homestay.</p>
+        </div>
+        <div class="row" *ngIf="homestays != []">
           <div class="col-md-4 assets/images" *ngFor="let h of homestays; index as i">
             <div class="destination">
               <div class="img img-2 d-flex justify-content-center align-items-center">
-                <img [routerLink]="['/homestay-detail/', h.id]" class="active" style="width: 254px; height: 200px; cursor: pointer"
+                <img [routerLink]="['/homestay-detail/', h.id]" class="active"
+                     style="width: 254px; height: 200px; cursor: pointer"
                      src="{{h.imageOfHomestays[1].images}}" alt="">
               </div>
               <div class="text p-3">
                 <div class="d-flex">
                   <div class="one">
-                    <h3><a [routerLink]="['/homestay-detail/', h.id]">{{h.name}}</a></h3>
+                    <h3 style="width: 220px; height: 56px"><a [routerLink]="['/homestay-detail/', h.id]">{{h.name}}</a></h3>
                     <div class="two">
-<!--                      <p class="price per-price">{{h.price | currency :'đ' :true: '1.0-0'}}<small>/night</small></p>-->
+                      <p class="price per-price">{{h.price | currency :'đ' :true: '1.0-0'}}<small>/ngày</small></p>
                     </div>
                   </div>
                 </div>

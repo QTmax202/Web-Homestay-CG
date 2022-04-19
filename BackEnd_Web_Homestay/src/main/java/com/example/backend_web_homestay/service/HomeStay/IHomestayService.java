@@ -13,6 +13,8 @@ public interface IHomestayService extends IGeneralService<Homestay> {
 
     Iterable<Homestay> findHomestayByNameAndCityAndPrice(String name, Long idCity, Long price1, Long price2);
 
+    Iterable<Homestay> findHomestayByNameAndCityAndPriceSignIn(Long idAcc, String name, Long idCity, Long price1, Long price2);
+
     Iterable<MyHomestayDTO> getTop5Homestay();
 }
 

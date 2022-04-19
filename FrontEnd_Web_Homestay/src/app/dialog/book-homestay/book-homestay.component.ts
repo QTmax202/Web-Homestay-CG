@@ -15,11 +15,13 @@ import {MatTableDataSource} from "@angular/material/table";
 })
 export class BookHomestayComponent implements OnInit {
 
-  bill!: Bill;
+  bill_error!: Bill[];
   homestay!: Homestay2;
   number_date!: number;
   price_homestay!: number;
   date_today!: any;
+  date_error_min?: any[];
+  date_error_max?: any[];
 
   calender_error: FormGroup = new FormGroup({});
   calender_day_bill: FormGroup = new FormGroup({
@@ -42,15 +44,26 @@ export class BookHomestayComponent implements OnInit {
 
     this.date_today = new Date(today.getFullYear(), today.getMonth(), today.getDate() + 1);
 
+    // if (this.bill_error != undefined){
+    //   for (const element of this.bill_error) {
+    //     console.log(element);
+    //     this.date_error_min?.push(element.start_date);
+    //     this.date_error_max?.push(element.end_date);
+    //   }
+    // }
+    //
+    // console.log(this.date_error_min);
+    // console.log(this.date_error_max);
+
     this.calender_day_bill = new FormGroup({
       start: new FormControl(new Date(today.getFullYear(), today.getMonth(), today.getDate() + 1)),
       end: new FormControl(new Date(today.getFullYear(), today.getMonth(), today.getDate() + 2)),
     });
 
-    this.calender_error = new FormGroup({
-      start: new FormControl(new Date(today.getFullYear(), today.getMonth(), today.getDate() + 1)),
-      end: new FormControl(new Date(today.getFullYear(), today.getMonth(), today.getDate() + 1))
-    })
+    // this.calender_error = new FormGroup({
+    //   start: new FormControl(new Date(today.getFullYear(), today.getMonth(), today.getDate() + 1)),
+    //   end: new FormControl(new Date(today.getFullYear(), today.getMonth(), today.getDate() + 1))
+    // })
 
     this.start_end_date();
   }
@@ -61,13 +74,13 @@ export class BookHomestayComponent implements OnInit {
   }
 
   get_bill_homestay_status(){
-    this.billService.bill_homestay_status(this.homestay.id).subscribe((data:Bill) => {
-      this.bill = data;
+    this.billService.bill_homestay_status(this.homestay.id).subscribe((data) => {
+      this.bill_error = data;
+      console.log(this.bill_error);
     },error => {
       console.log('error_status_homestay');
     })
   }
-
 
   book_homestay(){
     const bill_new = {

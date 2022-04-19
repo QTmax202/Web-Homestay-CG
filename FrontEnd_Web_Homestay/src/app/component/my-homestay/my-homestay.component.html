@@ -41,6 +41,8 @@
           <input (click)="openMyHomestay()" type="submit" value="Nhà Của Tôi" class="btn btn-primary py-3 px-5" style="width: 100%;">
           <hr>
           <input (click)="openMyBill()" type="submit" value="Đơn Thuê Nhà" class="btn btn-primary py-3 px-5" style="width: 100%;">
+          <hr>
+          <input (click)="openTurnOver()" type="submit" value="Doanh Thu" class="btn btn-primary py-3 px-5" style="width: 100%;">
         </div>
       </div>
 
@@ -60,6 +62,14 @@
                   <div class="d-flex">
                     <div class="one">
                       <h3><a href="hotel-single.html">{{h.name}}</a></h3>
+                      <p *ngIf="h.roundRate == null" class="rate">
+                        <i class="icon-star-o"></i>
+                        <i class="icon-star-o"></i>
+                        <i class="icon-star-o"></i>
+                        <i class="icon-star-o"></i>
+                        <i class="icon-star-o"></i>
+                        <span>Chưa có đánh giá</span>
+                      </p>
                       <p *ngIf="h.roundRate == 0" class="rate">
                         <i class="icon-star-o"></i>
                         <i class="icon-star-o"></i>
@@ -109,17 +119,16 @@
                         <span>{{h.avgRate}} Sao</span>
                       </p>
                     </div>
-                    <div class="two">
-                      <span class="price per-price">{{h.price}}<br><small>/night</small></span>
+                    <div class="two" style="margin-left: -50px">
+                      <span class="price per-price">{{h.price | currency :'đ' :true: '1.0-0'}}<br><small>/ngày</small></span>
                     </div>
                   </div>
-                  <p>{{h.description}}</p>
+                  <p style="width: 760px">{{h.description}}</p>
                   <hr>
-                  <p class="bottom-area d-flex">
-                    <span><i class="icon-map-o"></i> {{h.address}}</span>
-                    <span class="ml-auto"><button class="btn btn-warning"
-                                                  style="margin-left: 520px">Edit</button></span>
-                    <span class="ml-auto"><button class="btn btn-danger">Delete</button></span>
+                  <p class="bottom-area d-flex row">
+                    <span class="col-sm-8"><i class="icon-map-o"></i> {{h.address}}</span>
+                    <button class="btn btn-warning col-sm-2" (click)="openEditStatus(h.id)">Edit</button>
+                    <button class="btn btn-danger col-sm-2">Delete</button>
                   </p>
                 </div>
               </div>
@@ -131,8 +140,8 @@
 
       <!--                History-->
       <div class="col-lg-9" style="display: none" id="my-bill">
+        <h4>Đơn thuê nhà</h4>
         <div class="col-md-12 hotel-single  mb-5 mt-5">
-          <h4 class="mb-9">Related Hotels</h4>
           <div class="row">
             <div class="col-md-12" *ngFor="let b of yourBill">
               <div class="destination">
@@ -140,6 +149,14 @@
                   <div class="d-flex">
                     <div class="one">
                       <h3><a href="hotel-single.html">{{b.homestayName}}</a></h3>
+                      <p *ngIf="b.roundRate == null" class="rate">
+                        <i class="icon-star-o"></i>
+                        <i class="icon-star-o"></i>
+                        <i class="icon-star-o"></i>
+                        <i class="icon-star-o"></i>
+                        <i class="icon-star-o"></i>
+                        <span>Chưa có đánh giá</span>
+                      </p>
                       <p *ngIf="b.roundRate == 0" class="rate">
                         <i class="icon-star-o"></i>
                         <i class="icon-star-o"></i>
@@ -190,25 +207,87 @@
                       </p>
                     </div>
                     <div class="two">
-<!--                      <span class="price per-price">{{b.price | currency :'đ' :true: '1.0-0'}}</span>-->
+                      <span class="price per-price">{{b.price | currency :'đ' :true: '1.0-0'}}</span>
                     </div>
                   </div>
-                  <p>Người đặt: <a href="">{{b.accountName}}</a></p>
+                  <p>Người đặt: <a href="">{{b.accountName}}</a> - Thời gian đặt: <span>{{b.regisDate}}</span></p>
                   <p>Ngày bắt đầu: <span>{{b.startDate}}</span> - Ngày kết thúc: <span>{{b.endDate}}</span></p>
                   <hr>
                   <p class="bottom-area d-flex">
-                    <span *ngIf="b.statusHomeId == 1" class="ml-auto"><button class="btn btn-warning"
-                                                  disabled>Chờ xác nhận</button></span>
-                    <span *ngIf="b.statusHomeId == 2" class="ml-auto"><button class="btn btn-success"
-                                                  disabled>Đã đặt</button></span>
-                    <span *ngIf="b.statusHomeId == 3" class="ml-auto"><button class="btn btn-info"
-                                                  disabled>Đang ở</button></span>
-                    <span *ngIf="b.statusHomeId == 4" class="ml-auto"><button class="btn btn-dark"
-                                                  disabled>Đã trả</button></span>
+                    <span *ngIf="b.statusHomeId == 1" class="ml-auto">
+                      <button class="btn btn-primary" *ngIf="!onCheckToday(b.startDate)" (click)="openCancellingInvoiceHost(b)">Hủy thuê</button>
+                      <button class="btn btn-warning" (click)="openConfirmHost(b)">Chờ xác nhận</button></span>
+                    <span *ngIf="b.statusHomeId == 2" class="ml-auto">
+                      <button class="btn btn-success" disabled>Đã xác nhận</button></span>
+                    <span *ngIf="b.statusHomeId == 3" class="ml-auto">
+                      <button class="btn btn-info" disabled>Đang ở</button></span>
+                    <span *ngIf="b.statusHomeId == 4" class="ml-auto">
+                      <button class="btn btn-dark" disabled>Đã trả</button></span>
+                    <span *ngIf="b.statusHomeId == 5" class="ml-auto">
+                      <button class="btn btn-dark" disabled>Đã hủy</button></span>
                   </p>
                 </div>
               </div>
             </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!--                Turn Over-->
+      <div class="col-lg-9" style="display: none" id="my-turn-over">
+        <h4 (click)="findTurnOverByAccountAndStartDate()">Doanh thu</h4>
+        <div class="col-md-12 hotel-single  mb-5 mt-5">
+          <div class="row">
+            <form [formGroup]="formTurnOver" (ngSubmit)="findTurnOverByAccountAndStartDate()" style="width: 825px">
+              <mat-label>Doanh thu theo thời gian</mat-label>
+              <br>
+              <mat-form-field class="example-full-width col-md-4" appearance="outline">
+                <mat-label>Ngày bắt đầu</mat-label>
+                <input type="date" matInput formControlName="startDate1">
+              </mat-form-field>
+              <mat-form-field class="example-full-width col-md-4" appearance="outline">
+                <mat-label>Ngày kết thúc</mat-label>
+                <input type="date" matInput formControlName="startDate2">
+              </mat-form-field>
+              <button style="margin-left: 30px" class="btn btn-dark col-md-3">Tìm kiếm</button>
+            </form>
+            <br>
+            <div>
+              <mat-label>Tổng doanh thu: {{totalTurnOver  | currency :'đ' :true: '1.0-0'}}</mat-label>
+            </div>
+            <br>
+            <hr>
+            <table mat-table [dataSource]="dataSource" matSort>
+
+              <!-- Progress Column -->
+              <ng-container matColumnDef="name">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Tên Homestay </th>
+                <td mat-cell *matCellDef="let row"> {{row.name}} </td>
+              </ng-container>
+
+              <!-- Name Column -->
+              <ng-container matColumnDef="countPrice">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Số lượt thuê </th>
+                <td mat-cell *matCellDef="let row"> {{row.countPrice}} </td>
+              </ng-container>
+
+              <!-- Fruit Column -->
+              <ng-container matColumnDef="sumPrice">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Doanh thu </th>
+                <td mat-cell *matCellDef="let row"> {{row.sumPrice | currency :'đ' :true: '1.0-0'}} </td>
+              </ng-container>
+
+              <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+              <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+              <!-- Row shown when there is no matching data. -->
+              <tr class="mat-row" *matNoDataRow>
+                <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
+              </tr>
+            </table>
+
+            <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of users"></mat-paginator>
           </div>
         </div>
 

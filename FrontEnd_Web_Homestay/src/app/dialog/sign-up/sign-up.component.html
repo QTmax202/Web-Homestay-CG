@@ -14,7 +14,7 @@
     <mat-label>Email</mat-label>
     <input type="email" matInput placeholder="Ex. pat@example.com" formControlName="gmail" required>
     <mat-error *ngIf="formSignUp.hasError('email','gmail') && !formSignUp.hasError('required','gmail')">
-      Vui lòng nhập một địa chỉ <strong>email</strong> hợp lệ!
+      Vui lòng nhập <strong>email</strong> hợp lệ!
     </mat-error>
     <mat-error *ngIf="formSignUp.hasError('required','gmail')">
       Không được bỏ trống!

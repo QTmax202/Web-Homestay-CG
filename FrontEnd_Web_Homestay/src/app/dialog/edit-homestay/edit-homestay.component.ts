@@ -1,6 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Inject, OnInit} from '@angular/core';
 import {finalize} from "rxjs";
 import {AngularFireStorage} from "@angular/fire/compat/storage";
+import {Homestay2Service} from "../../service/homestay/homestay2.service";
+import {MAT_DIALOG_DATA, MatDialog} from "@angular/material/dialog";
+import {MyHomestayDto} from "../../models/my-homestay-dto";
+import {Homestay2} from "../../models/homestay2";
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 
 @Component({
   selector: 'app-edit-homestay',
@@ -14,9 +19,56 @@ export class EditHomestayComponent implements OnInit {
   fb : any;
   selectedImages: any[] = [];
 
-  constructor(private storage: AngularFireStorage) { }
+  homestay!: Homestay2;
+  idHomestay!: number;
+  formStatus: FormGroup = new FormGroup({});
+
+  constructor(private storage: AngularFireStorage,
+              private homestayService: Homestay2Service,
+              private dialog: MatDialog,
+              private formBuilder: FormBuilder,
+              @Inject(MAT_DIALOG_DATA) public data: any,) { }
 
   ngOnInit(): void {
+    this.idHomestay = this.data;
+    this.getHomestayById()
+    this.formStatus = this.formBuilder.group({
+      status: ['', [Validators.required]],
+    })
+
+  }
+
+  editStatusHomestay() {
+    const statusHomestay = {
+      id: this.homestay.id,
+      name: this.homestay.name,
+      address: this.homestay.address,
+      bed_room: this.homestay.bed_room,
+      bath_room: this.homestay.bath_room,
+      price: this.homestay.price,
+      status: this.formStatus.value.status,
+      description: this.homestay.description,
+      homestay_type: {
+        id: this.homestay.homestay_type.id,
+      },
+      account: {
+        id:  this.homestay.account.id,
+      },
+      city: {
+        id: this.homestay.city.id
+      },
+    }
+    console.log(statusHomestay)
+    this.homestayService.createHomestay(statusHomestay).subscribe(() => {
+      this.dialog.closeAll();
+    })
+  }
+
+  getHomestayById() {
+    this.homestayService.getHomestayById(this.idHomestay).subscribe((data) => {
+      this.homestay = data;
+      console.log(this.homestay)
+    })
   }
 
   showPreview(event: any) {
@@ -53,5 +105,6 @@ export class EditHomestayComponent implements OnInit {
     }
 
   }
+
 
 }

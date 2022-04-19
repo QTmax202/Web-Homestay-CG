@@ -94,13 +94,24 @@ public class HomestayController {
                                                                 @RequestParam(required = false) Long idCity,
                                                                 @RequestParam(required = false) Long price1,
                                                                 @RequestParam(required = false) Long price2) {
-        if (price1 == null) {
-            price1 = 0L;
-        }
-        if (price2 == null) {
-            price2 = 999999999L;
-        }
+        if (price1 == null) price1 = 0L;
+        if (price2 == null) price2 = 999999999L;
         Iterable<Homestay> homestays = homestayService.findHomestayByNameAndCityAndPrice(name, idCity, price1, price2);
+        if (!homestays.iterator().hasNext()) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+        return new ResponseEntity<>(homestays, HttpStatus.OK);
+    }
+
+    @GetMapping("/{id}/search")
+    private ResponseEntity<?> findHomestayByNameAndCityAndPriceSignIn(@PathVariable Long id,
+                                                                      @RequestParam(required = false) String name,
+                                                                      @RequestParam(required = false) Long idCity,
+                                                                      @RequestParam(required = false) Long price1,
+                                                                      @RequestParam(required = false) Long price2) {
+        if (price1 == null) price1 = 0L;
+        if (price2 == null) price2 = 999999999L;
+        Iterable<Homestay> homestays = homestayService.findHomestayByNameAndCityAndPriceSignIn(id, name, idCity, price1, price2);
         if (!homestays.iterator().hasNext()) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }

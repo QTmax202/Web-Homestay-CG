@@ -67,8 +67,6 @@ export class SignUpComponent implements OnInit {
       gmail: this.formSignUp.value.gmail,
       password: this.formSignUp.value.password,
     }
-    console.log("account" + account);
-
     this.accountService.createAccount(account).subscribe(() => {
       this.formSignUp.reset();
       // this.openConfirm();

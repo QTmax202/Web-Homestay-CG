@@ -1,32 +1,31 @@
-<form class="example-form">
+<form class="example-form" [formGroup]="formRateComment">
   <h1 mat-dialog-title>ĐÁNH GIÁ</h1>
   <mat-form-field class="example-full-width" appearance="outline">
     <mat-label>Tên Nhà</mat-label>
-    <input type="text" matInput readonly value="Hehe">
+    <input type="text" matInput readonly value="{{homestay.name}}">
   </mat-form-field>
   <mat-form-field class="example-full-width" appearance="outline">
     <mat-label>Địa Chỉ</mat-label>
-    <input type="text" matInput readonly value="Hà Nội">
+    <input type="text" matInput readonly value="{{homestay.address}}, {{homestay.city.name}}">
   </mat-form-field>
+  <mat-label>Đánh Giá</mat-label>
   <div class="row">
     <div class="col-sm-6">
-      <p class="rate">
-        <span>Đánh giá của bạn: </span>
-        <i class="icon-star"></i>
-        <i class="icon-star"></i>
-        <i class="icon-star"></i>
-        <i class="icon-star"></i>
-        <i class="icon-star-o"></i>
-        <span> 5 star</span>
-      </p>
+      <button mat-icon-button color="warn" *ngFor="let r of ratingArr; index as i"
+              (click)="onClick(i)">
+        <mat-icon>
+          {{ returnStar(i) }}
+        </mat-icon>
+      </button>
     </div>
   </div>
+  <br>
   <mat-form-field class="example-full-width" appearance="outline">
-    <mat-label>Nhận xét</mat-label>
-    <input type="text" matInput>
+    <mat-label>Nhận Xét</mat-label>
+    <input type="text" matInput formControlName="comment" required>
   </mat-form-field>
   <div mat-dialog-actions [align]="'end'">
     <button mat-raised-button color="warn" mat-dialog-close>Đóng</button>
-    <button type="submit" mat-raised-button color="primary">Xác Nhận</button>
+    <button (click)="createRateComment()" type="submit" mat-raised-button color="primary">Xác Nhận</button>
   </div>
 </form>

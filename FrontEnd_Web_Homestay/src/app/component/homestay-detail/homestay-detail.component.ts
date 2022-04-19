@@ -21,7 +21,7 @@ export class HomestayDetailComponent implements OnInit {
   idH!: number;
   homestays!: Homestay2[];
   homestay!: Homestay2;
-  google_api! :string;
+  google_api!: string;
   images!: ImageOfHomestay[];
 
   formComment: FormGroup = new FormGroup({});
@@ -38,7 +38,8 @@ export class HomestayDetailComponent implements OnInit {
               private commentService: CommentService,
               private route: ActivatedRoute,
               private fb: FormBuilder,
-              private dialog: MatDialog) { }
+              private dialog: MatDialog) {
+  }
 
   ngOnInit(): void {
     this.formComment = this.fb.group({
@@ -58,16 +59,17 @@ export class HomestayDetailComponent implements OnInit {
     } else {
       this.getAllHomestaySignIn();
     }
-    console.log(localStorage.getItem('ACCOUNT_ID'))
-    // this.google_api = this.homestay.address + this.homestay.city.name;
-    this.google_api = "Sân+vận+động+Quốc+gia+Mỹ+Đình";
-    console.log(this.google_api);
   }
 
   getHomestayById() {
     this.idH = this.route.snapshot.params['id'];
     this.homestayService.getHomestayById(this.idH).subscribe((data) => {
       this.homestay = data;
+      this.google_api = this.homestay.address + ", " + this.homestay.city.name;
+      this.google_api = this.google_api?.split(" ").join("+");
+      console.log(this.google_api);
+      // @ts-ignore
+      document.getElementById('google-api-maps').innerHTML = this.getGoogleApi(this.google_api);
     })
   }
 
@@ -85,30 +87,6 @@ export class HomestayDetailComponent implements OnInit {
       this.dataSource = new MatTableDataSource<any>(data);
       this.comments = data;
       this.dataSource.paginator = this.paginator;
-      console.log(data)
-      console.log("-----------")
-      console.log(this.comments)
-    })
-  }
-
-  createComment() {
-    const comment = {
-      id: this.formComment.value.id,
-      comment: this.formComment.value.comment,
-      time_stamp: new Date(),
-      homestay: {
-        id: this.idH
-      },
-      account: {
-        id: localStorage.getItem('ACCOUNT_ID')
-      }
-    };
-    console.log(comment);
-    this.commentService.createComment(comment).subscribe(() => {
-      console.log(comment);
-      alert(comment);
-      this.formComment.reset();
-      this.getAllComment();
     })
   }
 
@@ -124,11 +102,37 @@ export class HomestayDetailComponent implements OnInit {
     })
   }
 
-  openBookHouse(homestay : any) {
+  openBookHouse(homestay: any) {
     this.dialog.closeAll()
-    this.dialog.open(BookHomestayComponent,{
+    this.dialog.open(BookHomestayComponent, {
       width: '45%',
-      data : homestay
+      data: homestay
     });
+  }
+
+  getGoogleApi(address: any) {
+    console.log(address);
+    return '<iframe\n' +
+      '                  width="100%"\n' +
+      '                  height="450"\n' +
+      '                  frameborder="0" style="border:0"\n' +
+      '                  referrerpolicy="no-referrer-when-downgrade"\n' +
+      '                  src="https://www.google.com/maps/embed/v1/place?key=AIzaSyDRgsm4D8UcW479Mj4malJdf92cl_sTLAI&q=' + address + '&maptype=satellite&zoom=15"\n' +
+      '                  allowfullscreen>\n' +
+      '                </iframe>'
+  }
+
+  openDescription() {
+    // @ts-ignore
+    document.getElementById("home-description").style.display = "block";
+    // @ts-ignore
+    document.getElementById("home-comment-rate").style.display = "none";
+  }
+
+  openCommentRate() {
+    // @ts-ignore
+    document.getElementById("home-comment-rate").style.display = "block";
+    // @ts-ignore
+    document.getElementById("home-description").style.display = "none";
   }
 }

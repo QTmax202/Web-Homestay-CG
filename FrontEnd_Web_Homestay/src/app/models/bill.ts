@@ -1,10 +1,10 @@
 export interface Bill {
   id?: number;
-  account?: object;
-  homestay?: object;
-  status_homestay?:object;
+  account?: any;
+  homestay?: any;
+  status_homestay?:any;
   price?: number;
-  registration_date?: string;
-  start_date?: string;
-  end_date?: string;
+  registration_date?: any;
+  start_date?: any;
+  end_date?: any;
 }
