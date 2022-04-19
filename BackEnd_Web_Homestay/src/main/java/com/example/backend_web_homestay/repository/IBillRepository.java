@@ -21,7 +21,7 @@ public interface IBillRepository extends JpaRepository<Bill, Long> {
             "            left join rate on rate.homestay_id = h.id\n" +
             "            join account a on b.account_id = a.id\n" +
             "            where h.account_id = ?\n" +
-            "            group by b.id", nativeQuery = true)
+            "            group by b.id desc ", nativeQuery = true)
     Iterable<YourBillDTO> getYourBillByAccountId(long id);
 
     @Query(value = "select b.id as id, b.end_date as endDate, b.registration_date as regisDate, b.start_date as startDate,\n" +
@@ -31,7 +31,7 @@ public interface IBillRepository extends JpaRepository<Bill, Long> {
             "            left join rate on rate.homestay_id = h.id\n" +
             "            join account a on b.account_id = a.id\n" +
             "            where b.account_id = ?\n" +
-            "            group by b.id", nativeQuery = true)
+            "            group by b.id desc", nativeQuery = true)
     Iterable<MyBillDTO> getMyBillByAccountId(long id);
 
     Iterable<Bill> getBillByHomestay_Id(Long id);
