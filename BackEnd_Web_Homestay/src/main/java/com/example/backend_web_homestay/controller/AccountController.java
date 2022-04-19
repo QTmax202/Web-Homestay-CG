@@ -66,6 +66,7 @@ public class AccountController {
         account.get().setGmail(profileDTO.getGmail());
         account.get().setPhone_number(profileDTO.getPhone_number());
         account.get().setAddress(profileDTO.getAddress());
+        account.get().setAvatar_url(profileDTO.getAvatar_url());
         accountService.update(account.get());
         return new ResponseEntity<>(account.get(), HttpStatus.OK);
     }
