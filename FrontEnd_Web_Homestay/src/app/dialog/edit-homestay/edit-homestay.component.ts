@@ -6,6 +6,7 @@ import {MAT_DIALOG_DATA, MatDialog} from "@angular/material/dialog";
 import {MyHomestayDto} from "../../models/my-homestay-dto";
 import {Homestay2} from "../../models/homestay2";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {NgToastService} from "ng-angular-popup";
 
 @Component({
   selector: 'app-edit-homestay',
@@ -27,13 +28,15 @@ export class EditHomestayComponent implements OnInit {
               private homestayService: Homestay2Service,
               private dialog: MatDialog,
               private formBuilder: FormBuilder,
-              @Inject(MAT_DIALOG_DATA) public data: any,) { }
+              @Inject(MAT_DIALOG_DATA) public data: any,
+              private toast: NgToastService) { }
 
   ngOnInit(): void {
     this.idHomestay = this.data;
     this.getHomestayById()
     this.formStatus = this.formBuilder.group({
       status: ['', [Validators.required]],
+      imageOfHomestays:'',
     })
 
   }
@@ -57,9 +60,11 @@ export class EditHomestayComponent implements OnInit {
       city: {
         id: this.homestay.city.id
       },
+      imageOfHomestays: this.selectedImages,
     }
     console.log(statusHomestay)
     this.homestayService.createHomestay(statusHomestay).subscribe(() => {
+      this.toast.success({detail:'SuccessMessage', summary:'Cập nhật thành công', duration: 5000})
       this.dialog.closeAll();
     })
   }
@@ -99,7 +104,10 @@ export class EditHomestayComponent implements OnInit {
               }
             });
           })
-        ).subscribe(() => {
+        ).subscribe(url => {
+          if (url){
+            console.log(url)
+          }
         });
       }
     }

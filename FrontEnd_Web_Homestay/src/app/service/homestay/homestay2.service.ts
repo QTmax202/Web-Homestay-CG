@@ -46,7 +46,7 @@ export class Homestay2Service {
   //home
 
   createHomestay(homestay: Homestay2): Observable<any> {
-    return this.http.post<Homestay2>(API_URL + 'homestay', homestay);
+    return this.http.post<Homestay2>(API_URL + 'homestay/add-image', homestay);
   }
 
   getAllHomestay(): Observable<any> {
@@ -80,16 +80,5 @@ export class Homestay2Service {
   getAllRateByAccount(id: number): Observable<any> {
     return this.http.get<Rate[]>(API_URL + 'rate/account/' + id);
   }
-  // tao nha theo id account
-  createHome(id: number, homestay: Homestay2): Observable<Homestay2[]> {
-    return this.http.post<any>(API_URL + `homestay/create/${id}`, homestay);
-  }
-  // sua thong tin nha
-  editHome(id: any, homestay: Homestay2): Observable<Homestay2> {
-    return this.http.put<Homestay2>(API_URL + `${id}`, homestay);
-  }
-  //them anh
-  create(image: ImageOfHomestay): Observable<ImageOfHomestay> {
-    return this.http.post<ImageOfHomestay>(API_URL + `save-image`, image);
-  }
+
 }

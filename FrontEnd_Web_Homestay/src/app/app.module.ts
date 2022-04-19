@@ -48,6 +48,8 @@ import {MatNativeDateModule} from "@angular/material/core";
 import {AngularFireAuthModule} from "@angular/fire/compat/auth";
 import {CommonModule} from "@angular/common";
 import {MatSnackBarModule} from "@angular/material/snack-bar";
+import {NgToastModule} from "ng-angular-popup";
+
 
 @NgModule({
   declarations: [
@@ -72,7 +74,8 @@ import {MatSnackBarModule} from "@angular/material/snack-bar";
     NotifyComponent,
     EditHomestayComponent,
     ChangePassComponent,
-    ConfirmBookComponent
+    ConfirmBookComponent,
+
   ],
   imports: [
     BrowserModule,
@@ -101,7 +104,8 @@ import {MatSnackBarModule} from "@angular/material/snack-bar";
     MatDatepickerModule,
     MatNativeDateModule,
     CommonModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    NgToastModule
   ],
   providers: [],
   bootstrap: [AppComponent]

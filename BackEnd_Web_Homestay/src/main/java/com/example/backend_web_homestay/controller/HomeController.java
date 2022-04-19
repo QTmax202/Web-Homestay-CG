@@ -2,10 +2,12 @@ package com.example.backend_web_homestay.controller;
 
 import com.example.backend_web_homestay.model.*;
 import com.example.backend_web_homestay.service.Account.IAccountService;
+import com.example.backend_web_homestay.service.HomeStay.HomestayService;
 import com.example.backend_web_homestay.service.HomeStay.IHomestayService;
 import com.example.backend_web_homestay.service.Image.IImageService;
 import com.example.backend_web_homestay.service.Rate.IRateService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -24,7 +26,18 @@ public class HomeController {
 
     @Autowired
     private IAccountService accountService;
-
+    @PostMapping("/add")
+    public ResponseEntity<?> createHouse(@RequestBody Homestay homestay) {
+       homestayService.save(homestay);
+        if (homestay.getImageOfHomestays() != null) {
+            for (ImageOfHomestay image : homestay.getImageOfHomestays()) {
+                image.setHomestay(homestay);
+                iImageService.save(image);
+            }
+        }
+        HttpHeaders headers = new HttpHeaders();
+        return new ResponseEntity<>(headers, HttpStatus.CREATED);
+    }
     //tao nha
     @PostMapping("/create/{account_id}")
     public ResponseEntity<Homestay> createHome(@RequestBody Homestay homestay,
@@ -38,7 +51,7 @@ public class HomeController {
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
     // them anh nha
-    @PostMapping("/save-image")
+    @PostMapping("/image")
     public ResponseEntity<?> saveImage(@RequestBody ImageOfHomestay image){
         iImageService.save(image);
         return new ResponseEntity<>(HttpStatus.CREATED);

@@ -9,6 +9,7 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {newArray} from "@angular/compiler/src/util";
 import {AccountService} from "../../service/account/account.service";
 import {Account} from "../../models/account";
+import {NgToastModule, NgToastService} from "ng-angular-popup";
 
 @Component({
   selector: 'app-profile',
@@ -28,7 +29,8 @@ export class ProfileComponent implements OnInit {
   constructor(private storage: AngularFireStorage,
               private dialog: MatDialog,
               private formBuilder: FormBuilder,
-              private accountService: AccountService) {
+              private accountService: AccountService,
+              private toast: NgToastService) {
   }
 
   ngOnInit(): void {
@@ -61,7 +63,7 @@ export class ProfileComponent implements OnInit {
     }
     console.log(information)
     this.accountService.updateProfile(information, this.idAcc).subscribe((data) => {
-      console.log(information)
+      this.toast.success({detail:'SuccessMessage', summary:'Cập nhật thành công', duration: 5000})
     })
   }
 

@@ -1,7 +1,15 @@
-import { Component, OnInit } from '@angular/core';
-import {FormGroup} from "@angular/forms";
-import {ImageOfHomestay} from "../../models/image-of-homestay";
+import {Component, Inject, OnInit} from '@angular/core';
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {Homestay2} from "../../models/homestay2";
+import {HomestayComponent} from "../../component/homestay/homestay.component";
+import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
+import {AccountService} from "../../service/account/account.service";
+import {AuthenticationService} from "../../service/authentication.service";
+import {NgToastService} from "ng-angular-popup";
+import {ActivatedRoute} from "@angular/router";
+import {City} from "../../models/city";
+import {HomestayType} from "../../models/homestay-type";
+import {HomestayService} from "../../service/homestay.service";
 
 @Component({
   selector: 'app-create-homestay',
@@ -11,12 +19,10 @@ import {Homestay2} from "../../models/homestay2";
 export class CreateHomestayComponent implements OnInit {
 
   public loading = false;
-  imgs: any[] = [];
   fb: any;
   selectedImages: any[] = [];
-  idUser = parseInt(<string>localStorage.getItem('ACCOUNT_ID'))
+  idAcc = parseInt(<string>localStorage.getItem('ACCOUNT_ID'))
   formHome!: FormGroup;
-  homestayImage!: ImageOfHomestay
   myItem: File[] = [];
   homestayTypes!: HomestayType[];
   homestay_type!: HomestayType;
@@ -26,7 +32,7 @@ export class CreateHomestayComponent implements OnInit {
   actionBtn: string = "tạo"
 
 
-  constructor(private homestayService: Homestay2Service,
+  constructor(private homestayService: HomestayService,
               private route: ActivatedRoute,
               private toast: NgToastService,
               private authenticationService: AuthenticationService,
@@ -79,15 +85,15 @@ export class CreateHomestayComponent implements OnInit {
       city: {
         id: this.formHome.value.city
       },
-      imageOfHomestay: this.selectedImages,
+      imageOfHomestays: this.selectedImages
     }
-    this.homestayService.createHome(this.idUser, home).subscribe(() => {
-      this.toast.success({detail:"Success Message!", summary:"Create Successfully!", duration: 5000})
+    this.homestayService.createHome(this.idAcc, home).subscribe(() => {
+      this.toast.success({detail: "Success Message!", summary: "Tạo thành công!!", duration: 5000})
       this.formHome.reset()
       this.dialogRef.close()
     }, error => {
       console.log(error.summary)
-      this.toast.error({detail: "Error Message!", summary:'Create Failed, Please Try again', duration: 5000})
+      this.toast.error({detail: "Error Message!", summary: 'Create Failed, Please Try again', duration: 5000})
     })
-
+  }
 }
