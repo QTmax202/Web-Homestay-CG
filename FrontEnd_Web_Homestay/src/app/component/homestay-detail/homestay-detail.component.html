@@ -291,7 +291,7 @@
 <!--                        <div class="d-flex">-->
 <!--                          <div class="one">-->
 <!--                            <h3><a style="cursor: pointer"-->
-<!--                                   (click)="redirectByHomestay(homestayDTOS[3].id)">{{homestayDTOS[3].name}}</a></h3>-->
+<!--                                   [routerLink]="['/homestay-detail/', homestayDTOS[3].id]">{{homestayDTOS[3].name}}</a></h3>-->
 <!--                            <p *ngIf="homestayDTOS[3].roundRate == null" class="rate">-->
 <!--                              <i class="icon-star-o"></i>-->
 <!--                              <i class="icon-star-o"></i>-->
@@ -374,7 +374,7 @@
 <!--                      <div class="text p-3">-->
 <!--                        <div class="d-flex">-->
 <!--                          <div class="one">-->
-<!--                            <h3><a style="cursor: pointer" (click)="redirectByHomestay(h.id)">{{h.name}}</a></h3>-->
+<!--                            <h3><a style="cursor: pointer" [routerLink]="['/homestay-detail/', h.id]">{{h.name}}</a></h3>-->
 <!--                            <p *ngIf="h.roundRate == null" class="rate">-->
 <!--                              <i class="icon-star-o"></i>-->
 <!--                              <i class="icon-star-o"></i>-->

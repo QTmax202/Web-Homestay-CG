@@ -1,4 +1,4 @@
-<div class="hero-wrap js-fullheight" style="background-image: url('assets/images/bg_2.jpg'); height: 680px">
+<div class="hero-wrap js-fullheight" style="background-image: url('https://upload.wikimedia.org/wikipedia/commons/b/b9/Tam_Coc_taken_by_Harmony_Hiro.jpg'); height: 680px">
   <div class="overlay"></div>
   <div class="container">
     <div class="row no-gutters slider-text js-fullheight align-items-center justify-content-center" data-scrollax-parent="true">
@@ -121,7 +121,7 @@
                       <button class="btn btn-warning" (click)="openCheckInBill(m)">Nhận phòng</button>
                       <button class="btn btn-success" disabled>Đã xác nhận</button></span>
                     <span *ngIf="m.statusHomeId == 3" class="ml-auto">
-                      <button class="btn btn-warning" *ngIf="!onCheckToday(m.startDate)" style="margin-left: 500px" (click)="openCheckOutBill(m)">Trả phòng</button>
+                      <button class="btn btn-warning" *ngIf="onCheckToday(m.endDate)" style="margin-left: 500px" (click)="openCheckOutBill(m)">Trả phòng</button>
                       <button class="btn btn-info" disabled>Đang ở</button></span>
                     <span *ngIf="m.statusHomeId == 4" class="ml-auto">
                       <button *ngIf="m.exist == true" disabled class="btn btn-danger" style="margin-left: 600px" (click)="openRate(m.homeId)">Đánh giá</button>
