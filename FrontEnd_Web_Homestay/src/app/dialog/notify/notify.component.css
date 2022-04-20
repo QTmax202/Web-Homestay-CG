@@ -8,11 +8,26 @@
   width: 100%;
 }
 
-.my-notify :hover {
+tr :hover {
+  width: 100%;
   background-color: #e7e9eb;
   cursor: pointer;
 }
 
 .my-notify {
   padding: 0;
+}
+
+table {
+  width: 100%;
+
+}
+
+.mat-form-field {
+  font-size: 14px;
+  width: 100%;
+}
+
+td, th {
+  width: 25%;
 }

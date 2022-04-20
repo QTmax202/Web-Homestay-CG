@@ -57,6 +57,8 @@ export class TripsComponent implements OnInit {
     this.dialog.open(ConfirmBookComponent, {
       width: '50%',
       data :  myBill
+    }).afterClosed().subscribe(() => {
+      this.getBillByAccountId()
     });
     // @ts-ignore
     document.getElementById("cancelling-invoice-client").hidden = false;
@@ -66,6 +68,8 @@ export class TripsComponent implements OnInit {
     this.dialog.open(ConfirmBookComponent, {
       width: '50%',
       data :  myBill
+    }).afterClosed().subscribe(() => {
+      this.getBillByAccountId()
     });
     // @ts-ignore
     document.getElementById("check-in-bill-client").hidden = false;
@@ -75,6 +79,8 @@ export class TripsComponent implements OnInit {
     this.dialog.open(ConfirmBookComponent, {
       width: '50%',
       data :  myBill
+    }).afterClosed().subscribe(() => {
+      this.getBillByAccountId()
     });
     // @ts-ignore
     document.getElementById("check-out-bill-client").hidden = false;

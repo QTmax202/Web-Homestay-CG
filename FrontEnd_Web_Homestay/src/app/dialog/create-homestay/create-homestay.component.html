@@ -1,8 +1,8 @@
-<form class="example-form" [formGroup]="formHome" >
+<form class="example-form" [formGroup]="formHome">
   <h1 mat-dialog-title>THÊM NHÀ</h1>
   <mat-form-field class="example-full-width" appearance="outline">
     <mat-label>Tên Nhà</mat-label>
-    <input type="text" matInput formControlName="name" name="name">
+    <input type="text" matInput formControlName="name" name="name" required>
     <mat-error *ngIf="formHome.hasError('required', 'name')">
       Không được bỏ trống
     </mat-error>
@@ -21,19 +21,19 @@
     <div class="col-lg-7">
       <mat-form-field class="example-full-width" appearance="outline">
         <mat-label>Địa Chỉ</mat-label>
-        <input type="text" matInput formControlName="address" name="address">
-        <mat-error *ngIf="formHome.hasError('required', 'address')">Phải điền địa chỉ</mat-error>
+        <input type="text" matInput formControlName="address" name="address" required>
+        <mat-error *ngIf="formHome.hasError('required', 'address')">Không được bỏ trống</mat-error>
       </mat-form-field>
     </div>
     <div class="col-lg-4">
       <mat-form-field appearance="outline">
         <mat-label >Thành Phố</mat-label>
-        <mat-select  formControlName="city" name="city" >
+        <mat-select  formControlName="city" name="city" required>
           <mat-option *ngFor="let city of cities" value="{{city.id}}">{{city.name}}</mat-option>
-          <mat-error *ngIf="formHome.hasError('required', 'city')">
-            Vui lòng nhập thành phố
-          </mat-error>
         </mat-select>
+        <mat-error *ngIf="formHome.hasError('required', 'city')">
+          Vui lòng chọn thành phố!
+        </mat-error>
       </mat-form-field>
     </div>
   </div>
@@ -42,7 +42,7 @@
         <div class="col-lg-4">
           <mat-form-field appearance="outline">
             <mat-label>Số Lượng Phòng Ngủ</mat-label>
-            <mat-select formControlName="bed_room" name="bed_room">
+            <mat-select formControlName="bed_room" name="bed_room" required>
               <mat-option value="1">1 Phòng</mat-option>
               <mat-option value="2">2 Phòng</mat-option>
               <mat-option value="3">3 Phòng</mat-option>
@@ -53,40 +53,42 @@
               <mat-option value="8">8 Phòng</mat-option>
               <mat-option value="9">9 Phòng</mat-option>
               <mat-option value="10">10 Phòng</mat-option>
-              <mat-error *ngIf="formHome.hasError('required', 'bed_room')">
-                Vui lòng chọn số phòng ngủ
-              </mat-error>
             </mat-select>
+            <mat-error *ngIf="formHome.hasError('required', 'bed_room')">
+              Vui lòng chọn số phòng ngủ!
+            </mat-error>
           </mat-form-field>
         </div>
         <div class="col-lg-4">
           <mat-form-field appearance="outline">
             <mat-label>Số Lượng Phòng Tắm</mat-label>
-            <mat-select formControlName="bath_room" name="bath_room">
+            <mat-select formControlName="bath_room" name="bath_room" required>
           <mat-option value="1">1 Phòng</mat-option>
           <mat-option value="2">2 Phòng</mat-option>
           <mat-option value="3">3 Phòng</mat-option>
         </mat-select>
+            <mat-error *ngIf="formHome.hasError('required', 'bath_room')">
+              Vui lòng chọn số phòng tắm!
+            </mat-error>
       </mat-form-field>
     </div>
     <div class="col-lg-4">
       <mat-form-field class="example-full-width" appearance="outline">
         <mat-label>Giá tiền</mat-label>
-        <input type="number" matInput placeholder="VNĐ" formControlName="price" name="price">
+        <input type="number" matInput placeholder="VNĐ" formControlName="price" name="price" required>
         <mat-error *ngIf="formHome.hasError('required', 'price')">
-          Vui lòng nhập giá tiền
+          Không được bỏ trống
         </mat-error>
       </mat-form-field>
     </div>
   </div>
-
   <mat-form-field class="example-full-width" appearance="outline">
     <mat-label>Mô tả</mat-label>
     <textarea matInput formControlName="description" name="description"></textarea>
   </mat-form-field>
   <div mat-dialog-actions [align]="'end'">
-    <button mat-raised-button color="warn" mat-dialog-close>Đóng</button>
-    <button type="submit" mat-raised-button color="primary" (click)="createHome()">Xác nhận</button>
+    <button mat-raised-button mat-dialog-close>Đóng</button>
+    <button (click)="createHome()" type="submit" mat-raised-button color="primary">Xác nhận</button>
   </div>
 </form>
 

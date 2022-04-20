@@ -37,8 +37,6 @@ export class ConfirmBookComponent implements OnInit {
             // @ts-ignore
             document.getElementById("error-registration-confirmation").innerHTML="Lỗi hủy (chỉ được hủy trước 1 ngày)!"
           } else {
-            console.log(data);
-            window.location.reload();
             this.dialog.closeAll();
           }
         },
@@ -56,8 +54,6 @@ export class ConfirmBookComponent implements OnInit {
             // @ts-ignore
             document.getElementById("error-registration-confirmation").innerHTML="Lỗi hủy (chỉ được hủy trước 1 ngày)!"
           } else {
-            console.log(data);
-            window.location.reload();
             // @ts-ignore
             document.getElementById("my-homestay").style.display = 'none';
             // @ts-ignore
@@ -76,8 +72,6 @@ export class ConfirmBookComponent implements OnInit {
     this.billService.HomestayCheckIn(id).pipe(first())
       .subscribe(
         data => {
-          console.log(data);
-          window.location.reload();
           this.dialog.closeAll();
         },error => {
           console.log(error);
@@ -89,8 +83,6 @@ export class ConfirmBookComponent implements OnInit {
     this.billService.HomestayCheckOut(id).pipe(first())
       .subscribe(
         data => {
-          console.log(data);
-          window.location.reload();
           this.dialog.closeAll();
         },error => {
           console.log(error);
@@ -102,8 +94,6 @@ export class ConfirmBookComponent implements OnInit {
     this.billService.registrationConfirmation(id).pipe(first())
       .subscribe(
         data => {
-          console.log(data);
-          window.location.reload();
           // @ts-ignore
           document.getElementById("my-homestay").style.display = 'none';
           // @ts-ignore

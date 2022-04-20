@@ -49,12 +49,10 @@ export class MyHomestayComponent implements OnInit {
 
   ngOnInit(): void {
     this.getAllMyHomestayRate()
-    this.getBillByAccountId()
     this.formTurnOver = this.fb.group({
       startDate1: [''],
       startDate2: [''],
     })
-    this.findTurnOverByAccountAndStartDate();
   }
 
   findTurnOverByAccountAndStartDate() {
@@ -99,10 +97,13 @@ export class MyHomestayComponent implements OnInit {
     this.dialog.closeAll();
     this.dialog.open(CreateHomestayComponent, {
       width: '50%',
+    }).afterClosed().subscribe(() => {
+      this.getAllMyHomestayRate()
     });
   }
 
   openMyHomestay() {
+    this.getAllMyHomestayRate()
     // @ts-ignore
     document.getElementById("my-homestay").style.display = 'block';
     // @ts-ignore
@@ -112,6 +113,7 @@ export class MyHomestayComponent implements OnInit {
   }
 
   openMyBill() {
+    this.getBillByAccountId()
     // @ts-ignore
     document.getElementById("my-homestay").style.display = 'none';
     // @ts-ignore
@@ -121,6 +123,7 @@ export class MyHomestayComponent implements OnInit {
   }
 
   openTurnOver() {
+    this.findTurnOverByAccountAndStartDate();
     // @ts-ignore
     document.getElementById("my-homestay").style.display = 'none';
     // @ts-ignore
@@ -141,6 +144,8 @@ export class MyHomestayComponent implements OnInit {
     this.dialog.open(ConfirmBookComponent, {
       width: '50%',
       data :  myBill
+    }).afterClosed().subscribe(() => {
+      this.getBillByAccountId()
     });
     // @ts-ignore
     document.getElementById("confirm-host").hidden = false;
@@ -150,6 +155,8 @@ export class MyHomestayComponent implements OnInit {
     this.dialog.open(ConfirmBookComponent, {
       width: '50%',
       data :  myBill
+    }).afterClosed().subscribe(() => {
+      this.getBillByAccountId()
     });
     // @ts-ignore
     document.getElementById("cancelling-invoice-host").hidden = false;

@@ -29,7 +29,9 @@
                 <div class="carousel-item active">
                   <img *ngIf="images != null" src="{{images[images.length - 2].images}}" alt="Chicago"
                        width="1100" height="500">
-                  <img *ngIf="images == null" src="https://cdn.vietnammoi.vn/171464242508312576/2020/6/29/247351093-1593370781884815416576.jpg" alt="Chicago"
+                  <img *ngIf="images == null"
+                       src="https://cdn.vietnammoi.vn/171464242508312576/2020/6/29/247351093-1593370781884815416576.jpg"
+                       alt="Chicago"
                        width="1100" height="500">
                 </div>
                 <div class="carousel-item" *ngFor="let i of images">
@@ -53,7 +55,7 @@
           <div class="col-md-12 hotel-single mt-4 mb-5 ">
             <span>Thông tin chi tiết</span>
             <div class="row">
-              <div class="col-md-10">
+              <div class="col-md-9">
                 <h2>{{homestay.name}}</h2>
               </div>
               <div class="col-md-3">
@@ -62,71 +64,74 @@
               </div>
             </div>
             <div class="row">
-              <p class="col-md-10">
-                <br>
-                <span class="loc rate i"><a href="#"><i class="icon-map"></i> {{homestay.address}}
-                  , {{homestay.city.name}}</a></span>
-              <p *ngIf="homestayDTO.roundRate == null" class="rate">
-                <i class="icon-star-o"></i>
-                <i class="icon-star-o"></i>
-                <i class="icon-star-o"></i>
-                <i class="icon-star-o"></i>
-                <i class="icon-star-o"></i>
-                <span>Chưa có đánh giá</span>
-              </p>
-              <p *ngIf="homestayDTO.roundRate == 0" class="rate">
-                <i class="icon-star-o"></i>
-                <i class="icon-star-o"></i>
-                <i class="icon-star-o"></i>
-                <i class="icon-star-o"></i>
-                <i class="icon-star-o"></i>
-                <span>{{homestayDTO.avgRate}} Sao</span>
-              </p>
-              <p *ngIf="homestayDTO.roundRate == 1" class="rate">
-                <i class="icon-star"></i>
-                <i class="icon-star-o"></i>
-                <i class="icon-star-o"></i>
-                <i class="icon-star-o"></i>
-                <i class="icon-star-o"></i>
-                <span>{{homestayDTO.avgRate}} Sao</span>
-              </p>
-              <p *ngIf="homestayDTO.roundRate == 2" class="rate">
-                <i class="icon-star"></i>
-                <i class="icon-star"></i>
-                <i class="icon-star-o"></i>
-                <i class="icon-star-o"></i>
-                <i class="icon-star-o"></i>
-                <span>{{homestayDTO.avgRate}} Sao</span>
-              </p>
-              <p *ngIf="homestayDTO.roundRate == 3" class="rate">
-                <i class="icon-star"></i>
-                <i class="icon-star"></i>
-                <i class="icon-star"></i>
-                <i class="icon-star-o"></i>
-                <i class="icon-star-o"></i>
-                <span>{{homestayDTO.avgRate}} Sao</span>
-              </p>
-              <p *ngIf="homestayDTO.roundRate == 4" class="rate">
-                <i class="icon-star"></i>
-                <i class="icon-star"></i>
-                <i class="icon-star"></i>
-                <i class="icon-star"></i>
-                <i class="icon-star-o"></i>
-                <span>{{homestayDTO.avgRate}} Sao</span>
-              </p>
-              <p *ngIf="homestayDTO.roundRate == 5" class="rate">
-                <i class="icon-star"></i>
-                <i class="icon-star"></i>
-                <i class="icon-star"></i>
-                <i class="icon-star"></i>
-                <i class="icon-star"></i>
-                <span>{{homestayDTO.avgRate}} Sao</span>
-              </p>
+              <div class="col-md-10">
+                <p *ngIf="homestayDTO.roundRate == null" class="rate">
+                  <i class="icon-star-o"></i>
+                  <i class="icon-star-o"></i>
+                  <i class="icon-star-o"></i>
+                  <i class="icon-star-o"></i>
+                  <i class="icon-star-o"></i>
+                  <span>Chưa có đánh giá</span>
+                </p>
+                <p *ngIf="homestayDTO.roundRate == 0" class="rate">
+                  <i class="icon-star-o"></i>
+                  <i class="icon-star-o"></i>
+                  <i class="icon-star-o"></i>
+                  <i class="icon-star-o"></i>
+                  <i class="icon-star-o"></i>
+                  <span>{{homestayDTO.avgRate}} Sao</span>
+                </p>
+                <p *ngIf="homestayDTO.roundRate == 1" class="rate">
+                  <i class="icon-star"></i>
+                  <i class="icon-star-o"></i>
+                  <i class="icon-star-o"></i>
+                  <i class="icon-star-o"></i>
+                  <i class="icon-star-o"></i>
+                  <span>{{homestayDTO.avgRate}} Sao</span>
+                </p>
+                <p *ngIf="homestayDTO.roundRate == 2" class="rate">
+                  <i class="icon-star"></i>
+                  <i class="icon-star"></i>
+                  <i class="icon-star-o"></i>
+                  <i class="icon-star-o"></i>
+                  <i class="icon-star-o"></i>
+                  <span>{{homestayDTO.avgRate}} Sao</span>
+                </p>
+                <p *ngIf="homestayDTO.roundRate == 3" class="rate">
+                  <i class="icon-star"></i>
+                  <i class="icon-star"></i>
+                  <i class="icon-star"></i>
+                  <i class="icon-star-o"></i>
+                  <i class="icon-star-o"></i>
+                  <span>{{homestayDTO.avgRate}} Sao</span>
+                </p>
+                <p *ngIf="homestayDTO.roundRate == 4" class="rate">
+                  <i class="icon-star"></i>
+                  <i class="icon-star"></i>
+                  <i class="icon-star"></i>
+                  <i class="icon-star"></i>
+                  <i class="icon-star-o"></i>
+                  <span>{{homestayDTO.avgRate}} Sao</span>
+                </p>
+                <p *ngIf="homestayDTO.roundRate == 5" class="rate">
+                  <i class="icon-star"></i>
+                  <i class="icon-star"></i>
+                  <i class="icon-star"></i>
+                  <i class="icon-star"></i>
+                  <i class="icon-star"></i>
+                  <span>{{homestayDTO.avgRate}} Sao</span>
+                </p>
+                <span class="loc rate i">
+                  <a><i class="icon-map"></i> {{homestay.address}}, {{homestay.city.name}}</a>
+                </span>
+              </div>
               <div class="col-sm-2" *ngIf="idAcc != null">
-                <input *ngIf="idAcc == homestay.account" disabled (click)="openBookHouse(homestay)" style="margin-right: 0" class="btn btn-primary"
+                <input *ngIf="idAcc == homestay.account" disabled (click)="openBookHouse(homestay)"
+                       style="margin-right: 0" class="btn btn-primary"
                        type="submit"
                        value="Đặt ngay">
-                <input *ngIf="idAcc != homestay.account" (click)="openBookHouse(homestay)" style="margin-right: 0" class="btn btn-primary"
+                <input *ngIf="idAcc != homestay.account" (click)="openBookHouse(homestay)" style="margin-right: 0"
+                       class="btn btn-primary"
                        type="submit"
                        value="Đặt ngay">
               </div>
@@ -138,9 +143,9 @@
             </div>
             <div class="d-md-flex mt-5 mb-5">
               <ul class="ml-md-5 col-sm-3" style="margin-top: 100px">
-                <li>Loại phòng: {{homestay.homestay_type.name}}</li>
-                <li>Số lượng phòng ngủ: {{homestay.bed_room}}</li>
-                <li>Số lượng phòng tắm: {{homestay.bath_room}}</li>
+                <li>● Loại phòng: {{homestay.homestay_type.name}}</li>
+                <li>● Số lượng phòng ngủ: {{homestay.bed_room}}</li>
+                <li>● Số lượng phòng tắm: {{homestay.bath_room}}</li>
               </ul>
               <div class="ml-md-5 col-sm-8" id="google-api-maps">
               </div>
@@ -277,12 +282,16 @@
                 <div class="carousel-item active">
                   <div class="col-sm col-md-12 col-lg ">
                     <div class="destination">
-                      <img *ngIf="homestayDTOS[3].images != null" src="{{homestayDTOS[3].images}}" alt="" style="width: 100%; height: 450px">
-                      <img *ngIf="homestayDTOS[3].images == null" src="https://cdn.vietnammoi.vn/171464242508312576/2020/6/29/247351093-1593370781884815416576.jpg" alt="" style="width: 100%; height: 450px">
+                      <img *ngIf="homestayDTOS[3].images != null" src="{{homestayDTOS[3].images}}" alt=""
+                           style="width: 100%; height: 450px">
+                      <img *ngIf="homestayDTOS[3].images == null"
+                           src="https://cdn.vietnammoi.vn/171464242508312576/2020/6/29/247351093-1593370781884815416576.jpg"
+                           alt="" style="width: 100%; height: 450px">
                       <div class="text p-3">
                         <div class="d-flex">
                           <div class="one">
-                            <h3><a style="cursor: pointer" (click)="redirectByHomestay(homestayDTOS[3].id)">{{homestayDTOS[3].name}}</a></h3>
+                            <h3><a style="cursor: pointer"
+                                   (click)="redirectByHomestay(homestayDTOS[3].id)">{{homestayDTOS[3].name}}</a></h3>
                             <p *ngIf="homestayDTOS[3].roundRate == null" class="rate">
                               <i class="icon-star-o"></i>
                               <i class="icon-star-o"></i>
@@ -341,23 +350,27 @@
                             </p>
                           </div>
                           <div class="two" style="margin-left: -50px">
-                            <span class="price per-price">{{homestayDTOS[3].price | currency :'đ' :true: '1.0-0'}}<small>/ngày</small></span>
+                            <span class="price per-price">{{homestayDTOS[3].price | currency :'đ' :true: '1.0-0'}}
+                              <small>/ngày</small></span>
                           </div>
                         </div>
                         <p class="format-form-p-bot">{{homestayDTOS[3].description}}</p>
                         <hr>
                         <p class="bottom-area d-flex">
-                          <span class="format-form-span-bot"><i class="icon-map-o"></i> {{homestayDTOS[3].address}}</span>
+                          <span class="format-form-span-bot"><i
+                            class="icon-map-o"></i> {{homestayDTOS[3].address}}</span>
                         </p>
                       </div>
                     </div>
                   </div>
                 </div>
                 <div class="carousel-item" *ngFor="let h of homestayDTOS">
-                  <div class="col-sm col-md-8 col-lg " >
+                  <div class="col-sm col-md-8 col-lg ">
                     <div class="destination">
                       <img *ngIf="h.images != null" src="{{h.images}}" alt="" style="width: 100%; height: 450px">
-                      <img *ngIf="h.images == null" src="https://cdn.vietnammoi.vn/171464242508312576/2020/6/29/247351093-1593370781884815416576.jpg" alt="" style="width: 100%; height: 450px">
+                      <img *ngIf="h.images == null"
+                           src="https://cdn.vietnammoi.vn/171464242508312576/2020/6/29/247351093-1593370781884815416576.jpg"
+                           alt="" style="width: 100%; height: 450px">
                       <div class="text p-3">
                         <div class="d-flex">
                           <div class="one">
