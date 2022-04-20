@@ -8,6 +8,7 @@ import {MatTableDataSource} from '@angular/material/table';
 import {ActivatedRoute} from "@angular/router";
 import {ImageOfHomestay} from "../../models/image-of-homestay";
 import {MAT_DIALOG_DATA} from "@angular/material/dialog";
+import {MyHomestayDto} from "../../models/my-homestay-dto";
 
 @Component({
   selector: 'app-homestay',
@@ -33,6 +34,7 @@ export class HomestayComponent implements OnInit {
 
 
   homestays!: Homestay2[];
+  homestayDTOS!: MyHomestayDto[];
 
   constructor(private fb: FormBuilder,
               private homestayService: Homestay2Service,
@@ -56,16 +58,28 @@ export class HomestayComponent implements OnInit {
   }
 
   getAllHomestay() {
-    this.homestayService.getAllHomestay().subscribe((data) => {
-      this.homestays = data;
+    this.homestayService.getAllHomestayRate().subscribe((data) => {
+      this.homestayDTOS = data;
     })
   }
 
   getAllHomestaySignIn() {
-    this.homestayService.getAllHomestaySignIn(this.idAcc).subscribe((data) => {
-      this.homestays = data;
+    this.homestayService.getAllYourHomestayRate(this.idAcc).subscribe((data) => {
+      this.homestayDTOS = data;
     })
   }
+
+  // getAllHomestay() {
+  //   this.homestayService.getAllHomestay().subscribe((data) => {
+  //     this.homestays = data;
+  //   })
+  // }
+  //
+  // getAllHomestaySignIn() {
+  //   this.homestayService.getAllHomestaySignIn(this.idAcc).subscribe((data) => {
+  //     this.homestays = data;
+  //   })
+  // }
 
 
 

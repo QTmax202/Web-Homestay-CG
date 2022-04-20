@@ -31,4 +31,9 @@ public class NotifyService implements INotifyService{
     public void remove(Long id) {
         notifyRepository.deleteById(id);
     }
+
+    @Override
+    public Iterable<Notify> getNotifyByAccountDesc(Long id) {
+        return notifyRepository.getNotifyByAccountDesc(id);
+    }
 }

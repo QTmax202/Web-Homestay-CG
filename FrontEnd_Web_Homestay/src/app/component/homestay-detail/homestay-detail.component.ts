@@ -25,6 +25,7 @@ export class HomestayDetailComponent implements OnInit {
   google_api!: string;
   images!: ImageOfHomestay[];
   homestayDTOS!: MyHomestayDto[];
+  homestayDTO!: MyHomestayDto;
 
   formComment: FormGroup = new FormGroup({});
   comments?: any;
@@ -68,6 +69,7 @@ export class HomestayDetailComponent implements OnInit {
     this.idH = this.route.snapshot.params['id'];
     this.homestayService.getHomestayById(this.idH).subscribe((data) => {
       this.homestay = data;
+      this.homestayDTO = data;
       this.google_api = this.homestay.address + ", " + this.homestay.city.name;
       this.google_api = this.google_api?.split(" ").join("+");
       console.log(this.google_api);

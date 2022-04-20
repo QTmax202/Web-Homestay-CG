@@ -109,7 +109,7 @@ public class HomestayController {
         if (price2 == null) price2 = 999999999L;
         Iterable<Homestay> homestays = homestayService.findHomestayByNameAndCityAndPrice(name, idCity, price1, price2);
         if (!homestays.iterator().hasNext()) {
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
         return new ResponseEntity<>(homestays, HttpStatus.OK);
     }
@@ -124,7 +124,7 @@ public class HomestayController {
         if (price2 == null) price2 = 999999999L;
         Iterable<Homestay> homestays = homestayService.findHomestayByNameAndCityAndPriceSignIn(id, name, idCity, price1, price2);
         if (!homestays.iterator().hasNext()) {
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
         return new ResponseEntity<>(homestays, HttpStatus.OK);
     }

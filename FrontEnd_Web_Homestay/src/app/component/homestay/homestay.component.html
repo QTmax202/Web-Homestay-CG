@@ -72,20 +72,82 @@
       </div>
       <div class="col-lg-9">
         <div class="row" *ngIf="homestays == []">
+          <p id="notify-find"></p>
           <p>Không tìm thấy Homestay.</p>
         </div>
         <div class="row" *ngIf="homestays != []">
-          <div class="col-md-4 assets/images" *ngFor="let h of homestays; index as i">
+          <div class="col-md-4 assets/images" *ngFor="let h of homestayDTOS; index as i">
             <div class="destination">
-              <div class="img img-2 d-flex justify-content-center align-items-center">
+              <div *ngIf="h.images != null" class="img img-2 d-flex justify-content-center align-items-center">
                 <img [routerLink]="['/homestay-detail/', h.id]" class="active"
                      style="width: 254px; height: 200px; cursor: pointer"
-                     src="{{h.imageOfHomestays[0].images}}" alt="">
+                     src="{{h.images}}" alt="">
+              </div>
+              <div *ngIf="h.images == null" class="img img-2 d-flex justify-content-center align-items-center">
+                <img [routerLink]="['/homestay-detail/', h.id]" class="active"
+                     style="width: 254px; height: 200px; cursor: pointer"
+                     src="https://cdn.vietnammoi.vn/171464242508312576/2020/6/29/247351093-1593370781884815416576.jpg" alt="">
               </div>
               <div class="text p-3">
                 <div class="d-flex">
                   <div class="one">
                     <h3 style="width: 220px; height: 56px"><a [routerLink]="['/homestay-detail/', h.id]">{{h.name}}</a></h3>
+                    <p *ngIf="h.roundRate == null" class="rate">
+                      <i class="icon-star-o"></i>
+                      <i class="icon-star-o"></i>
+                      <i class="icon-star-o"></i>
+                      <i class="icon-star-o"></i>
+                      <i class="icon-star-o"></i>
+                      <span>Chưa có đánh giá</span>
+                    </p>
+                    <p *ngIf="h.roundRate == 0" class="rate">
+                      <i class="icon-star-o"></i>
+                      <i class="icon-star-o"></i>
+                      <i class="icon-star-o"></i>
+                      <i class="icon-star-o"></i>
+                      <i class="icon-star-o"></i>
+                      <span>{{h.avgRate}} Sao</span>
+                    </p>
+                    <p *ngIf="h.roundRate == 1" class="rate">
+                      <i class="icon-star"></i>
+                      <i class="icon-star-o"></i>
+                      <i class="icon-star-o"></i>
+                      <i class="icon-star-o"></i>
+                      <i class="icon-star-o"></i>
+                      <span>{{h.avgRate}} Sao</span>
+                    </p>
+                    <p *ngIf="h.roundRate == 2" class="rate">
+                      <i class="icon-star"></i>
+                      <i class="icon-star"></i>
+                      <i class="icon-star-o"></i>
+                      <i class="icon-star-o"></i>
+                      <i class="icon-star-o"></i>
+                      <span>{{h.avgRate}} Sao</span>
+                    </p>
+                    <p *ngIf="h.roundRate == 3" class="rate">
+                      <i class="icon-star"></i>
+                      <i class="icon-star"></i>
+                      <i class="icon-star"></i>
+                      <i class="icon-star-o"></i>
+                      <i class="icon-star-o"></i>
+                      <span>{{h.avgRate}} Sao</span>
+                    </p>
+                    <p *ngIf="h.roundRate == 4" class="rate">
+                      <i class="icon-star"></i>
+                      <i class="icon-star"></i>
+                      <i class="icon-star"></i>
+                      <i class="icon-star"></i>
+                      <i class="icon-star-o"></i>
+                      <span>{{h.avgRate}} Sao</span>
+                    </p>
+                    <p *ngIf="h.roundRate == 5" class="rate">
+                      <i class="icon-star"></i>
+                      <i class="icon-star"></i>
+                      <i class="icon-star"></i>
+                      <i class="icon-star"></i>
+                      <i class="icon-star"></i>
+                      <span>{{h.avgRate}} Sao</span>
+                    </p>
                     <div class="two">
                       <p class="price per-price">{{h.price | currency :'đ' :true: '1.0-0'}}<small>/ngày</small></p>
                     </div>
