@@ -93,30 +93,35 @@ export class AuthGoogleService {
             for (let i of result){
               let start_date = new Date(i.start_date);
               let end_date = new Date(i.end_date);
-              if ((i.status_homestay.id == 1 || i.status_homestay.id == 2) && (start_date < date_next || end_date < date_today)){
-                this.billService.cancellingInvoiceHostAuto(i.id).pipe(first())
-                  .subscribe(
-                    data => {
-                      console.log(data);
-                    },error => {
-                      console.log(error);
-                    }
-                  )
+              if (start_date <= date_today){
+                if (i.status_homestay.id == 1 || i.status_homestay.id == 2){
+                  if (start_date < date_next || end_date < date_today)
+                    this.billService.cancellingInvoiceHostAuto(i.id).pipe(first())
+                      .subscribe(
+                        data => {
+                          console.log(data);
+                        },error => {
+                          console.log(error);
+                        }
+                      )
+                }
               }
-              if (i.status_homestay.id == 3 && end_date <= date_next){
-                this.billService.HomestayCheckOutAuto(i.id).pipe(first())
-                  .subscribe(
-                    data => {
-                      console.log(data);
-                    },error => {
-                      console.log(error);
-                    }
-                  )
+              if (end_date <= date_today){
+                if (i.status_homestay.id == 3 && end_date < date_next){
+                  this.billService.HomestayCheckOutAuto(i.id).pipe(first())
+                    .subscribe(
+                      data => {
+                        console.log(data);
+                      },error => {
+                        console.log(error);
+                      }
+                    )
+                }
               }
             }
           })
           window.location.reload();
-          this.router.navigate(['/']);
+          this.router.navigate(['/home']);
           this.dialog.closeAll();
         },error => {
           // @ts-ignore

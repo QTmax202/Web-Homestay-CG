@@ -17,6 +17,7 @@ import {TurnOver} from "../../models/turn-over";
 import {MyBillDto} from "../../models/my-bill-dto";
 import {ConfirmBookComponent} from "../../dialog/confirm-book/confirm-book.component";
 import {formatDate} from "@angular/common";
+import {ImagesHomestayComponent} from "../../dialog/images-homestay/images-homestay.component";
 
 @Component({
   selector: 'app-my-homestay',
@@ -137,6 +138,14 @@ export class MyHomestayComponent implements OnInit {
     this.dialog.open(EditHomestayComponent, {
       width: '50%',
       data: idHomestayDetail
+    });
+  }
+
+  openImageHomestay(id: any) {
+    this.dialog.closeAll();
+    this.dialog.open(ImagesHomestayComponent, {
+      width: '50%',
+      data: id
     });
   }
 

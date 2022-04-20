@@ -127,9 +127,10 @@
                   <p style="width: 760px">{{h.description}}</p>
                   <hr>
                   <p class="bottom-area d-flex row">
-                    <span class="col-sm-8"><i class="icon-map-o"></i> {{h.address}}</span>
-                    <button class="btn btn-warning col-sm-2" (click)="openEditStatus(h.id)">Edit</button>
-                    <button class="btn btn-danger col-sm-2">Delete</button>
+                    <span class="col-sm-6"><i class="icon-map-o"></i> {{h.address}}</span>
+                    <button class="btn btn-info col-sm-2" (click)="openImageHomestay(h.id)">Thêm ảnh</button>
+                    <button class="btn btn-warning col-sm-2" (click)="openEditStatus(h.id)">Chỉnh sửa</button>
+                    <button class="btn btn-danger col-sm-2">Xóa</button>
                   </p>
                 </div>
               </div>
@@ -217,7 +218,7 @@
                   <p class="bottom-area d-flex">
                     <span *ngIf="b.statusHomeId == 1" class="ml-auto">
                       <button class="btn btn-primary" *ngIf="!onCheckToday(b.startDate)" (click)="openCancellingInvoiceHost(b)">Hủy thuê</button>
-                      <button class="btn btn-warning" (click)="openConfirmHost(b)">Chờ xác nhận</button></span>
+                      <button class="btn btn-warning" (click)="openConfirmHost(b)">Xác nhận thuê</button></span>
                     <span *ngIf="b.statusHomeId == 2" class="ml-auto">
                       <button class="btn btn-success" disabled>Đã xác nhận</button></span>
                     <span *ngIf="b.statusHomeId == 3" class="ml-auto">

@@ -15,8 +15,6 @@ public class ImageOfHomestay {
 
     private String images;
 
-
-    @JsonIgnore
     @ManyToOne
     private Homestay homestay;
 
@@ -37,5 +35,13 @@ public class ImageOfHomestay {
 
     public void setImages(String images) {
         this.images = images;
+    }
+
+    public Homestay getHomestay() {
+        return homestay;
+    }
+
+    public void setHomestay(Homestay homestay) {
+        this.homestay = homestay;
     }
 }

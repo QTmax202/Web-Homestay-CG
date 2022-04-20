@@ -33,10 +33,6 @@ public class Homestay {
     @JoinColumn(name = "city_id")
     private City city;
 
-    @OneToMany(mappedBy = "homestay", fetch = FetchType.EAGER,cascade = CascadeType.ALL)
-    private List<ImageOfHomestay> imageOfHomestays;
-
-
     public Homestay() {
     }
 
@@ -52,14 +48,6 @@ public class Homestay {
         this.homestay_type = homestay_type;
         this.account = account;
         this.city = city;
-    }
-
-    public List<ImageOfHomestay> getImageOfHomestays() {
-        return imageOfHomestays;
-    }
-
-    public void setImageOfHomestays(List<ImageOfHomestay> imageOfHomestays) {
-        this.imageOfHomestays = imageOfHomestays;
     }
 
     public Long getId() {

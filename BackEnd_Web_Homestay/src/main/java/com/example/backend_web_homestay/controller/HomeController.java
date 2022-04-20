@@ -25,18 +25,18 @@ public class HomeController {
     @Autowired
     private IAccountService accountService;
 
-    @PostMapping("/add")
-    public ResponseEntity<?> createHouse(@RequestBody Homestay homestay) {
-       homestayService.save(homestay);
-        if (homestay.getImageOfHomestays() != null) {
-            for (ImageOfHomestay image : homestay.getImageOfHomestays()) {
-                image.setHomestay(homestay);
-                iImageService.save(image);
-            }
-        }
-        HttpHeaders headers = new HttpHeaders();
-        return new ResponseEntity<>(headers, HttpStatus.CREATED);
-    }
+//    @PostMapping("/add")
+//    public ResponseEntity<?> createHouse(@RequestBody Homestay homestay) {
+//       homestayService.save(homestay);
+//        if (homestay.getImageOfHomestays() != null) {
+//            for (ImageOfHomestay image : homestay.getImageOfHomestays()) {
+//                image.setHomestay(homestay);
+//                iImageService.save(image);
+//            }
+//        }
+//        HttpHeaders headers = new HttpHeaders();
+//        return new ResponseEntity<>(headers, HttpStatus.CREATED);
+//    }
 
     //tao nha
     @PostMapping("/create/{account_id}")
@@ -96,5 +96,4 @@ public class HomeController {
         }
         return new ResponseEntity<>(city, HttpStatus.OK);
     }
-
 }

@@ -49,6 +49,8 @@ import {AngularFireAuthModule} from "@angular/fire/compat/auth";
 import {CommonModule} from "@angular/common";
 import {MatSnackBarModule} from "@angular/material/snack-bar";
 import {NgToastModule} from "ng-angular-popup";
+import { ImagesHomestayComponent } from './dialog/images-homestay/images-homestay.component';
+import {MatBadgeModule} from "@angular/material/badge";
 
 @NgModule({
   declarations: [
@@ -73,7 +75,8 @@ import {NgToastModule} from "ng-angular-popup";
     NotifyComponent,
     EditHomestayComponent,
     ChangePassComponent,
-    ConfirmBookComponent
+    ConfirmBookComponent,
+    ImagesHomestayComponent
   ],
   imports: [
     BrowserModule,
@@ -103,6 +106,7 @@ import {NgToastModule} from "ng-angular-popup";
     MatNativeDateModule,
     CommonModule,
     MatSnackBarModule,
+    MatBadgeModule,
     NgToastModule
   ],
   providers: [],
