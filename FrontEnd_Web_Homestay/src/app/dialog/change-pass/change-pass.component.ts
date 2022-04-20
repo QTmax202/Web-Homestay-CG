@@ -4,6 +4,7 @@ import {Account} from "../../models/account";
 import {MatDialog} from "@angular/material/dialog";
 import {AccountService} from "../../service/account/account.service";
 import {ChangePassword} from "../../models/change-password";
+import {NgToastService} from "ng-angular-popup";
 
 
 
@@ -20,6 +21,7 @@ export class ChangePassComponent implements OnInit {
   hide = true;
 
   constructor(private dialog: MatDialog,
+              private toast: NgToastService,
               private accountService: AccountService,
               private fb: FormBuilder) {
   }
@@ -41,6 +43,7 @@ export class ChangePassComponent implements OnInit {
     console.log(changePass)
     this.accountService.changePassword(changePass, this.idAcc).subscribe((data) => {
       this.dialog.closeAll();
+      this.toast.success({detail: "Thành công!", summary: "Thay đổi mật khẩu thành công!", duration: 5000})
     }, error => {
       // @ts-ignore
       document.getElementById("error-form-change-password").innerText = "Sai mật khẩu cũ hoặc mật khẩu xác nhân không đúng"

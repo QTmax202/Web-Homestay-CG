@@ -5,6 +5,7 @@ import {Homestay2} from "../../models/homestay2";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {CommentService} from "../../service/comment/comment.service";
+import {NgToastService} from "ng-angular-popup";
 
 @Component({
   selector: 'app-rate-comment',
@@ -32,6 +33,7 @@ export class RateCommentComponent implements OnInit {
   constructor(@Inject(MAT_DIALOG_DATA) public data: any,
               private homestayService: Homestay2Service,
               private fb: FormBuilder,
+              private toast: NgToastService,
               private snackBar: MatSnackBar,
               private commentService: CommentService,
               private dialog: MatDialog) {
@@ -63,7 +65,6 @@ export class RateCommentComponent implements OnInit {
   }
 
   createRateComment() {
-    console.log("1")
     const comment = {
       id: this.formRateComment.value.id,
       comment: this.formRateComment.value.comment,
@@ -75,7 +76,6 @@ export class RateCommentComponent implements OnInit {
         id: localStorage.getItem('ACCOUNT_ID')
       }
     };
-    console.log(this.rating)
     const rate = {
       id: this.formRateComment.value.id,
       value_rate: this.rating,
@@ -87,14 +87,12 @@ export class RateCommentComponent implements OnInit {
         id: localStorage.getItem('ACCOUNT_ID')
       }
     };
-    console.log(comment)
-    console.log(rate)
     this.commentService.createComment(comment).subscribe(() => {
     })
     this.commentService.createRate(rate).subscribe(() => {
       this.formRateComment.reset();
       this.dialog.closeAll();
-
+      this.toast.success({detail: "Thành công!", summary: "Đánh giá thành công!", duration: 5000})
     })
   }
 

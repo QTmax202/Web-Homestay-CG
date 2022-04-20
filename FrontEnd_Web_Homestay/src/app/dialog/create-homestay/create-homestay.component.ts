@@ -90,12 +90,11 @@ export class CreateHomestayComponent implements OnInit {
       imageOfHomestays: this.selectedImages
     }
     this.homestayService.createHome(this.idAcc, home).subscribe(() => {
-      this.toast.success({detail: "Success Message!", summary: "Tạo thành công!!", duration: 5000})
+      this.toast.success({detail: "Thành công!", summary: "Thêm nhà thành công!", duration: 5000})
       this.formHome.reset()
       this.dialogRef.close()
     }, error => {
-      console.log(error.summary)
-      this.toast.error({detail: "Error Message!", summary: 'Create Failed, Please Try again', duration: 5000})
+      this.toast.error({detail: "Thất bại!", summary: 'Thêm nhà thất bại! Vui lòng nhập lại', duration: 5000})
     })
   }
   getHomestayByAccId() {

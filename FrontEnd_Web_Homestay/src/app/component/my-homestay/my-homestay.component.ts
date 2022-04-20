@@ -1,23 +1,19 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
-import {SignInComponent} from "../../dialog/sign-in/sign-in.component";
 import {CreateHomestayComponent} from "../../dialog/create-homestay/create-homestay.component";
 import {MatDialog} from "@angular/material/dialog";
 import {Homestay2Service} from "../../service/homestay/homestay2.service";
-import {Homestay2} from "../../models/homestay2";
 import {MyHomestayDto} from "../../models/my-homestay-dto";
 import {YourBillDto} from "../../models/your-bill-dto";
 import {EditHomestayComponent} from "../../dialog/edit-homestay/edit-homestay.component";
 import {FormBuilder, FormControl, FormGroup} from "@angular/forms";
-import {newArray} from "@angular/compiler/src/util";
 import { MatPaginator } from '@angular/material/paginator';
 import {MatSort} from "@angular/material/sort";
 import {MatTableDataSource} from "@angular/material/table";
 import {BillService} from "../../service/bill/bill.service";
 import {TurnOver} from "../../models/turn-over";
-import {MyBillDto} from "../../models/my-bill-dto";
 import {ConfirmBookComponent} from "../../dialog/confirm-book/confirm-book.component";
-import {formatDate} from "@angular/common";
 import {ImagesHomestayComponent} from "../../dialog/images-homestay/images-homestay.component";
+import {NgToastService} from "ng-angular-popup";
 
 @Component({
   selector: 'app-my-homestay',
@@ -46,6 +42,7 @@ export class MyHomestayComponent implements OnInit {
   constructor(private dialog: MatDialog,
               private homestayService: Homestay2Service,
               private billService: BillService,
+              private toast: NgToastService,
               private fb: FormBuilder) { }
 
   ngOnInit(): void {
@@ -77,6 +74,7 @@ export class MyHomestayComponent implements OnInit {
         this.totalTurnOver += this.turnOver[i].sumPrice;
       }
     }, error => {
+      this.toast.error({detail: "Thành công!", summary: "Không có kết quả tìm kiếm tương ứng!", duration: 5000})
       this.totalTurnOver = 0;
       this.dataSource = new MatTableDataSource<any>([])
     })
@@ -146,6 +144,8 @@ export class MyHomestayComponent implements OnInit {
     this.dialog.open(ImagesHomestayComponent, {
       width: '50%',
       data: id
+    }).afterClosed().subscribe(() => {
+      this.getAllMyHomestayRate();
     });
   }
 

@@ -9,6 +9,7 @@ import {ActivatedRoute} from "@angular/router";
 import {ImageOfHomestay} from "../../models/image-of-homestay";
 import {MAT_DIALOG_DATA} from "@angular/material/dialog";
 import {MyHomestayDto} from "../../models/my-homestay-dto";
+import {NgToastService} from "ng-angular-popup";
 
 @Component({
   selector: 'app-homestay',
@@ -37,6 +38,7 @@ export class HomestayComponent implements OnInit {
   homestayDTOS!: MyHomestayDto[];
 
   constructor(private fb: FormBuilder,
+              private toast: NgToastService,
               private homestayService: Homestay2Service,
               private route: ActivatedRoute,) {
   }
@@ -98,29 +100,37 @@ export class HomestayComponent implements OnInit {
     if (this.price1 > this.price2) {
       if (this.idAcc == null) {
         this.homestayService.findHomestayByNameAndCityAndPrice(this.name, this.idCity, this.price2, this.price1).subscribe((data) => {
-          this.homestays = data;
+          this.homestayDTOS = data;
+          this.toast.success({detail: "Thành công!", summary: "Tìm kiếm thành công!", duration: 5000})
         }, error => {
-          this.homestays = [];
+          this.homestayDTOS = [];
+          this.toast.error({detail: "Thất bại!", summary: "Không có kết quả tìm kiếm tương ứng", duration: 5000})
         });
       } else if (this.idAcc != null) {
         this.homestayService.findHomestayByNameAndCityAndPriceSignIn(this.idAcc, this.name, this.idCity, this.price2, this.price1).subscribe((data) => {
-          this.homestays = data;
+          this.homestayDTOS = data;
+          this.toast.success({detail: "Thành công!", summary: "Tìm kiếm thành công!", duration: 5000})
         }, error => {
-          this.homestays = [];
+          this.homestayDTOS = [];
+          this.toast.error({detail: "Thất bại!", summary: "Không có kết quả tìm kiếm tương ứng", duration: 5000})
         });
       }
     } else if (this.price1 < this.price2) {
       if (this.idAcc == null) {
         this.homestayService.findHomestayByNameAndCityAndPrice(this.name, this.idCity, this.price1, this.price2).subscribe((data) => {
-          this.homestays = data;
+          this.homestayDTOS = data;
+          this.toast.success({detail: "Thành công!", summary: "Tìm kiếm thành công!", duration: 5000})
         }, error => {
-          this.homestays = [];
+          this.homestayDTOS = [];
+          this.toast.error({detail: "Thất bại!", summary: "Không có kết quả tìm kiếm tương ứng", duration: 5000})
         });
       } else if (this.idAcc != null) {
         this.homestayService.findHomestayByNameAndCityAndPriceSignIn(this.idAcc, this.name, this.idCity, this.price1, this.price2).subscribe((data) => {
-          this.homestays = data;
+          this.homestayDTOS = data;
+          this.toast.success({detail: "Thành công!", summary: "Tìm kiếm thành công!", duration: 5000})
         }, error => {
-          this.homestays = [];
+          this.homestayDTOS = [];
+          this.toast.error({detail: "Thất bại!", summary: "Không có kết quả tìm kiếm tương ứng", duration: 5000})
         });
       }
     }

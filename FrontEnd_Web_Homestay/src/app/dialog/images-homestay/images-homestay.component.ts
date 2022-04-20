@@ -6,6 +6,7 @@ import {MAT_DIALOG_DATA, MatDialog} from "@angular/material/dialog";
 import {Homestay2} from "../../models/homestay2";
 import {ImageOfHomestay} from "../../models/image-of-homestay";
 import {ImagesHomestayService} from "../../service/images/images-homestay.service";
+import {NgToastService} from "ng-angular-popup";
 
 @Component({
   selector: 'app-images-homestay',
@@ -26,6 +27,7 @@ export class ImagesHomestayComponent implements OnInit {
 
   constructor(private storage: AngularFireStorage,
               private homestayService: Homestay2Service,
+              private toast: NgToastService,
               private imagesHomestay: ImagesHomestayService,
               @Inject(MAT_DIALOG_DATA) public data: any,
               private dialog: MatDialog,) {
@@ -98,7 +100,7 @@ export class ImagesHomestayComponent implements OnInit {
             console.log('error_images_homestay');
           });
     }
-    window.location.reload();
+    this.toast.success({detail:'Thành công!', summary:'Cập nhật thành công!', duration: 5000})
     this.dialog.closeAll();
   }
 

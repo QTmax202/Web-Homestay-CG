@@ -1,5 +1,5 @@
 <div class="hero-wrap js-fullheight"
-     style="background-image: url('http://anhnendep.net/wp-content/uploads/2016/03/anh-dep-du-lich-viet-nam-vietnam-travel-ha-long-bay-01.jpg'); height: 680px">
+     style="background-image: url('https://www.vietfuntravel.com.vn/image/data/Da-Nang/cau-rong-da-nang/dia-chi-cau-rong-da-nang-o-dau-h4.jpg'); height: 680px">
   <div class="overlay"></div>
   <div class="container" style="padding: 15px">
     <div class="row no-gutters slider-text js-fullheight align-items-center justify-content-start"
@@ -188,7 +188,8 @@
     <div class="row">
       <div class="col-sm col-md-6 col-lg " *ngFor="let h of topHomestayDTOS" style="width: 218px; height: 500px">
         <div class="destination">
-          <img src="{{h.images}}" alt="" style="width: 226px; height: 200px">
+          <img *ngIf="h.images != null" src="{{h.images}}" alt="" style="width: 223px; height: 200px">
+          <img *ngIf="h.images == null" src="https://cdn.vietnammoi.vn/171464242508312576/2020/6/29/247351093-1593370781884815416576.jpg" alt="" style="width: 223px; height: 200px">
           <div class="text p-3">
             <div class="d-flex">
               <div>

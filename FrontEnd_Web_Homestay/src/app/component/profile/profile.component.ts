@@ -9,6 +9,7 @@ import {newArray} from "@angular/compiler/src/util";
 import {AccountService} from "../../service/account/account.service";
 import {Account} from "../../models/account";
 import {ProfileDto} from "../../models/profile-dto";
+import {NgToastService} from "ng-angular-popup";
 
 @Component({
   selector: 'app-profile',
@@ -28,6 +29,7 @@ export class ProfileComponent implements OnInit {
 
   constructor(private storage: AngularFireStorage,
               private dialog: MatDialog,
+              private toast: NgToastService,
               private formBuilder: FormBuilder,
               private accountService: AccountService) {
   }
@@ -62,9 +64,8 @@ export class ProfileComponent implements OnInit {
       address: this.formProfile.value.address,
       avatar_url: this.avataUrl,
     }
-    console.log(information)
     this.accountService.updateProfile(information, this.idAcc).subscribe((data) => {
-      console.log(information)
+      this.toast.success({detail: "Thành công!", summary: "Thay đổi thông tin thành công!", duration: 5000})
       window.location.reload();
     })
   }
@@ -84,14 +85,11 @@ export class ProfileComponent implements OnInit {
             if (url) {
               this.avataUrl = url;
             }
-            console.log(this.avataUrl);
           });
         })
       )
       .subscribe(url => {
-        if (url) {
-          console.log(url);
-        }
+        this.toast.success({detail: "Thành công!", summary: "Tải ảnh đại diện lên thành công!", duration: 5000})
       });
   }
 

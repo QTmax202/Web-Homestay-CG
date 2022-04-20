@@ -60,7 +60,7 @@ export class EditHomestayComponent implements OnInit {
     }
     console.log(statusHomestay)
     this.homestayService.createHomestay(statusHomestay).subscribe(() => {
-      this.toast.success({detail:'SuccessMessage', summary:'Cập nhật thành công', duration: 5000})
+      this.toast.success({detail:'Thành công!', summary:'Cập nhật thành công!', duration: 5000})
       this.dialog.closeAll();
     })
   }

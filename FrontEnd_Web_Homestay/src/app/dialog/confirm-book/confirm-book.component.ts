@@ -3,6 +3,7 @@ import {MAT_DIALOG_DATA, MatDialog} from "@angular/material/dialog";
 import {BillService} from "../../service/bill/bill.service";
 import {Bill} from "../../models/bill";
 import {first} from "rxjs";
+import {NgToastService} from "ng-angular-popup";
 
 @Component({
   selector: 'app-confirm-book',
@@ -15,6 +16,7 @@ export class ConfirmBookComponent implements OnInit {
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: any,
               private dialog: MatDialog,
+              private toast: NgToastService,
               private billService: BillService) { }
 
   ngOnInit(): void {
@@ -38,7 +40,8 @@ export class ConfirmBookComponent implements OnInit {
             document.getElementById("error-registration-confirmation").innerHTML="Lỗi hủy (chỉ được hủy trước 1 ngày)!"
           } else {
             this.dialog.closeAll();
-          }
+          };
+          this.toast.success({detail: "Thành công!", summary: "Thao tác thành công!", duration: 5000})
         },
         error => {
           // @ts-ignore
@@ -61,7 +64,8 @@ export class ConfirmBookComponent implements OnInit {
             // @ts-ignore
             document.getElementById("my-turn-over").style.display = 'none';
             this.dialog.closeAll();
-          }
+          };
+          this.toast.success({detail: "Thành công!", summary: "Thao tác thành công!", duration: 5000})
         }, error => {
           // @ts-ignore
           document.getElementById("error-registration-confirmation").innerHTML="Lỗi hủy (chỉ được hủy trước 1 ngày)!"
@@ -83,6 +87,7 @@ export class ConfirmBookComponent implements OnInit {
     this.billService.HomestayCheckOut(id).pipe(first())
       .subscribe(
         data => {
+          this.toast.success({detail: "Thành công!", summary: "Thao tác thành công!", duration: 5000})
           this.dialog.closeAll();
         },error => {
           console.log(error);
@@ -101,6 +106,7 @@ export class ConfirmBookComponent implements OnInit {
           // @ts-ignore
           document.getElementById("my-turn-over").style.display = 'none';
           this.dialog.closeAll();
+          this.toast.success({detail: "Thành công!", summary: "Thao tác thành công!", duration: 5000})
         },error => {
           console.log(error);
         }

@@ -81,6 +81,14 @@ export class HomestayDetailComponent implements OnInit {
   redirectByHomestay(id: any) {
     this.router.navigateByUrl('/homestay-detail/' + id, {state: {id}})
     this.getHomestayById()
+    this.getAllImage()
+    this.getAllComment()
+    if (this.idAcc == null) {
+      this.getAllHomestayRate();
+    } else {
+      this.getAllYourHomestayRate();
+    }
+
   }
 
   getAllHomestayRate() {

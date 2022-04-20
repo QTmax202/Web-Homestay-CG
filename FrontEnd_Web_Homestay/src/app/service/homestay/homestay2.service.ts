@@ -24,12 +24,12 @@ export class Homestay2Service {
 
   //search homestay full option
   findHomestayByNameAndCityAndPrice(name: string, idCity: number, price1: number, price2: number): Observable<any> {
-    return this.http.get<Homestay2>(API_URL + 'homestay/search?name=' + name + '&idCity=' + idCity +
+    return this.http.get<MyHomestayDto[]>(API_URL + 'homestay/search?name=' + name + '&idCity=' + idCity +
       '&price1=' + price1 +'&price2=' + price2);
   }
 
   findHomestayByNameAndCityAndPriceSignIn(idAcc: any, name: string, idCity: number, price1: number, price2: number): Observable<any> {
-    return this.http.get<Homestay2>(API_URL + 'homestay/' + idAcc + '/search?name=' + name + '&idCity=' + idCity +
+    return this.http.get<MyHomestayDto[]>(API_URL + 'homestay/' + idAcc + '/search?name=' + name + '&idCity=' + idCity +
       '&price1=' + price1 +'&price2=' + price2);
   }
 

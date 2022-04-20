@@ -7,6 +7,7 @@ import {Bill} from "../../models/bill";
 import {BillService} from "../../service/bill/bill.service";
 import {first} from "rxjs";
 import {MatTableDataSource} from "@angular/material/table";
+import {NgToastService} from "ng-angular-popup";
 
 @Component({
   selector: 'app-book-homestay',
@@ -32,6 +33,7 @@ export class BookHomestayComponent implements OnInit {
   constructor(private homestayService: Homestay2Service,
               private billService: BillService,
               private dialog: MatDialog,
+              private toast: NgToastService,
               @Inject(MAT_DIALOG_DATA) public data: any,
               private dialogRef: MatDialogRef<BookHomestayComponent>) {
   }
@@ -101,7 +103,7 @@ export class BookHomestayComponent implements OnInit {
         this.billService.book_homsstay(bill_new).pipe(first())
           .subscribe(
             data => {
-              console.log(data);
+              this.toast.success({detail: "Thành công!", summary: "Đặt lịch thành công!", duration: 5000})
               this.dialog.closeAll();
             },
             error => {
