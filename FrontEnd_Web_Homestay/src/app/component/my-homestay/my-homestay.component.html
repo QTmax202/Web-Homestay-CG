@@ -57,11 +57,12 @@
           <div class="row">
             <div class="col-md-12">
               <div class="destination" *ngFor="let h of homestays">
-                <img src="{{h.images}}" alt="" style="width: 795px; height: 200px">
+                <img *ngIf="h.images != null" src="{{h.images}}" alt="" style="width: 795px; height: 200px">
+                <img *ngIf="h.images == null" src="https://cdn.vietnammoi.vn/171464242508312576/2020/6/29/247351093-1593370781884815416576.jpg" alt="" style="width: 795px; height: 200px">
                 <div class="text p-3">
                   <div class="d-flex">
                     <div class="one">
-                      <h3><a href="hotel-single.html">{{h.name}}</a></h3>
+                      <h3><a>{{h.name}}</a></h3>
                       <p *ngIf="h.roundRate == null" class="rate">
                         <i class="icon-star-o"></i>
                         <i class="icon-star-o"></i>
@@ -148,7 +149,7 @@
                 <div class="text p-3">
                   <div class="d-flex">
                     <div class="one">
-                      <h3><a href="hotel-single.html">{{b.homestayName}}</a></h3>
+                      <h3><a>{{b.homestayName}}</a></h3>
                       <p *ngIf="b.roundRate == null" class="rate">
                         <i class="icon-star-o"></i>
                         <i class="icon-star-o"></i>
@@ -210,7 +211,7 @@
                       <span class="price per-price">{{b.price | currency :'đ' :true: '1.0-0'}}</span>
                     </div>
                   </div>
-                  <p>Người đặt: <a href="">{{b.accountName}}</a> - Thời gian đặt: <span>{{b.regisDate}}</span></p>
+                  <p>Người đặt: <a>{{b.accountName}}</a> - Thời gian đặt: <span>{{b.regisDate}}</span></p>
                   <p>Ngày bắt đầu: <span>{{b.startDate}}</span> - Ngày kết thúc: <span>{{b.endDate}}</span></p>
                   <hr>
                   <p class="bottom-area d-flex">

@@ -338,7 +338,8 @@
           <div class="carousel-item active">
             <div class="col-sm col-md-8 col-lg ">
               <div class="destination">
-                <img src="{{homestayDTOS[2].images}}" alt="" style="width: 100%; height: 450px">
+                <img *ngIf="homestayDTOS[2].images != null" src="{{homestayDTOS[2].images}}" alt="" style="width: 100%; height: 450px">
+                <img *ngIf="homestayDTOS[2].images == null" src="https://cdn.vietnammoi.vn/171464242508312576/2020/6/29/247351093-1593370781884815416576.jpg" alt="" style="width: 100%; height: 450px">
                 <div class="text p-3">
                   <div class="d-flex">
                     <div class="one">
@@ -416,7 +417,8 @@
           <div class="carousel-item" *ngFor="let h of homestayDTOS">
             <div class="col-sm col-md-8 col-lg " >
               <div class="destination">
-                <img src="{{h.images}}" alt="" style="width: 100%; height: 450px">
+                <img *ngIf="h.images != null" src="{{h.images}}" alt="" style="width: 100%; height: 450px">
+                <img *ngIf="h.images == null" src="https://cdn.vietnammoi.vn/171464242508312576/2020/6/29/247351093-1593370781884815416576.jpg" alt="" style="width: 100%; height: 450px">
                 <div class="text p-3">
                   <div class="d-flex">
                     <div class="one">
