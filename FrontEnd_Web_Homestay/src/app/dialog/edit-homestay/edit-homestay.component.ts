@@ -15,11 +15,7 @@ import {NgToastService} from "ng-angular-popup";
 })
 export class EditHomestayComponent implements OnInit {
 
-  public loading = false;
-  imgs: any[] = [];
-  fb : any;
   selectedImages: any[] = [];
-  @ViewChild('uploadFile', {static: true}) public imageDom: ElementRef | undefined
   homestay!: Homestay2;
   idHomestay!: number;
   formStatus: FormGroup = new FormGroup({});
@@ -74,46 +70,5 @@ export class EditHomestayComponent implements OnInit {
       this.homestay = data;
       console.log(this.homestay)
     })
-  }
-
-  showPreview(event: any) {
-    this.loading = true;
-    let newSelectedImages = [];
-    if (event.target.files && event.target.files[0]) {
-      const reader = new FileReader();
-      reader.readAsDataURL(event.target.files[0]);
-      newSelectedImages = event.target.files;
-      for (let i = 0; i < event.target.files.length; i++) {
-        this.selectedImages.push(event.target.files[i]);
-      }
-    } else {
-      this.selectedImages = [];
-    }
-    if (newSelectedImages.length !== 0) {
-      for (let i = 0; i < newSelectedImages.length; i++) {
-        let selectedImage = newSelectedImages[i];
-        var n = Date.now();
-        const filePath = `Homestay_Images/${n}`;
-        const fileRef = this.storage.ref(filePath);
-        this.storage.upload(filePath, selectedImage).snapshotChanges().pipe(
-          finalize(() => {
-            fileRef.getDownloadURL().subscribe(url => {
-              this.imgs.push(url);
-              if (this.imgs.length == newSelectedImages.length) {
-                this.loading = false;
-              }
-            });
-          })
-        ).subscribe(url => {
-          if (url){
-            console.log(url)
-          }
-        });
-      }
-    }
-  }
-  uploadImage(){
-    this.selectedImages = this.imageDom?.nativeElement.files[0];
-    this.showPreview(event)
   }
 }

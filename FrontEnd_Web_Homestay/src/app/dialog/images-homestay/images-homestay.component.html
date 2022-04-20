@@ -1,0 +1,39 @@
+<form class="example-form">
+  <h1 mat-dialog-title>THÊM ẢNH VÀO HOMESTAY</h1>
+  <mat-form-field class="example-full-width" appearance="outline">
+    <mat-label>Tên Nhà</mat-label>
+    <input type="text" matInput readonly value="{{homestay.name}}">
+  </mat-form-field>
+  <div class="row">
+    <br>
+    <div class="col-lg-12">
+      <h4>Ảnh cũ</h4>
+    </div>
+    <div class="col-lg-3" *ngFor="let i of images_homestay">
+      <mat-icon matBadge="" matBadgeColor="warn" (click)="clickDeleteImage(i.id)" style="margin-left: 95%;">close</mat-icon>
+      <img src="{{i.images}}" alt="" class="rounded" style=" width: 150px; height: 90px">
+    </div>
+    <br>
+    <div class="col-lg-12">
+      <h4>Thêm ảnh mới</h4>
+    </div>
+    <br>
+    <div class="col-lg-3" *ngFor="let i of imgs">
+      <img src="{{i}}" alt="" class="rounded" style=" width: 150px; height: 90px">
+    </div>
+    <br>
+    <div class="col-lg-12">
+      <section class="example-section">
+        <label>Chọn Ảnh</label>
+        <input type="file"
+               (change)="showPreview($event)"
+               multiple
+               autocomplete="off">
+      </section>
+    </div>
+  </div>
+  <div mat-dialog-actions [align]="'end'">
+    <button mat-raised-button mat-dialog-close>Đóng</button>
+    <button type="submit" mat-raised-button color="primary" (click)="uploadImagesHomestay(homestay.id)">Thêm ảnh</button>
+  </div>
+</form>
