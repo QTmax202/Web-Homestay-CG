@@ -40,13 +40,17 @@ public interface IHomestayRepository extends JpaRepository<Homestay, Long> {
             "group by hs.id", nativeQuery = true)
     List<MyHomestayDTO> getAllHomestayRate();
 
-    @Query(value = "select * from homestay\n" +
-            "where name like %:name% and city_id = :idCity and status = 1 and price between :price1 and :price2", nativeQuery = true)
-    Iterable<Homestay> findHomestayByNameAndCityAndPrice(String name, Long idCity, Long price1, Long price2);
+    @Query(value = "select hs.id as id, hs.name as name, hs.price as price, hs.description as description, hs.address as address, avg(rate.value_rate) as avgRate, round(avg(rate.value_rate)) as roundRate, img.images as images from homestay hs  \n" +
+            "left join rate on hs.id = rate.homestay_id \n" +
+            "left join image_of_homestay img on img.homestay_id = hs.id \n" +
+            "where hs.name like %:name% and hs.city_id = :idCity and hs.status = 1 and hs.price between :price1 and :price2", nativeQuery = true)
+    Iterable<MyHomestayDTO> findHomestayByNameAndCityAndPrice(String name, Long idCity, Long price1, Long price2);
 
-    @Query(value = "select * from homestay\n" +
-            "where account_id != :idAcc and name like %:name% and city_id = :idCity and status = 1 and price between :price1 and :price2", nativeQuery = true)
-    Iterable<Homestay> findHomestayByNameAndCityAndPriceSignIn(Long idAcc, String name, Long idCity, Long price1, Long price2);
+    @Query(value = "select hs.id as id, hs.name as name, hs.price as price, hs.description as description, hs.address as address, avg(rate.value_rate) as avgRate, round(avg(rate.value_rate)) as roundRate, img.images as images from homestay hs  \n" +
+            "left join rate on hs.id = rate.homestay_id \n" +
+            "left join image_of_homestay img on img.homestay_id = hs.id \n" +
+            "where hs.account_id != :idAcc and hs.name like %:name% and hs.city_id = :idCity and hs.status = 1 and hs.price between :price1 and :price2", nativeQuery = true)
+    Iterable<MyHomestayDTO> findHomestayByNameAndCityAndPriceSignIn(Long idAcc, String name, Long idCity, Long price1, Long price2);
 
     @Query(value = "select hs.id as id, hs.name as name, hs.price as price, hs.description as description, hs.address as address, \n" +
             "avg(rate.value_rate) as avgRate, round(avg(rate.value_rate)) as roundRate, \n" +

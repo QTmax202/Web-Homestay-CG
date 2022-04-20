@@ -107,7 +107,7 @@ public class HomestayController {
                                                                 @RequestParam(required = false) Long price2) {
         if (price1 == null) price1 = 0L;
         if (price2 == null) price2 = 999999999L;
-        Iterable<Homestay> homestays = homestayService.findHomestayByNameAndCityAndPrice(name, idCity, price1, price2);
+        Iterable<MyHomestayDTO> homestays = homestayService.findHomestayByNameAndCityAndPrice(name, idCity, price1, price2);
         if (!homestays.iterator().hasNext()) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
@@ -122,7 +122,7 @@ public class HomestayController {
                                                                       @RequestParam(required = false) Long price2) {
         if (price1 == null) price1 = 0L;
         if (price2 == null) price2 = 999999999L;
-        Iterable<Homestay> homestays = homestayService.findHomestayByNameAndCityAndPriceSignIn(id, name, idCity, price1, price2);
+        Iterable<MyHomestayDTO> homestays = homestayService.findHomestayByNameAndCityAndPriceSignIn(id, name, idCity, price1, price2);
         if (!homestays.iterator().hasNext()) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
