@@ -29,8 +29,8 @@ public class GmailService implements IGmailService {
         String token = registrationUserTokenRepository.findByUserId(account.get().getId());
 
         String confirmationUrl = "http://localhost:8080/api/sign-up/active-account?token=" + token;
-        String subject = "Xác Nhận Đăng Ký Account";
-        String content = "Bạn đã đăng kí thành công. Click vào link dưới đây để kích hoạt tài khoản \n" + confirmationUrl;
+        String subject = "XÁC NHẬN ĐĂNG KÝ TÀI KHOẢN HOMESTAY - THE DEV's BAR";
+        String content = "Bạn đã đăng kí thành công tài khoản hệ thống Homestay The Dev's Bar.\n Vui lòng truy cập vào đường dẫn phía dưới để kích hoạt tài khoản: \n" + confirmationUrl;
 
         sendEmail(email, subject, content);
     }

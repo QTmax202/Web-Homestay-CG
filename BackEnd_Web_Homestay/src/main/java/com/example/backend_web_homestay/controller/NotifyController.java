@@ -8,6 +8,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Optional;
+
 @RestController
 @RequestMapping("/api/notify")
 @CrossOrigin("*")
@@ -21,6 +23,23 @@ public class NotifyController {
     @GetMapping("/account/{id}")
     private ResponseEntity<?> getNotifyByAccountDesc(@PathVariable long id) {
         Iterable<Notify> notifies = notifyService.getNotifyByAccountDesc(id);
+        if (!notifies.iterator().hasNext()) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<>(notifies, HttpStatus.OK);
+    }
+
+    @GetMapping("/{id}")
+    private ResponseEntity<?> editNotify(@PathVariable long id) {
+        Optional<Notify> notifyEdit = notifyService.findById(id);
+        notifyEdit.get().setStatus(true);
+        notifyService.save(notifyEdit.get());
+        return new ResponseEntity<>(notifyEdit, HttpStatus.OK);
+    }
+
+    @GetMapping("/check/{id}")
+    private ResponseEntity<?> check1NotifyByAccountDesc(@PathVariable long id) {
+        Iterable<Notify> notifies = notifyService.check1NotifyByAccount(id);
         if (!notifies.iterator().hasNext()) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }

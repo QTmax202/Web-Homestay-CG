@@ -36,4 +36,9 @@ public class NotifyService implements INotifyService{
     public Iterable<Notify> getNotifyByAccountDesc(Long id) {
         return notifyRepository.getNotifyByAccountDesc(id);
     }
+
+    @Override
+    public Iterable<Notify> check1NotifyByAccount(long id) {
+        return notifyRepository.check1NotifyByAccount(id);
+    }
 }

@@ -12,6 +12,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.web.servlet.view.RedirectView;
 
 import java.util.HashSet;
 import java.util.Optional;
@@ -77,7 +79,7 @@ public class AccountController {
             return new ResponseEntity<>(true, HttpStatus.BAD_REQUEST);
         } else {
             account.setPassword(passwordEncoder.encode(account.getPassword()));
-            account.setAvatar_url("https://haycafe.vn/wp-content/uploads/2021/11/Anh-avatar-dep-chat-lam-hinh-dai-dien.jpg");
+            account.setAvatar_url("https://scr.vn/wp-content/uploads/2020/07/Avatar-Facebook-tr%E1%BA%AFng.jpg");
             Set<Role> roleSet = new HashSet<>();
             roleSet.add(roleService.findById(1L).get());
             account.setRoles(roleSet);
@@ -87,8 +89,10 @@ public class AccountController {
     }
 
     @GetMapping("/active-account")
-    public ResponseEntity<?> activeUserViaEmail(@RequestParam String token) {
+    public RedirectView activeUserViaEmail(@RequestParam String token, RedirectAttributes attributes) {
         accountService.activeUser(token);
-        return new ResponseEntity<>("Active success!", HttpStatus.OK);
+        attributes.addFlashAttribute("flashAttribute", "redirectWithRedirectView");
+        attributes.addAttribute("attribute", "redirectWithRedirectView");
+        return new RedirectView("http://localhost:4200/home");
     }
 }
