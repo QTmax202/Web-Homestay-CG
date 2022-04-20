@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface INotifyRepository extends JpaRepository<Notify, Long> {
-    @Query(value = "select * from notify \n" +
+    @Query(value = "select * from notify n \n" +
             "where n.account_id = :id \n" +
             "order by n.id desc;", nativeQuery = true)
     Iterable<Notify> getNotifyByAccountDesc(Long id);

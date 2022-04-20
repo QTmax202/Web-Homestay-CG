@@ -24,6 +24,6 @@ public class NotifyController {
         if (!notifies.iterator().hasNext()) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
-        return new ResponseEntity<>(HttpStatus.OK);
+        return new ResponseEntity<>(notifies, HttpStatus.OK);
     }
 }
