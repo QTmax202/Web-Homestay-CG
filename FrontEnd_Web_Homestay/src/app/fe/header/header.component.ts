@@ -71,7 +71,7 @@ export class HeaderComponent implements OnInit{
     localStorage.removeItem('ACCESS_TOKEN');
     localStorage.removeItem('ACCOUNT_ID');
     localStorage.removeItem('currentAccount');
-    this.router.navigate(['/home']).then();
     window.location.reload();
+    this.router.navigate(['/home']).then();
   }
 }

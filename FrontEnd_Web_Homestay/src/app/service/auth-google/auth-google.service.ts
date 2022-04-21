@@ -121,8 +121,8 @@ export class AuthGoogleService {
             }
           })
           window.location.reload();
-          this.router.navigate(['/home']);
           this.dialog.closeAll();
+          this.router.navigate(['/home']);
         },error => {
           // @ts-ignore
           document.getElementById("error-form-login").innerHTML = 'Tài khoản chưa có trong hệ thống hoặc đã bị khoá!'

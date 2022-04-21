@@ -147,8 +147,8 @@ export class SignInComponent implements OnInit {
             })
             console.log(localStorage.getItem('currentAccount'));
             window.location.reload();
-            this.router.navigate(['/home']);
             this.dialog.closeAll();
+            this.router.navigate(['/home']);
           }
         },
         error => {
